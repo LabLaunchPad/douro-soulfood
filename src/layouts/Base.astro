@@ -1,5 +1,6 @@
 ---
 import '@/styles/global.css';
+import MobileBottomBar from '@/components/layout/MobileBottomBar.astro';
 
 interface Props {
   title: string;
@@ -110,5 +111,7 @@ const fullTitle = title === siteName ? title : `${siteName} | ${title}`;
       <slot />
     </main>
     <slot name="footer" />
+    <MobileBottomBar />
   </body>
 </html>
+
