@@ -1,6 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import DietaryBadge from './DietaryBadge.astro';
+import siteSettings from '@/content/settings/default.json';
+
+const orderHref = siteSettings.lieferando_url || 'https://www.lieferando.at/en/menu/douro';
 
 /**
  * MenuItemCard — Glassmorphic card for a single menu item.
@@ -74,7 +77,7 @@ const formatPrice = (cents: number): string => {
   ]}
 >
   {/* Entire Card Clickable Link */}
-  <a href="https://www.lieferando.at/speisekarte/douro-soulfood" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-30" aria-label={`Jetzt ${name} bestellen`}></a>
+  <a href={orderHref} target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-30" aria-label={`Jetzt ${name} bestellen`}></a>
 
   {/* Featured indicator */}
   {featured && (

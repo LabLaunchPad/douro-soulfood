@@ -4,7 +4,7 @@
   "hero_cta_primary_label": "Speisekarte",
   "hero_cta_primary_href": "/menu",
   "hero_cta_secondary_label": "Lieferung bestellen",
-  "hero_cta_secondary_href": "https://www.foodora.at/en/restaurant/noch/douro-soulfood-bistro",
+  "hero_cta_secondary_href": "https://www.lieferando.at/en/menu/douro",
   "hero_images": [
     { "src": "/images/hero-1.jpg", "alt": "D'ouro Soulfood Bistro dishes" },
     { "src": "/images/hero-2.jpg", "alt": "Brazilian bowl with fresh ingredients" }

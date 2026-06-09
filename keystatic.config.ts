@@ -106,7 +106,7 @@ export default config({
         postal_code: fields.text({ label: 'Postal Code' }),
         country: fields.text({ label: 'Country' }),
         google_maps_url: fields.url({ label: 'Google Maps URL' }),
-        foodora_url: fields.url({ label: 'Foodora Order URL' }),
+        lieferando_url: fields.url({ label: 'Lieferando Order URL' }),
         logo: fields.image({
           label: 'Logo',
           directory: 'public/images',
