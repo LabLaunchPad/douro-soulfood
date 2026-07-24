@@ -4,8 +4,8 @@
   "price": 890,
   "image": "/images/menu/caipirinha.jpg",
   "category": "drinks",
-  "dietary": ["vegan", "gluten-free"],
-  "order": 10,
+  "dietary": [],
+  "order": 60,
   "featured": true,
   "available": true
 }

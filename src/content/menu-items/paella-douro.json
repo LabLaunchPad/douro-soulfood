@@ -1,0 +1,17 @@
+{
+  "title": "Paella D'Ouro",
+  "description": "Traditionelle Paella mit Garnelen, Muscheln und Meeresfrüchten, zubereitet mit Safranreis und mediterranen Gewürzen.",
+  "price": 2390,
+  "category": "seafood",
+  "dietary": [
+    "gluten-free"
+  ],
+  "order": 10,
+  "featured": true,
+  "available": true,
+  "allergens": [
+    "B",
+    "R"
+  ],
+  "image": "/images/menu/paella-douro.png"
+}

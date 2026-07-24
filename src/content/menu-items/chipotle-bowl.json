@@ -1,0 +1,15 @@
+{
+  "title": "Chipotle Bowl",
+  "description": "Reis, Pinto Bohnen, Hähnchen, Salat, Guacamole, Käse, Sauerrahm.",
+  "price": 1790,
+  "category": "bowls",
+  "dietary": [],
+  "order": 50,
+  "featured": false,
+  "available": true,
+  "allergens": [
+    "A",
+    "G"
+  ],
+  "image": null
+}

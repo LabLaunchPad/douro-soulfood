@@ -1,0 +1,17 @@
+{
+  "title": "Sommer Quesadilla",
+  "description": "Mit Käse & Pico de Gallo.",
+  "price": 1490,
+  "category": "quesadillas",
+  "dietary": [
+    "vegetarian"
+  ],
+  "order": 40,
+  "featured": false,
+  "available": true,
+  "allergens": [
+    "A",
+    "G"
+  ],
+  "image": null
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Nachos",
+  "description": "Knusprige Maischips, serviert mit Guacamole.",
+  "price": 890,
+  "image": "/images/menu/nachos-guac.jpg",
+  "category": "appetizers",
+  "dietary": [
+    "vegetarian"
+  ],
+  "order": 10,
+  "featured": false,
+  "available": true
+}

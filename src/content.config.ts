@@ -20,17 +20,31 @@ const menuItems = defineCollection({
     title: z.string(),
     description: z.string(),
     price: z.number().min(0),
-    image: z.string().optional(),
+    image: z.string().nullable().optional(),
     category: z.enum([
+      'appetizers',
+      'quesadillas',
       'tacos',
       'bowls',
-      'african-specials',
+      'mains',
+      'seafood',
       'sides',
       'drinks',
+      'desserts',
     ]),
     dietary: z.array(
       z.enum(['vegan', 'vegetarian', 'gluten-free', 'spicy', 'halal', 'dairy-free'])
     ).optional(),
+    allergens: z.array(z.string()).optional(),
+    prepTime: z.string().optional(),
+    addOns: z.array(z.object({
+      label: z.string(),
+      price: z.number(),
+    })).optional(),
+    priceVariants: z.object({
+      nonAlcoholic: z.number().optional(),
+      alcoholic: z.number().optional(),
+    }).optional(),
     order: z.number().min(0).default(0),
     featured: z.boolean().default(false),
     available: z.boolean().default(true),

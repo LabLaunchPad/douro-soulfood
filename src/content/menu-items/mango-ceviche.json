@@ -1,0 +1,14 @@
+{
+  "title": "Mango Ceviche (Vegan)",
+  "description": "Frische Mango mit Tomaten, Zwiebeln und Knusper-Mais.",
+  "price": 890,
+  "category": "appetizers",
+  "dietary": [
+    "vegan",
+    "gluten-free"
+  ],
+  "order": 20,
+  "featured": false,
+  "available": true,
+  "image": null
+}

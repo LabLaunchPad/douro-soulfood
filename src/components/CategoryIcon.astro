@@ -1,0 +1,94 @@
+---
+/**
+ * CategoryIcon.astro — Vector SVG Icons for Food Categories
+ * 
+ * Provides consistent, cross-browser vector icons for menu categories.
+ * Replaces system emojis (like 🫓) which render inconsistently across OS/browsers.
+ */
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className = "w-6 h-6" } = Astro.props;
+---
+
+{name === 'appetizers' && (
+  <!-- Starters / Dumpling / Nachos icon -->
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+  </svg>
+)}
+
+{name === 'quesadillas' && (
+  <!-- Quesadilla / Folded Tortilla icon (crisp vector) -->
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 15C3 18.3137 7.02944 21 12 21C16.9706 21 21 18.3137 21 15C21 11.6863 16.9706 9 12 9C7.02944 9 3 11.6863 3 15Z" />
+    <path d="M3 15L12 3L21 15" />
+    <circle cx="9" cy="13" r="1" fill="currentColor" />
+    <circle cx="15" cy="13" r="1" fill="currentColor" />
+    <circle cx="12" cy="16" r="1" fill="currentColor" />
+  </svg>
+)}
+
+{name === 'tacos' && (
+  <!-- Taco icon -->
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 18C3 12 7.5 7 12 7s9 5 9 11H3z" />
+    <path d="M6 14s2-2 4-2 4 2 6 2" />
+    <circle cx="9" cy="10" r="1" fill="currentColor" />
+    <circle cx="14" cy="9" r="1" fill="currentColor" />
+  </svg>
+)}
+
+{name === 'bowls' && (
+  <!-- Bowl / Soup icon -->
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a8 8 0 0 0 16 0H4z" />
+    <path d="M6 7s1-2 1-3" />
+    <path d="M12 7s1-2 1-3" />
+    <path d="M18 7s1-2 1-3" />
+  </svg>
+)}
+
+{name === 'mains' && (
+  <!-- Pratos Feitos / Plate icon -->
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="8" />
+    <path d="M12 8v8M8 12h8" />
+  </svg>
+)}
+
+{name === 'seafood' && (
+  <!-- Fish / Seafood icon -->
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6.5 12C3 9 2 4 2 4s5 1 8 4.5c2 2.5 4 4.5 7.5 4.5 3.5 0 4.5 3 4.5 3s-3.5 1-6.5-2C12.5 11 10.5 9 6.5 12z" />
+    <circle cx="18" cy="11" r="1" fill="currentColor" />
+  </svg>
+)}
+
+{name === 'sides' && (
+  <!-- Fries / Side Dish icon -->
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 10l2 10h10l2-10H5z" />
+    <path d="M8 10V4M12 10V3M16 10V5" />
+  </svg>
+)}
+
+{name === 'drinks' && (
+  <!-- Cocktail / Drink icon -->
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 22h8M12 15v7M19 3H5l7 8 7-8z" />
+  </svg>
+)}
+
+{name === 'desserts' && (
+  <!-- Cake / Dessert icon -->
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 21v-4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v4" />
+    <path d="M4 15s2-2 4-2 4 2 6 2 4-2 6-2" />
+    <path d="M12 6V3" />
+    <path d="M12 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+  </svg>
+)}

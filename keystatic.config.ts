@@ -34,11 +34,15 @@ export default config({
         category: fields.select({
           label: 'Category',
           options: [
+            { label: 'Vorspeisen / Entradas', value: 'appetizers' },
+            { label: 'Quesadillas', value: 'quesadillas' },
             { label: 'Tacos', value: 'tacos' },
             { label: 'Bowls', value: 'bowls' },
-            { label: 'African Specials', value: 'african-specials' },
-            { label: 'Sides & Extras', value: 'sides' },
-            { label: 'Drinks', value: 'drinks' },
+            { label: 'Pratos Feitos', value: 'mains' },
+            { label: 'Pratos Do Mar', value: 'seafood' },
+            { label: 'Beilagen / Sides', value: 'sides' },
+            { label: 'Bebidas', value: 'drinks' },
+            { label: 'Sobremesas', value: 'desserts' },
           ],
           defaultValue: 'bowls',
         }),

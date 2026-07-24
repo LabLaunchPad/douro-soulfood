@@ -1,0 +1,15 @@
+{
+  "title": "Taco Especial",
+  "description": "Gegrilltes Rindfleisch (Picanha), schwarze Bohnen, Salat, Pico de Gallo, Guacamole.",
+  "price": 1890,
+  "category": "tacos",
+  "dietary": [],
+  "order": 10,
+  "featured": true,
+  "available": true,
+  "allergens": [
+    "A",
+    "M"
+  ],
+  "image": "/images/menu/taco-especial.png"
+}

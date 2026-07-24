@@ -1,0 +1,11 @@
+{
+  "title": "Softdrinks",
+  "description": "Sinalco Cola, Fanta, Sprite — die klassischen Erfrischungsgetränke.",
+  "price": 380,
+  "category": "drinks",
+  "dietary": [],
+  "order": 80,
+  "featured": false,
+  "available": true,
+  "image": null
+}

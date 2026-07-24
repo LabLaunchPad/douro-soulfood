@@ -1,0 +1,14 @@
+{
+  "title": "Süsskartoffel-Pommes",
+  "description": "Knusprige Pommes aus Süsskartoffeln mit Meersalz und hausgemachtem Aioli-Dip.",
+  "price": 890,
+  "category": "sides",
+  "dietary": [
+    "vegan",
+    "gluten-free"
+  ],
+  "order": 30,
+  "featured": false,
+  "available": true,
+  "image": null
+}

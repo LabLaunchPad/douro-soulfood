@@ -1,0 +1,13 @@
+{
+  "title": "Beijinho",
+  "description": "Brasilianische Kokostrüffel aus Kondensmilch, Kokosraspeln und Butter — süß, zart und köstlich.",
+  "price": 490,
+  "category": "desserts",
+  "dietary": [
+    "vegetarian"
+  ],
+  "order": 40,
+  "featured": false,
+  "available": true,
+  "image": "/images/menu/beijinho.webp"
+}

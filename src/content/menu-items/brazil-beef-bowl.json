@@ -1,11 +1,16 @@
 {
   "title": "Brazil Beef Bowl",
-  "description": "Zartes Rindfleisch mit Reis, schwarzen Bohnen, Guacamole, Pico de Gallo und hausgemachter Soße.",
-  "price": 1490,
+  "description": "Reis, schwarze Bohnen, Rindfleisch, Salat, Pico de Gallo, Guacamole.",
+  "price": 1690,
   "image": "/images/menu/beef-bowl.jpg",
   "category": "bowls",
-  "dietary": ["gluten-free"],
-  "order": 1,
+  "dietary": [
+    "gluten-free"
+  ],
+  "order": 30,
   "featured": true,
-  "available": true
+  "available": true,
+  "allergens": [
+    "A"
+  ]
 }

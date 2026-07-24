@@ -1,0 +1,15 @@
+{
+  "title": "Taco Res",
+  "description": "Langsam gekochtes Rindfleisch, Salat, Pico de Gallo, Guacamole.",
+  "price": 1799,
+  "image": "/images/menu/beef-taco.jpg",
+  "category": "tacos",
+  "dietary": [],
+  "order": 50,
+  "featured": false,
+  "available": true,
+  "allergens": [
+    "A",
+    "M"
+  ]
+}

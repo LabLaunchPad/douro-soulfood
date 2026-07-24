@@ -1,0 +1,11 @@
+{
+  "title": "Café Expresso",
+  "description": "Kräftiger brasilianischer Espresso — intensiv und aromatisch im kleinen Format.",
+  "price": 320,
+  "category": "drinks",
+  "dietary": [],
+  "order": 120,
+  "featured": false,
+  "available": true,
+  "image": null
+}

@@ -1,0 +1,17 @@
+{
+  "title": "African Peanut Stew mit Fufu",
+  "description": "Cremiger Erdnusseintopf mit Hähnchen und Gemüse, serviert mit Fufu und Kochbananen.",
+  "price": 1790,
+  "image": "/images/menu/african-stew.jpg",
+  "category": "mains",
+  "dietary": [
+    "gluten-free",
+    "dairy-free"
+  ],
+  "order": 30,
+  "featured": false,
+  "available": true,
+  "allergens": [
+    "E"
+  ]
+}

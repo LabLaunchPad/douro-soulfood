@@ -5,6 +5,7 @@ import Base from '@/layouts/Base.astro';
 import NavBar from '@/components/NavBar.astro';
 import Footer from '@/components/Footer.astro';
 import MenuItemCard from '@/components/MenuItemCard.astro';
+import CategoryIcon from '@/components/CategoryIcon.astro';
 import { getCollection } from 'astro:content';
 
 /**
@@ -13,27 +14,21 @@ import { getCollection } from 'astro:content';
  * Fetches all menu items from the KeystaticCMS menu_items collection,
  * groups them by category, sorts by order within each category,
  * and renders them as glassmorphic cards.
- *
- * Categories and their display order:
- *   1. Tacos
- *   2. Bowls
- *   3. African Specials
- *   4. Sides & Extras
- *   5. Drinks
- *
- * Prices stored in EUR cents (1490 = €14.90), formatted via Intl.NumberFormat.
- * Dietary badges: vegan, vegetarian, gluten-free, spicy, halal, dairy-free.
  */
 
 type DietaryTag = 'vegan' | 'vegetarian' | 'gluten-free' | 'spicy' | 'halal' | 'dairy-free';
 
-/** Category display config — controls order and German labels */
+/** Category display config — controls order, labels, and vector icon names */
 const categoryConfig: Record<string, { label: string; order: number; icon: string }> = {
-  'tacos':              { label: 'Tacos',              order: 10, icon: '🌮' },
-  'bowls':              { label: 'Bowls',              order: 20, icon: '🥘' },
-  'african-specials':   { label: 'African Specials',   order: 30, icon: '🌍' },
-  'sides':              { label: 'Sides & Extras',     order: 40, icon: '🧄' },
-  'drinks':             { label: 'Drinks',             order: 50, icon: '🍹' },
+  'appetizers':   { label: 'Vorspeisen / Entradas',  order: 10, icon: 'appetizers' },
+  'quesadillas':  { label: 'Quesadillas',            order: 20, icon: 'quesadillas' },
+  'tacos':        { label: 'Tacos',                  order: 30, icon: 'tacos' },
+  'bowls':        { label: 'Bowls',                  order: 40, icon: 'bowls' },
+  'mains':        { label: 'Pratos Feitos',          order: 50, icon: 'mains' },
+  'seafood':      { label: 'Pratos Do Mar',          order: 60, icon: 'seafood' },
+  'sides':        { label: 'Beilagen / Sides',       order: 65, icon: 'sides' },
+  'drinks':       { label: 'Bebidas',                order: 70, icon: 'drinks' },
+  'desserts':     { label: 'Sobremesas',             order: 80, icon: 'desserts' },
 };
 
 /** Fetch all menu items from KeystaticCMS */
@@ -67,7 +62,7 @@ const sortedCategories = Object.entries(grouped).sort(
   <NavBar slot="nav" />
 
   <!-- ═══ HERO HEADER ═══ -->
-  <section class="py-16 md:py-24 px-4 md:px-16 max-w-7xl mx-auto">
+  <section class="py-12 md:py-20 px-4 md:px-16 max-w-7xl mx-auto">
     <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-brand-gold mb-6 font-display uppercase tracking-tight">
       Speisekarte
     </h1>
@@ -77,21 +72,21 @@ const sortedCategories = Object.entries(grouped).sort(
     </p>
 
     <!-- Quick category navigation -->
-    <nav class="flex flex-wrap gap-3 mt-10" aria-label="Menü-Kategorien">
+    <nav class="flex flex-wrap gap-2.5 mt-8" aria-label="Menü-Kategorien">
       {sortedCategories.map(([slug]) => {
         const config = categoryConfig[slug];
         if (!config) return null;
         return (
           <a
             href={`#category-${slug}`}
-            class="inline-flex items-center gap-2 min-h-12 px-5 py-3 text-base font-bold uppercase tracking-wider rounded-sm
+            class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold uppercase tracking-wider rounded-lg
                    bg-surface-card border border-border-subtle text-text-secondary
-                   hover:bg-surface-elevated hover:border-border-default hover:text-text-primary
+                   hover:bg-surface-elevated hover:border-brand-gold hover:text-brand-gold
                    active:bg-surface-primary
                    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold
                    no-underline transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)]"
           >
-            <span aria-hidden="true" class="text-lg">{config.icon}</span>
+            <CategoryIcon name={config.icon} class="w-4 h-4 text-brand-gold" />
             {config.label}
           </a>
         );
@@ -101,19 +96,21 @@ const sortedCategories = Object.entries(grouped).sort(
 
   <!-- ═══ MENU CATEGORIES ═══ -->
   {sortedCategories.map(([slug, items]) => {
-    const config = categoryConfig[slug] ?? { label: slug, order: 99, icon: '🍽️' };
+    const config = categoryConfig[slug] ?? { label: slug, order: 99, icon: 'mains' };
     return (
       <section
         id={`category-${slug}`}
         class="py-8 md:py-12 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20"
       >
         {/* Category heading */}
-        <div class="flex items-center gap-4 mb-10">
-          <span class="text-3xl" aria-hidden="true">{config.icon}</span>
+        <div class="flex items-center gap-3.5 mb-8">
+          <div class="w-10 h-10 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center">
+            <CategoryIcon name={config.icon} class="w-6 h-6" />
+          </div>
           <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-text-primary font-display uppercase tracking-wider">
             {config.label}
           </h2>
-          <div class="flex-1 h-0.5 bg-border-subtle"></div>
+          <div class="flex-1 h-0.5 bg-border-subtle ml-2"></div>
         </div>
 
         {/* Menu items grid */}
@@ -124,6 +121,9 @@ const sortedCategories = Object.entries(grouped).sort(
               description={item.data.description}
               priceInCents={item.data.price}
               dietary={item.data.dietary as DietaryTag[] | undefined}
+              allergens={item.data.allergens}
+              prepTime={item.data.prepTime}
+              addOns={item.data.addOns}
               available={item.data.available}
               featured={item.data.featured}
               imageSrc={item.data.image || undefined}
@@ -146,16 +146,27 @@ const sortedCategories = Object.entries(grouped).sort(
     </section>
   )}
 
-  <!-- ═══ ALLERGEN NOTE ═══ -->
+  <!-- ═══ ALLERGEN LEGEND & NOTE ═══ -->
   <section class="py-8 md:py-12 px-4 md:px-16 max-w-7xl mx-auto">
-    <div class="rounded-lg bg-surface-card border border-border-subtle p-6">
-      <h3 class="text-sm font-semibold text-text-tertiary uppercase tracking-wider mb-3">
-        Hinweis
+    <div class="rounded-xl bg-surface-card border border-border-subtle p-6 flex flex-col gap-4">
+      <h3 class="text-sm font-semibold text-brand-gold uppercase tracking-wider flex items-center gap-2">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="16" x2="12" y2="12" />
+          <line x1="12" y1="8" x2="12.01" y2="8" />
+        </svg>
+        Allergene & Zusatzstoffe (EU-Kennzeichnung)
       </h3>
-      <p class="text-sm text-text-secondary leading-relaxed max-w-[75ch]">
-        Alle Gerichte können Spuren von Allergenen enthalten. Fragen Sie unser Team nach
-        detaillierten Zutaten- und Allergeninformationen. Die Preise verstehen sich inklusive
-        Mehrwertsteuer. Änderungen und Irrtümer vorbehalten.
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-xs text-text-secondary">
+        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">A</span> Glutenhaltiges Getreide</div>
+        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">M / G</span> Milch / Laktose</div>
+        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">B</span> Krebstiere</div>
+        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">R</span> Weichtiere</div>
+        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">E</span> Erdnüsse</div>
+        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">F</span> Soja</div>
+      </div>
+      <p class="text-xs text-text-tertiary border-t border-border-subtle pt-3 leading-relaxed">
+        Fragen Sie unser Team nach detaillierten Informationen zu Allergenen und Zutaten. Alle Preise inkl. MwSt. Änderungen und Irrtümer vorbehalten.
       </p>
     </div>
   </section>

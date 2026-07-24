@@ -1,0 +1,13 @@
+{
+  "title": "Amazonas",
+  "description": "Erfrischende Água Fresca mit Ananas, Minze und Kokoswasser — ein tropischer Durstlöscher.",
+  "price": 490,
+  "category": "drinks",
+  "dietary": [
+    "vegan"
+  ],
+  "order": 10,
+  "featured": false,
+  "available": true,
+  "image": "/images/menu/amazonas.webp"
+}

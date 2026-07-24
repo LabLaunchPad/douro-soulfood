@@ -1,0 +1,11 @@
+{
+  "title": "Mineralwasser",
+  "description": "Frisches Mineralwasser mit oder ohne Kohlensäure — die perfekte Begleitung zu jedem Gericht.",
+  "price": 320,
+  "category": "drinks",
+  "dietary": [],
+  "order": 100,
+  "featured": false,
+  "available": true,
+  "image": null
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Torta de Chocolate",
+  "description": "Saftiger brasilianischer Schokoladenkuchen mit intensivem Kakaogeschmack — reichhaltig und unwiderstehlich.",
+  "price": 590,
+  "category": "desserts",
+  "dietary": [
+    "vegetarian"
+  ],
+  "order": 20,
+  "featured": false,
+  "available": true,
+  "image": "/images/menu/tortadechocolate.webp"
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Pudim de Caramelo",
+  "description": "Brasilianischer Karamellpudding — samtig-weich mit goldener Karamellsauce, ein Klassiker der brasilianischen Küche.",
+  "price": 490,
+  "category": "desserts",
+  "dietary": [
+    "vegetarian"
+  ],
+  "order": 10,
+  "featured": true,
+  "available": true,
+  "image": "/images/menu/pudimdecaremilo.webp"
+}

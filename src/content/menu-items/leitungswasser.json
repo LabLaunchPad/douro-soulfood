@@ -1,0 +1,11 @@
+{
+  "title": "Leitungswasser",
+  "description": "Gekühltes Leitungswasser — erfrischend und umweltbewusst.",
+  "price": 100,
+  "category": "drinks",
+  "dietary": [],
+  "order": 110,
+  "featured": false,
+  "available": true,
+  "image": null
+}

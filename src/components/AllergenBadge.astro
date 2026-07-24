@@ -1,0 +1,33 @@
+---
+/**
+ * AllergenBadge.astro — European Union Standard Allergen Code Badge
+ * 
+ * Displays compact allergen letters (A, G, M, B, R, E, F) as featured in douromenu.pdf.
+ */
+
+interface Props {
+  code: string;
+}
+
+const { code } = Astro.props;
+
+const labels: Record<string, string> = {
+  'A': 'Glutenhaltiges Getreide / Cereals containing gluten',
+  'M': 'Milch / Milk',
+  'G': 'Milch / Milk',
+  'B': 'Krebstiere / Crustaceans',
+  'R': 'Weichtiere / Molluscs',
+  'E': 'Erdnüsse / Peanuts',
+  'F': 'Soja / Soy',
+};
+
+const label = labels[code.toUpperCase()] || code;
+---
+
+<span
+  class="inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold tracking-wider rounded-xs bg-amber-500/20 text-amber-300 border border-amber-500/40"
+  title={label}
+  aria-label={`Allergen ${code}: ${label}`}
+>
+  {code.toUpperCase()}
+</span>

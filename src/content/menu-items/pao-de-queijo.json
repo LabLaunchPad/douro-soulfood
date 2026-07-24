@@ -1,0 +1,18 @@
+{
+  "title": "Pão de Queijo",
+  "description": "Frische brasilianische Käsebällchen, frisch gebacken.",
+  "price": 1090,
+  "category": "appetizers",
+  "dietary": [
+    "vegetarian",
+    "gluten-free"
+  ],
+  "order": 40,
+  "featured": false,
+  "available": true,
+  "prepTime": "ca. 25 Min.",
+  "allergens": [
+    "M"
+  ],
+  "image": "/images/menu/pao-de-queijo.png"
+}

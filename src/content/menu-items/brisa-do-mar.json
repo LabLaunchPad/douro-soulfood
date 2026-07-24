@@ -1,0 +1,14 @@
+{
+  "title": "Brisa Do Mar Premium",
+  "description": "Auswahl aus Miesmuscheln und Venusmuscheln in einer Tomatensauce mit Kräutern und Weißwein.",
+  "price": 2090,
+  "category": "seafood",
+  "dietary": [],
+  "order": 20,
+  "featured": false,
+  "available": true,
+  "allergens": [
+    "R"
+  ],
+  "image": "/images/menu/brisa-do-mar.png"
+}

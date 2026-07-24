@@ -6,38 +6,26 @@ import NavBar from '@/components/NavBar.astro';
 import HeroSection from '@/components/HeroSection.astro';
 import ReviewBadge from '@/components/ReviewBadge.astro';
 import MenuItemCard from '@/components/MenuItemCard.astro';
+import CategoryIcon from '@/components/CategoryIcon.astro';
 import OurStory from '@/components/OurStory.astro';
 import Footer from '@/components/Footer.astro';
 import { getCollection } from 'astro:content';
 
 /**
  * HOME PAGE — D'ouro Soulfood Bistro
- *
- * Assembles the complete home page from pre-built section components.
- * Featured menu items are queried from the KeystaticCMS menu_items
- * collection (featured=true, sorted by order, limited to 3).
- *
- * Section order:
- *   1. NavBar (sticky, glassmorphism)
- *   2. HeroSection (Afro-Latin Soul headline + dual CTAs)
- *   3. ReviewBadge (4.8-star social proof strip)
- *   4. Featured Menu (3 bestsellers: Brazil Beef Bowl, Beef Taco, Fufu)
- *   5. OurStory (Angela's lockdown origin story + FAQ + location)
- *   6. Footer (address, hours, phone, Instagram, Foodora)
- *
- * SEO: Title, description, canonical, Open Graph, Schema.org Restaurant.
- * All handled by Base.astro via props.
- *
- * All images use <Image /> from astro:assets.
- * All colors use brand-* token classes — zero hex codes.
- * Zero `any` types. Edge-compatible only (no Node.js APIs).
  */
 
 type DietaryTag = 'vegan' | 'vegetarian' | 'gluten-free' | 'spicy' | 'halal' | 'dairy-free';
 
-// ─────────────────────────────────────────────────────────────
-// DATA: Fetch content from KeystaticCMS collections
-// ─────────────────────────────────────────────────────────────
+/** 6 Core Category Slots for Homepage */
+const categorySlots = [
+  { slug: 'appetizers', title: 'Vorspeisen / Entradas', desc: 'Coxinha, Pão de Queijo & Ceviche', icon: 'appetizers' },
+  { slug: 'quesadillas', title: 'Quesadillas', desc: 'Melted Gouda & Mozzarella-Mix', icon: 'quesadillas' },
+  { slug: 'tacos', title: 'Tacos', desc: 'Picanha, Pollo, Vegano & Gambas', icon: 'tacos' },
+  { slug: 'bowls', title: 'Bowls', desc: 'Brazil Beef, Chipotle & Surf & Turf', icon: 'bowls' },
+  { slug: 'mains', title: 'Pratos Feitos', desc: 'Feijoada & African Peanut Stew mit Fufu', icon: 'mains' },
+  { slug: 'drinks', title: 'Bebidas & Sobremesas', desc: 'Caipirinha, Guaraná & Brigadeiros', icon: 'drinks' },
+];
 
 /** Fetch featured menu items for the homepage (bestsellers) */
 const featuredItems = (await getCollection('menu_items'))
@@ -54,14 +42,11 @@ const faqItems = faqEntries.map((item) => ({
   answer: item.data.answer,
 }));
 
-// ─────────────────────────────────────────────────────────────
 // SEO CONFIG
-// ─────────────────────────────────────────────────────────────
-
 const SITE_URL = 'https://douro-soulfood.com';
 const PAGE_TITLE = "Afro-Latin Cuisine in Salzburg";
 const PAGE_DESCRIPTION =
-  "Fresh Brazilian & African soulfood by Angela in Salzburg. Tacos, bowls, African stews. Mon\u2013Sat 11\u201320h. Auerspergstra\u00dfe 10.";
+  "Fresh Brazilian & African soulfood by Angela in Salzburg. Tacos, bowls, African stews. Mon–Sat 11–20h. Auerspergstraße 10.";
 ---
 
 <Base
@@ -69,14 +54,10 @@ const PAGE_DESCRIPTION =
   description={PAGE_DESCRIPTION}
   canonical={SITE_URL}
 >
-  {/* ═══════════════════════════════════════════════════════
-      1. NAVBAR — Sticky glassmorphic navigation
-      ═══════════════════════════════════════════════════════ */}
+  {/* 1. NAVBAR */}
   <NavBar slot="nav" />
 
-  {/* ═══════════════════════════════════════════════════════
-      2. HERO — Full-bleed hero with headline overlay + CTAs
-      ═══════════════════════════════════════════════════════ */}
+  {/* 2. HERO */}
   <HeroSection
     accent="D'ouro Soulfood Bistro"
     headline="Afro-Latin Soul in the Heart of Salzburg"
@@ -84,7 +65,7 @@ const PAGE_DESCRIPTION =
     images={[
       {
         src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80',
-        alt: "D'ouro Soulfood Bistro \u2014 Afro-Latin cuisine in Salzburg",
+        alt: "D'ouro Soulfood Bistro — Afro-Latin cuisine in Salzburg",
         width: 1600,
         height: 900,
       },
@@ -93,10 +74,7 @@ const PAGE_DESCRIPTION =
     ctaSecondary={{ label: 'See Our Menu', href: '/menu' }}
   />
 
-  {/* ═══════════════════════════════════════════════════════
-      3. REVIEW BADGE — 4.8-star social proof strip
-      Positioned above the fold to build trust immediately.
-      ═══════════════════════════════════════════════════════ */}
+  {/* 3. REVIEW BADGE */}
   <section class="py-6 md:py-8 px-4 md:px-16 border-b border-border-subtle" aria-label="Bewertungen">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
       <ReviewBadge
@@ -110,22 +88,49 @@ const PAGE_DESCRIPTION =
     </div>
   </section>
 
-  {/* ═══════════════════════════════════════════════════════
-      4. FEATURED MENU — 3 Bestsellers
-      Showcases the most popular dishes to entice visitors.
-      Data comes from KeystaticCMS (featured=true items).
-      ═══════════════════════════════════════════════════════ */}
-  <section class="pt-8 md:pt-10 pb-12 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Empfehlungen">
-    {/* Section heading */}
-    <div class="text-center mb-10 md:mb-14">
+  {/* 4. FEATURED MENU & 6 CATEGORY SLOTS */}
+  <section class="pt-8 md:pt-10 pb-12 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Speisekarte Highlights">
+    {/* ── 6 CORE CATEGORY SLOTS GRID ── */}
+    <div class="mb-14">
+      <div class="text-center mb-8">
+        <span class="inline-block text-sm font-semibold text-brand-gold uppercase tracking-wider mb-2">
+          Unsere Speisekarte
+        </span>
+        <h2 class="text-2xl md:text-4xl font-extrabold text-text-primary font-display uppercase tracking-tight">
+          Entdecken Sie unsere 6 Afro-Latino Spezialitäten
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+        {categorySlots.map((slot) => (
+          <a
+            href={`/menu#category-${slot.slug}`}
+            class="group flex flex-col items-center text-center p-4 rounded-2xl bg-surface-card border border-border-subtle hover:border-brand-gold/50 hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-md"
+          >
+            <div class="w-12 h-12 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <CategoryIcon name={slot.icon} class="w-6 h-6" />
+            </div>
+            <h3 class="text-sm font-bold text-text-primary group-hover:text-brand-gold font-display transition-colors mb-1">
+              {slot.title}
+            </h3>
+            <p class="text-[11px] text-text-tertiary leading-tight line-clamp-2">
+              {slot.desc}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    {/* ── BESTSELLERS SECTION ── */}
+    <div class="text-center mb-10">
       <span class="inline-block text-sm font-semibold text-brand-gold uppercase tracking-wider mb-2">
-        Bestsellers
+        Empfehlungen
       </span>
       <h2 class="text-2xl md:text-4xl font-semibold text-text-primary font-display">
-        The Dishes Everyone Comes Back For
+        Beliebte Gerichte im D'ouro Bistro
       </h2>
-      <p class="text-text-secondary mt-3 max-w-[75ch] mx-auto">
-        Handpicked by Angela &mdash; our most loved dishes, made fresh every day.
+      <p class="text-text-secondary mt-2 max-w-[75ch] mx-auto text-sm md:text-base">
+        Frisch von Angela zubereitet — mit den besten Zutaten Brasiliens und Westafrikas.
       </p>
     </div>
 
@@ -137,6 +142,9 @@ const PAGE_DESCRIPTION =
           description={item.data.description}
           priceInCents={item.data.price}
           dietary={item.data.dietary as DietaryTag[] | undefined}
+          allergens={item.data.allergens}
+          prepTime={item.data.prepTime}
+          addOns={item.data.addOns}
           available={item.data.available}
           featured={item.data.featured}
           imageSrc={item.data.image || undefined}
@@ -157,7 +165,7 @@ const PAGE_DESCRIPTION =
                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold
                no-underline transition-colors duration-[var(--duration-fast)] ease-[var(--ease-spring)] shadow-glow-gold"
       >
-        See Full Menu
+        Komplette Speisekarte ansehen
         <svg
           class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)]"
           viewBox="0 0 256 256"
@@ -175,28 +183,24 @@ const PAGE_DESCRIPTION =
     </div>
   </section>
 
-  {/* ═══════════════════════════════════════════════════════
-      5. OUR STORY — Angela's lockdown origin story
-      Uses the OurStory component which also includes
-      FAQ accordion and location card via slot composition.
-      ═══════════════════════════════════════════════════════ */}
+  {/* 5. OUR STORY */}
   <OurStory
-    faqTitle="H\u00e4ufig gestellte Fragen"
+    faqTitle="Häufig gestellte Fragen"
     faqItems={faqItems}
     location={{
-      title: 'Salzburg, \u00d6sterreich',
+      title: 'Salzburg, Österreich',
       subtitle: 'Restaurant',
-      address: ['Auerspergstra\u00dfe 10', '5020 Salzburg'],
+      address: ['Auerspergstraße 10', '5020 Salzburg'],
       phone: '+43 676 4231921',
       phoneHref: 'tel:+436764231921',
       directionsHref:
         'https://www.google.com/maps/search/?api=1&query=Auerspergstra%C3%9Fe+10%2C+5020+Salzburg%2C+Austria',
-      hoursToday: '11:00 \u2013 20:00',
+      hoursToday: '11:00 – 20:00',
       orderHref: '/menu',
       orderLabel: 'Jetzt bestellen',
     }}
   >
-    {/* Angela's story — inserted via slot before FAQ/location */}
+    {/* Angela's story */}
     <section class="pt-8 md:pt-10 pb-12 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Our Story">
       <div class="glass-gold rounded-2xl p-8 md:p-12 max-w-3xl mx-auto text-center">
         <span class="inline-block text-sm font-semibold text-brand-gold uppercase tracking-wider mb-4">
@@ -233,15 +237,13 @@ const PAGE_DESCRIPTION =
     </section>
   </OurStory>
 
-  {/* ═══════════════════════════════════════════════════════
-      6. FOOTER — Address, hours, phone, Instagram, Foodora
-      ═══════════════════════════════════════════════════════ */}
+  {/* 6. FOOTER */}
   <Footer
     slot="footer"
     links={[
       { label: 'Speisekarte', href: '/menu' },
       { label: 'Catering & Events', href: '/catering' },
-      { label: '\u00dcber uns', href: '/about' },
+      { label: 'Über uns', href: '/about' },
       { label: 'Kontakt', href: '/contact' },
       { label: 'Geschenkkarten', href: '/gift-cards' },
     ]}

@@ -1,0 +1,13 @@
+{
+  "title": "Roja",
+  "description": "Fruchtige Água Fresca mit Hibiskus, Limette und einem Hauch Ingwer — spritzig und belebend.",
+  "price": 490,
+  "category": "drinks",
+  "dietary": [
+    "vegan"
+  ],
+  "order": 20,
+  "featured": false,
+  "available": true,
+  "image": "/images/menu/roja.webp"
+}
