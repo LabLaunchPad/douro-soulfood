@@ -62,76 +62,48 @@
 
 @theme {
 
-  /* Make containers full width */
-  --container-7xl: 100%;
-
   /* ─────────────────────────────────────────────────────────────
-     BRAND PALETTE — Raw color swatches
-     These are the soul of the brand. Each color tells a story
-     of Brazilian warmth, African earth, and Salzburg hospitality.
+     BRAND PALETTE — Talkin' Tacos OKLCH Color Tokens (Single Source of Truth)
      ───────────────────────────────────────────────────────────── */
 
-  /* ── Brand Primary: Terracotta / Rust ──
-     The soul of Brazilian earth tones. Warm, grounded, authentic.
-     This is the dominant accent — used for CTAs, highlights,
-     active states, and anything that needs to say "look at me
-     with warmth." Not aggressive like red, not passive like
-     brown — it's terracotta, the color of clay pots and
-     sun-baked earth. */
-  --color-brand-terracotta: oklch(0.48 0.18 142.67);
-  --color-brand-terracotta-light: oklch(0.6812 0.2208 142.67);
-  --color-brand-terracotta-dark: oklch(0.35 0.15 142.67);
+  /* ── Brand Primary: Taco Green (#06B906) ── */
+  --color-brand-terracotta: oklch(0.56 0.18 24.5);
+  --color-brand-terracotta-light: oklch(0.66 0.18 24.5);
+  --color-brand-terracotta-dark: oklch(0.42 0.18 24.5);
 
-  /* ── Brand Secondary: Warm Golden Yellow ──
-     Brazilian sunshine, market energy, carnival warmth.
-     Used for secondary accents, badges, price highlights,
-     and gradient endpoints. Evokes the golden hour light
-     on Salzburg's old town. Pairs naturally with terracotta
-     for warm-toned UI elements. */
-  --color-brand-gold: oklch(0.6812 0.2208 142.67);
-  --color-brand-gold-light: oklch(0.78 0.16 142.67);
-  --color-brand-gold-dark: oklch(0.58 0.20 142.67);
+  /* ── Brand Secondary: Honey Gold / Yellow Accent ── */
+  --color-brand-gold: oklch(0.78 0.18 85.0);
+  --color-brand-gold-light: oklch(0.85 0.16 85.0);
+  --color-brand-gold-dark: oklch(0.65 0.18 85.0);
 
-  /* ── Brand Accent: Deep Forest / Olive Green ──
-     African earth, freshness, natural vitality.
-     Used sparingly for success states, vegetarian labels,
-     freshness indicators. Provides contrast against the warm
-     palette — a breath of cool air in a warm room. */
-  --color-brand-forest: oklch(0.6812 0.2208 142.67);
-  --color-brand-forest-light: oklch(0.78 0.16 142.67);
-  --color-brand-sage: oklch(0.75 0.10 142.67);
+  /* ── Brand Accent: Taco Green (#06B906) ── */
+  --color-brand-forest: oklch(0.68 0.22 142.5);
+  --color-brand-forest-light: oklch(0.76 0.18 142.5);
+  --color-brand-sage: oklch(0.72 0.12 142.5);
 
-  /* ── Brand Neutral Warmth: Cream & Espresso ──
-     The bookends of our palette. Cream is warm off-white —
-     never clinical, always inviting. Espresso is near-black
-     with a warm undertone — never cold, always cozy. */
-  --color-brand-cream: oklch(0.95 0.015 80);
-  --color-brand-cream-warm: oklch(0.93 0.02 75);
+  /* ── Brand Neutrals: Dark Black (#0D0D0D) & Charcoal (#4D4D4D) ── */
+  --color-brand-cream: oklch(0.98 0.005 80);
+  --color-brand-cream-warm: oklch(0.95 0.01 80);
   --color-brand-mist: oklch(0.97 0.008 80);
-  --color-brand-espresso: oklch(0.14 0.03 40);
-  --color-brand-charcoal: oklch(0.12 0.01 0);
+  --color-brand-espresso: oklch(0.12 0.01 0);
+  --color-brand-charcoal: oklch(0.38 0.01 0);
   --color-brand-smoke: oklch(0.17 0.01 0);
-  --color-brand-ember: oklch(0.28 0.12 142.67);
+  --color-brand-ember: oklch(0.56 0.18 24.5);
 
-  /* ─────────────────────────────────────────────────────────────
-     LEGACY TOKENS — Backward compatibility alias map
-     Existing components use var(--color-douro-*) references.
-     These map to the same OKLCH values as brand-* tokens.
-     Both namespaces coexist; new code should prefer brand-*.
-     ───────────────────────────────────────────────────────────── */
-  --color-douro-gold: oklch(0.6812 0.2208 142.67);
-  --color-douro-gold-light: oklch(0.78 0.16 142.67);
-  --color-douro-gold-dark: oklch(0.58 0.20 142.67);
-  --color-douro-terracotta: oklch(0.48 0.18 142.67);
-  --color-douro-terracotta-light: oklch(0.6812 0.2208 142.67);
-  --color-douro-ember: oklch(0.28 0.12 142.67);
-  --color-douro-forest: oklch(0.6812 0.2208 142.67);
-  --color-douro-forest-light: oklch(0.78 0.16 142.67);
-  --color-douro-sage: oklch(0.75 0.10 142.67);
-  --color-douro-cream: oklch(0.95 0.015 80);
-  --color-douro-cream-warm: oklch(0.93 0.02 75);
-  --color-douro-espresso: oklch(0.14 0.03 40);
-  --color-douro-charcoal: oklch(0.12 0.01 0);
+  /* ── Legacy Compat Map ── */
+  --color-douro-gold: oklch(0.78 0.18 85.0);
+  --color-douro-gold-light: oklch(0.85 0.16 85.0);
+  --color-douro-gold-dark: oklch(0.65 0.18 85.0);
+  --color-douro-terracotta: oklch(0.56 0.18 24.5);
+  --color-douro-terracotta-light: oklch(0.66 0.18 24.5);
+  --color-douro-ember: oklch(0.56 0.18 24.5);
+  --color-douro-forest: oklch(0.68 0.22 142.5);
+  --color-douro-forest-light: oklch(0.76 0.18 142.5);
+  --color-douro-sage: oklch(0.72 0.12 142.5);
+  --color-douro-cream: oklch(0.98 0.005 80);
+  --color-douro-cream-warm: oklch(0.95 0.01 80);
+  --color-douro-espresso: oklch(0.12 0.01 0);
+  --color-douro-charcoal: oklch(0.38 0.01 0);
   --color-douro-smoke: oklch(0.17 0.01 0);
   --color-douro-mist: oklch(0.97 0.008 80);
 
