@@ -1,6 +1,6 @@
 {
   "title": "Roja",
-  "description": "Fruchtige Água Fresca mit Hibiskus, Limette und einem Hauch Ingwer — spritzig und belebend.",
+  "description": "Frisches, gesundes und leckeres Getränk mit Erdbeeren, Limette und Grenadine — alkoholfrei.",
   "price": 490,
   "category": "drinks",
   "dietary": [
@@ -9,5 +9,6 @@
   "order": 20,
   "featured": false,
   "available": true,
-  "image": "/images/menu/roja.webp"
+  "image": "/images/menu/roja.webp",
+  "subCategory": "aguas-frescas"
 }

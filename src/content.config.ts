@@ -32,6 +32,7 @@ const menuItems = defineCollection({
       'drinks',
       'desserts',
     ]),
+    subCategory: z.enum(['aguas-frescas', 'cocktails', 'softdrinks', 'cafes']).optional(),
     dietary: z.array(
       z.enum(['vegan', 'vegetarian', 'gluten-free', 'spicy', 'halal', 'dairy-free'])
     ).optional(),

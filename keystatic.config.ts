@@ -46,6 +46,16 @@ export default config({
           ],
           defaultValue: 'bowls',
         }),
+        subCategory: fields.select({
+          label: 'Drink Sub-Category (Bebidas only)',
+          options: [
+            { label: 'Águas Frescas', value: 'aguas-frescas' },
+            { label: 'Cocktails', value: 'cocktails' },
+            { label: 'Softdrinks', value: 'softdrinks' },
+            { label: 'Cafés', value: 'cafes' },
+          ],
+          defaultValue: 'softdrinks',
+        }),
         dietary: fields.multiselect({
           label: 'Dietary Tags',
           options: [

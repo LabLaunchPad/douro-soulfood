@@ -1,11 +1,16 @@
 {
-  "title": "Mojito",
-  "description": "Der kubanische Klassiker — weißer Rum, frische Minze, Limette, Rohrzucker und Soda. Perfekt für warme Tage.",
-  "price": 890,
+  "title": "Mojito (ohne / mit Alkohol)",
+  "description": "Klassischer Mojito mit frischer Minze und Limette — als alkoholfreier Mocktail (€6,90) oder klassisch mit weißem Rum (€8,90).",
+  "price": 690,
   "category": "drinks",
   "dietary": [],
-  "order": 40,
+  "order": 10,
   "featured": false,
   "available": true,
-  "image": null
+  "image": null,
+  "priceVariants": {
+    "nonAlcoholic": 690,
+    "alcoholic": 890
+  },
+  "subCategory": "cocktails"
 }

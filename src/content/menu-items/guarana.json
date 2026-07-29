@@ -1,11 +1,12 @@
 {
   "title": "Guaraná Antarctica",
-  "description": "Brasiliens beliebtestes Erfrischungsgetränk — der einzigartige Guaraná-Geschmack aus dem Amazonas.",
+  "description": "Das kultige brasilianische Erfrischungsgetränk mit feinem Guaraná-Geschmack.",
   "price": 590,
   "category": "drinks",
   "dietary": [],
-  "order": 90,
+  "order": 20,
   "featured": false,
   "available": true,
-  "image": null
+  "image": null,
+  "subCategory": "softdrinks"
 }

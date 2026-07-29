@@ -1,13 +1,14 @@
 {
   "title": "Amazonas",
-  "description": "Erfrischende Água Fresca mit Ananas, Minze und Kokoswasser — ein tropischer Durstlöscher.",
+  "description": "Frisches, gesundes und leckeres Getränk mit Gurke, Minze, Limette und grünem Apfel — alkoholfrei.",
   "price": 490,
   "category": "drinks",
   "dietary": [
     "vegan"
   ],
   "order": 10,
-  "featured": false,
+  "featured": true,
   "available": true,
-  "image": "/images/menu/amazonas.webp"
+  "image": "/images/menu/amazonas.webp",
+  "subCategory": "aguas-frescas"
 }

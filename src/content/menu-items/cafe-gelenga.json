@@ -1,11 +1,12 @@
 {
   "title": "Café Gelenga",
-  "description": "Brasilianischer Eiskaffee mit Milchschaum und einem Hauch Zimt — süß, kühl und belebend.",
+  "description": "Aromatischer Kaffeespezialität nach Hausart.",
   "price": 380,
   "category": "drinks",
   "dietary": [],
-  "order": 130,
+  "order": 20,
   "featured": false,
   "available": true,
-  "image": null
+  "image": null,
+  "subCategory": "cafes"
 }

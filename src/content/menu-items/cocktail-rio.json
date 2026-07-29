@@ -1,11 +1,12 @@
 {
   "title": "Cocktail Rio",
-  "description": "Tropischer Mix aus Cachaça, Maracuja, Limette und Kokoscreme — Geschmack von Rio de Janeiro.",
+  "description": "Erfrischender Mix aus Orangensaft, Limonade, Grenadine und Limette.",
   "price": 690,
   "category": "drinks",
   "dietary": [],
-  "order": 70,
+  "order": 30,
   "featured": false,
   "available": true,
-  "image": null
+  "image": null,
+  "subCategory": "cocktails"
 }
