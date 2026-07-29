@@ -2,10 +2,10 @@
 /**
  * NavBar — Dynamic Dual-State Talkin' Tacos Header & Floating Navbar
  *
- * Single Source of Truth (SSOT):
- * - Buttons use `rounded-sm` (--radius-sm = 10px) matching HeroSection & global token spec.
- * - Floating container uses `rounded-md` (--radius-md = 14px) matching card tokens.
- * - Colors map directly to OKLCH @theme tokens (bg-brand-forest, bg-brand-espresso, text-white).
+ * Dedicated Background Layer Architecture:
+ * - Dedicated <div data-scrolled-bg> layer handles the full-width dark background & bottom border.
+ * - Fades in seamlessly behind the floating capsule container as you scroll down.
+ * - Eliminates background alpha dip and lingering border lag when returning to top.
  */
 
 interface NavLink {
@@ -38,14 +38,19 @@ const {
 <nav
   aria-label="Hauptmenü"
   class:list={[
-    'fixed top-0 inset-x-0 z-50 transition-all duration-300 ease-out',
-    'bg-transparent py-4',
+    'fixed top-0 inset-x-0 z-50 py-3 md:py-4 transition-all duration-300 ease-out',
     className,
   ]}
   data-nav
   data-scrolled="false"
 >
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-12">
+  <!-- Dedicated Full-Width Background Layer (Smooth Fade & Border) -->
+  <div
+    data-scrolled-bg
+    class="absolute inset-0 bg-brand-espresso/95 backdrop-blur-md border-b border-white/10 shadow-2xl transition-opacity duration-300 ease-out pointer-events-none -z-10 opacity-0"
+  ></div>
+
+  <div class="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-4 md:px-12">
 
     <!-- Left: Logo Image Only -->
     <div class="shrink-0">
@@ -62,11 +67,11 @@ const {
       </a>
     </div>
 
-    <!-- Right: Desktop Navigation Floating Container (SSOT: rounded-md) -->
+    <!-- Right: Desktop Navigation Container (SSOT: rounded-md) -->
     <div class="hidden md:flex items-center">
       <div
         data-capsule
-        class="flex items-center gap-3 bg-brand-espresso/90 border border-white/15 backdrop-blur-md rounded-md px-4 py-2 shadow-2xl transition-all duration-300"
+        class="flex items-center gap-3 rounded-md px-4 py-2 bg-brand-espresso/90 border border-white/15 backdrop-blur-md shadow-2xl transition-all duration-300 ease-out"
       >
         <!-- Nav links -->
         <div class="flex items-center gap-1">
@@ -202,44 +207,44 @@ const {
 <slot />
 
 <script>
-  // Scroll Sentinel for Dynamic Dual-State Navbar
+  // High-performance window.scrollY scroll handler with dedicated background layer
   const nav = document.querySelector('[data-nav]') as HTMLElement;
+  const scrolledBg = document.querySelector('[data-scrolled-bg]') as HTMLElement;
   const capsule = document.querySelector('[data-capsule]') as HTMLElement;
 
   if (nav) {
-    const sentinel = document.createElement('div');
-    sentinel.style.position = 'absolute';
-    sentinel.style.top = '0px';
-    sentinel.style.height = '20px';
-    sentinel.style.width = '100%';
-    sentinel.style.pointerEvents = 'none';
-    document.body.prepend(sentinel);
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const isTop = entry.isIntersecting;
-        nav.dataset.scrolled = String(!isTop);
+      if (isScrolled) {
+        nav.dataset.scrolled = 'true';
 
-        if (!isTop) {
-          // Scrolled State: Full width dark bar header
-          nav.classList.remove('bg-transparent', 'py-4');
-          nav.classList.add('bg-brand-espresso/95', 'backdrop-blur-md', 'border-b', 'border-white/10', 'py-3', 'shadow-2xl');
+        // Fade in full-width dark background behind capsule
+        if (scrolledBg) scrolledBg.style.opacity = '1';
 
-          capsule?.classList.remove('bg-brand-espresso/90', 'border-white/15', 'shadow-2xl');
-          capsule?.classList.add('bg-transparent', 'border-transparent', 'shadow-none');
-        } else {
-          // Top State: Transparent header with floating dark capsule
-          nav.classList.add('bg-transparent', 'py-4');
-          nav.classList.remove('bg-brand-espresso/95', 'backdrop-blur-md', 'border-b', 'border-white/10', 'py-3', 'shadow-2xl');
-
-          capsule?.classList.add('bg-brand-espresso/90', 'border-white/15', 'shadow-2xl');
-          capsule?.classList.remove('bg-transparent', 'border-transparent', 'shadow-none');
+        // Blend capsule into full-width header
+        if (capsule) {
+          capsule.style.backgroundColor = 'transparent';
+          capsule.style.borderColor = 'transparent';
+          capsule.style.boxShadow = 'none';
         }
-      },
-      { threshold: 0.1 }
-    );
+      } else {
+        nav.dataset.scrolled = 'false';
 
-    observer.observe(sentinel);
+        // Fade out full-width dark background
+        if (scrolledBg) scrolledBg.style.opacity = '0';
+
+        // Re-enable floating capsule container
+        if (capsule) {
+          capsule.style.backgroundColor = '';
+          capsule.style.borderColor = '';
+          capsule.style.boxShadow = '';
+        }
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
   }
 
   // Mobile menu toggle

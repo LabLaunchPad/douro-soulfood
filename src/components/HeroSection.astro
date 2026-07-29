@@ -25,8 +25,10 @@ interface Props {
   headline: string;
   /** Supporting subheadline text */
   subheadline?: string;
-  /** Hero background images (carousel source) */
-  images: HeroImage[];
+  /** Hero background video URL (e.g. /douroherovideo.mp4) */
+  videoSrc?: string;
+  /** Hero background images (fallback source) */
+  images?: HeroImage[];
   /** Primary CTA config */
   ctaPrimary: { label: string; href: string };
   /** Secondary CTA config */
@@ -37,25 +39,37 @@ const {
   accent,
   headline,
   subheadline,
-  images,
+  videoSrc = '/douroherovideo.mp4',
+  images = [],
   ctaPrimary,
   ctaSecondary,
 } = Astro.props;
 
-/** Use first image as the default hero background */
+/** Use first image as fallback hero background */
 const heroImage = images[0];
 ---
 
 <header class="relative w-full overflow-hidden bg-surface-primary">
-  <!-- Background image layer -->
+  <!-- Background layer (Video or Image) -->
   <div
     class="absolute inset-0 overflow-hidden"
     role="region"
     aria-live="polite"
     aria-atomic="true"
-    aria-label="Hero-Bildkarussell"
+    aria-label="Hero-Hintergrund"
   >
-    {heroImage && (
+    {videoSrc ? (
+      <video
+        src={videoSrc}
+        poster={heroImage?.src}
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
+        class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+      ></video>
+    ) : heroImage && (
       <img
         src={heroImage.src}
         alt={heroImage.alt}
