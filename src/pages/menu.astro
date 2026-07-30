@@ -208,6 +208,9 @@ const sortedCategories = Object.entries(grouped).sort(
             ))}
           </div>
 
+          {/* Section-Specific Allergen Legend */}
+          <div class="mt-6">
+            <AllergenHeaderLegend allergens={items.flatMap((i) => i.data.allergens || [])} />
           </div>
         </section>
       );
@@ -277,6 +280,9 @@ const sortedCategories = Object.entries(grouped).sort(
             ))}
           </div>
 
+          {/* Section-Specific Allergen Legend */}
+          <div class="mt-6">
+            <AllergenHeaderLegend allergens={items.flatMap((i) => i.data.allergens || [])} />
           </div>
         </section>
       );
@@ -346,6 +352,9 @@ const sortedCategories = Object.entries(grouped).sort(
             ))}
           </div>
 
+          {/* Section-Specific Allergen Legend */}
+          <div class="mt-6">
+            <AllergenHeaderLegend allergens={items.flatMap((i) => i.data.allergens || [])} />
           </div>
         </section>
       );
@@ -416,6 +425,9 @@ const sortedCategories = Object.entries(grouped).sort(
             ))}
           </div>
 
+          {/* Section-Specific Allergen Legend */}
+          <div class="mt-6">
+            <AllergenHeaderLegend allergens={items.flatMap((i) => i.data.allergens || [])} />
           </div>
         </section>
       );
@@ -456,6 +468,9 @@ const sortedCategories = Object.entries(grouped).sort(
             ))}
           </div>
 
+          {/* Section-Specific Allergen Legend */}
+          <div class="mt-6">
+            <AllergenHeaderLegend allergens={items.flatMap((i) => i.data.allergens || [])} />
           </div>
         </section>
       );
@@ -496,6 +511,9 @@ const sortedCategories = Object.entries(grouped).sort(
             ))}
           </div>
 
+          {/* Section-Specific Allergen Legend */}
+          <div class="mt-6">
+            <AllergenHeaderLegend allergens={items.flatMap((i) => i.data.allergens || [])} />
           </div>
         </section>
       );
@@ -536,6 +554,9 @@ const sortedCategories = Object.entries(grouped).sort(
             ))}
           </div>
 
+          {/* Section-Specific Allergen Legend */}
+          <div class="mt-6">
+            <AllergenHeaderLegend allergens={items.flatMap((i) => i.data.allergens || [])} />
           </div>
         </section>
       );
@@ -579,6 +600,11 @@ const sortedCategories = Object.entries(grouped).sort(
               imageHeight={300}
             />
           ))}
+        </div>
+
+        {/* Section-Specific Allergen Legend */}
+        <div class="mt-6">
+          <AllergenHeaderLegend allergens={items.flatMap((i) => i.data.allergens || [])} />
         </div>
       </section>
     );
