@@ -59,16 +59,29 @@ const heroImage = images[0];
     aria-label="Hero-Hintergrund"
   >
     {videoSrc ? (
-      <video
-        src={videoSrc}
-        poster={heroImage?.src}
-        autoplay
-        loop
-        muted
-        playsinline
-        preload="auto"
-        class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
-      ></video>
+      <>
+        <!-- Mobile Video -->
+        <video
+          src="/douroheromobile.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="auto"
+          class="block md:hidden absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+        ></video>
+        <!-- Desktop Video -->
+        <video
+          src={videoSrc}
+          poster={heroImage?.src}
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="auto"
+          class="hidden md:block absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+        ></video>
+      </>
     ) : heroImage && (
       <img
         src={heroImage.src}
@@ -83,8 +96,8 @@ const heroImage = images[0];
     <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
   </div>
 
-  <!-- Hero content -->
-  <div class="relative max-w-7xl mx-auto px-4 md:px-16 min-h-[70vh] md:min-h-screen flex flex-col justify-end pb-12 md:pb-16">
+  <!-- Hero content: 100vh full-screen on mobile -->
+  <div class="relative max-w-7xl mx-auto px-4 md:px-16 min-h-screen flex flex-col justify-end pb-24 md:pb-16">
     <div class="flex flex-col gap-3 lg:gap-4 max-w-2xl">
       <!-- Accent label — brand gold decorative text -->
       <span class="text-sm md:text-xl lg:text-2xl font-semibold text-brand-gold leading-tight tracking-tight font-display">
@@ -102,8 +115,8 @@ const heroImage = images[0];
         </p>
       )}
 
-      <!-- CTA buttons -->
-      <div class="flex flex-wrap gap-3 mt-4">
+      <!-- Desktop CTA buttons (Hidden on Mobile per reference layout) -->
+      <div class="hidden md:flex flex-wrap gap-3 mt-4">
         <!-- Primary CTA — brand gold with glow -->
         <a
           href={ctaPrimary.href}
