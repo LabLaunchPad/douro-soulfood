@@ -1,0 +1,34 @@
+---
+/**
+ * AllergenHeaderLegend — Top Allergen Key component with German & English descriptions.
+ * Matches the reference bistro menu footer/header allergen key.
+ */
+const allergenMap = [
+  { code: 'A', de: 'Gluten', en: 'Gluten' },
+  { code: 'M', de: 'Milch', en: 'Milk' },
+  { code: 'B', de: 'Krebstiere', en: 'Crustaceans' },
+  { code: 'R', de: 'Weichtiere', en: 'Molluscs' },
+  { code: 'E', de: 'Erdnüsse', en: 'Peanuts' },
+  { code: 'F', de: 'Soja', en: 'Soy' },
+];
+---
+
+<div class="w-full bg-[#FAF6EE] border-t-2 border-b-2 border-amber-900/30 py-3 px-4 shadow-sm mt-4 mb-2 rounded-xl">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+    <div class="flex items-center gap-2 shrink-0 font-serif font-bold text-xs uppercase tracking-widest text-amber-950">
+      <svg class="w-4 h-4 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>ALLERGENE / ALLERGENS:</span>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-x-5 gap-y-1.5 text-xs text-amber-900/90 font-serif">
+      {allergenMap.map((item) => (
+        <span class="inline-flex items-center gap-1">
+          <strong class="font-bold text-amber-950 font-mono">{item.code}</strong> = 
+          <span>{item.de === item.en ? item.de : `${item.de} / ${item.en}`}</span>
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

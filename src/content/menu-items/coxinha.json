@@ -1,6 +1,7 @@
 {
   "title": "Coxinha mit Salat",
   "description": "Brasilianische Teigtasche mit Hühnerfleischfüllung, serviert mit Salat.",
+  "descriptionEn": "Brazilian fried dumpling with chicken filling, served with side salad.",
   "price": 890,
   "category": "appetizers",
   "dietary": [],
@@ -11,5 +12,5 @@
     "A",
     "M"
   ],
-  "image": "/images/menu/coxinha.png"
+  "image": "/images/menu/coxinasalad.jfif"
 }

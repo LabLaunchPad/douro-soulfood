@@ -19,6 +19,7 @@ const menuItems = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    descriptionEn: z.string().optional(),
     price: z.number().min(0),
     image: z.string().nullable().optional(),
     category: z.enum([
@@ -38,6 +39,7 @@ const menuItems = defineCollection({
     ).optional(),
     allergens: z.array(z.string()).optional(),
     prepTime: z.string().optional(),
+    prepTimeEn: z.string().optional(),
     addOns: z.array(z.object({
       label: z.string(),
       price: z.number(),

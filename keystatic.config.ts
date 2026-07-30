@@ -18,9 +18,13 @@ export default config({
       schema: {
         title: fields.slug({ name: { label: 'Dish Name', validation: { length: { min: 1 } } } }),
         description: fields.text({
-          label: 'Description',
+          label: 'Description (German)',
           multiline: true,
           validation: { length: { min: 1 } },
+        }),
+        descriptionEn: fields.text({
+          label: 'Description (English)',
+          multiline: true,
         }),
         price: fields.integer({
           label: 'Price (EUR cents)',
