@@ -1,18 +1,17 @@
 {
-  "title": "Veggie Peanut Stew mit Fufu",
+  "title": "veggie peanut stew mit fufu",
   "description": "Cremiger vegetarischer Erdnusseintopf mit Gemüse, serviert mit Fufu.",
+  "descriptionEn": "Creamy vegetarian peanut stew with vegetables, served with fufu.",
   "price": 1690,
-  "image": "/images/menu/fufu.jpg",
   "category": "mains",
   "dietary": [
-    "vegan",
-    "gluten-free",
-    "dairy-free"
+    "vegetarian"
   ],
   "order": 40,
   "featured": false,
   "available": true,
   "allergens": [
     "E"
-  ]
+  ],
+  "image": null
 }

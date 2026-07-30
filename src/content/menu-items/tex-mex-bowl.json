@@ -1,6 +1,7 @@
 {
   "title": "Tex-Mex Bowl",
-  "description": "Reis, schwarze Bohnen, Schweinefleisch, Mais, Pico de Gallo, Guacamole.",
+  "description": "Reis, schwarze Bohnen, Schweinefleisch, Mais, Pico de Gallo, Guacamole",
+  "descriptionEn": "Rice, black beans, pork, corn, pico de gallo, guacamole",
   "price": 1590,
   "category": "bowls",
   "dietary": [],

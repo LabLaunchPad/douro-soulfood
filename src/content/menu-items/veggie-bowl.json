@@ -1,12 +1,11 @@
 {
   "title": "Veggie Bowl",
-  "description": "Reis, schwarze Bohnen, Sojaprotein nach brasilianischer Art, Mais, Salat, Pico de Gallo, Guacamole.",
+  "description": "Reis, schwarze Bohnen, Sojaprotein nach brasilianischer Art, Mais, Salat, Pico de Gallo, Guacamole",
+  "descriptionEn": "Rice, black beans, Brazilian seasoned soy protein, corn, salad, pico de gallo, guacamole",
   "price": 1490,
-  "image": "/images/menu/veggie-bowl.jpg",
   "category": "bowls",
   "dietary": [
-    "vegan",
-    "gluten-free"
+    "vegetarian"
   ],
   "order": 10,
   "featured": false,
@@ -14,5 +13,6 @@
   "allergens": [
     "A",
     "F"
-  ]
+  ],
+  "image": null
 }

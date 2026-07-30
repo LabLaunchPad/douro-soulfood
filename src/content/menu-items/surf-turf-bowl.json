@@ -1,11 +1,10 @@
 {
   "title": "Surf & Turf Bowl",
-  "description": "Reis, schwarze Bohnen, Rindfleisch & Garnelen, Salat, Guacamole.",
+  "description": "Reis, schwarze Bohnen, Rindfleisch & Garnelen, Salat, Guacamole",
+  "descriptionEn": "Rice, black beans, beef & shrimp, salad, guacamole",
   "price": 1890,
   "category": "bowls",
-  "dietary": [
-    "gluten-free"
-  ],
+  "dietary": [],
   "order": 60,
   "featured": false,
   "available": true,

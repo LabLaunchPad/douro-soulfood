@@ -1,13 +1,13 @@
 {
   "title": "Feijoada",
-  "description": "Traditioneller brasilianischer Bohneneintopf mit Rindfleisch, Wurst und Schweinefleisch, serviert mit Salat.",
+  "description": "Traditioneller brasilianischer Bohneneintopf mit Rindfleisch, Wurst und Schweinefleisch, serviert mit Salat",
+  "descriptionEn": "Traditional Brazilian bean stew with beef, sausage, and pork, served with salad.",
   "price": 1890,
   "category": "mains",
-  "dietary": [
-    "gluten-free"
-  ],
+  "dietary": [],
   "order": 10,
   "featured": true,
   "available": true,
+  "allergens": [],
   "image": "/images/menu/feijoada.png"
 }

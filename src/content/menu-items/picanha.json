@@ -1,13 +1,13 @@
 {
   "title": "Picanha",
-  "description": "Brasilianische Picanha vom Grill, serviert mit Reis, Salat und Farofa.",
+  "description": "Brasilianische Picanha vom Grill, serviert mit Reis, Salat und Farofa",
+  "descriptionEn": "Grilled Brazilian Picanha, served with rice, salad, and farofa.",
   "price": 2290,
   "category": "mains",
-  "dietary": [
-    "gluten-free"
-  ],
+  "dietary": [],
   "order": 20,
-  "featured": false,
+  "featured": true,
   "available": true,
+  "allergens": [],
   "image": "/images/menu/picanha.png"
 }

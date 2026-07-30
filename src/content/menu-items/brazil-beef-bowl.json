@@ -1,16 +1,15 @@
 {
   "title": "Brazil Beef Bowl",
-  "description": "Reis, schwarze Bohnen, Rindfleisch, Salat, Pico de Gallo, Guacamole.",
+  "description": "Reis, schwarze Bohnen, Rindfleisch, Salat, Pico de Gallo, Guacamole",
+  "descriptionEn": "Rice, black beans, beef, salad, pico de gallo, guacamole",
   "price": 1690,
-  "image": "/images/menu/beef-bowl.jpg",
   "category": "bowls",
-  "dietary": [
-    "gluten-free"
-  ],
+  "dietary": [],
   "order": 30,
-  "featured": true,
+  "featured": false,
   "available": true,
   "allergens": [
     "A"
-  ]
+  ],
+  "image": null
 }

@@ -1,20 +1,21 @@
 {
-  "title": "Jollof Reis",
-  "description": "Würziger Jollof Reis mit Gemüse, serviert mit Salat.",
+  "title": "Jollof Reis (vegetarisch)",
+  "description": "Würziger Jollof Reis mit Gemüse, serviert mit Salat",
+  "descriptionEn": "Spicy Jollof rice with vegetables, served with salad.",
   "price": 1590,
   "category": "mains",
   "dietary": [
-    "vegan",
-    "gluten-free"
+    "vegetarian"
   ],
-  "order": 50,
-  "featured": false,
-  "available": true,
   "addOns": [
     {
       "label": "Frango (Chicken)",
       "price": 300
     }
   ],
+  "order": 50,
+  "featured": false,
+  "available": true,
+  "allergens": [],
   "image": null
 }
