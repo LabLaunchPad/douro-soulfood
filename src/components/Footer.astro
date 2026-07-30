@@ -55,8 +55,8 @@ const {
 <footer class="bg-surface-primary pt-8 pb-16 md:pb-12 border-t border-border-subtle">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <!-- Main Floating Silver / Platinum Grey Capsule Card -->
-    <div class="bg-neutral-100 border border-neutral-200/80 rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl transition-all duration-300">
+    <!-- Main Floating Medium Silver Metallic Capsule Card -->
+    <div class="bg-zinc-300/90 border border-zinc-300/90 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl transition-all duration-300">
 
       <!-- Top Row: Logo, Nav Links, Order CTA -->
       <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
@@ -74,7 +74,7 @@ const {
               class="h-10 md:h-12 w-auto object-contain transition-transform duration-200 hover:scale-105"
             />
           </a>
-          <p class="text-xs md:text-sm text-stone-600 leading-relaxed font-sans">
+          <p class="text-xs md:text-sm text-zinc-700 leading-relaxed font-sans font-medium">
             {tagline}
           </p>
         </div>
@@ -87,7 +87,7 @@ const {
           {links.map((link) => (
             <a
               href={link.href}
-              class="text-sm md:text-base font-bold text-stone-800 hover:text-brand-gold
+              class="text-sm md:text-base font-bold text-zinc-900 hover:text-brand-gold
                      no-underline transition-colors duration-200 rounded-sm"
             >
               {link.label}
@@ -123,14 +123,14 @@ const {
       </div>
 
       <!-- Horizontal Divider Line -->
-      <div class="border-t border-neutral-200/90 my-6 md:my-8"></div>
+      <div class="border-t border-zinc-300 my-6 md:my-8"></div>
 
       <!-- Inner Bottom Row: Legal Links -->
       <div class="flex flex-wrap items-center gap-6">
         {legalLinks.map((link) => (
           <a
             href={link.href}
-            class="text-xs md:text-sm font-semibold text-stone-600 hover:text-stone-900
+            class="text-xs md:text-sm font-bold text-zinc-700 hover:text-zinc-950
                    no-underline transition-colors duration-200"
           >
             {link.label}
