@@ -1,6 +1,7 @@
 {
   "title": "Taco Pulled Pork",
-  "description": "Gezupftes Schweinefleisch, Salat, Pico de Gallo, Guacamole.",
+  "description": "gezupftes Schweinefleisch, Salat, Pico de Gallo, Guacamole",
+  "descriptionEn": "shredded pork, salad, pico de gallo, guacamole",
   "price": 1690,
   "category": "tacos",
   "dietary": [],

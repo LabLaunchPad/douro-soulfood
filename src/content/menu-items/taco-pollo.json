@@ -1,8 +1,8 @@
 {
   "title": "Taco Pollo",
-  "description": "Langsam gegartes Hähnchen, Salat, Pico de Gallo, Guacamole.",
+  "description": "langsam gegartes Hähnchen, Salat, Pico de Gallo, Guacamole",
+  "descriptionEn": "slow-cooked chicken, salad, pico de gallo, guacamole",
   "price": 1590,
-  "image": "/images/menu/chicken-taco.jpg",
   "category": "tacos",
   "dietary": [],
   "order": 20,
@@ -10,6 +10,7 @@
   "available": true,
   "allergens": [
     "A",
-    "M"
-  ]
+    "G/M"
+  ],
+  "image": null
 }

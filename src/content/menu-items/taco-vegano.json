@@ -1,18 +1,18 @@
 {
   "title": "Taco Vegano",
-  "description": "Sojaprotein mit brasilianischen Gewürzen, Salat, Pico de Gallo, Guacamole.",
+  "description": "Sojaprotein mit brasilianischen Gewürzen, Salat, Pico de Gallo, Guacamole",
+  "descriptionEn": "soy protein with Brazilian seasonings, salad, pico de gallo, guacamole",
   "price": 1390,
-  "image": "/images/menu/veggie-taco.jpg",
   "category": "tacos",
   "dietary": [
-    "vegan",
-    "gluten-free"
+    "vegan"
   ],
   "order": 30,
   "featured": false,
   "available": true,
   "allergens": [
     "A",
-    "M"
-  ]
+    "G/M"
+  ],
+  "image": null
 }

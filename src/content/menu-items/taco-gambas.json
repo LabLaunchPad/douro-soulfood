@@ -1,18 +1,17 @@
 {
   "title": "Taco Gambas",
-  "description": "Garnelen, Salat, Pico de Gallo, Guacamole.",
+  "description": "Garnelen, Salat, Pico de Gallo, Guacamole",
+  "descriptionEn": "shrimp, salad, pico de gallo, guacamole",
   "price": 1890,
   "category": "tacos",
-  "dietary": [
-    "gluten-free"
-  ],
+  "dietary": [],
   "order": 60,
   "featured": false,
   "available": true,
   "allergens": [
     "A",
     "B",
-    "M"
+    "G/M"
   ],
   "image": null
 }

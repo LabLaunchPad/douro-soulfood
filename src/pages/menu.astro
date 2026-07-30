@@ -232,9 +232,9 @@ const sortedCategories = Object.entries(grouped).sort(
             </div>
           </div>
 
-          {/* Category Showcase Image Banner (Photo Only) */}
-          <div class="mb-8 rounded-2xl overflow-hidden bg-[#FFFDF9] border border-[#E8DFC8] shadow-sm p-3 sm:p-4 max-w-2xl mx-auto flex justify-center">
-            <div class="w-full h-56 sm:h-72 md:h-80 rounded-xl overflow-hidden shadow-inner bg-stone-100">
+          {/* Category Showcase Image Banner (Strict 1:1 Compact Square Photo Only) */}
+          <div class="mb-6 rounded-2xl overflow-hidden bg-[#FFFDF9] border border-[#E8DFC8] shadow-sm p-3 max-w-xs sm:max-w-sm mx-auto flex justify-center">
+            <div class="w-full aspect-square rounded-xl overflow-hidden shadow-inner bg-stone-100">
               <img
                 src="/images/menu/Quesadillas.webp"
                 alt="D'ouro Quesadillas"
@@ -245,6 +245,78 @@ const sortedCategories = Object.entries(grouped).sort(
           </div>
 
           {/* Quesadillas Bistro Cards Grid */}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+            {items.map((item) => (
+              <MenuBistroCard
+                name={item.data.title}
+                description={item.data.description}
+                descriptionEn={item.data.descriptionEn}
+                priceInCents={item.data.price}
+                prepTime={item.data.prepTime}
+                prepTimeEn={item.data.prepTimeEn}
+                allergens={item.data.allergens}
+                imageSrc={item.data.image || undefined}
+                imageAlt={item.data.title}
+                available={item.data.available}
+              />
+            ))}
+          </div>
+
+          {/* Section-Specific Allergen Legend */}
+          <div class="mt-6">
+            <AllergenHeaderLegend allergens={items.flatMap((i) => i.data.allergens || [])} />
+          </div>
+        </section>
+      );
+    }
+
+    // Special layout for Tacos: 3-Photo Showcase Row + Bistro Cards Grid
+    if (slug === 'tacos') {
+      return (
+        <section
+          id={`category-${slug}`}
+          class="pt-4 pb-8 md:pt-6 md:pb-12 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20"
+        >
+          {/* Category Banner Header */}
+          <div class="flex justify-center mb-6">
+            <div class="inline-flex items-center gap-3 bg-[#1B140E] border-2 border-[#D4AF37] px-6 sm:px-10 py-3 rounded-2xl shadow-lg text-center">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-[#F4E3B3] tracking-widest uppercase">
+                {config.label}
+              </h2>
+            </div>
+          </div>
+
+          {/* 3-Photo Showcase Row (Each photo matches Quesadillas photo height) */}
+          <div class="mb-8 rounded-2xl overflow-hidden bg-[#FFFDF9] border border-[#E8DFC8] shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
+            <div class="grid grid-cols-3 gap-3 sm:gap-4">
+              <div class="w-full aspect-square rounded-xl overflow-hidden shadow-inner bg-stone-100">
+                <img
+                  src="/images/menu/tacos1.webp"
+                  alt="D'ouro Taco Showcase 1"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="w-full aspect-square rounded-xl overflow-hidden shadow-inner bg-stone-100">
+                <img
+                  src="/images/menu/tacos2.webp"
+                  alt="D'ouro Taco Showcase 2"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="w-full aspect-square rounded-xl overflow-hidden shadow-inner bg-stone-100">
+                <img
+                  src="/images/menu/tacos3.webp"
+                  alt="D'ouro Taco Showcase 3"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Tacos Bistro Cards Grid */}
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
             {items.map((item) => (
               <MenuBistroCard
