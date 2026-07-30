@@ -1,8 +1,12 @@
 {
-  "title": "Caipirinha (ohne / mit Alkohol)",
+  "title": "Caipirinha",
   "description": "Brasilianischer Klassiker mit Limette",
   "descriptionEn": "Brazilian classic with lime",
   "price": 690,
+  "priceVariants": {
+    "nonAlcoholic": 690,
+    "alcoholic": 890
+  },
   "category": "drinks",
   "subCategory": "cocktails",
   "dietary": [],

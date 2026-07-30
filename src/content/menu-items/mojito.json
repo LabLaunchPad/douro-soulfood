@@ -1,8 +1,12 @@
 {
-  "title": "Mojito (ohne / mit Alkohol)",
+  "title": "Mojito",
   "description": "Klassisch mit Minze und Limette",
   "descriptionEn": "Classic mint and lime cocktail",
   "price": 690,
+  "priceVariants": {
+    "nonAlcoholic": 690,
+    "alcoholic": 890
+  },
   "category": "drinks",
   "subCategory": "cocktails",
   "dietary": [],
