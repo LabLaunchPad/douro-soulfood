@@ -24,7 +24,7 @@ const {
 ---
 
 <div class:list={['w-full', className]}>
-  <div class="relative flex md:min-h-[600px] md:items-center">
+  <div class="relative flex md:items-center">
     {background_image && (
       <Image
         src={background_image.src}
@@ -38,7 +38,7 @@ const {
       />
     )}
 
-    <div class="max-w-7xl mx-auto w-full p-4 md:p-8">
+    <div class="max-w-7xl mx-auto w-full px-4 md:px-16 py-2 md:py-3">
       <div class:list={[
         'z-10 flex w-full items-stretch glass rounded-xl overflow-hidden shadow-lg',
         'flex-col md:flex-row',

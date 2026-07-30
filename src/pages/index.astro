@@ -5,17 +5,15 @@ import Base from '@/layouts/Base.astro';
 import NavBar from '@/components/NavBar.astro';
 import HeroSection from '@/components/HeroSection.astro';
 import ReviewBadge from '@/components/ReviewBadge.astro';
-import MenuItemCard from '@/components/MenuItemCard.astro';
 import CategoryIcon from '@/components/CategoryIcon.astro';
-import OurStory from '@/components/OurStory.astro';
+import FeatureCard from '@/components/sections/FeatureCard.astro';
+import UserReviews from '@/components/UserReviews.astro';
 import Footer from '@/components/Footer.astro';
 import { getCollection } from 'astro:content';
 
 /**
  * HOME PAGE — D'ouro Soulfood Bistro
  */
-
-type DietaryTag = 'vegan' | 'vegetarian' | 'gluten-free' | 'spicy' | 'halal' | 'dairy-free';
 
 /** 6 Core Category Slots for Homepage */
 const categorySlots = [
@@ -27,11 +25,31 @@ const categorySlots = [
   { slug: 'drinks', title: 'Bebidas & Sobremesas', desc: 'Caipirinha, Guaraná & Brigadeiros', icon: 'drinks' },
 ];
 
-/** Fetch featured menu items for the homepage (bestsellers) */
-const featuredItems = (await getCollection('menu_items'))
-  .filter((item) => item.data.featured && item.data.available !== false)
-  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
-  .slice(0, 6);
+/** 9 Popular dishes photos (image-only gallery layout) */
+const popularDishes = [
+  { src: '/images/menu/taco-especial.png', alt: 'Taco Especial' },
+  { src: '/images/menu/quesadilla-haehnchen.png', alt: 'Quesadilla Hähnchen' },
+  { src: '/images/menu/feijoada.png', alt: 'Feijoada Brasileira' },
+  { src: '/images/menu/pao-de-queijo.png', alt: 'Pão de Queijo' },
+  { src: '/images/menu/mango-ceviche.png', alt: 'Mango Ceviche' },
+  { src: '/images/menu/coxinha.png', alt: 'Coxinha' },
+  { src: '/images/menu/african-stew.jpg', alt: 'African Peanut Stew' },
+  { src: '/images/menu/brigadeiros.jpg', alt: 'Brigadeiros' },
+  { src: '/images/menu/brisa-do-mar.png', alt: 'Brisa do Mar' },
+];
+
+/** 9 Photos for Galerie section */
+const galleryImages = [
+  { src: '/images/gallery/1.webp', alt: 'D\'ouro Bistro Spezialität 1' },
+  { src: '/images/gallery/2.webp', alt: 'D\'ouro Bistro Spezialität 2' },
+  { src: '/images/gallery/3.webp', alt: 'D\'ouro Bistro Spezialität 3' },
+  { src: '/images/gallery/4.webp', alt: 'D\'ouro Bistro Spezialität 4' },
+  { src: '/images/gallery/5.webp', alt: 'D\'ouro Bistro Spezialität 5' },
+  { src: '/images/gallery/6.webp', alt: 'D\'ouro Bistro Spezialität 6' },
+  { src: '/images/gallery/7.webp', alt: 'D\'ouro Bistro Spezialität 7' },
+  { src: '/images/gallery/8.webp', alt: 'D\'ouro Bistro Spezialität 8' },
+  { src: '/images/gallery/9.webp', alt: 'D\'ouro Bistro Spezialität 9' },
+];
 
 /** FAQ entries from KeystaticCMS */
 const faqEntries = (await getCollection('faq'))
@@ -57,7 +75,7 @@ const PAGE_DESCRIPTION =
   {/* 1. NAVBAR */}
   <NavBar slot="nav" />
 
-  {/* 2. HERO */}
+  {/* 2. HERO SECTION */}
   <HeroSection
     accent="D'ouro Soulfood Bistro"
     headline="Afro-Latin Soul im Herzen von Salzburg"
@@ -75,7 +93,7 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 3. REVIEW BADGE */}
-  <section class="py-6 md:py-8 px-4 md:px-16 border-b border-border-subtle" aria-label="Bewertungen">
+  <section class="py-2 md:py-3 px-4 md:px-16 border-b border-border-subtle" aria-label="Bewertungen">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
       <ReviewBadge
         rating={4.8}
@@ -88,80 +106,74 @@ const PAGE_DESCRIPTION =
     </div>
   </section>
 
-  {/* 4. FEATURED MENU & 6 CATEGORY SLOTS */}
-  <section class="pt-8 md:pt-10 pb-12 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Speisekarte Highlights">
-    {/* ── 6 CORE CATEGORY SLOTS GRID ── */}
-    <div class="mb-14">
-      <div class="text-center mb-8">
-        <span class="inline-block text-sm font-semibold text-brand-gold uppercase tracking-wider mb-2">
-          Unsere Speisekarte
-        </span>
-        <h2 class="text-2xl md:text-4xl font-extrabold text-text-primary font-display uppercase tracking-tight">
-          Entdecken Sie unsere 6 Afro-Latino Spezialitäten
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-        {categorySlots.map((slot) => (
-          <a
-            href={`/menu#category-${slot.slug}`}
-            class="group flex flex-col items-center text-center p-4 rounded-2xl bg-surface-card border border-border-subtle hover:border-brand-gold/50 hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-md"
-          >
-            <div class="w-12 h-12 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-              <CategoryIcon name={slot.icon} class="w-6 h-6" />
-            </div>
-            <h3 class="text-sm font-bold text-text-primary group-hover:text-brand-gold font-display transition-colors mb-1">
-              {slot.title}
-            </h3>
-            <p class="text-[11px] text-text-tertiary leading-tight line-clamp-2">
-              {slot.desc}
-            </p>
-          </a>
-        ))}
-      </div>
+  {/* 4. 6 AFRO-LATINO SPEZIALITÄTEN */}
+  <section class="pt-4 md:pt-6 pb-3 md:pb-4 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Speisekarte Kategorien">
+    <div class="text-center mb-4 md:mb-5">
+      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
+        Unsere Speisekarte
+      </span>
+      <h2 class="text-xl md:text-3xl font-extrabold text-text-primary font-display uppercase tracking-tight">
+        Entdecken Sie unsere 6 Afro-Latino Spezialitäten
+      </h2>
     </div>
 
-    {/* ── BESTSELLERS SECTION ── */}
-    <div class="text-center mb-10">
-      <span class="inline-block text-sm font-semibold text-brand-gold uppercase tracking-wider mb-2">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+      {categorySlots.map((slot) => (
+        <a
+          href={`/menu#category-${slot.slug}`}
+          class="group flex flex-col items-center text-center p-3 md:p-4 rounded-2xl bg-surface-card border border-border-subtle hover:border-brand-gold/50 hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-md"
+        >
+          <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center mb-2 md:mb-3 group-hover:scale-110 transition-transform">
+            <CategoryIcon name={slot.icon} class="w-5 h-5 md:w-6 md:h-6" />
+          </div>
+          <h3 class="text-xs md:text-sm font-bold text-text-primary group-hover:text-brand-gold font-display transition-colors mb-1">
+            {slot.title}
+          </h3>
+          <p class="text-[10px] md:text-[11px] text-text-tertiary leading-tight line-clamp-2">
+            {slot.desc}
+          </p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {/* 5. BELIEBTE GERICHTE IM D'OURO BISTRO (REDESIGNED: 9 FOOD PHOTOS ONLY) */}
+  <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Beliebte Gerichte">
+    <div class="text-center mb-4 md:mb-5">
+      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
         Empfehlungen
       </span>
-      <h2 class="text-2xl md:text-4xl font-semibold text-text-primary font-display">
+      <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display">
         Beliebte Gerichte im D'ouro Bistro
       </h2>
-      <p class="text-text-secondary mt-2 max-w-[75ch] mx-auto text-sm md:text-base">
+      <p class="text-text-secondary mt-1 max-w-[75ch] mx-auto text-xs md:text-sm">
         Frisch von Angela zubereitet — mit den besten Zutaten Brasiliens und Westafrikas.
       </p>
     </div>
 
-    {/* Featured items grid — 3 columns on desktop */}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-      {featuredItems.map((item) => (
-        <MenuItemCard
-          name={item.data.title}
-          description={item.data.description}
-          priceInCents={item.data.price}
-          dietary={item.data.dietary as DietaryTag[] | undefined}
-          allergens={item.data.allergens}
-          prepTime={item.data.prepTime}
-          addOns={item.data.addOns}
-          available={item.data.available}
-          featured={item.data.featured}
-          imageSrc={item.data.image || undefined}
-          imageAlt={item.data.title}
-          imageWidth={400}
-          imageHeight={300}
-        />
+    {/* 9 Food Photos Gallery Grid (3 columns on desktop, rounded cards) */}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+      {popularDishes.map((item) => (
+        <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]">
+          <img
+            src={item.src}
+            alt={item.alt}
+            width="600"
+            height="450"
+            class="w-full h-full object-cover transition-transform duration-[var(--duration-normal)] ease-[var(--ease-out-quart)] group-hover:scale-105"
+            loading="lazy"
+          />
+        </div>
       ))}
     </div>
 
     {/* CTA: See Full Menu */}
-    <div class="mt-10 md:mt-14 text-center">
+    <div class="mt-4 md:mt-6 text-center">
       <a
         href="/menu"
         class="group inline-flex items-center gap-2 rounded-sm
                bg-brand-gold hover:bg-brand-gold-light active:bg-brand-gold-dark
-               min-h-12 px-6 py-3 text-base font-semibold text-brand-espresso
+               min-h-10 md:min-h-12 px-5 py-2.5 md:py-3 text-sm md:text-base font-semibold text-brand-espresso
                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold
                no-underline transition-colors duration-[var(--duration-fast)] ease-[var(--ease-spring)] shadow-glow-gold"
       >
@@ -183,61 +195,212 @@ const PAGE_DESCRIPTION =
     </div>
   </section>
 
-  {/* 5. OUR STORY */}
-  <OurStory
-    faqTitle="Häufig gestellte Fragen"
-    faqItems={faqItems}
-    location={{
-      title: 'Salzburg, Österreich',
-      subtitle: 'Restaurant',
-      address: ['Auerspergstraße 10', '5020 Salzburg'],
-      phone: '+43 676 4231921',
-      phoneHref: 'tel:+436764231921',
-      directionsHref:
-        'https://www.google.com/maps/search/?api=1&query=Auerspergstra%C3%9Fe+10%2C+5020+Salzburg%2C+Austria',
-      hoursToday: '11:00 – 20:00',
-      orderHref: '/menu',
-      orderLabel: 'Jetzt bestellen',
-    }}
-  >
-    {/* Angela's story */}
-    <section class="pt-8 md:pt-10 pb-12 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Our Story">
-      <div class="glass-gold rounded-2xl p-8 md:p-12 max-w-3xl mx-auto text-center">
-        <span class="inline-block text-sm font-semibold text-brand-gold uppercase tracking-wider mb-4">
-          Our Story
+  {/* 6. WIE D'OURO BEGANN (TRANSLATED TO GERMAN) */}
+  <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Unsere Geschichte">
+    <div class="glass-gold rounded-2xl p-6 md:p-8 max-w-3xl mx-auto text-center border border-brand-gold/20 shadow-lg">
+      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-2">
+        Unsere Geschichte
+      </span>
+      <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display mb-3">
+        Wie D'ouro begann
+      </h2>
+      <p class="text-sm md:text-base text-text-secondary leading-relaxed max-w-[75ch] mx-auto">
+        D'ouro begann während des Lockdowns, als Angela von zu Hause aus selbstgemachtes brasilianisches Essen an alle verteilte, die ein Stück Heimat suchten. Genau diese Wärme und Leidenschaft stecken auch heute in jedem einzelnen Gericht.
+      </p>
+      <div class="mt-6 flex items-center justify-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center" aria-hidden="true">
+          <svg
+            class="w-5 h-5 text-brand-gold"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </div>
+        <div class="text-left">
+          <p class="text-xs md:text-sm font-semibold text-text-primary">Angela</p>
+          <p class="text-[10px] md:text-xs text-text-tertiary">Gründerin & Chefköchin</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* 7. FIRMENEVENTS SECTION */}
+  <section class="py-2 md:py-3" aria-label="Firmenevents">
+    <FeatureCard
+      title="Firmenevents"
+      description="Von Team-Lunches bis Firmenfeiern — unsere Catering-Pakete passen sich Ihren Bedürfnissen an."
+      image={{ src: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&q=80', alt: 'Firmenevent Catering', width: 800, height: 600 }}
+      cta={{ label: 'Anfrage senden', href: '/contact' }}
+    />
+  </section>
+
+  {/* 8. REVIEWS SECTION */}
+  <section class="py-2 md:py-3" aria-label="Gästebewertungen">
+    <UserReviews />
+  </section>
+
+  {/* 9. PRIVATE FEIERN SECTION */}
+  <section class="py-2 md:py-3" aria-label="Private Feiern">
+    <FeatureCard
+      title="Private Feiern"
+      description="Geburtstage, Hochzeiten, Familientreffen — wir bringen Soul Food direkt zu Ihnen."
+      image={{ src: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80', alt: 'Private Feiern Catering', width: 800, height: 600 }}
+      cta={{ label: 'Jetzt planen', href: '/contact' }}
+      reverse
+    />
+  </section>
+
+  {/* 10. GALERIE SECTION (9 DEMO FOOD PHOTOS GRID) */}
+  <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Galerie">
+    <div class="text-center mb-4 md:mb-5">
+      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
+        Impressionen
+      </span>
+      <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display">
+        Galerie
+      </h2>
+      <p class="text-text-secondary mt-1 max-w-[75ch] mx-auto text-xs md:text-sm">
+        Einblicke in unsere frischen Speisen und das Ambiente im D'ouro Bistro.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+      {galleryImages.map((img) => (
+        <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]">
+          <img
+            src={img.src}
+            alt={img.alt}
+            width="600"
+            height="450"
+            class="w-full h-full object-cover transition-transform duration-[var(--duration-normal)] ease-[var(--ease-out-quart)] group-hover:scale-105"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* 11. FAQ ACCORDION */}
+  {faqItems.length > 0 && (
+    <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Häufig gestellte Fragen">
+      <div class="text-center mb-4 md:mb-5">
+        <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
+          FAQ
         </span>
-        <h2 class="text-2xl md:text-4xl font-semibold text-text-primary font-display mb-6">
-          How D'ouro Began
+        <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display">
+          Häufig gestellte Fragen
         </h2>
-        <p class="text-base md:text-lg text-text-secondary leading-relaxed max-w-[75ch] mx-auto">
-          D'ouro started during lockdown when Angela handed out homemade Brazilian food
-          to anyone who wanted it from her house. That same warmth lives in every dish today.
-        </p>
-        <div class="mt-8 flex items-center justify-center gap-3">
-          <div class="w-12 h-12 rounded-full bg-brand-gold/20 flex items-center justify-center" aria-hidden="true">
-            <svg
-              class="w-6 h-6 text-brand-gold"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+      </div>
+      <div class="flex flex-col max-w-4xl mx-auto">
+        {faqItems.map((item) => (
+          <details class="w-full border-b border-border-subtle group">
+            <summary
+              class="flex items-center justify-between py-4 cursor-pointer list-none
+                     text-text-primary font-medium text-sm md:text-base
+                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold rounded-sm
+                     transition-colors duration-[var(--duration-fast)] ease-[var(--ease-spring)] hover:text-brand-gold"
             >
-              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
+              <span>{item.question}</span>
+              <svg
+                class="w-4 h-4 md:w-5 md:h-5 text-text-tertiary transition-transform duration-[var(--duration-fast)] ease-[var(--ease-out-quint)] group-open:rotate-180 shrink-0 ml-4"
+                viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 7.5L10 12.5L15 7.5" />
+              </svg>
+            </summary>
+            <div class="pb-4 text-text-secondary leading-relaxed text-xs md:text-sm">
+              {item.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {/* 12. MAP & STANDORT SECTION */}
+  <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Unser Standort">
+    <div class="text-center mb-4 md:mb-5">
+      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
+        Standort
+      </span>
+      <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display">
+        Unser Bistro in Salzburg
+      </h2>
+    </div>
+
+    <article class="rounded-2xl overflow-hidden bg-surface-glass backdrop-blur-sm border border-border-subtle shadow-lg">
+      <div class="flex flex-col md:flex-row">
+        {/* Map */}
+        <div class="w-full md:w-1/2 min-h-[260px] md:min-h-[340px]">
+          <iframe
+            src="https://maps.google.com/maps?q=Auerspergstra%C3%9Fe%2010,%205020%20Salzburg&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            class="w-full h-full min-h-[260px] border-0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="D'ouro Soulfood Standort"
+          ></iframe>
+        </div>
+
+        {/* Details */}
+        <div class="flex flex-col flex-1 justify-between gap-4 p-5 md:p-8">
+          <div class="flex flex-col gap-3">
+            <div>
+              <span class="text-xs uppercase font-semibold tracking-wider text-brand-gold">Restaurant & Bistro</span>
+              <h3 class="text-xl md:text-2xl font-bold text-text-primary font-display mt-0.5">
+                Salzburg, Österreich
+              </h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-0.5">
+                <span class="text-[11px] text-text-tertiary uppercase font-medium">Adresse</span>
+                <address class="not-italic text-xs md:text-sm text-text-secondary leading-relaxed">
+                  <p>Auerspergstraße 10</p>
+                  <p>5020 Salzburg</p>
+                </address>
+              </div>
+              <div class="flex flex-col gap-0.5">
+                <span class="text-[11px] text-text-tertiary uppercase font-medium">Kontakt</span>
+                <a
+                  href="tel:+436764231921"
+                  class="text-xs md:text-sm text-text-secondary hover:text-brand-gold no-underline transition-colors"
+                >
+                  +43 676 4231921
+                </a>
+              </div>
+            </div>
           </div>
-          <div class="text-left">
-            <p class="text-sm font-semibold text-text-primary">Angela</p>
-            <p class="text-xs text-text-tertiary">Founder & Chef</p>
+
+          <div class="border-t border-border-subtle pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div>
+              <span class="text-[11px] text-text-tertiary block">Öffnungszeiten</span>
+              <span class="text-xs md:text-sm font-medium text-text-primary">Heute: 11:00 – 20:00 Uhr</span>
+            </div>
+            <a
+              href="/menu"
+              class="group inline-flex items-center gap-2 rounded-sm bg-brand-gold hover:bg-brand-gold-light active:bg-brand-gold-dark
+                     px-4 py-2 text-xs md:text-sm font-semibold text-brand-espresso
+                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold
+                     no-underline transition-colors shadow-glow-gold"
+            >
+              Jetzt bestellen
+            </a>
           </div>
         </div>
       </div>
-    </section>
-  </OurStory>
+    </article>
+  </section>
 
-  {/* 6. FOOTER */}
+  {/* 13. FOOTER */}
   <Footer
     slot="footer"
     links={[
