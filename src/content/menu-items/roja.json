@@ -1,14 +1,16 @@
 {
   "title": "Roja",
-  "description": "Frisches, gesundes und leckeres Getränk mit Erdbeeren, Limette und Grenadine — alkoholfrei.",
+  "description": "Frisches, gesundes und leckeres Getränk mit Erdbeeren, Limette und Grenadine – alkoholfrei",
+  "descriptionEn": "Healthy and tasty drink with strawberries, lime and grenadine – non-alcoholic",
   "price": 490,
   "category": "drinks",
+  "subCategory": "aguas-frescas",
   "dietary": [
     "vegan"
   ],
   "order": 20,
-  "featured": false,
+  "featured": true,
   "available": true,
-  "image": "/images/menu/roja.webp",
-  "subCategory": "aguas-frescas"
+  "allergens": [],
+  "image": "/images/menu/roja.webp"
 }

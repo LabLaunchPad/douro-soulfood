@@ -1,12 +1,14 @@
 {
   "title": "Guaraná Antarctica",
-  "description": "Das kultige brasilianische Erfrischungsgetränk mit feinem Guaraná-Geschmack.",
+  "description": "",
+  "descriptionEn": "",
   "price": 590,
   "category": "drinks",
+  "subCategory": "softdrinks",
   "dietary": [],
-  "order": 20,
+  "order": 70,
   "featured": false,
   "available": true,
-  "image": null,
-  "subCategory": "softdrinks"
+  "allergens": [],
+  "image": null
 }

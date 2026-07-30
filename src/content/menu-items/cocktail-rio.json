@@ -1,12 +1,14 @@
 {
   "title": "Cocktail Rio",
-  "description": "Erfrischender Mix aus Orangensaft, Limonade, Grenadine und Limette.",
+  "description": "Orangensaft, Limonade, Grenadine und Limette",
+  "descriptionEn": "Orange juice, lemonade, grenadine and lime",
   "price": 690,
   "category": "drinks",
+  "subCategory": "cocktails",
   "dietary": [],
-  "order": 30,
+  "order": 50,
   "featured": false,
   "available": true,
-  "image": null,
-  "subCategory": "cocktails"
+  "allergens": [],
+  "image": null
 }

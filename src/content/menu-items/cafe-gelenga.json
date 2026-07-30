@@ -1,12 +1,14 @@
 {
-  "title": "Café Gelenga",
-  "description": "Aromatischer Kaffeespezialität nach Hausart.",
+  "title": "Café Galão",
+  "description": "",
+  "descriptionEn": "",
   "price": 380,
   "category": "drinks",
+  "subCategory": "cafes",
   "dietary": [],
-  "order": 20,
+  "order": 110,
   "featured": false,
   "available": true,
-  "image": null,
-  "subCategory": "cafes"
+  "allergens": [],
+  "image": null
 }

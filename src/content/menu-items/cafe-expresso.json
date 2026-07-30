@@ -1,12 +1,14 @@
 {
   "title": "Café Expresso",
-  "description": "Intensiver, frischer Espresso.",
+  "description": "",
+  "descriptionEn": "",
   "price": 320,
   "category": "drinks",
+  "subCategory": "cafes",
   "dietary": [],
-  "order": 10,
+  "order": 100,
   "featured": false,
   "available": true,
-  "image": null,
-  "subCategory": "cafes"
+  "allergens": [],
+  "image": null
 }

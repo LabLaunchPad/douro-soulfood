@@ -1,16 +1,14 @@
 {
   "title": "Mojito (ohne / mit Alkohol)",
-  "description": "Klassischer Mojito mit frischer Minze und Limette — als alkoholfreier Mocktail (€6,90) oder klassisch mit weißem Rum (€8,90).",
+  "description": "Klassisch mit Minze und Limette",
+  "descriptionEn": "Classic mint and lime cocktail",
   "price": 690,
   "category": "drinks",
+  "subCategory": "cocktails",
   "dietary": [],
-  "order": 10,
+  "order": 30,
   "featured": false,
   "available": true,
-  "image": null,
-  "priceVariants": {
-    "nonAlcoholic": 690,
-    "alcoholic": 890
-  },
-  "subCategory": "cocktails"
+  "allergens": [],
+  "image": null
 }

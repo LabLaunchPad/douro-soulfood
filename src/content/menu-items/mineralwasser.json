@@ -1,12 +1,14 @@
 {
   "title": "Mineralwasser (mit / ohne Kohlensäure)",
-  "description": "Erfrischendes Mineralwasser, wahlweise still oder mit Kohlensäure.",
+  "description": "",
+  "descriptionEn": "Still or sparkling water",
   "price": 320,
   "category": "drinks",
+  "subCategory": "softdrinks",
   "dietary": [],
-  "order": 30,
+  "order": 80,
   "featured": false,
   "available": true,
-  "image": null,
-  "subCategory": "softdrinks"
+  "allergens": [],
+  "image": null
 }

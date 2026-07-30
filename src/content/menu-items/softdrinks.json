@@ -1,12 +1,14 @@
 {
-  "title": "Softdrinks (Sinalco, Fanta, Sprite)",
-  "description": "Sinalco Cola, Fanta, Sprite — gekühlte Erfrischungsgetränke.",
+  "title": "Sinalco, Fanta, Sprite",
+  "description": "",
+  "descriptionEn": "",
   "price": 380,
   "category": "drinks",
+  "subCategory": "softdrinks",
   "dietary": [],
-  "order": 10,
+  "order": 60,
   "featured": false,
   "available": true,
-  "image": null,
-  "subCategory": "softdrinks"
+  "allergens": [],
+  "image": null
 }

@@ -1,13 +1,17 @@
 {
   "title": "Brigadeiro",
-  "description": "Brasilianische Schokoladentrüffel aus Kondensmilch, Kakao und Butter — traditionell gerollt in Schokoladenstreuseln.",
+  "description": "",
+  "descriptionEn": "Chocolate truffle",
   "price": 490,
-  "image": "/images/menu/brigadeiro.webp",
   "category": "desserts",
   "dietary": [
     "vegetarian"
   ],
   "order": 30,
   "featured": false,
-  "available": true
+  "available": true,
+  "allergens": [
+    "G/M"
+  ],
+  "image": "/images/menu/brigadeiro.webp"
 }

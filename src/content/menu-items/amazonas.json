@@ -1,14 +1,16 @@
 {
   "title": "Amazonas",
-  "description": "Frisches, gesundes und leckeres Getränk mit Gurke, Minze, Limette und grünem Apfel — alkoholfrei.",
+  "description": "Frisches, gesundes und leckeres Getränk mit Gurke, Minze, Limette und grünem Apfel – alkoholfrei",
+  "descriptionEn": "Healthy and tasty drink with cucumber, mint, lime and green apple – non-alcoholic",
   "price": 490,
   "category": "drinks",
+  "subCategory": "aguas-frescas",
   "dietary": [
     "vegan"
   ],
   "order": 10,
   "featured": true,
   "available": true,
-  "image": "/images/menu/amazonas.webp",
-  "subCategory": "aguas-frescas"
+  "allergens": [],
+  "image": "/images/menu/amazonas.webp"
 }

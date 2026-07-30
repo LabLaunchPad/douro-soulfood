@@ -1,16 +1,14 @@
 {
   "title": "Caipirinha (ohne / mit Alkohol)",
-  "description": "Brasilianischer Klassiker mit Limette — als alkoholfreier Mocktail (€6,90) oder klassisch mit Cachaça (€8,90).",
+  "description": "Brasilianischer Klassiker mit Limette",
+  "descriptionEn": "Brazilian classic with lime",
   "price": 690,
-  "image": null,
   "category": "drinks",
+  "subCategory": "cocktails",
   "dietary": [],
-  "order": 20,
+  "order": 40,
   "featured": false,
   "available": true,
-  "priceVariants": {
-    "nonAlcoholic": 690,
-    "alcoholic": 890
-  },
-  "subCategory": "cocktails"
+  "allergens": [],
+  "image": null
 }

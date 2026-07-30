@@ -1,12 +1,14 @@
 {
   "title": "Leitungswasser",
-  "description": "Gekühltes Leitungswasser.",
+  "description": "",
+  "descriptionEn": "Tap water",
   "price": 100,
   "category": "drinks",
+  "subCategory": "softdrinks",
   "dietary": [],
-  "order": 40,
+  "order": 90,
   "featured": false,
   "available": true,
-  "image": null,
-  "subCategory": "softdrinks"
+  "allergens": [],
+  "image": null
 }
