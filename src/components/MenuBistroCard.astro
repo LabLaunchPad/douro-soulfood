@@ -78,7 +78,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
 
   {/* Image Column — Mobile (< md): Right side (order-2, w-24 h-24). Desktop (>= md): Left side (md:order-1, md:w-36 md:h-36 lg:w-40 lg:h-40) */}
   {imageSrc && (
-    <div class="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 shrink-0 aspect-square rounded-sm overflow-hidden relative shadow-inner bg-stone-100 self-start md:self-center order-2 md:order-1">
+    <div class="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 shrink-0 aspect-square rounded-md overflow-hidden relative shadow-inner bg-stone-100 self-start md:self-center order-2 md:order-1">
       <Image
         src={imageSrc}
         alt={imageAlt || name}
