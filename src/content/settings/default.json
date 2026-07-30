@@ -15,9 +15,9 @@
   "og_image": "/images/og-default.jpg",
   "social": {
     "instagram": "",
-    "facebook": "",
+    "facebook": "https://www.facebook.com/dourosoulfood/",
     "tiktok": "",
-    "tripadvisor": "https://www.tripadvisor.com/Restaurant_Review-g190441-d25104877-Reviews-D_ouro_Soulfood_Bistro-Salzburg_Austrian_Alps.html"
+    "tripadvisor": ""
   },
   "hours": [
     { "day": "Montag", "time": "11:00 – 22:00" },
