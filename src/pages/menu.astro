@@ -68,7 +68,7 @@ const sortedCategories = Object.entries(grouped).sort(
   <NavBar slot="nav" />
 
   <!-- ═══ HERO HEADER ═══ -->
-  <section class="pt-24 pb-4 md:pt-20 md:pb-4 px-4 md:px-16 max-w-7xl mx-auto">
+  <section class="pt-28 pb-4 md:pt-32 md:pb-4 px-4 md:px-16 max-w-7xl mx-auto">
     <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-brand-gold mb-6 font-display uppercase tracking-tight">
       Speisekarte
     </h1>
@@ -619,30 +619,7 @@ const sortedCategories = Object.entries(grouped).sort(
     </section>
   )}
 
-  <!-- ═══ ALLERGEN LEGEND & NOTE ═══ -->
-  <section class="py-8 md:py-12 px-4 md:px-16 max-w-7xl mx-auto">
-    <div class="rounded-xl bg-surface-card border border-border-subtle p-6 flex flex-col gap-4">
-      <h3 class="text-sm font-semibold text-brand-gold uppercase tracking-wider flex items-center gap-2">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="16" x2="12" y2="12" />
-          <line x1="12" y1="8" x2="12.01" y2="8" />
-        </svg>
-        Allergene & Zusatzstoffe (EU-Kennzeichnung)
-      </h3>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-xs text-text-secondary">
-        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">A</span> Glutenhaltiges Getreide</div>
-        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">M / G</span> Milch / Laktose</div>
-        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">B</span> Krebstiere</div>
-        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">R</span> Weichtiere</div>
-        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">E</span> Erdnüsse</div>
-        <div class="flex items-center gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">F</span> Soja</div>
-      </div>
-      <p class="text-xs text-text-tertiary border-t border-border-subtle pt-3 leading-relaxed">
-        Fragen Sie unser Team nach detaillierten Informationen zu Allergenen und Zutaten. Alle Preise inkl. MwSt. Änderungen und Irrtümer vorbehalten.
-      </p>
-    </div>
-  </section>
+
 
   <Footer slot="footer" />
 </Base>
