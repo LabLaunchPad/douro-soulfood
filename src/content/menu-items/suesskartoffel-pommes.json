@@ -1,14 +1,15 @@
 {
-  "title": "Süsskartoffel-Pommes",
-  "description": "Knusprige Pommes aus Süsskartoffeln mit Meersalz und hausgemachtem Aioli-Dip.",
+  "title": "Süßkartoffel-Pommes",
+  "description": "Knusprige Süßkartoffel-Pommes, goldbraun frittiert und leicht gesalzen.",
+  "descriptionEn": "Crispy sweet potato fries, golden fried and lightly salted.",
   "price": 890,
-  "category": "sides",
+  "category": "seafood",
   "dietary": [
-    "vegan",
-    "gluten-free"
+    "vegan"
   ],
   "order": 30,
   "featured": false,
   "available": true,
+  "allergens": [],
   "image": null
 }
