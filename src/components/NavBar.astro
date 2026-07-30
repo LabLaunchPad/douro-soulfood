@@ -125,13 +125,13 @@ const {
       </div>
     </div>
 
-    <!-- Mobile Navigation Capsule (Reference Image 1) -->
+    <!-- Mobile Navigation Capsule (SSOT: rounded-md container, rounded-sm button) -->
     <div class="flex md:hidden items-center">
-      <div class="flex items-center gap-2 bg-brand-espresso/90 border border-white/15 backdrop-blur-md rounded-xl px-2.5 py-1.5 shadow-2xl">
-        <!-- German "Speisekarte" Link Button -->
+      <div class="flex items-center gap-2 bg-brand-espresso/90 border border-white/15 backdrop-blur-md rounded-md px-2.5 py-1.5 shadow-2xl">
+        <!-- German "Speisekarte" Link Button (SSOT: rounded-sm = 10px) -->
         <a
           href="/menu"
-          class="px-3 py-1 text-xs font-extrabold tracking-wide text-white border border-white/20 rounded-md
+          class="px-3 py-1 text-xs font-extrabold tracking-wide text-white border border-white/20 rounded-sm
                  hover:bg-white/10 no-underline transition-colors"
         >
           Speisekarte
@@ -156,28 +156,28 @@ const {
   </div>
 </nav>
 
-<!-- Full-Screen Mobile Drawer Overlay (Reference Image 2) -->
+<!-- Full-Screen Mobile Drawer Overlay (Top-Left Aligned List) -->
 <div
   id="mobile-menu"
   class="fixed inset-0 z-50 bg-brand-espresso/98 backdrop-blur-2xl
          opacity-0 pointer-events-none transition-all duration-300
-         md:hidden flex flex-col justify-between p-6 overflow-y-auto"
+         md:hidden flex flex-col justify-start gap-8 p-6 overflow-y-auto"
   role="dialog"
   aria-modal="true"
   aria-label="Navigationsmenü"
   data-open="false"
 >
   <!-- Top Bar inside open mobile menu -->
-  <div class="flex items-center justify-between w-full">
+  <div class="flex items-center justify-between w-full shrink-0">
     <a href="/" class="flex items-center no-underline">
       <img src="/dourologo.png" alt="D'ouro Soulfood Logo" class="h-10 w-auto object-contain" />
     </a>
 
-    <!-- Capsule with Speisekarte + Close X Icon -->
-    <div class="flex items-center gap-2 bg-brand-espresso/90 border border-white/15 backdrop-blur-md rounded-xl px-2.5 py-1.5 shadow-2xl">
+    <!-- Capsule with Speisekarte + Close X Icon (SSOT: rounded-md container, rounded-sm button) -->
+    <div class="flex items-center gap-2 bg-brand-espresso/90 border border-white/15 backdrop-blur-md rounded-md px-2.5 py-1.5 shadow-2xl">
       <a
         href="/menu"
-        class="px-3 py-1 text-xs font-extrabold tracking-wide text-white border border-white/20 rounded-md no-underline"
+        class="px-3 py-1 text-xs font-extrabold tracking-wide text-white border border-white/20 rounded-sm no-underline"
       >
         Speisekarte
       </a>
@@ -196,7 +196,7 @@ const {
   </div>
 
   <!-- Main Navigation Links List (Top-Left Aligned) -->
-  <nav aria-label="Mobile Navigation Drawer" class="flex flex-col items-start text-left gap-6 pt-12 pb-24">
+  <nav aria-label="Mobile Navigation Drawer" class="flex flex-col items-start text-left gap-6 pt-4 pb-28">
     {links.map((link) => (
       <a
         href={link.href}
