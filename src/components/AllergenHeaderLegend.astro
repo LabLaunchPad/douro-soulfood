@@ -47,7 +47,7 @@ const itemsToRender = activeKeys
   .filter((item, index, self) => index === self.findIndex((t) => t.codeDisplay === item.codeDisplay));
 ---
 
-<div class:list={['w-full bg-[#FFFDF9] border border-[#E8DFC8] rounded-xl p-3.5 sm:p-4 shadow-sm', className]}>
+<div class:list={['w-full bg-[#FFFDF9] border border-[#E8DFC8] rounded-sm p-3.5 sm:p-4 shadow-sm', className]}>
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
     {/* Label Header with Info Icon */}
     <div class="flex items-center gap-2 shrink-0 font-serif font-bold text-xs uppercase tracking-wider text-[#2C1810]">
@@ -60,7 +60,7 @@ const itemsToRender = activeKeys
     {/* Allergen Badges Row */}
     <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-xs font-sans text-stone-700">
       {itemsToRender.map((item) => (
-        <div class="inline-flex items-center gap-1.5 bg-[#FAF6EE] border border-[#E8DFC8] px-2.5 py-1 rounded-lg shadow-xs">
+        <div class="inline-flex items-center gap-1.5 bg-[#FAF6EE] border border-[#E8DFC8] px-2.5 py-1 rounded-sm shadow-xs">
           <span class="px-1.5 py-0.5 rounded bg-[#1B140E] text-[#F4E3B3] font-mono font-black text-[11px]">
             {item.codeDisplay}
           </span>
