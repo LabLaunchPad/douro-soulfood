@@ -117,19 +117,19 @@ const PAGE_DESCRIPTION =
       </h2>
     </div>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+    <div class="flex overflow-x-auto snap-x snap-mandatory gap-2 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-3 lg:grid-cols-6 sm:gap-3 md:gap-4 no-scrollbar">
       {categorySlots.map((slot) => (
         <a
           href={`/menu#category-${slot.slug}`}
-          class="group flex flex-col items-center text-center p-3 md:p-4 rounded-2xl bg-surface-card border border-border-subtle hover:border-brand-gold/50 hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-md"
+          class="group shrink-0 w-[110px] sm:w-auto snap-start flex flex-col items-center text-center p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-surface-card border border-border-subtle hover:border-brand-gold/50 hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-md"
         >
-          <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center mb-2 md:mb-3 group-hover:scale-110 transition-transform">
-            <CategoryIcon name={slot.icon} class="w-5 h-5 md:w-6 md:h-6" />
+          <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center mb-1.5 sm:mb-3 group-hover:scale-110 transition-transform">
+            <CategoryIcon name={slot.icon} class="w-4 h-4 sm:w-6 sm:h-6" />
           </div>
-          <h3 class="text-xs md:text-sm font-bold text-text-primary group-hover:text-brand-gold font-display transition-colors mb-1">
+          <h3 class="text-[11px] sm:text-sm font-bold text-text-primary group-hover:text-brand-gold font-display transition-colors mb-0.5 sm:mb-1">
             {slot.title}
           </h3>
-          <p class="text-[10px] md:text-[11px] text-text-tertiary leading-tight line-clamp-2">
+          <p class="text-[9px] sm:text-[11px] text-text-tertiary leading-tight line-clamp-1 sm:line-clamp-2">
             {slot.desc}
           </p>
         </a>
@@ -151,10 +151,13 @@ const PAGE_DESCRIPTION =
       </p>
     </div>
 
-    {/* 9 Food Photos Gallery Grid (3 columns on desktop, rounded cards) */}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-      {popularDishes.map((item) => (
-        <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]">
+    {/* 8 Food Photos on Mobile (2 cols), 9 on Desktop (3 cols) */}
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4 md:gap-6">
+      {popularDishes.map((item, index) => (
+        <div class:list={[
+          "group relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]",
+          index === 8 && "hidden sm:block"
+        ]}>
           <img
             src={item.src}
             alt={item.alt}
@@ -256,7 +259,7 @@ const PAGE_DESCRIPTION =
     />
   </section>
 
-  {/* 10. GALERIE SECTION (9 DEMO FOOD PHOTOS GRID) */}
+  {/* 10. GALERIE SECTION (8 PHOTOS ON MOBILE / 9 ON DESKTOP) */}
   <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Galerie">
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
@@ -270,9 +273,12 @@ const PAGE_DESCRIPTION =
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-      {galleryImages.map((img) => (
-        <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]">
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4 md:gap-6">
+      {galleryImages.map((img, index) => (
+        <div class:list={[
+          "group relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]",
+          index === 8 && "hidden sm:block"
+        ]}>
           <img
             src={img.src}
             alt={img.alt}
