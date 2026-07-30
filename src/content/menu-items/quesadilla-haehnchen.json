@@ -1,6 +1,7 @@
 {
-  "title": "Hähnchen (Pollo) Quesadilla",
-  "description": "Mit geschmolzenem Gouda.",
+  "title": "Hähnchen (Pollo)",
+  "description": "Mit geschmolzenem Gouda",
+  "descriptionEn": "With melted gouda cheese",
   "price": 1500,
   "category": "quesadillas",
   "dietary": [],
@@ -9,7 +10,7 @@
   "available": true,
   "allergens": [
     "A",
-    "G"
+    "G/M"
   ],
-  "image": "/images/menu/quesadilla-haehnchen.png"
+  "image": null
 }

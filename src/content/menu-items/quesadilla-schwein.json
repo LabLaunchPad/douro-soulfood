@@ -1,6 +1,7 @@
 {
-  "title": "Schwein (Cerdo) Quesadilla",
-  "description": "Mit Pizzakäse (Mozzarella-Mix).",
+  "title": "Schwein (Cerdo)",
+  "description": "Mit Pizzakäse (Mozzarella-Mix)",
+  "descriptionEn": "With pizza cheese (mozzarella mix)",
   "price": 1500,
   "category": "quesadillas",
   "dietary": [],
@@ -9,7 +10,7 @@
   "available": true,
   "allergens": [
     "A",
-    "G"
+    "G/M"
   ],
   "image": null
 }

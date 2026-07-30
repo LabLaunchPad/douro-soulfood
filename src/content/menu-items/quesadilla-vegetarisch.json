@@ -1,6 +1,7 @@
 {
-  "title": "Vegetarische Quesadilla",
-  "description": "Mit Spinat, Feta & österreichischem Käse (Gouda & Mozzarella).",
+  "title": "Vegetarisch",
+  "description": "Mit Spinat, Feta & österreichischem Käse (Gouda & Mozzarella)",
+  "descriptionEn": "With spinach, feta & Austrian cheese (gouda & mozzarella)",
   "price": 1390,
   "category": "quesadillas",
   "dietary": [
@@ -11,7 +12,7 @@
   "available": true,
   "allergens": [
     "A",
-    "G"
+    "G/M"
   ],
   "image": null
 }
