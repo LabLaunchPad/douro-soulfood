@@ -133,10 +133,14 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
             </div>
           </div>
         ) : (
-          <div class="shrink-0 font-serif font-extrabold text-[#F4E3B3] bg-[#1B140E] border border-[#D4AF37]/50 px-3 py-1 rounded-sm shadow-xs text-sm sm:text-base md:text-lg tracking-wide whitespace-nowrap self-center ml-1">
-            {formattedPrice}
+          <div class="shrink-0 flex flex-col items-end ml-1 self-center">
+            <div class="font-serif font-extrabold text-[#F4E3B3] bg-[#1B140E] border border-[#D4AF37]/50 px-3 py-1 rounded-sm shadow-xs text-sm sm:text-base md:text-lg tracking-wide whitespace-nowrap">
+              {formattedPrice}
+            </div>
             {prepTime && (
-              <span class="text-xs font-normal text-[#F4E3B3]/80 ml-1">({prepTime})</span>
+              <span class="text-[10px] sm:text-xs text-stone-500 font-sans font-medium tracking-wide whitespace-nowrap mt-0.5">
+                ⏱️ {prepTime}
+              </span>
             )}
           </div>
         )}
