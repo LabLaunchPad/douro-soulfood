@@ -12,8 +12,9 @@
 | Styling | Tailwind CSS v4 | Design token integration via `@theme`, JIT |
 | CMS | Keystatic | Git-backed, visual editing, Astro-native support |
 | Hosting | Cloudflare Pages / Workers | Free tier, edge CDN, zero cold starts |
-| Images | Astro `<Image>` (partial) | `imageService: 'compile'` is configured and used by `MenuItemCard`, `MenuBistroCard`, `FeatureCard`; most page-level image grids (`menu.astro`, `index.astro`) still use raw `<img>` — not yet a blanket policy across the codebase |
+| Images | Astro `<Image>` | `imageService: 'compile'` is used across `MenuItemCard`, `MenuBistroCard`, `FeatureCard`, `PhotoGrid`, and the `menu.astro` showcase rows — zero raw `<img>` remain in `index.astro`/`menu.astro` as of the IMG-01 fix. Note: since source files live in `public/images/` (not `src/assets/`), Astro's image service passes them through unprocessed (correct `width`/`height`/`decoding="async"`, no format/compression gain) — see `docs/audit/image-audit.md`. |
 | Maps | Google Maps Embed, consent-gated | Two-click `MapEmbed.astro` component: static placeholder by default, real iframe only loads after the visitor clicks through (no request to Google before consent) |
+| Client JS | None by default; React-as-island only, tightly scoped | See `docs/adr/react-islands.md` — Astro + vanilla `<script>` is the default for all interactivity (mobile nav drawer, Maps consent gate, today's-hours widget all use this pattern); React is not installed and requires an explicit, approved ADR-scoped exception before any dependency is added |
 
 ---
 
