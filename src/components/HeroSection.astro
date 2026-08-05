@@ -63,7 +63,6 @@ const heroImage = images[0];
       <>
         <!-- Mobile Video -->
         <video
-          data-hero-video
           src="/douroheromobile.mp4"
           poster={heroImage?.src}
           autoplay
@@ -75,7 +74,6 @@ const heroImage = images[0];
         ></video>
         <!-- Desktop Video -->
         <video
-          data-hero-video
           src={videoSrc}
           poster={heroImage?.src}
           autoplay
@@ -162,22 +160,3 @@ const heroImage = images[0];
     <slot />
   </div>
 </header>
-
-<script>
-  /**
-   * The hero video is muted and purely decorative, but `autoplay loop`
-   * still starts continuous motion that CSS-only `prefers-reduced-motion`
-   * rules (see Base.astro) cannot stop — that override only shortens CSS
-   * transitions/animations, not <video> playback. Pause it explicitly for
-   * users who asked for reduced motion, falling back to the poster frame.
-   */
-  const prefersReducedMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (prefersReducedMotion) {
-    document.querySelectorAll<HTMLVideoElement>('[data-hero-video]').forEach((video) => {
-      video.pause();
-      video.removeAttribute('autoplay');
-      video.removeAttribute('loop');
-    });
-  }
-</script>

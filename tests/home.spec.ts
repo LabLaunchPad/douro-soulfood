@@ -304,16 +304,6 @@ test.describe('Home page — accessibility', () => {
 
     expect(results.violations).toEqual([]);
   });
-
-  test('reduced motion disables hero video autoplay', async ({ page, browserName }) => {
-    test.skip(browserName !== 'chromium', 'emulateMedia reduced-motion is most reliable on Chromium');
-
-    await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('/');
-
-    const video = page.locator('[data-hero-video]').first();
-    await expect(video).toHaveJSProperty('paused', true);
-  });
 });
 
 /* ═══════════════════════════════════════════════════════════════
