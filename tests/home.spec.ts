@@ -224,9 +224,10 @@ test.describe('Home page — mobile menu', () => {
     const hamburgerBtn = page.locator('button#mobile-menu-btn');
     await hamburgerBtn.click();
 
-    // Scoped to the drawer's link list — #mobile-menu also has its own
-    // top-bar "Speisekarte" quick link, so an unscoped href match here
-    // would resolve to two elements and violate Playwright's strict mode.
+    // Scoped to the drawer's link list — the persistent nav bar (still
+    // visible behind the drawer) also has a "Speisekarte" quick link, so
+    // an unscoped href match here would resolve to two elements and
+    // violate Playwright's strict mode.
     const mobileNav = page.locator('nav[aria-label="Mobile Navigation Drawer"]');
     const menuLink = mobileNav.locator('a[href="/menu"]', { hasText: 'Speisekarte' });
     await expect(menuLink).toBeVisible();

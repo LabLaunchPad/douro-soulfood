@@ -164,11 +164,11 @@ const {
 
 <!-- Full-Screen Mobile Drawer Overlay (Top-Left Aligned List)
      z-40, one below the nav's z-50: the collapsed nav bar (and its
-     #mobile-menu-btn toggle) must stay clickable while the drawer is
-     open, since the toggle's own click handler closes the drawer too.
-     At equal z-index the drawer (later in DOM order) painted over the
-     button, making that close path unreachable by mouse — only the
-     drawer's dedicated X button or Escape could close it. -->
+     #mobile-menu-btn toggle, which morphs into an X — see the script
+     below) stays visible and clickable while the drawer is open, so
+     there's a single header instead of a duplicate one painted inside
+     the drawer itself (that duplicate used to visually double up with
+     the real nav bar — logo and capsule both slightly offset). -->
 <div
   id="mobile-menu"
   class="fixed inset-0 z-40 bg-brand-espresso/98 backdrop-blur-2xl
@@ -179,36 +179,8 @@ const {
   aria-label="Navigationsmenü"
   data-open="false"
 >
-  <!-- Top Bar inside open mobile menu -->
-  <div class="flex items-center justify-between w-full shrink-0">
-    <a href="/" class="flex items-center no-underline">
-      <img src="/dourologo.png" alt="D'ouro Soulfood Logo" width="292" height="139" class="h-10 w-auto object-contain" />
-    </a>
-
-    <!-- Capsule with Speisekarte + Close X Icon (SSOT: rounded-md container, rounded-sm button) -->
-    <div class="flex items-center gap-2 bg-brand-espresso/90 border border-white/15 backdrop-blur-md rounded-md px-2.5 py-1.5 shadow-2xl">
-      <a
-        href="/menu"
-        class="px-3 py-1 text-xs font-extrabold tracking-wide text-white border border-white/20 rounded-sm no-underline"
-      >
-        Speisekarte
-      </a>
-      <button
-        id="mobile-menu-close-btn"
-        type="button"
-        class="flex justify-center items-center w-8 h-8 text-white focus:outline-none"
-        aria-label="Navigationsmenü schließen"
-      >
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- Main Navigation Links List (Top-Left Aligned) -->
-  <nav aria-label="Mobile Navigation Drawer" class="flex flex-col items-start text-left gap-6 pt-4 pb-28">
+  <!-- Main Navigation Links List (Top-Left Aligned; pt-20 clears the fixed nav bar above it) -->
+  <nav aria-label="Mobile Navigation Drawer" class="flex flex-col items-start text-left gap-6 pt-20 pb-28">
     {links.map((link) => (
       <a
         href={link.href}
@@ -221,6 +193,20 @@ const {
 </div>
 
 <slot />
+
+<style>
+  /* Hamburger -> X morph, driven by the button's own aria-expanded state
+     (toggled in the script below) rather than a duplicate close icon. */
+  #mobile-menu-btn[aria-expanded='true'] [data-line-top] {
+    transform: translateY(6px) rotate(45deg);
+  }
+  #mobile-menu-btn[aria-expanded='true'] [data-line-mid] {
+    opacity: 0;
+  }
+  #mobile-menu-btn[aria-expanded='true'] [data-line-bot] {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+</style>
 
 <script>
   // Desktop window.scrollY scroll handler
@@ -257,7 +243,6 @@ const {
 
   // Mobile drawer menu logic
   const btn = document.getElementById('mobile-menu-btn');
-  const closeBtn = document.getElementById('mobile-menu-close-btn');
   const menu = document.getElementById('mobile-menu');
 
   function openMenu() {
@@ -266,6 +251,7 @@ const {
       menu.classList.remove('opacity-0', 'pointer-events-none');
     }
     btn?.setAttribute('aria-expanded', 'true');
+    btn?.setAttribute('aria-label', 'Navigationsmenü schließen');
     document.body.style.overflow = 'hidden';
   }
 
@@ -275,6 +261,7 @@ const {
       menu.classList.add('opacity-0', 'pointer-events-none');
     }
     btn?.setAttribute('aria-expanded', 'false');
+    btn?.setAttribute('aria-label', 'Navigationsmenü öffnen');
     document.body.style.overflow = '';
   }
 
@@ -283,8 +270,6 @@ const {
     if (isOpen) closeMenu();
     else openMenu();
   });
-
-  closeBtn?.addEventListener('click', closeMenu);
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && menu?.dataset.open === 'true') {
