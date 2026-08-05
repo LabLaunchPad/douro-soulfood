@@ -90,23 +90,6 @@
   --color-brand-smoke: oklch(0.17 0.01 0);
   --color-brand-ember: oklch(0.56 0.18 24.5);
 
-  /* ── Legacy Compat Map ── */
-  --color-douro-gold: oklch(0.78 0.18 85.0);
-  --color-douro-gold-light: oklch(0.85 0.16 85.0);
-  --color-douro-gold-dark: oklch(0.65 0.18 85.0);
-  --color-douro-terracotta: oklch(0.56 0.18 24.5);
-  --color-douro-terracotta-light: oklch(0.66 0.18 24.5);
-  --color-douro-ember: oklch(0.56 0.18 24.5);
-  --color-douro-forest: oklch(0.68 0.22 142.5);
-  --color-douro-forest-light: oklch(0.76 0.18 142.5);
-  --color-douro-sage: oklch(0.72 0.12 142.5);
-  --color-douro-cream: oklch(0.98 0.005 80);
-  --color-douro-cream-warm: oklch(0.95 0.01 80);
-  --color-douro-espresso: oklch(0.12 0.01 0);
-  --color-douro-charcoal: oklch(0.38 0.01 0);
-  --color-douro-smoke: oklch(0.17 0.01 0);
-  --color-douro-mist: oklch(0.97 0.008 80);
-
 
   /* ─────────────────────────────────────────────────────────────
      BISTRO MENU PALETTE
@@ -161,14 +144,6 @@
      Frosted glass over a warm candlelit scene. */
   --color-surface-glass: oklch(1.0 0.002 80 / 0.72);
 
-  /* ── Surface: Light ──
-     Keep for compatibility. */
-  --color-surface-light: oklch(1.0 0 0);
-
-  /* ── Surface: Light Elevated ──
-     Slightly off-white, softer than pure white. */
-  --color-surface-light-elevated: oklch(0.96 0.005 270);
-
 
   /* ─────────────────────────────────────────────────────────────
      SEMANTIC TEXT TOKENS
@@ -194,11 +169,6 @@
   /* ── Text: Inverse ──
      Light text on dark surfaces. Used for buttons with terracotta/gold fills. */
   --color-text-inverse: oklch(0.98 0.005 80);
-
-  /* ── Text: Brand ──
-     The forest green accent for text links and highlighted brands,
-     ensuring legible contrast against light cream backgrounds. */
-  --color-text-brand: oklch(0.35 0.15 142.67);
 
 
   /* ─────────────────────────────────────────────────────────────
@@ -252,8 +222,6 @@
      Use on CTA buttons, featured cards, and anything that
      needs to say "this glows with Brazilian sunshine." */
   --shadow-glow-gold: 0 0 40px oklch(0.6812 0.2208 142.67 / 0.15);
-  --shadow-glow-terracotta: 0 0 40px oklch(0.6812 0.2208 142.67 / 0.12);
-  --shadow-glow-forest: 0 0 40px oklch(0.6812 0.2208 142.67 / 0.12);
 
 
   /* ─────────────────────────────────────────────────────────────
