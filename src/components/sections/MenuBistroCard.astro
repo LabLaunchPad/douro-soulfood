@@ -60,7 +60,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
 
 <article
   class:list={[
-    'group relative flex flex-row justify-between items-start md:items-center rounded-sm p-3.5 sm:p-4 md:p-4 bg-[#FFFDF9] border border-[#E8DFC8] shadow-sm hover:shadow-md hover:border-[#D6C4A5] transition-all duration-200 gap-3.5 sm:gap-4 md:gap-5 overflow-hidden w-full max-w-full',
+    'group relative flex flex-row justify-between items-start md:items-center rounded-sm p-3.5 sm:p-4 md:p-4 bg-(--color-bistro-paper) border border-(--color-bistro-paper-border) shadow-sm hover:shadow-md hover:border-(--color-bistro-taupe) transition-all duration-200 gap-3.5 sm:gap-4 md:gap-5 overflow-hidden w-full max-w-full',
     !available && 'opacity-60',
     className,
   ]}
@@ -95,14 +95,14 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
     <div>
       {/* Title + Highlighted Price Header */}
       <div class="flex items-center justify-between gap-2 w-full mb-2">
-        <h3 class="text-sm sm:text-base md:text-lg font-serif font-black text-[#2C1810] tracking-wide uppercase break-words leading-snug min-w-0 flex-1 self-center">
+        <h3 class="text-sm sm:text-base md:text-lg font-serif font-black text-(--color-bistro-ink) tracking-wide uppercase break-words leading-snug min-w-0 flex-1 self-center">
           {name}
         </h3>
 
         {/* Highlighted Price Badge — dual or single */}
         {hasDualPrice ? (
           <div class="shrink-0 flex flex-col items-end gap-1 ml-1 self-center">
-            <div class="font-serif font-extrabold text-[#F4E3B3] bg-[#1B140E] border border-[#D4AF37]/50 px-3 py-1 rounded-sm shadow-xs text-sm sm:text-base tracking-wide whitespace-nowrap">
+            <div class="font-serif font-extrabold text-(--color-bistro-banner-text) bg-(--color-bistro-banner) border border-(--color-bistro-banner-border)/50 px-3 py-1 rounded-sm shadow-xs text-sm sm:text-base tracking-wide whitespace-nowrap">
               {dualPriceDisplay}
             </div>
             <div class="flex flex-col items-end gap-0.5">
@@ -132,7 +132,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
           </div>
         ) : (
           <div class="shrink-0 flex flex-col items-end ml-1 self-center">
-            <div class="font-serif font-extrabold text-[#F4E3B3] bg-[#1B140E] border border-[#D4AF37]/50 px-3 py-1 rounded-sm shadow-xs text-sm sm:text-base md:text-lg tracking-wide whitespace-nowrap">
+            <div class="font-serif font-extrabold text-(--color-bistro-banner-text) bg-(--color-bistro-banner) border border-(--color-bistro-banner-border)/50 px-3 py-1 rounded-sm shadow-xs text-sm sm:text-base md:text-lg tracking-wide whitespace-nowrap">
               {formattedPrice}
             </div>
             {prepTime && (

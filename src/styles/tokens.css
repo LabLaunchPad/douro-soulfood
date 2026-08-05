@@ -109,6 +109,28 @@
 
 
   /* ─────────────────────────────────────────────────────────────
+     BISTRO MENU PALETTE
+     A secondary gold/cream palette used specifically for the menu
+     page's category banners and allergen legend — visually distinct
+     from the primary brand palette above (deeper ink, warmer cream,
+     brighter gold). Previously hardcoded as raw hex arbitrary values
+     scattered across menu.astro, MenuBistroCard.astro, and
+     AllergenHeaderLegend.astro; centralized here so the actual
+     colors have a single source of truth. Values preserved exactly
+     as they were — this is a rename, not a redesign.
+     ───────────────────────────────────────────────────────────── */
+
+  --color-bistro-banner: #1B140E;
+  --color-bistro-banner-border: #D4AF37;
+  --color-bistro-banner-text: #F4E3B3;
+  --color-bistro-ink: #2C1810;
+  --color-bistro-paper: #FFFDF9;
+  --color-bistro-paper-border: #E8DFC8;
+  --color-bistro-paper-alt: #FAF6EE;
+  --color-bistro-taupe: #D6C4A5;
+
+
+  /* ─────────────────────────────────────────────────────────────
      SEMANTIC SURFACE TOKENS
      Named by role, not by color. These create the layered
      depth system that makes the dark UI feel dimensional
