@@ -1,0 +1,21 @@
+---
+// Snippet: React island adapter skeleton — ONLY use after a React island
+// has been explicitly approved per docs/adr/react-islands.md. No real
+// example of this exists in the codebase yet; this is a policy-derived
+// skeleton, not a proven pattern. Pages must import THIS file, never the
+// .tsx island directly.
+//
+// import { ExampleIsland } from '@/components/islands/ExampleIsland';
+// interface Props {
+//   initialValue: string;
+// }
+// const { initialValue } = Astro.props;
+---
+
+<!--
+<ExampleIsland initialValue={initialValue} client:visible />
+Prefer client:visible over client:load. Justify any client:load usage
+explicitly — it hydrates immediately on page load regardless of scroll
+position, which risks the Total Blocking Time performance budget
+(docs/performance-budget.md).
+-->

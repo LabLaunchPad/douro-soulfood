@@ -1,0 +1,27 @@
+---
+// Snippet: class:list usage — this repo's only mechanism for conditional/
+// merged classes. There is no cn()/clsx() helper; don't reintroduce one.
+interface Props {
+  active?: boolean;
+  hiddenOnMobile?: boolean;
+  class?: string;
+}
+const { active = false, hiddenOnMobile = false, class: className = '' } = Astro.props;
+---
+
+<!-- Array form: strings, [condition, string] pairs, or plain conditionals -->
+<div
+  class:list={[
+    'base-classes always-applied',
+    active && 'active-state-classes',
+    hiddenOnMobile && 'hidden sm:block',
+    className,
+  ]}
+>
+  <slot />
+</div>
+
+<!-- Object form: { className: condition } -->
+<div class:list={['base-classes', { 'active-state-classes': active }]}>
+  <slot />
+</div>
