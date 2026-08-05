@@ -20,7 +20,7 @@ pnpm format         # prettier --write .
 pnpm test:e2e       # npx playwright test (targets http://localhost:8788 — wrangler dev, NOT astro dev)
 pnpm test:e2e:ui    # playwright test --ui
 pnpm test:e2e:headed
-pnpm lhci           # Lighthouse CI (see .lighthouserc.js)
+pnpm lhci           # Lighthouse CI (see .lighthouserc.cjs)
 ```
 
 Run a single Playwright test: `npx playwright test tests/menu.spec.ts -g "test name"`.
