@@ -29,6 +29,9 @@ export default defineConfig({
     plugins: [tailwindcss()],
     ssr: {
       external: ['sharp'],
+      optimizeDeps: {
+        exclude: ['@keystatic/astro/internal/keystatic-api.js'],
+      },
     },
   },
 });
