@@ -1,12 +1,13 @@
 ---
 /**
- * NavBar — Dynamic Dual-State Talkin' Tacos Header & Mobile Capsule Drawer
+ * NavBar — Dynamic Dual-State Header + Mobile Capsule Trigger
  *
- * Mobile Features (Matching Reference Images 1 & 2):
- * - Mobile capsule navbar containing German "Speisekarte" button + hamburger icon.
- * - Full-screen dark mobile menu drawer (fixed inset-0) with top header and vertical links.
+ * - Mobile capsule navbar containing German "Speisekarte" button + hamburger icon,
+ *   which toggles the full-screen drawer rendered by MobileNavDrawer.astro.
  * - Desktop dual-state scroll transition (transparent top vs solid dark on scroll).
  */
+
+import MobileNavDrawer from './MobileNavDrawer.astro';
 
 interface NavLink {
   label: string;
@@ -156,57 +157,7 @@ const {
   </div>
 </nav>
 
-<!-- Full-Screen Mobile Drawer Overlay (Top-Left Aligned List) -->
-<div
-  id="mobile-menu"
-  class="fixed inset-0 z-50 bg-brand-espresso/98 backdrop-blur-2xl
-         opacity-0 pointer-events-none transition-all duration-300
-         md:hidden flex flex-col justify-start gap-8 p-6 overflow-y-auto"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Navigationsmenü"
-  data-open="false"
->
-  <!-- Top Bar inside open mobile menu -->
-  <div class="flex items-center justify-between w-full shrink-0">
-    <a href="/" class="flex items-center no-underline">
-      <img src="/dourologo.png" alt="D'ouro Soulfood Logo" class="h-10 w-auto object-contain" />
-    </a>
-
-    <!-- Capsule with Speisekarte + Close X Icon (SSOT: rounded-md container, rounded-sm button) -->
-    <div class="flex items-center gap-2 bg-brand-espresso/90 border border-white/15 backdrop-blur-md rounded-md px-2.5 py-1.5 shadow-2xl">
-      <a
-        href="/menu"
-        class="px-3 py-1 text-xs font-extrabold tracking-wide text-white border border-white/20 rounded-sm no-underline"
-      >
-        Speisekarte
-      </a>
-      <button
-        id="mobile-menu-close-btn"
-        type="button"
-        class="flex justify-center items-center w-8 h-8 text-white focus:outline-none"
-        aria-label="Navigationsmenü schließen"
-      >
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- Main Navigation Links List (Top-Left Aligned) -->
-  <nav aria-label="Mobile Navigation Drawer" class="flex flex-col items-start text-left gap-6 pt-4 pb-28">
-    {links.map((link) => (
-      <a
-        href={link.href}
-        class="text-2xl font-bold tracking-wide uppercase text-white hover:text-brand-gold no-underline transition-colors"
-      >
-        {link.label}
-      </a>
-    ))}
-  </nav>
-</div>
+<MobileNavDrawer links={links} />
 
 <slot />
 
@@ -242,42 +193,5 @@ const {
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
   }
-
-  // Mobile drawer menu logic
-  const btn = document.getElementById('mobile-menu-btn');
-  const closeBtn = document.getElementById('mobile-menu-close-btn');
-  const menu = document.getElementById('mobile-menu');
-
-  function openMenu() {
-    if (menu) {
-      menu.dataset.open = 'true';
-      menu.classList.remove('opacity-0', 'pointer-events-none');
-    }
-    btn?.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeMenu() {
-    if (menu) {
-      menu.dataset.open = 'false';
-      menu.classList.add('opacity-0', 'pointer-events-none');
-    }
-    btn?.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  btn?.addEventListener('click', () => {
-    const isOpen = menu?.dataset.open === 'true';
-    if (isOpen) closeMenu();
-    else openMenu();
-  });
-
-  closeBtn?.addEventListener('click', closeMenu);
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menu?.dataset.open === 'true') {
-      closeMenu();
-      btn?.focus();
-    }
-  });
+  // Mobile drawer open/close/Escape logic lives in MobileNavDrawer.astro
 </script>
