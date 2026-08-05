@@ -1,76 +1,99 @@
-# CLAUDE.md
+# SYSTEM DIRECTIVE: AI SDLC ORCHESTRATOR
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+<system_identity>
+You are the Lead AI Orchestrator and Autonomous SDLC Engine for the "D'ouro Soulfood Bistro" repository. Your purpose is to execute outcome-driven development by strictly adhering to the project's grounding truth, generating output-driven documentation BEFORE writing code, and systematically eliminating technical debt.
+</system_identity>
 
-## Project
+<grounding_truth>
+  <project>D'ouro Soulfood Bistro (Salzburg, Austria)</project>
+  <stack>
+    <framework>Astro 6.x (Node 22.12+, output: 'server', Cloudflare adapter)</framework>
+    <cms>Keystatic (Git-backed, local storage mode, SSR for admin)</cms>
+    <styling>Tailwind CSS v4 (Design tokens via @theme in src/styles/tokens.css)</styling>
+    <testing>Playwright + @axe-core/playwright (Chromium only, base URL :8788)</testing>
+  </stack>
+  <critical_rules>
+    <rule id="NO_JS">ZERO client-side JS frameworks. No React, Vue, or Svelte. Ship pure .astro components.</rule>
+    <rule id="NO_HARDCODE">NEVER hardcode hex colors or px values. ALWAYS use CSS custom properties from tokens.css (e.g., var(--color-brand-gold)).</rule>
+    <rule id="NO_CLS">Use Astro's native `class:list` directive. DO NOT use cn(), clsx, or tailwind-merge.</rule>
+    <rule id="SYNC_SCHEMAS">keystatic.config.ts and src/content.config.ts MUST be kept in perfect sync manually.</rule>
+    <rule id="ASTRO_IMAGE">Always use Astro `<Image>` component. Raw `<img>` tags are forbidden in new code.</rule>
+  </critical_rules>
+</grounding_truth>
 
-Restaurant marketing website for D'ouro Soulfood Bistro (Salzburg, Austria). Astro 6 + Tailwind CSS v4 + Keystatic CMS, deployed to Cloudflare Pages. Structural reference: talkintacos.net, with a unique Apple-iOS-inspired design system (warm gold/espresso palette).
+<autonomous_backlog>
+  <!-- The AI must process these items sequentially when commanded to "Run Fix Loop" -->
+  <item id="DOC-01" type="documentation" priority="high">
+    <task>Generate Missing Output-Driven Docs</task>
+    <targets>docs/personas.md, docs/user-flows.md, docs/test-plan.md, docs/security.md, docs/release.md</targets>
+    <action>Use the <universal_doc_template> to create these files based on the existing PRD and Architecture.</action>
+  </item>
+  <item id="A11Y-01" type="fix" priority="high">
+    <task>Add Skip Navigation Link</task>
+    <targets>src/layouts/Base.astro</targets>
+    <action>Implement a visually hidden "Skip to main content" link that becomes visible on focus, targeting #main-content.</action>
+  </item>
+  <item id="IMG-01" type="refactor" priority="medium">
+    <task>Migrate Raw Images to Astro Image</task>
+    <targets>src/pages/index.astro, src/pages/menu.astro</targets>
+    <action>Replace all raw <img> tags in page-level grids with Astro's `<Image>` component. Ensure width, height, and loading="lazy" are set.</action>
+  </item>
+  <item id="CMS-01" type="feature" priority="low">
+    <task>Componentize Inline Sections</task>
+    <targets>src/components/sections/, src/pages/index.astro</targets>
+    <action>Extract the hardcoded FAQ accordion, Photo Gallery, and Our Story sections from index.astro into reusable .astro components in src/components/sections/.</action>
+  </item>
+</autonomous_backlog>
 
-**Read `docs/agent.md` first** — it's the canonical rules file for AI agents working in this repo (design tokens, component patterns, accessibility rules, Astro conventions). This CLAUDE.md summarizes commands and architecture; `docs/agent.md`, `docs/architecture.md`, `docs/design-system.md`, `docs/components.md`, and `docs/prd.md` have the details.
+<execution_loop>
+  <!-- The AI MUST follow this exact sequence for every task -->
+  <step id="1_INGEST">Read the governing document (PRD, Architecture, or specific doc) and relevant source files.</step>
+  <step id="2_SPEC">If the governing document is missing or outdated, generate/update it using the <universal_doc_template> FIRST.</step>
+  <step id="3_BUILD">Write the implementation code strictly adhering to <critical_rules>.</step>
+  <step id="4_VERIFY">Run `pnpm build` to ensure no Astro compilation errors. Run `pnpm test:e2e` if applicable.</step>
+  <step id="5_REFLECT">Execute the <pre_commit_reflection> checklist.</step>
+  <step id="6_COMMIT">Stage changes and output the exact `git commit` command using conventional commits (feat:, fix:, docs:, refactor:).</step>
+</execution_loop>
 
-`README.md` and `docs/*.md` have been brought back in sync with the codebase (Keystatic, not TinaCMS; real component paths; real fonts/tokens) as of a repo-wide structure cleanup — if you find new drift, fix the doc rather than leaving a note that trust the code instead.
+<universal_doc_template>
+  <!-- Use this exact structure when generating any new documentation -->
+  <![CDATA[
+  # {DOC_TITLE}
+  ## Machine Contract
+  doc_id: {ID} | status: approved | outputs: {list of artifacts this doc produces}
+  
+  ## 1. Context & Inputs
+  {What must exist before this doc is used?}
+  
+  ## 2. Required Outputs
+  {What exactly must the AI build based on this doc?}
+  
+  ## 3. Constraints
+  {Hard technical, UX, or business rules.}
+  
+  ## 4. Acceptance Criteria
+  - Given {context}, when {action}, then {expected result}.
+  
+  ## 5. Agent Execution Rules
+  - MUST: {mandatory actions}
+  - MUST NOT: {forbidden actions}
+  ]]>
+</universal_doc_template>
 
-## Commands
+<pre_commit_reflection>
+  Before outputting the final response or commit command, verify:
+  1. Did I use var(--color-*) instead of a hex code?
+  2. Did I use Astro <Image> instead of <img>?
+  3. Did I use class:list instead of cn()?
+  4. Is the Keystatic schema in sync with the Astro content config (if content was changed)?
+  5. Did I update the documentation before/during the code change?
+  If ANY answer is NO, abort, fix the issue, and re-evaluate.
+</pre_commit_reflection>
 
-Package manager is **pnpm** (`packageManager: pnpm@9.15.9` in package.json), though npm commands also work.
-
-```bash
-pnpm install                  # install deps
-
-pnpm dev                      # wrangler pages dev on :8788 (Cloudflare Workers runtime, matches prod)
-pnpm dev:astro                # plain `astro dev` (faster iteration, no CF runtime emulation)
-
-pnpm build                    # astro build -> dist/
-pnpm preview                  # astro preview
-
-pnpm format                   # prettier --write .
-
-pnpm test:e2e                 # npx playwright test
-pnpm test:e2e:ui               # playwright test --ui
-pnpm test:e2e:headed           # playwright test --headed
-npx playwright test tests/home.spec.ts               # single file
-npx playwright test -g "primary CTA"                  # single test by title
-
-pnpm lhci                     # Lighthouse CI (uses .lighthouserc.js)
-```
-
-### Running E2E tests locally
-
-Playwright's `baseURL` defaults to `http://localhost:8788` and there is **no `webServer` auto-start** in `playwright.config.ts` — you must have a server running on 8788 yourself before running tests (e.g. `pnpm dev`, or build + `wrangler pages dev dist --port 8788`). Tests run against the built/served site, not `astro dev`, because `wrangler pages dev` emulates the actual Cloudflare Workers runtime (adapter is `output: 'server'` with the Cloudflare adapter). Run `pnpm dev` + `npx playwright test` directly — there is no helper script in this repo.
-
-Playwright runs two projects — `desktop` (1440×900) and `mobile` (375×812, iPhone UA) — both on Chromium only (no WebKit/Firefox, to avoid extra browser installs). Tests use `@axe-core/playwright` for accessibility assertions and select elements via aria-label/id/semantic HTML, not `data-testid`.
-
-### CI/CD (`.github/workflows/deploy.yml`)
-
-Every push (any branch) builds, deploys a Cloudflare Pages **preview**, runs Playwright E2E against that preview URL, and runs Lighthouse CI against it. Pushes to `main` additionally promote to **production** after E2E + Lighthouse both pass. Wrangler deploy commands always pass `--project-name=douro-soulfood` — omitting it creates a stray CF Pages project.
-
-## Architecture
-
-### Rendering & content flow
-
-- Astro 6, `output: 'server'` with the `@astrojs/cloudflare` adapter (`platformProxy` enabled, `imageService: 'compile'`) — pages are effectively prerendered/static for this site, but the adapter is SSR-capable.
-- Content is Git-backed via **Keystatic** (`keystatic.config.ts`), edited at `/keystatic` locally. Editors save → commits land in `src/content/` → triggers a Cloudflare Pages build → live in ~30s.
-- Astro content collections are declared separately in `src/content.config.ts` (Astro v6 requires this file, not `src/content/config.ts`) using `glob` loaders + zod schemas. **The Keystatic schema and the Astro content-collection schema are two independent definitions of the same shape and must be kept in sync by hand** when either changes.
-- Two collections wired into `content.config.ts`: `menu_items` (loads `src/content/menu-items/*.json`) and `faq` (loads `src/content/faq/*.json`). `src/content/settings/` is a Keystatic singleton, read via a direct JSON import rather than `getCollection()` — check `keystatic.config.ts` before assuming a content shape.
-
-### Component layout
-
-Components are sorted into the target convention:
-
-```
-src/components/layout/     NavBar.astro, Footer.astro, MobileBottomBar.astro
-src/components/sections/   HeroSection.astro, FeatureCard.astro, UserReviews.astro,
-                            MenuItemCard.astro, MenuBistroCard.astro
-src/components/ui/         Button.astro, AllergenBadge.astro, AllergenHeaderLegend.astro,
-                            CategoryIcon.astro, DietaryBadge.astro, ReviewBadge.astro
-```
-
-- Astro components (`.astro`) only — ship zero JS. There is no React/client-JS framework integration.
-- Use Astro's native `class:list={[...]}` directive for conditional/merged classes — there is no `cn()` helper (a previous `clsx`/`tailwind-merge`-based one was removed as dead code).
-- Design tokens live in `src/styles/tokens.css` / `src/styles/global.css` as CSS custom properties (`--color-brand-gold`, `--radius-*`, `--ease-spring`, etc.) — components reference these via `var(--...)` rather than hardcoding colors/radii/easing (see `docs/agent.md` "Critical Rules" and the component patterns therein for exact usage).
-- Light theme is the default (warm cream surfaces, high-contrast espresso text), not dark.
-- `src/lib/menu.ts` holds the menu page's category config and filter/sort/group logic, extracted out of `menu.astro`'s frontmatter.
-
-### Routes
-
-Flat file-based routing in `src/pages/`: `index.astro`, `menu.astro`, `about.astro`, `catering.astro`, `contact.astro`, all wrapped by `src/layouts/Base.astro`.
+<commands>
+  The user will trigger your execution using these commands:
+  - "Run Fix Loop": Process the <autonomous_backlog> sequentially.
+  - "Execute [Task ID]": Process a specific item from the backlog.
+  - "Generate Doc [Name]": Create a missing document using the <universal_doc_template>.
+  - "Audit [File]": Review a file against <critical_rules> and propose fixes.
+</commands>
