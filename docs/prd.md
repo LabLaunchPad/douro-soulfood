@@ -1,17 +1,17 @@
 # PRD: D'ouro Soulfood Bistro — Website
 
-> **Version:** 0.1.0
+> **Version:** 0.2.0
 > **Status:** Active Development
 > **Client:** D'ouro Soulfood Bistro, Salzburg, Austria
-> **Stack:** Astro 6 + TinaCMS + Cloudflare Pages
+> **Stack:** Astro 6 + Keystatic CMS + Cloudflare Pages
 
 ---
 
 ## 1. Product Overview
 
-A premium restaurant website for D'ouro Soulfood Bistro — a Brazilian/Latin/African fusion restaurant at Auerspergstraße 10, 5020 Salzburg, Austria. Owner: Angela (Brazilian roots).
+A restaurant website for D'ouro Soulfood Bistro — a Brazilian/Latin/African fusion restaurant at Auerspergstraße 10, 5020 Salzburg, Austria. Owner: Angela (Brazilian roots).
 
-**Design DNA:** Systematic clone of talkintacos.net's structure, rebuilt with a unique Apple iOS-inspired design system using Aceternity UI motion patterns. Dark-theme dominant with warm Brazilian gold accents.
+**Design DNA:** Apple iOS-inspired light-theme design system with warm Brazilian gold/terracotta accents. Structural layout conventions reference talkintacos.net; all colors, fonts, and content are D'ouro's own.
 
 **Goal:** Drive online orders, showcase the menu, build brand presence in Salzburg's food scene.
 
@@ -21,7 +21,7 @@ A premium restaurant website for D'ouro Soulfood Bistro — a Brazilian/Latin/Af
 
 - **Primary:** Salzburg locals (German & English speakers) aged 22-45
 - **Secondary:** Tourists visiting Salzburg looking for non-traditional Austrian cuisine
-- **Tertiary:** Foodora/delivery platform users discovering the brand
+- **Tertiary:** Lieferando delivery-platform users discovering the brand
 
 ---
 
@@ -29,41 +29,41 @@ A premium restaurant website for D'ouro Soulfood Bistro — a Brazilian/Latin/Af
 
 | Page | Route | Purpose |
 |------|-------|---------|
-| Home | `/` | Hero carousel, gallery, featured dishes, about section, location card, FAQ |
-| Menu | `/menu` | Full menu with categories, prices, dietary tags |
+| Home | `/` | Hero, review badge, category grid, popular dishes gallery, catering/reviews feature cards, "Our Story", photo gallery, FAQ accordion, location/map |
+| Menu | `/menu` | Full menu with categories, prices, dietary tags, allergen legend |
 | About | `/about` | Angela's story, Brazilian roots, philosophy |
-| Catering & Events | `/catering` | Catering services, event booking form |
-| Contact | `/contact` | Location map, hours, phone, reservation link |
+| Catering & Events | `/catering` | Catering services, private events |
+| Contact | `/contact` | Address, phone, hours (sourced from Keystatic settings), map, route-planning CTA |
 
 ---
 
 ## 4. Section Inventory (Home Page)
 
-Mapped from talkintacos.net, adapted for D'ouro:
+Reflects what `src/pages/index.astro` actually renders — mostly hand-written inline sections, not separate reusable components:
 
-1. **Sticky Nav** — Glass morphism, logo left, links center, CTA right
-2. **Hero Carousel** — Full-bleed food photography with gradient overlay, tagline, dual CTA (Pickup/Delivery)
-3. **Food Gallery Grid** — 2×3 (mobile) / 3×3 grid, lightbox on click, hover zoom
-4. **Feature Card — Catering** — Split image+text with backdrop blur card
-5. **Feature Card — Story** — Split reverse, Angela's story
-6. **Featured Menu Scroll** — Horizontal scroll of signature dishes
-7. **Gift Cards / Specials** — Alternating image+text section
-8. **FAQ Accordion** — Known dishes, hours, dietary accommodations
-9. **Location Card** — Map, address, hours, order CTA
-10. **Footer** — Social links, legal, quick nav
+1. **NavBar** — scroll-transition header with a coupled mobile drawer
+2. **Hero** — single image (optional video), headline, dual CTA (`HeroSection.astro`)
+3. **Review Badge** — star rating strip below the hero
+4. **Category Grid** — icon-linked scroll to menu categories
+5. **Popular Dishes** — static photo grid of featured items
+6. **Feature Cards** — catering + reviews, using `FeatureCard.astro`
+7. **Our Story** — Angela's lockdown origin story (inline markup)
+8. **Photo Gallery** — plain grid, no lightbox
+9. **FAQ Accordion** — plain `<details>`-based accordion (inline markup, not a separate component)
+10. **Location/Map** — address, hours, embedded Google Maps iframe
+11. **Footer** — social links, legal, quick nav
 
 ---
 
-## 5. Content Management (TinaCMS)
+## 5. Content Management (Keystatic)
 
-All content editable via TinaCMS admin at `/admin`:
+Content editable via the Keystatic admin at `/keystatic`:
 
-- **Pages:** Hero text, section content, CTAs
-- **Menu Items:** Name, description, price, image, dietary tags, category
-- **Gallery Images:** Upload, reorder, alt text
-- **FAQ:** Question/answer pairs
-- **Hours:** Operating hours per day
-- **Site Settings:** Logo, social links, contact info, SEO defaults
+- **Menu Items** (collection): name (DE/EN), description, price, image, category, sub-category, dietary tags, allergens, prep time, add-ons, price variants, display order, featured, available
+- **FAQ** (collection): question/answer pairs, display order
+- **Site Settings** (singleton): site name, tagline, phone, email, address, city, postal code, country, Google Maps URL, Lieferando order URL, logo, OG image, social links, operating hours
+
+The home page's copy (hero headline, story text, gallery images) is currently hardcoded in `index.astro`, not CMS-managed — there was previously a "Home Page" Keystatic singleton, but it was unused (nothing read it) and has been removed. If homepage content needs to become CMS-editable, that's a deliberate follow-up requiring new source images and a copy decision, not a small fix.
 
 ---
 
@@ -71,41 +71,33 @@ All content editable via TinaCMS admin at `/admin`:
 
 | Requirement | Spec |
 |-------------|------|
-| Framework | Astro 6.x (Node 22+) |
-| CMS | TinaCMS (Git-backed, self-hosted option) |
+| Framework | Astro 6.x (Node 22.12+) |
+| CMS | Keystatic (Git-backed, local storage mode) |
 | Hosting | Cloudflare Pages (free tier) |
-| Styling | Tailwind CSS v4 + custom design system |
-| Components | Aceternity UI-inspired (Apple iOS motion) |
-| i18n | German (primary) + English |
-| Performance | Lighthouse 95+ all categories |
-| Accessibility | WCAG 2.1 AA minimum |
-| CSP | Astro 6 built-in CSP enabled |
-| Images | Astro Image optimization, WebP/AVIF |
-| Analytics | Cloudflare Web Analytics (cookie-free) |
+| Styling | Tailwind CSS v4 + custom design token system |
+| i18n | German (primary) + English (some fields) |
+| Accessibility | Playwright + `@axe-core/playwright` accessibility assertions in E2E tests |
+| Security headers | CSP, HSTS, X-Frame-Options, etc. via `public/_headers` |
+| Images | Astro Image compile-time optimization |
+| Analytics | None currently configured |
 
 ---
 
 ## 7. SEO Requirements
 
-- Schema.org `Restaurant` structured data
+- Schema.org `Restaurant` structured data (`Base.astro`)
 - OpenGraph + Twitter cards per page
 - Canonical URLs
-- Sitemap.xml via @astrojs/sitemap
-- `robots.txt` with proper directives
-- Local SEO: Google Business Profile alignment
+- Sitemap.xml via `@astrojs/sitemap`
+- `robots.txt` with `/keystatic/` disallowed
 - Meta descriptions for all pages
-- Alt text for all images
 
 ---
 
 ## 8. Performance Targets
 
-- **LCP:** < 1.5s
-- **FID:** < 50ms
-- **CLS:** < 0.05
-- **TTI:** < 2.0s
-- **Bundle:** < 100KB JS total (Astro islands)
-- **Images:** Lazy-loaded with blur placeholders
+- Lighthouse CI runs against `/`, `/menu`, `/about`, `/catering`, `/contact` (`.lighthouserc.js`, `.github/workflows/deploy.yml`)
+- No client-side JS framework — this is a fully static/prerendered site, keeping JS payload minimal by construction
 
 ---
 
@@ -113,16 +105,13 @@ All content editable via TinaCMS admin at `/admin`:
 
 | Service | Purpose |
 |---------|---------|
-| Foodora | Delivery link-out |
-| Google Maps | Location embed |
-| Cloudflare Analytics | Privacy-first analytics |
-| TinaCMS Cloud / Self-hosted | Content management |
+| Lieferando | Delivery/order link-out (migrated from Foodora) |
+| Google Maps | Location embed (Contact page + home page location section) |
 
 ---
 
 ## 10. Success Metrics
 
-- Direct online orders increase 30% in first 3 months
+- Direct online orders via the Lieferando link
 - Organic search traffic from "restaurant salzburg" cluster
-- Lighthouse score 95+ sustained
-- Content updates by client without developer intervention
+- Content updates by client without developer intervention (Menu Items, FAQ, Settings are all Keystatic-editable today)

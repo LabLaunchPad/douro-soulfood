@@ -1,6 +1,6 @@
 # D'ouro Soulfood Bistro — Website
 
-> Astro 6 + TinaCMS + Cloudflare Pages
+> Astro 6 + Keystatic CMS + Cloudflare Pages
 > Apple iOS-inspired design system with Brazilian soul warmth
 
 ---
@@ -9,26 +9,25 @@
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
-# Start dev server (TinaCMS + Astro)
-npm run dev
+# Start dev server (Cloudflare Workers runtime, matches prod)
+pnpm dev
 
 # Open browser
-# Site:  http://localhost:4321
-# CMS:   http://localhost:4321/admin
+# Site: http://localhost:8788
+# CMS:  http://localhost:8788/keystatic
 ```
 
 ## Stack
 
 | Layer | Tech |
 |-------|------|
-| Framework | Astro 6 (Node 22+) |
-| CMS | TinaCMS (Git-backed) |
+| Framework | Astro 6 (Node 22.12+) |
+| CMS | Keystatic (Git-backed) |
 | Styling | Tailwind CSS v4 |
-| UI Islands | React 19 + Framer Motion |
-| Hosting | Cloudflare Pages |
-| Design | Aceternity UI-inspired, Apple iOS motion |
+| Hosting | Cloudflare Pages / Workers |
+| Design | Apple iOS-inspired motion, warm gold/espresso palette |
 
 ## Project Structure
 
@@ -36,20 +35,20 @@ npm run dev
 docs/           → AI agent docs (prd, design-system, architecture, agent, components)
 src/
   components/
-    ui/         → Atoms: Button, Card, Badge
-    sections/   → Sections: Hero, Gallery, FeatureCard, FAQ
-    layout/     → GlassNav, Footer
-  content/      → TinaCMS-managed content
+    ui/         → Atoms: Button, AllergenBadge, DietaryBadge, CategoryIcon, ReviewBadge, AllergenHeaderLegend
+    sections/   → Page composites: HeroSection, FeatureCard, UserReviews, MenuItemCard, MenuBistroCard
+    layout/     → NavBar, Footer, MobileBottomBar
+  content/      → Keystatic-managed content (menu-items, faq, settings)
+  lib/          → Shared logic (menu.ts)
   layouts/      → Base layout
   pages/        → Routes
   styles/       → Design tokens & global CSS
-tina/           → CMS schema
 public/         → Static assets
 ```
 
 ## For AI Agents
 
-**Read `docs/agent.md` first.** It contains all rules for working in this repo.
+**Read `CLAUDE.md` first**, then `docs/agent.md`. Together they contain the working rules for this repo.
 
 Key docs for context:
 - `docs/prd.md` — What we're building
@@ -59,15 +58,15 @@ Key docs for context:
 
 ## Deploy
 
-Auto-deploys via Cloudflare Pages on push to `main`.
+Auto-deploys via Cloudflare Pages on push to `main` (see `.github/workflows/deploy.yml`).
 
 ```bash
-npm run build    # Builds TinaCMS + Astro
+pnpm build    # astro build -> dist/
 ```
 
 ## Design Reference
 
-Structural clone of [talkintacos.net](https://talkintacos.net/) with unique D'ouro design system.
+Structural reference: talkintacos.net (layout/spacing conventions only), rebuilt with D'ouro's own brand palette, fonts, and content.
 
 ## License
 

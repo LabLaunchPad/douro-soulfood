@@ -8,7 +8,7 @@ Restaurant marketing website for D'ouro Soulfood Bistro (Salzburg, Austria). Ast
 
 **Read `docs/agent.md` first** — it's the canonical rules file for AI agents working in this repo (design tokens, component patterns, accessibility rules, Astro conventions). This CLAUDE.md summarizes commands and architecture; `docs/agent.md`, `docs/architecture.md`, `docs/design-system.md`, `docs/components.md`, and `docs/prd.md` have the details.
 
-**Docs vs. reality note:** `README.md` and `docs/*.md` were written against an earlier TinaCMS-based setup. The codebase has since moved to **Keystatic** (`@keystatic/astro`, `keystatic.config.ts`) — trust the code/config over any TinaCMS references in the docs.
+`README.md` and `docs/*.md` have been brought back in sync with the codebase (Keystatic, not TinaCMS; real component paths; real fonts/tokens) as of a repo-wide structure cleanup — if you find new drift, fix the doc rather than leaving a note that trust the code instead.
 
 ## Commands
 
@@ -50,30 +50,27 @@ Every push (any branch) builds, deploys a Cloudflare Pages **preview**, runs Pla
 ### Rendering & content flow
 
 - Astro 6, `output: 'server'` with the `@astrojs/cloudflare` adapter (`platformProxy` enabled, `imageService: 'compile'`) — pages are effectively prerendered/static for this site, but the adapter is SSR-capable.
-- Content is Git-backed via **Keystatic** (`keystatic.config.ts`), edited at `/admin` locally (`KEYSTATIC_MODE=local` in `.env.example`). Editors save → commits land in `src/content/` → triggers a Cloudflare Pages build → live in ~30s.
+- Content is Git-backed via **Keystatic** (`keystatic.config.ts`), edited at `/keystatic` locally. Editors save → commits land in `src/content/` → triggers a Cloudflare Pages build → live in ~30s.
 - Astro content collections are declared separately in `src/content.config.ts` (Astro v6 requires this file, not `src/content/config.ts`) using `glob` loaders + zod schemas. **The Keystatic schema and the Astro content-collection schema are two independent definitions of the same shape and must be kept in sync by hand** when either changes.
-- Two collections currently wired into `content.config.ts`: `menu_items` (loads `src/content/menu-items/*.json`) and `faq` (loads `src/content/faq/*.json`). There is also a `src/content/menu/` directory (mdx/mdoc bodies per dish) and `src/content/pages/`, `src/content/settings/` that are Keystatic-managed but not yet declared as Astro collections — check `keystatic.config.ts` before assuming a content shape.
+- Two collections wired into `content.config.ts`: `menu_items` (loads `src/content/menu-items/*.json`) and `faq` (loads `src/content/faq/*.json`). `src/content/settings/` is a Keystatic singleton, read via a direct JSON import rather than `getCollection()` — check `keystatic.config.ts` before assuming a content shape.
 
 ### Component layout
 
-Component organization is in transition — some are flat under `src/components/`, others under subfolders:
+Components are sorted into the target convention:
 
 ```
-src/components/            NavBar, Footer, HeroSection, MenuGrid, MenuGrid/MenuItemCard/MenuBistroCard,
-                            AllergenBadge, AllergenHeaderLegend, CategoryIcon, DietaryBadge,
-                            OurStory, UserReviews, ReviewBadge  (mostly flat, page-specific sections)
-src/components/layout/     GlassNav.astro, Footer.astro, MobileBottomBar.astro
-src/components/sections/   FeatureCard.astro
-src/components/ui/         Button.astro
+src/components/layout/     NavBar.astro, Footer.astro, MobileBottomBar.astro
+src/components/sections/   HeroSection.astro, FeatureCard.astro, UserReviews.astro,
+                            MenuItemCard.astro, MenuBistroCard.astro
+src/components/ui/         Button.astro, AllergenBadge.astro, AllergenHeaderLegend.astro,
+                            CategoryIcon.astro, DietaryBadge.astro, ReviewBadge.astro
 ```
 
-`docs/agent.md` and `docs/architecture.md` describe a fully-sorted `ui/` (atoms) / `sections/` / `layout/` split — treat that as the target convention for new components, not a guarantee of current file locations.
-
-- Astro components (`.astro`) by default — ship zero JS.
-- React islands only for interactive pieces (carousel, gallery lightbox, menu filters, FAQ accordion), hydrated with `client:visible` or `client:idle` — **never `client:load`** (per `docs/agent.md`).
-- `src/lib/utils.ts` exports `cn()` (clsx + tailwind-merge) — the standard way to compose/override Tailwind classes in components.
-- Design tokens live in `src/styles/tokens.css` / `src/styles/global.css` as CSS custom properties (`--color-douro-gold`, `--radius-*`, `--ease-spring`, etc.) — components reference these via `var(--...)` rather than hardcoding colors/radii/easing (see `docs/agent.md` "Critical Rules" and the component patterns therein for exact usage).
+- Astro components (`.astro`) only — ship zero JS. There is no React/client-JS framework integration.
+- Use Astro's native `class:list={[...]}` directive for conditional/merged classes — there is no `cn()` helper (a previous `clsx`/`tailwind-merge`-based one was removed as dead code).
+- Design tokens live in `src/styles/tokens.css` / `src/styles/global.css` as CSS custom properties (`--color-brand-gold`, `--radius-*`, `--ease-spring`, etc.) — components reference these via `var(--...)` rather than hardcoding colors/radii/easing (see `docs/agent.md` "Critical Rules" and the component patterns therein for exact usage).
 - Light theme is the default (warm cream surfaces, high-contrast espresso text), not dark.
+- `src/lib/menu.ts` holds the menu page's category config and filter/sort/group logic, extracted out of `menu.astro`'s frontmatter.
 
 ### Routes
 

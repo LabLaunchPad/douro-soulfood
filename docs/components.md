@@ -1,180 +1,142 @@
 # Components Reference
 
-> API docs for all components in the D'ouro Soulfood design system.
+> API docs for all components in the D'ouro Soulfood design system. All components are `.astro` — no client-side JS framework is used anywhere in this codebase.
 
 ---
 
-## UI Atoms
+## UI Atoms (`src/components/ui/`)
 
 ### Button
 **File:** `src/components/ui/Button.astro`
 **Props:**
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| href | string | - | Link destination |
+| href | string | — | Link destination |
 | variant | 'primary' \| 'secondary' \| 'ghost' | 'primary' | Visual style |
 | size | 'sm' \| 'md' \| 'lg' | 'md' | Size variant |
 | arrow | boolean | false | Show animated arrow icon |
 | class | string | '' | Additional classes |
 
-**Variants:**
-- `primary` — Gold fill, dark text, glow hover
-- `secondary` — Transparent, border, hover fill
-- `ghost` — No border, text-only, underline hover
-
 ---
 
-### Card
-**File:** `src/components/ui/Card.astro`
-**Props:**
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | 'default' \| 'glass' \| 'elevated' | 'default' | Surface style |
-| padding | 'none' \| 'sm' \| 'md' \| 'lg' | 'md' | Internal padding |
-| hover | boolean | true | Enable hover lift |
-| class | string | '' | Additional classes |
+### AllergenBadge
+**File:** `src/components/ui/AllergenBadge.astro`
+Renders a single allergen code badge (e.g. "G/M"), used inside `MenuItemCard`.
 
----
+### DietaryBadge
+**File:** `src/components/ui/DietaryBadge.astro`
+Renders a single dietary tag badge (vegan, vegetarian, gluten-free, spicy, halal, dairy-free), used inside `MenuItemCard`.
 
-### Badge
-**File:** `src/components/ui/Badge.astro`
-**Props:**
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | 'gold' \| 'green' \| 'neutral' | 'neutral' | Color variant |
-| size | 'sm' \| 'md' | 'sm' | Size |
+### CategoryIcon
+**File:** `src/components/ui/CategoryIcon.astro`
+Renders the vector icon for a menu category (appetizers, tacos, bowls, etc.) — used on both the home page's category grid and the menu page's category navigation.
 
-**Use:** Dietary tags (Vegan, Gluten-free), price badges, status indicators.
-
----
-
-## Section Components
-
-### HeroCarousel
-**File:** `src/components/sections/HeroCarousel.tsx`
-**Type:** React island (`client:visible`)
+### ReviewBadge
+**File:** `src/components/ui/ReviewBadge.astro`
 **Props:**
 | Prop | Type | Description |
 |------|------|-------------|
-| images | { src: string; alt: string }[] | Carousel images |
-| headline | string | Main heading |
+| rating | number | Star rating (e.g. 4.8) |
+
+Renders the star-rating badge shown on the home page below the hero.
+
+### AllergenHeaderLegend
+**File:** `src/components/ui/AllergenHeaderLegend.astro`
+Renders the allergen code legend and bilingual (DE/EN) disclaimer shown at the top of the menu page.
+
+---
+
+## Section Components (`src/components/sections/`)
+
+### HeroSection
+**File:** `src/components/sections/HeroSection.astro`
+**Props:**
+| Prop | Type | Description |
+|------|------|-------------|
+| accent | string | Small accent label above the headline |
+| headline | string | Main `<h1>` heading |
 | subheadline | string | Supporting text |
-| cta_primary | { label: string; href: string } | Primary CTA |
-| cta_secondary | { label: string; href: string } | Secondary CTA |
-| interval | number | Auto-advance ms (default 8000) |
+| images | { src, alt, width, height }[] | Hero image(s) |
+| ctaPrimary | { label, href } | Primary CTA button |
+| ctaSecondary | { label, href } | Secondary CTA button |
 
----
-
-### FoodGallery
-**File:** `src/components/sections/FoodGallery.tsx`
-**Type:** React island (`client:idle`)
-**Props:**
-| Prop | Type | Description |
-|------|------|-------------|
-| images | { src: string; alt: string }[] | Gallery images |
-| title | string | Section title |
-| subtitle | string | Section subtitle |
-| columns | 2 \| 3 | Grid columns on desktop |
-
----
+The primary/secondary CTAs render inside a `hidden md:flex` container — not visible on mobile viewports by design.
 
 ### FeatureCard
 **File:** `src/components/sections/FeatureCard.astro`
-**Type:** Astro (zero JS)
 **Props:**
 | Prop | Type | Description |
 |------|------|-------------|
 | title | string | Card heading |
 | description | string | Body text |
-| image | { src: string; alt: string } | Feature image |
-| cta | { label: string; href: string } | Action button |
+| image | { src, alt } | Feature image |
+| cta | { label, href } | Action button |
 | reverse | boolean | Flip image/text order |
-| background_image | string | Optional full-bleed bg |
 
----
+### UserReviews
+**File:** `src/components/sections/UserReviews.astro`
+Renders the guest-reviews section on the home page.
 
-### MenuScroll
-**File:** `src/components/sections/MenuScroll.tsx`
-**Type:** React island (`client:visible`)
+### MenuItemCard
+**File:** `src/components/sections/MenuItemCard.astro`
+Full-detail menu item card (used for most menu categories). Reads `siteSettings` directly for the order-online link. Composes `DietaryBadge` and `AllergenBadge`.
+
+### MenuBistroCard
+**File:** `src/components/sections/MenuBistroCard.astro`
+Compact menu item card, used for the drinks/bebidas sub-sections. Supports `priceVariants` (non-alcoholic/alcoholic dual pricing) and `addOns`.
 **Props:**
 | Prop | Type | Description |
 |------|------|-------------|
-| items | MenuItem[] | Menu items to display |
-| title | string | Section title |
-| view_menu_href | string | Link to full menu |
-
-```ts
-interface MenuItem {
-  name: string;
-  image: string;
-  href: string;
-  price?: string;
-}
-```
+| name | string | Dish/drink name |
+| description | string | German description |
+| descriptionEn | string? | English description |
+| priceInCents | number | Base price in EUR cents |
+| priceVariants | { nonAlcoholic?, alcoholic? } | EUR cents, for dual-price drinks |
+| prepTime / prepTimeEn | string? | Prep time text |
+| allergens | string[] | Allergen codes |
+| addOns | { label, price }[] | Optional add-ons |
+| imageSrc / imageAlt | string? | Optional image |
+| available | boolean | Whether currently available |
 
 ---
 
-### FAQAccordion
-**File:** `src/components/sections/FAQAccordion.tsx`
-**Type:** React island (`client:idle`)
-**Props:**
-| Prop | Type | Description |
-|------|------|-------------|
-| title | string | Section heading |
-| items | { question: string; answer: string }[] | FAQ items |
+## Layout Components (`src/components/layout/`)
 
----
-
-### LocationCard
-**File:** `src/components/sections/LocationCard.astro`
-**Type:** Astro (zero JS)
-**Props:**
-| Prop | Type | Description |
-|------|------|-------------|
-| name | string | Restaurant name |
-| address | string[] | Address lines |
-| phone | string | Phone number |
-| email | string | Email |
-| hours | { day: string; time: string }[] | Operating hours |
-| map_url | string | Google Maps link |
-| order_url | string | Online order link |
-
----
-
-## Layout Components
-
-### GlassNav
-**File:** `src/components/layout/GlassNav.astro`
-**Behavior:** Sticky top, transparent → glass on scroll (via IntersectionObserver)
-**Slots:** Default slot for custom CTA
+### NavBar
+**File:** `src/components/layout/NavBar.astro`
+Desktop scroll-transition header plus a coupled full-screen mobile drawer (`aria-label="Mobile Navigation Drawer"`), all in one component with its own `<script>` for scroll/open-close behavior.
 
 ### Footer
 **File:** `src/components/layout/Footer.astro`
-**Slots:** None — pulls from site settings
+**Props:** `cta`, `address` (string array), `phone`, `phoneHref`, `copyrightName`, plus link arrays. Renders the location line inside a semantic `<address>` element.
 
-### SEOHead
-**File:** `src/components/layout/SEOHead.astro`
+### MobileBottomBar
+**File:** `src/components/layout/MobileBottomBar.astro`
+Persistent bottom action bar shown on mobile, rendered directly by `Base.astro` (not per-page). Reads phone/order-link from `siteSettings`.
+
+---
+
+## Layout Shell
+
+### Base
+**File:** `src/layouts/Base.astro`
 **Props:**
 | Prop | Type | Description |
 |------|------|-------------|
 | title | string | Page title |
-| description | string | Meta description |
-| image | string | OG image URL |
-| canonical | string | Canonical URL |
+| description | string? | Meta description |
+| image | string? | OG/Twitter image URL |
+| canonical | string? | Canonical URL |
 | type | 'website' \| 'article' | OG type |
+
+Handles `<head>` (SEO meta, fonts, Schema.org `Restaurant` JSON-LD), global CSS import, and renders `MobileBottomBar` plus `nav`/`footer`/default slots. Does **not** import `NavBar`/`Footer` itself — each page imports and slots them individually.
 
 ---
 
-## Utility: cn()
+## Class Composition
 
-**File:** `src/lib/utils.ts`
-```ts
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+There is no `cn()` utility in this codebase (a previous `clsx`/`tailwind-merge`-based one was removed as dead code). Use Astro's native `class:list={[...]}` directive for conditional/merged classes, e.g.:
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+```astro
+<div class:list={['base-class', { 'active-class': isActive }]}>
 ```
-
-Use `cn()` in all components for class merging. It handles Tailwind class conflicts automatically.
