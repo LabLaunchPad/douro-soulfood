@@ -384,6 +384,51 @@
 
 
 /* ─────────────────────────────────────────────────────────────────
+   2b. Self-hosted fonts (Fraunces + DM Sans)
+   ─────────────────────────────────────────────────────────────────
+   Self-hosted instead of loaded from Google's servers: loading fonts
+   from fonts.googleapis.com/fonts.gstatic.com transmits the visitor's
+   IP to Google before any consent exists (the same underlying issue
+   behind the 2022 Munich Google Fonts ruling). These four files are
+   the exact variable-font instances Google itself served for the
+   family/weight/style spec this site already used — same visual
+   result, no third-party request.
+   ═════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/dm-sans-normal-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: italic;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/fonts/dm-sans-italic-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url('/fonts/fraunces-normal-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/fraunces-italic-variable.woff2') format('woff2');
+}
+
+
+/* ─────────────────────────────────────────────────────────────────
    3. @layer base — Body defaults & global resets
    ─────────────────────────────────────────────────────────────────
    These establish the visual baseline for every page.
