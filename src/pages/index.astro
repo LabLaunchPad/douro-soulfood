@@ -8,6 +8,9 @@ import ReviewBadge from '@/components/ui/ReviewBadge.astro';
 import CategoryIcon from '@/components/ui/CategoryIcon.astro';
 import FeatureCard from '@/components/sections/FeatureCard.astro';
 import UserReviews from '@/components/sections/UserReviews.astro';
+import PhotoGrid from '@/components/sections/PhotoGrid.astro';
+import OurStorySection from '@/components/sections/OurStorySection.astro';
+import FaqAccordion from '@/components/sections/FaqAccordion.astro';
 import MapEmbed from '@/components/ui/MapEmbed.astro';
 import Footer from '@/components/layout/Footer.astro';
 import { getCollection } from 'astro:content';
@@ -30,30 +33,30 @@ const categorySlots = [
   { slug: 'drinks', title: 'Bebidas & Sobremesas', desc: 'Caipirinha, Guaraná & Brigadeiros', icon: 'drinks' },
 ];
 
-/** 9 Popular dishes photos (image-only gallery layout) */
+/** 9 Popular dishes photos (image-only gallery layout). width/height match the actual source files (300×300). */
 const popularDishes = [
-  { src: '/images/menu/taco-especial.png', alt: 'Taco Especial' },
-  { src: '/images/menu/quesadilla-haehnchen.png', alt: 'Quesadilla Hähnchen' },
-  { src: '/images/menu/feijoada.png', alt: 'Feijoada Brasileira' },
-  { src: '/images/menu/pao-de-queijo.png', alt: 'Pão de Queijo' },
-  { src: '/images/menu/mango-ceviche.png', alt: 'Mango Ceviche' },
-  { src: '/images/menu/coxinha.png', alt: 'Coxinha' },
-  { src: '/images/menu/african-stew.jpg', alt: 'African Peanut Stew' },
-  { src: '/images/menu/brigadeiros.jpg', alt: 'Brigadeiros' },
-  { src: '/images/menu/brisa-do-mar.png', alt: 'Brisa do Mar' },
+  { src: '/images/menu/taco-especial.png', alt: 'Taco Especial', width: 300, height: 300 },
+  { src: '/images/menu/quesadilla-haehnchen.png', alt: 'Quesadilla Hähnchen', width: 300, height: 300 },
+  { src: '/images/menu/feijoada.png', alt: 'Feijoada Brasileira', width: 300, height: 300 },
+  { src: '/images/menu/pao-de-queijo.png', alt: 'Pão de Queijo', width: 300, height: 300 },
+  { src: '/images/menu/mango-ceviche.png', alt: 'Mango Ceviche', width: 300, height: 300 },
+  { src: '/images/menu/coxinha.png', alt: 'Coxinha', width: 300, height: 300 },
+  { src: '/images/menu/african-stew.jpg', alt: 'African Peanut Stew', width: 300, height: 300 },
+  { src: '/images/menu/brigadeiros.jpg', alt: 'Brigadeiros', width: 300, height: 300 },
+  { src: '/images/menu/brisa-do-mar.png', alt: 'Brisa do Mar', width: 300, height: 300 },
 ];
 
-/** 9 Photos for Galerie section */
+/** 9 Photos for Galerie section. width/height match each source file's actual dimensions. */
 const galleryImages = [
-  { src: '/images/gallery/1.webp', alt: 'D\'ouro Bistro Spezialität 1' },
-  { src: '/images/gallery/2.webp', alt: 'D\'ouro Bistro Spezialität 2' },
-  { src: '/images/gallery/3.webp', alt: 'D\'ouro Bistro Spezialität 3' },
-  { src: '/images/gallery/4.webp', alt: 'D\'ouro Bistro Spezialität 4' },
-  { src: '/images/gallery/5.webp', alt: 'D\'ouro Bistro Spezialität 5' },
-  { src: '/images/gallery/6.webp', alt: 'D\'ouro Bistro Spezialität 6' },
-  { src: '/images/gallery/7.webp', alt: 'D\'ouro Bistro Spezialität 7' },
-  { src: '/images/gallery/8.webp', alt: 'D\'ouro Bistro Spezialität 8' },
-  { src: '/images/gallery/9.webp', alt: 'D\'ouro Bistro Spezialität 9' },
+  { src: '/images/gallery/1.webp', alt: 'D\'ouro Bistro Spezialität 1', width: 680, height: 510 },
+  { src: '/images/gallery/2.webp', alt: 'D\'ouro Bistro Spezialität 2', width: 594, height: 510 },
+  { src: '/images/gallery/3.webp', alt: 'D\'ouro Bistro Spezialität 3', width: 382, height: 510 },
+  { src: '/images/gallery/4.webp', alt: 'D\'ouro Bistro Spezialität 4', width: 382, height: 510 },
+  { src: '/images/gallery/5.webp', alt: 'D\'ouro Bistro Spezialität 5', width: 382, height: 510 },
+  { src: '/images/gallery/6.webp', alt: 'D\'ouro Bistro Spezialität 6', width: 382, height: 510 },
+  { src: '/images/gallery/7.webp', alt: 'D\'ouro Bistro Spezialität 7', width: 382, height: 510 },
+  { src: '/images/gallery/8.webp', alt: 'D\'ouro Bistro Spezialität 8', width: 382, height: 510 },
+  { src: '/images/gallery/9.webp', alt: 'D\'ouro Bistro Spezialität 9', width: 680, height: 510 },
 ];
 
 /** FAQ entries from KeystaticCMS */
@@ -142,101 +145,25 @@ const PAGE_DESCRIPTION =
     </div>
   </section>
 
-  {/* 5. BELIEBTE GERICHTE IM D'OURO BISTRO (REDESIGNED: 9 FOOD PHOTOS ONLY) */}
-  <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Beliebte Gerichte">
-    <div class="text-center mb-4 md:mb-5">
-      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
-        Empfehlungen
-      </span>
-      <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display">
-        Beliebte Gerichte im D'ouro Bistro
-      </h2>
-      <p class="text-text-secondary mt-1 max-w-[75ch] mx-auto text-xs md:text-sm">
-        Frisch von Angela zubereitet — mit den besten Zutaten Brasiliens und Westafrikas.
-      </p>
-    </div>
+  {/* 5. BELIEBTE GERICHTE IM D'OURO BISTRO */}
+  <PhotoGrid
+    ariaLabel="Beliebte Gerichte"
+    eyebrow="Empfehlungen"
+    title="Beliebte Gerichte im D'ouro Bistro"
+    description="Frisch von Angela zubereitet — mit den besten Zutaten Brasiliens und Westafrikas."
+    items={popularDishes}
+    cta={{ label: 'Komplette Speisekarte ansehen', href: '/menu' }}
+  />
 
-    {/* 8 Food Photos on Mobile (2 cols), 9 on Desktop (3 cols) */}
-    <div class="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4 md:gap-6">
-      {popularDishes.map((item, index) => (
-        <div class:list={[
-          "group relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]",
-          index === 8 && "hidden sm:block"
-        ]}>
-          <img
-            src={item.src}
-            alt={item.alt}
-            width="600"
-            height="450"
-            class="w-full h-full object-cover transition-transform duration-[var(--duration-normal)] ease-[var(--ease-out-quart)] group-hover:scale-105"
-            loading="lazy"
-          />
-        </div>
-      ))}
-    </div>
-
-    {/* CTA: See Full Menu */}
-    <div class="mt-4 md:mt-6 text-center">
-      <a
-        href="/menu"
-        class="group inline-flex items-center gap-2 rounded-sm
-               bg-brand-gold hover:bg-brand-gold-light active:bg-brand-gold-dark
-               min-h-10 md:min-h-12 px-5 py-2.5 md:py-3 text-sm md:text-base font-semibold text-brand-espresso
-               focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold
-               no-underline transition-colors duration-[var(--duration-fast)] ease-[var(--ease-spring)] shadow-glow-gold"
-      >
-        Komplette Speisekarte ansehen
-        <svg
-          class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)]"
-          viewBox="0 0 256 256"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="24"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <line x1="70" y1="128" x2="216" y2="128" />
-          <polyline points="144 56 216 128 144 200" />
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  {/* 6. WIE D'OURO BEGANN (TRANSLATED TO GERMAN) */}
-  <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Unsere Geschichte">
-    <div class="glass-gold rounded-2xl p-6 md:p-8 max-w-3xl mx-auto text-center border border-brand-gold/20 shadow-lg">
-      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-2">
-        Unsere Geschichte
-      </span>
-      <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display mb-3">
-        Wie D'ouro begann
-      </h2>
-      <p class="text-sm md:text-base text-text-secondary leading-relaxed max-w-[75ch] mx-auto">
-        D'ouro begann während des Lockdowns, als Angela von zu Hause aus selbstgemachtes brasilianisches Essen an alle verteilte, die ein Stück Heimat suchten. Genau diese Wärme und Leidenschaft stecken auch heute in jedem einzelnen Gericht.
-      </p>
-      <div class="mt-6 flex items-center justify-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center" aria-hidden="true">
-          <svg
-            class="w-5 h-5 text-brand-gold"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
-          </svg>
-        </div>
-        <div class="text-left">
-          <p class="text-xs md:text-sm font-semibold text-text-primary">Angela</p>
-          <p class="text-[10px] md:text-xs text-text-tertiary">Gründerin & Chefköchin</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  {/* 6. WIE D'OURO BEGANN */}
+  <OurStorySection
+    ariaLabel="Unsere Geschichte"
+    eyebrow="Unsere Geschichte"
+    title="Wie D'ouro begann"
+    text="D'ouro begann während des Lockdowns, als Angela von zu Hause aus selbstgemachtes brasilianisches Essen an alle verteilte, die ein Stück Heimat suchten. Genau diese Wärme und Leidenschaft stecken auch heute in jedem einzelnen Gericht."
+    founderName="Angela"
+    founderTitle="Gründerin & Chefköchin"
+  />
 
   {/* 7. FIRMENEVENTS SECTION */}
   <section class="py-2 md:py-3" aria-label="Firmenevents">
@@ -264,77 +191,22 @@ const PAGE_DESCRIPTION =
     />
   </section>
 
-  {/* 10. GALERIE SECTION (8 PHOTOS ON MOBILE / 9 ON DESKTOP) */}
-  <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Galerie">
-    <div class="text-center mb-4 md:mb-5">
-      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
-        Impressionen
-      </span>
-      <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display">
-        Galerie
-      </h2>
-      <p class="text-text-secondary mt-1 max-w-[75ch] mx-auto text-xs md:text-sm">
-        Einblicke in unsere frischen Speisen und das Ambiente im D'ouro Bistro.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4 md:gap-6">
-      {galleryImages.map((img, index) => (
-        <div class:list={[
-          "group relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]",
-          index === 8 && "hidden sm:block"
-        ]}>
-          <img
-            src={img.src}
-            alt={img.alt}
-            width="600"
-            height="450"
-            class="w-full h-full object-cover transition-transform duration-[var(--duration-normal)] ease-[var(--ease-out-quart)] group-hover:scale-105"
-            loading="lazy"
-          />
-        </div>
-      ))}
-    </div>
-  </section>
+  {/* 10. GALERIE SECTION */}
+  <PhotoGrid
+    ariaLabel="Galerie"
+    eyebrow="Impressionen"
+    title="Galerie"
+    description="Einblicke in unsere frischen Speisen und das Ambiente im D'ouro Bistro."
+    items={galleryImages}
+  />
 
   {/* 11. FAQ ACCORDION */}
-  {faqItems.length > 0 && (
-    <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Häufig gestellte Fragen">
-      <div class="text-center mb-4 md:mb-5">
-        <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
-          FAQ
-        </span>
-        <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display">
-          Häufig gestellte Fragen
-        </h2>
-      </div>
-      <div class="flex flex-col max-w-4xl mx-auto">
-        {faqItems.map((item) => (
-          <details class="w-full border-b border-border-subtle group">
-            <summary
-              class="flex items-center justify-between py-4 cursor-pointer list-none
-                     text-text-primary font-medium text-sm md:text-base
-                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold rounded-sm
-                     transition-colors duration-[var(--duration-fast)] ease-[var(--ease-spring)] hover:text-brand-gold"
-            >
-              <span>{item.question}</span>
-              <svg
-                class="w-4 h-4 md:w-5 md:h-5 text-text-tertiary transition-transform duration-[var(--duration-fast)] ease-[var(--ease-out-quint)] group-open:rotate-180 shrink-0 ml-4"
-                viewBox="0 0 20 20" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 7.5L10 12.5L15 7.5" />
-              </svg>
-            </summary>
-            <div class="pb-4 text-text-secondary leading-relaxed text-xs md:text-sm">
-              {item.answer}
-            </div>
-          </details>
-        ))}
-      </div>
-    </section>
-  )}
+  <FaqAccordion
+    ariaLabel="Häufig gestellte Fragen"
+    eyebrow="FAQ"
+    title="Häufig gestellte Fragen"
+    items={faqItems}
+  />
 
   {/* 12. MAP & STANDORT SECTION */}
   <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Unser Standort">
