@@ -221,6 +221,7 @@ jobs:
             --collect.url="${LHCI_URL}/" \
             --collect.url="${LHCI_URL}/menu" \
             --collect.url="${LHCI_URL}/about" \
+            --collect.url="${LHCI_URL}/catering" \
             --collect.url="${LHCI_URL}/contact"
 
       - name: Upload Lighthouse results

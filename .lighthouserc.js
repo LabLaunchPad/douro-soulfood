@@ -32,7 +32,7 @@ module.exports = {
        */
       url: process.env.LHCI_URL
         ? [process.env.LHCI_URL]
-        : ['http://localhost:8788/', 'http://localhost:8788/menu', 'http://localhost:8788/about', 'http://localhost:8788/contact'],
+        : ['http://localhost:8788/', 'http://localhost:8788/menu', 'http://localhost:8788/about', 'http://localhost:8788/catering', 'http://localhost:8788/contact'],
       numberOfRuns: 3,
       /*
        * Use staticDistDir only for local development when no URL is set.

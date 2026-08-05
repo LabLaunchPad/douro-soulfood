@@ -23,7 +23,6 @@ pnpm dev:astro                # plain `astro dev` (faster iteration, no CF runti
 pnpm build                    # astro build -> dist/
 pnpm preview                  # astro preview
 
-pnpm lint                     # eslint src/  (NOTE: no eslint config file exists in the repo currently — this will fail until one is added)
 pnpm format                   # prettier --write .
 
 pnpm test:e2e                 # npx playwright test
