@@ -1,8 +1,9 @@
 # Design System: D'ouro Soulfood
 
-> **Version:** 0.1.0
+> **Version:** 0.2.0
 > **Design DNA:** Apple iOS device aesthetic + Brazilian soul warmth
-> **Reference:** Systematic clone of talkintacos.net structure with unique visual identity
+> **Structural reference:** talkintacos.net (spacing/grid conventions only — D'ouro's own palette, fonts, and content)
+> **Source of truth:** `src/styles/tokens.css` — this document describes it, values here must stay in sync with that file
 
 ---
 
@@ -11,9 +12,9 @@
 **"Warm Precision"** — Apple's spatial clarity meets Brazilian sensory warmth. Every interaction should feel as polished as an iOS app but as inviting as Angela's cooking.
 
 ### Principles
-1. **Glass over solid** — Prefer glassmorphism surfaces over opaque backgrounds
+1. **Light, not dark** — Warm cream surfaces with high-contrast espresso text, not a dark theme
 2. **Motion is meaning** — Every animation communicates, never decorates
-3. **Warm contrast** — Dark surfaces with gold/terracotta accents create appetite
+3. **Warm contrast** — Gold/terracotta accents create appetite against a light backdrop
 4. **Generous space** — iOS-level whitespace, never cramped
 5. **One hero per section** — Every section has one focal point
 
@@ -21,35 +22,34 @@
 
 ## 2. Color Palette
 
-### Brand Colors (OKLCH Definitions)
+### Brand Colors (OKLCH — `src/styles/tokens.css`)
 ```
-Terracotta (Primary CTA):   oklch(0.52 0.13 24)   — Earthy rust red for CTAs and highlights
-Terracotta Light (Hover):   oklch(0.63 0.12 24)
-Terracotta Dark (Pressed):  oklch(0.38 0.12 22)
-Gold (Secondary CTA):       oklch(0.68 0.14 70)   — Honey gold for secondary highlights
-Gold Light (Hover):         oklch(0.78 0.12 70)
-Gold Dark (Pressed):        oklch(0.53 0.12 68)
-Forest (Fresh/Vegan):       oklch(0.35 0.07 152)  — Fresh olive/forest green
-Sage (Green labels):        oklch(0.65 0.07 140)
-Espresso (Dark Neutral):    oklch(0.14 0.03 40)   — Near-black warm espresso tone
-Cream (Warm Neutral):       oklch(0.95 0.015 80)  — Soothing warm cream tone
+Terracotta (Primary CTA):   oklch(0.56 0.18 24.5)   — Earthy rust red
+Terracotta Light (Hover):   oklch(0.66 0.18 24.5)
+Terracotta Dark (Pressed):  oklch(0.42 0.18 24.5)
+Gold (Secondary CTA):       oklch(0.78 0.18 85.0)   — Honey gold
+Gold Light (Hover):         oklch(0.85 0.16 85.0)
+Gold Dark (Pressed):        oklch(0.65 0.18 85.0)
+Forest (Fresh/Vegan):       oklch(0.68 0.22 142.5)
+Sage (Green labels):        oklch(0.72 0.12 142.5)
+Espresso (Dark Neutral):    oklch(0.12 0.01 0)      — Near-black warm espresso tone
+Cream (Warm Neutral):       oklch(0.98 0.005 80)    — Soothing warm cream tone
 ```
 
 ### Surface System (Light Theme — Default)
 ```
-Primary Surface:     oklch(0.98 0.005 80)    — Soothing warm cream page background
-Elevated Surface:    oklch(0.95 0.01 80)     — Deeper cream for navbars, footers, etc.
-Card Surface:        oklch(1.0 0.002 80)     — Soft warm-tinted white for component containers
+Primary Surface:     oklch(0.98 0.005 80)       — Page background
+Elevated Surface:    oklch(0.95 0.01 80)        — Nav bars, subtly separated containers
+Card Surface:        oklch(1.0 0.002 80)        — Menu items, feature cards
 Glass Surface:       oklch(1.0 0.002 80 / 0.72) — Frosted glass with backdrop blur
 ```
 
 ### Text Hierarchy
 ```
-Primary Text:        oklch(0.20 0.02 40)     — Dark espresso/charcoal for soft high contrast
-Secondary Text:      oklch(0.42 0.02 45)     — Medium-dark warm grey for secondary descriptions
-Tertiary Text:       oklch(0.58 0.015 50)    — Muted warm grey for captions and footnotes
-Inverse Text:        oklch(0.98 0.005 80)    — Soft cream white for text inside dark CTAs
-Brand Text:          oklch(0.48 0.12 24)     — Deep terracotta for legible brand text accents
+Primary Text:        oklch(0.20 0.02 40)   — Deep espresso/charcoal
+Secondary Text:      oklch(0.42 0.02 45)   — Medium-dark warm grey
+Tertiary Text:       oklch(0.58 0.015 50)  — Muted warm grey, captions/footnotes
+Inverse Text:        oklch(0.98 0.005 80)  — Cream text on dark/filled CTAs
 ```
 
 ### Borders
@@ -59,65 +59,69 @@ Default:             oklch(0.20 0.02 40 / 0.10) — 10% opacity dark neutral
 Emphasis:            oklch(0.20 0.02 40 / 0.20) — 20% opacity dark neutral
 ```
 
+### Bistro Menu Palette
+A secondary gold/cream palette used specifically for the menu page's category banners and allergen legend, visually distinct from the primary brand palette (deeper ink, brighter gold):
+```
+Banner:              #1B140E
+Banner Border:       #D4AF37
+Banner Text:         #F4E3B3
+Ink:                 #2C1810
+Paper:               #FFFDF9
+Paper Border:        #E8DFC8
+Paper Alt:            #FAF6EE
+Taupe:                #D6C4A5
+```
+
 ---
 
 ## 3. Typography
 
 ### Font Stack
-- **Display:** `'SF Pro Display', 'Inter', system-ui, sans-serif`
-- **Body:** `'SF Pro Text', 'Inter', system-ui, sans-serif`
-- **Mono:** `'SF Mono', 'Fira Code', monospace`
+- **Display:** `'Fraunces', 'Georgia', 'Times New Roman', serif` — a wonky, soft serif for headings, heroes, pull quotes
+- **Body:** `'DM Sans', 'Inter', system-ui, -apple-system, sans-serif` — clean, geometric, warm
+- **Mono:** `'SF Mono', 'Fira Code', 'Cascadia Code', monospace` — code/technical data only
 
-> **Web fallback:** Load Inter from Google Fonts as the web-safe fallback.
-> SF Pro is Apple-native and renders on macOS/iOS; Inter covers all other platforms.
+Loaded via `<link>` tags in `Base.astro`'s `<head>` (preconnect + stylesheet with `display=swap`), not `@import`.
 
-### Scale
-| Name | Size | Weight | Use |
-|------|------|--------|-----|
-| Hero | clamp(2.5rem, 6vw, 4.5rem) | 700 | Hero headlines |
-| Title 2XL | clamp(2rem, 4vw, 3rem) | 600 | Section titles |
-| Title XL | clamp(1.5rem, 3vw, 2.25rem) | 600 | Card titles |
-| Title LG | 1.5rem | 600 | Sub-section |
-| Title Base | 1.25rem | 600 | Card headers |
-| Body LG | 1.125rem | 400 | Lead paragraphs |
-| Body | 1rem | 400 | Default text |
-| Body SM | 0.875rem | 400 | Meta, captions |
-| Caption | 0.75rem | 500 | Labels, tags |
+### Type Scale
+`tokens.css` defines a modular semantic scale (`--text-display-*`, `--text-heading-*`, `--text-body-*`, `--text-label`) intended for new/refactored components, layered on top of Tailwind's default `text-xs`…`text-7xl` scale (still used by most existing markup):
+
+| Token | Size | Line-height |
+|-------|------|-------------|
+| `--text-label` | 0.75rem | 1.4 |
+| `--text-body-sm` | 0.875rem | 1.6 |
+| `--text-body-base` | 1rem | 1.6 |
+| `--text-body-lg` | 1.125rem | 1.6 |
+| `--text-heading-sm` | 1.375rem | 1.25 |
+| `--text-heading-md` | 1.75rem | 1.2 |
+| `--text-heading-lg` | 2.25rem | 1.15 |
+| `--text-display-sm` | 2.75rem | 1.1 |
+| `--text-display-md` | 3.5rem | 1.05 |
+| `--text-display-lg` | 4.5rem | 1.0 |
+| `--text-display-xl` | 5.5rem | 0.98 |
 
 ### Rules
-- **Tracking:** -0.02em on titles, normal on body
-- **Line height:** 1.2 on titles, 1.6 on body
-- **Max width:** 65ch on body text
-- **Gold gradient text** class `.text-gradient-gold` for brand moments
+- Headings use `-0.02em` letter-spacing, `1.15` line-height (set globally on `h1`–`h6` in `tokens.css`'s `@layer base`)
+- Body text uses `1.6` line-height
 
 ---
 
 ## 4. Spacing & Layout
 
 ### Section Spacing
-- Desktop: 120px vertical padding
-- Mobile: 72px vertical padding
+- Desktop: `--spacing-section` (120px) vertical padding
+- Mobile: `--spacing-section-mobile` (72px) vertical padding
 
 ### Content Max Width
-- `max-w-7xl` (1280px) for content sections
-- Full-bleed for hero, galleries, feature backgrounds
+- `max-w-7xl` (1280px, aliased as `--container-content` in tokens.css) for content sections
 
-### Grid
-- Mobile: 1 column
-- Tablet (md): 2 columns
-- Desktop (lg): 3 columns
-- Gallery: 2col mobile, 3col desktop
-
-### iOS-like Container
-```css
-padding: 0 max(1rem, env(safe-area-inset-left));
-```
+### Breakpoints
+Tailwind v4 defaults, explicitly declared in `tokens.css` for documentation: `sm` 640px, `md` 768px, `lg` 1024px, `xl` 1280px, `2xl` 1536px.
 
 ---
 
 ## 5. Border Radius
 
-Following Apple's nested corner radius pattern:
 ```
 XS:    6px   — Small chips, tags
 SM:    10px  — Buttons, inputs
@@ -128,22 +132,18 @@ XL:    28px  — Hero cards, galleries
 Full:  9999px — Avatars, pills
 ```
 
-**Rule:** Inner radius = Outer radius - padding
-
 ---
 
 ## 6. Shadows
 
-iOS-inspired depth system:
 ```
-XS:    0 1px 2px rgba(0,0,0,0.3)      — Subtle lift
-SM:    0 2px 8px rgba(0,0,0,0.25)      — Cards
-MD:    0 4px 16px rgba(0,0,0,0.3)      — Dropdowns
-LG:    0 8px 32px rgba(0,0,0,0.35)     — Modals
-XL:    0 16px 48px rgba(0,0,0,0.4)     — Hero overlays
+XS:    0 1px 2px oklch(0.20 0.02 40 / 0.03)
+SM:    0 2px 8px oklch(0.20 0.02 40 / 0.05)
+MD:    0 4px 16px oklch(0.20 0.02 40 / 0.08)
+LG:    0 8px 32px oklch(0.20 0.02 40 / 0.12)
+XL:    0 16px 48px oklch(0.20 0.02 40 / 0.16)
 
-Glow Gold:       0 0 40px rgba(200,145,58,0.15)
-Glow Terracotta: 0 0 40px rgba(181,85,58,0.12)
+Glow Gold: 0 0 40px oklch(0.6812 0.2208 142.67 / 0.15)
 ```
 
 ---
@@ -152,90 +152,52 @@ Glow Terracotta: 0 0 40px rgba(181,85,58,0.12)
 
 ### Easing Curves
 ```
-Spring:    cubic-bezier(0.22, 1, 0.36, 1)   — Default for most
-Smooth:    cubic-bezier(0.4, 0, 0.2, 1)     — Subtle transitions
-Bounce:    cubic-bezier(0.34, 1.56, 0.64, 1) — Playful interactions
+Spring:    cubic-bezier(0.22, 1, 0.36, 1)   — Default for most interactive transitions
+Smooth:    cubic-bezier(0.4, 0, 0.2, 1)     — Background animations
+Out-quart: cubic-bezier(0.25, 1, 0.5, 1)    — Page entrance animations
+Out-quint: cubic-bezier(0.16, 1, 0.3, 1)    — Scroll reveals
 ```
 
 ### Durations
 ```
 Fast:      200ms   — Hover, focus states
-Normal:    350ms   — Transitions, reveals
-Slow:      500ms   — Page transitions, morphs
-Entrance:  700ms   — First paint reveals
+Normal:    350ms   — Standard transitions
+Slow:      500ms   — Complex animations
+Entrance:  700ms   — Page-load reveals
 ```
 
-### Aceternity-Inspired Patterns
-1. **Fade Up on Scroll** — Elements fade in from 24px below with staggered delays
-2. **Hero Parallax** — Background image moves at 0.5x scroll speed
-3. **Card Hover Lift** — translateY(-4px) + shadow expansion on hover
-4. **Image Zoom** — scale(1.04) on hover within overflow-hidden container
-5. **Glass Blur Nav** — backdrop-filter: blur(40px) saturate(180%) on scroll
-6. **Stagger Children** — 80ms delay between sibling animations
-7. **Text Reveal** — Clip-path or opacity reveal for hero text
-8. **Button Arrow Slide** — Arrow icon slides in from left on hover (from talkintacos.net)
+All motion respects `prefers-reduced-motion` (global rule in `tokens.css`'s `@layer base`).
 
-### Framer Motion Config (for React islands)
-```tsx
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
-};
-
-const staggerContainer = {
-  animate: { transition: { staggerChildren: 0.08 } }
-};
-```
+### Z-Index Scale
+`tokens.css` defines named stacking layers for new overlay-type components: `--z-index-dropdown` (1000), `--z-index-sticky` (1100), `--z-index-overlay` (1200), `--z-index-modal` (1300), `--z-index-popover` (1400), `--z-index-toast` (1500). Existing components mostly use raw Tailwind `z-10`/`z-20`/etc.
 
 ---
 
-## 8. Components Library
+## 8. Components
 
-### From talkintacos.net (Remapped)
+See `docs/components.md` for the full API reference. Summary by folder:
 
-| TalkinTacos Component | D'ouro Component | Notes |
-|----------------------|------------------|-------|
-| `mercury-ui-primary` surfaces | `surface-primary` | Dark: #0A0A0A |
-| `mercury-ui-button-primary` | `btn-primary` | Gold fill, dark text |
-| `mercury-ui-control` radius | `radius-sm` | 10px |
-| Gallery grid | `FoodGallery` | Lightbox + zoom |
-| Hero carousel | `HeroCarousel` | Parallax + gradient |
-| Split feature card | `FeatureCard` | Glass blur bg |
-| Menu scroll | `MenuScroll` | Horizontal snap scroll |
-| Location card | `LocationCard` | Map + hours + CTA |
-| FAQ accordion | `FAQAccordion` | Smooth expand |
-| Nav sticky | `GlassNav` | Blur on scroll |
+| Folder | Components |
+|--------|------------|
+| `src/components/ui/` (atoms) | Button, AllergenBadge, DietaryBadge, CategoryIcon, ReviewBadge, AllergenHeaderLegend |
+| `src/components/sections/` (composites) | HeroSection, FeatureCard, UserReviews, MenuItemCard, MenuBistroCard |
+| `src/components/layout/` (shells) | NavBar, Footer, MobileBottomBar |
 
-### Aceternity-Inspired Custom Components
-
-| Component | Description |
-|-----------|-------------|
-| `SpotlightCard` | Card with mouse-following radial gradient spotlight |
-| `TextReveal` | Text that reveals on scroll with blur transition |
-| `BentoGrid` | Asymmetric grid with varying card sizes |
-| `FloatingDock` | iOS-style floating action bar |
-| `GlowBorder` | Card with animated gradient border |
-| `ParallaxScroll` | Multi-layer parallax image section |
-| `AnimatedTabs` | Smooth tab switching with indicator animation |
-| `InfiniteMarquee` | Auto-scrolling text/image strip |
+There is no third-party component library dependency — every component is hand-built `.astro`, no client-side JS framework.
 
 ---
 
 ## 9. Iconography
 
-- **Icon set:** Lucide React (consistent, clean, MIT license)
-- **Size:** 20px default, 16px compact, 24px feature
-- **Stroke:** 1.5px (matches iOS)
-- **Color:** Inherits text color via `currentColor`
+- Hand-written inline SVGs (nav icons, badges, category icons) — no icon library dependency.
+- Stroke: `1.5px`–`2.5px` depending on component, matches iOS-style line icons.
+- Color: inherits via `currentColor` / Tailwind text-color utilities.
 
 ---
 
 ## 10. Image Guidelines
 
-- **Hero images:** 1920×1080 minimum, food photography, warm tones
-- **Gallery:** Square aspect ratio (1:1), 810px min
-- **Menu items:** 320×320 thumbnails, high saturation
-- **Format:** WebP primary, AVIF where supported, JPEG fallback
-- **Treatment:** Slight warm overlay (+5% orange in post-processing)
-- **Loading:** Blur placeholder → lazy load → fade in
+- **Format:** Astro's `<Image />` component compiles to optimized formats via the Cloudflare adapter's `imageService: 'compile'`.
+- **Remote images:** only `images.unsplash.com` is allowlisted in `astro.config.mjs`'s `image.remotePatterns` — used for exactly one hero fallback image.
+- **Menu item photos:** stored under `public/images/menu/`, uploaded via Keystatic's image field.
+- **Loading:** `loading="lazy"` on all images except the hero.

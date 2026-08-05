@@ -1,6 +1,6 @@
 # Architecture: D'ouro Soulfood
 
-> **Version:** 0.1.0
+> **Version:** 0.2.0
 
 ---
 
@@ -8,14 +8,12 @@
 
 | Layer | Choice | Rationale |
 |-------|--------|-----------|
-| Framework | Astro 6 | Content-first, island architecture, Cloudflare-native |
-| UI Islands | React 19 | Aceternity components, Framer Motion, ecosystem |
-| Styling | Tailwind CSS v4 | Design token integration, JIT, tree-shaking |
-| CMS | TinaCMS | Git-backed, visual editing, Astro-native support |
-| Hosting | Cloudflare Pages | Free tier, edge CDN, zero cold starts |
-| Images | Astro Image | Auto WebP/AVIF, responsive srcset |
-| Analytics | CF Web Analytics | Cookie-free, GDPR-compliant, zero JS |
-| Maps | Google Maps Embed | Static map image for performance |
+| Framework | Astro 6 | Content-first, Cloudflare-native, zero-JS by default |
+| Styling | Tailwind CSS v4 | Design token integration via `@theme`, JIT |
+| CMS | Keystatic | Git-backed, visual editing, Astro-native support |
+| Hosting | Cloudflare Pages / Workers | Free tier, edge CDN, zero cold starts |
+| Images | Astro Image | Compile-time optimization via `@astrojs/cloudflare`'s `imageService: 'compile'` |
+| Maps | Google Maps Embed | Static iframe embed for performance |
 
 ---
 
@@ -23,48 +21,54 @@
 
 ```
 ┌─────────────────────────────────────────┐
-│  Astro 6 — Hybrid Output               │
+│  Astro 6 — output: 'server'             │
+│  (Cloudflare adapter, SSR-capable)      │
 │                                         │
-│  Static (prerendered):                  │
+│  Prerendered (export const prerender    │
+│  = true on every page):                │
 │  ├── / (home)                           │
 │  ├── /menu                              │
 │  ├── /about                             │
 │  ├── /catering                          │
-│  ├── /contact                           │
-│  └── /admin (TinaCMS)                   │
+│  └── /contact                           │
 │                                         │
-│  SSR (on-demand): none for MVP          │
+│  SSR (not prerendered):                 │
+│  ├── /keystatic/[...params]  (admin UI) │
+│  └── /api/keystatic/[...params] (API)   │
 │                                         │
-│  Client Islands (React):               │
-│  ├── HeroCarousel (client:visible)      │
-│  ├── FoodGallery lightbox (client:idle) │
-│  ├── MenuFilter (client:visible)        │
-│  ├── FAQAccordion (client:idle)         │
-│  └── MobileMenu (client:idle)           │
+│  Client Islands: none — no React/JS     │
+│  framework integration is registered    │
 └─────────────────────────────────────────┘
 ```
+
+All real pages are prerendered to static HTML at build time; only Keystatic's own admin routes run server-side.
 
 ---
 
 ## Content Architecture
 
 ```
-TinaCMS Collections
-├── pages          → Home, About, Catering, Contact content
-├── menu_items     → Dish name, description, price, image, tags, category
-├── gallery        → Image uploads with alt text and ordering
-├── faq            → Question/answer pairs
-├── settings       → Site-wide: logo, hours, contact, social links
-└── specials       → Promotions, seasonal offers
+Keystatic Collections
+├── menu_items     → Dish name, description (DE/EN), price, image, category,
+│                     sub-category, dietary tags, allergens, prep time,
+│                     add-ons, price variants, order, featured, available
+└── faq            → Question/answer pairs, display order
+
+Keystatic Singletons
+└── settings       → Site name, contact info, address, hours, social links,
+                      Lieferando order URL
 ```
 
 ### Content Flow
 ```
-Editor → TinaCMS Admin (/admin)
-  → Saves to Git (markdown/JSON in src/content/)
+Editor → Keystatic Admin (/keystatic)
+  → Commits JSON to Git (src/content/menu-items/, src/content/faq/,
+    src/content/settings/)
   → Triggers Cloudflare Pages build
   → Live in ~30 seconds
 ```
+
+`keystatic.config.ts` (the CMS schema) and `src/content.config.ts` (Astro's typed content-collection schema) are two independent definitions of the same data shapes and must be kept in sync by hand.
 
 ---
 
@@ -72,26 +76,29 @@ Editor → TinaCMS Admin (/admin)
 
 ```
 Base.astro (layout)
-├── GlassNav.astro
+├── NavBar.astro (src/components/layout/)
 │   ├── Logo
-│   ├── NavLinks
-│   ├── MobileMenuToggle
-│   └── OrderCTA (Button)
+│   ├── Desktop nav links
+│   └── Mobile drawer (full-screen overlay + hamburger toggle)
 │
-├── <slot /> (page content)
-│   │
-│   ├── HeroCarousel.tsx (React island)
-│   ├── SectionContainer.astro
-│   │   └── FoodGallery.tsx (React island)
-│   ├── FeatureCard.astro
-│   ├── MenuScroll.tsx (React island)
-│   ├── FAQAccordion.tsx (React island)
-│   └── LocationCard.astro
+├── <slot /> (page content, e.g. index.astro)
+│   ├── HeroSection.astro       (src/components/sections/)
+│   ├── ReviewBadge.astro        (src/components/ui/)
+│   ├── CategoryIcon.astro        (src/components/ui/)
+│   ├── FeatureCard.astro          (src/components/sections/)
+│   ├── UserReviews.astro           (src/components/sections/)
+│   └── inline sections (gallery, story, FAQ accordion, map/location —
+│       hand-written markup in index.astro, not separate components)
 │
-└── Footer.astro
-    ├── QuickNav
-    ├── SocialLinks
-    └── Legal
+├── MenuItemCard.astro / MenuBistroCard.astro  (src/components/sections/,
+│   used on menu.astro)
+├── AllergenBadge.astro / DietaryBadge.astro / AllergenHeaderLegend.astro
+│   (src/components/ui/)
+│
+├── MobileBottomBar.astro (src/components/layout/, rendered by Base.astro
+│   directly, present on every page)
+│
+└── Footer.astro (src/components/layout/)
 ```
 
 ---
@@ -99,50 +106,34 @@ Base.astro (layout)
 ## Build Pipeline
 
 ```
-npm run build
+pnpm build (= astro build)
   │
-  ├── 1. tinacms build
-  │     └── Generates GraphQL client + content index
-  │
-  ├── 2. astro build
-  │     ├── Reads content collections
-  │     ├── Pre-renders all pages to HTML
-  │     ├── Tree-shakes unused Tailwind
-  │     ├── Optimizes images (WebP/AVIF)
-  │     ├── Generates sitemap.xml
-  │     └── Outputs to dist/
-  │
-  └── 3. Cloudflare Pages
-        ├── Serves from edge (300+ PoPs)
-        ├── Applies CF Web Analytics
-        └── CDN caches static assets
+  ├── Reads content collections (getCollection('menu_items'),
+  │   getCollection('faq')) + settings singleton (direct JSON import)
+  ├── Pre-renders all 5 real routes to static HTML
+  ├── Bundles Keystatic's admin UI/API as SSR routes
+  ├── Tree-shakes unused Tailwind utilities
+  ├── Compiles/optimizes images via the Cloudflare adapter's image service
+  ├── Generates sitemap.xml (@astrojs/sitemap)
+  └── Outputs to dist/ (dist/client static assets + dist/server Worker)
+        │
+        └── Cloudflare Pages
+              ├── Serves static assets from the edge
+              ├── Runs the Worker for /keystatic and /api/keystatic
+              └── public/_headers applies security headers (CSP, HSTS, etc.)
 ```
-
----
-
-## Performance Budget
-
-| Metric | Budget | Strategy |
-|--------|--------|----------|
-| HTML | < 30KB gzip | Astro pre-renders, minimal DOM |
-| CSS | < 15KB gzip | Tailwind purge + token-only custom |
-| JS | < 100KB total | Islands only, no full-page hydration |
-| Images | WebP < 200KB each | Astro Image srcset + lazy |
-| Fonts | < 50KB | Inter subset, WOFF2 only |
-| LCP | < 1.5s | Preload hero, inline critical CSS |
-| CLS | < 0.05 | Explicit image dimensions |
 
 ---
 
 ## Directory Conventions
 
-- `src/components/ui/` — Design system atoms (Button, Card, Badge, Input, etc.)
-- `src/components/sections/` — Page sections (Hero, Gallery, FAQ, etc.)
-- `src/components/layout/` — Nav, Footer, SEO head
-- `src/content/` — CMS-managed content (markdown, JSON)
-- `src/layouts/` — Page layouts
+- `src/components/ui/` — Design system atoms (Button, AllergenBadge, DietaryBadge, CategoryIcon, ReviewBadge, AllergenHeaderLegend)
+- `src/components/sections/` — Page composites (HeroSection, FeatureCard, UserReviews, MenuItemCard, MenuBistroCard)
+- `src/components/layout/` — Nav, Footer, MobileBottomBar
+- `src/content/` — Keystatic-managed content (menu-items/, faq/, settings/)
+- `src/lib/` — Shared logic (menu.ts: category config + filter/sort/group pipeline)
+- `src/layouts/` — Page layouts (Base.astro)
 - `src/pages/` — Route files
 - `src/styles/` — Global CSS, design tokens
-- `public/` — Static assets (fonts, images, favicon)
-- `tina/` — TinaCMS configuration
+- `public/` — Static assets (images, favicon, `_headers`)
 - `docs/` — Project documentation for humans and AI agents
