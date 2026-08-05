@@ -80,8 +80,8 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
         >
           {/* Main Category Banner Header */}
           <div class="flex justify-center mb-6">
-            <div class="inline-flex items-center gap-3 bg-[#1B140E] border-2 border-[#D4AF37] px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
-              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-[#F4E3B3] tracking-widest uppercase">
+            <div class="inline-flex items-center gap-3 bg-(--color-bistro-banner) border-2 border-(--color-bistro-banner-border) px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-(--color-bistro-banner-text) tracking-widest uppercase">
                 {config.label}
               </h2>
             </div>
@@ -94,9 +94,9 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
               return (
                 <div class="space-y-4">
                   {/* Sub-category header */}
-                  <div class="flex items-center gap-2.5 pb-2 border-b-2 border-[#D4AF37]/30">
+                  <div class="flex items-center gap-2.5 pb-2 border-b-2 border-(--color-bistro-banner-border)/30">
                     <span class="text-xl" aria-hidden="true">{subMeta.icon}</span>
-                    <h3 class="text-lg md:text-xl font-serif font-extrabold text-[#2C1810] uppercase tracking-wider">
+                    <h3 class="text-lg md:text-xl font-serif font-extrabold text-(--color-bistro-ink) uppercase tracking-wider">
                       {subMeta.label}
                     </h3>
                   </div>
@@ -139,8 +139,8 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
-            <div class="inline-flex items-center gap-3 bg-[#1B140E] border-2 border-[#D4AF37] px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
-              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-[#F4E3B3] tracking-widest uppercase">
+            <div class="inline-flex items-center gap-3 bg-(--color-bistro-banner) border-2 border-(--color-bistro-banner-border) px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-(--color-bistro-banner-text) tracking-widest uppercase">
                 {config.label}
               </h2>
             </div>
@@ -181,15 +181,15 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
-            <div class="inline-flex items-center gap-3 bg-[#1B140E] border-2 border-[#D4AF37] px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
-              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-[#F4E3B3] tracking-widest uppercase">
+            <div class="inline-flex items-center gap-3 bg-(--color-bistro-banner) border-2 border-(--color-bistro-banner-border) px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-(--color-bistro-banner-text) tracking-widest uppercase">
                 {config.label}
               </h2>
             </div>
           </div>
 
           {/* 3-Photo Showcase Row */}
-          <div class="mb-8 rounded-sm overflow-hidden bg-[#FFFDF9] border border-[#E8DFC8] shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
+          <div class="mb-8 rounded-sm overflow-hidden bg-(--color-bistro-paper) border border-(--color-bistro-paper-border) shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
               <div class="aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
                 <img
@@ -253,15 +253,15 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
-            <div class="inline-flex items-center gap-3 bg-[#1B140E] border-2 border-[#D4AF37] px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
-              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-[#F4E3B3] tracking-widest uppercase">
+            <div class="inline-flex items-center gap-3 bg-(--color-bistro-banner) border-2 border-(--color-bistro-banner-border) px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-(--color-bistro-banner-text) tracking-widest uppercase">
                 {config.label}
               </h2>
             </div>
           </div>
 
           {/* 3-Photo Showcase Row (Each photo matches Quesadillas photo height) */}
-          <div class="mb-8 rounded-sm overflow-hidden bg-[#FFFDF9] border border-[#E8DFC8] shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
+          <div class="mb-8 rounded-sm overflow-hidden bg-(--color-bistro-paper) border border-(--color-bistro-paper-border) shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
                 <img
@@ -325,16 +325,16 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
-            <div class="inline-flex flex-col items-center gap-1 bg-[#1B140E] border-2 border-[#D4AF37] px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
-              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-[#F4E3B3] tracking-widest uppercase">
+            <div class="inline-flex flex-col items-center gap-1 bg-(--color-bistro-banner) border-2 border-(--color-bistro-banner-border) px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-(--color-bistro-banner-text) tracking-widest uppercase">
                 {config.label}
               </h2>
-              <span class="text-xs sm:text-sm font-sans font-medium text-[#D4AF37]/80 tracking-wide">(1 Stk. / 1 Piece)</span>
+              <span class="text-xs sm:text-sm font-sans font-medium text-(--color-bistro-banner-border)/80 tracking-wide">(1 Stk. / 1 Piece)</span>
             </div>
           </div>
 
           {/* 3-Photo Showcase Row */}
-          <div class="mb-8 rounded-sm overflow-hidden bg-[#FFFDF9] border border-[#E8DFC8] shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
+          <div class="mb-8 rounded-sm overflow-hidden bg-(--color-bistro-paper) border border-(--color-bistro-paper-border) shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
                 <img
@@ -398,8 +398,8 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
-            <div class="inline-flex items-center gap-3 bg-[#1B140E] border-2 border-[#D4AF37] px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
-              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-[#F4E3B3] tracking-widest uppercase">
+            <div class="inline-flex items-center gap-3 bg-(--color-bistro-banner) border-2 border-(--color-bistro-banner-border) px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-(--color-bistro-banner-text) tracking-widest uppercase">
                 {config.label}
               </h2>
             </div>
@@ -441,8 +441,8 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
-            <div class="inline-flex items-center gap-3 bg-[#1B140E] border-2 border-[#D4AF37] px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
-              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-[#F4E3B3] tracking-widest uppercase">
+            <div class="inline-flex items-center gap-3 bg-(--color-bistro-banner) border-2 border-(--color-bistro-banner-border) px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-(--color-bistro-banner-text) tracking-widest uppercase">
                 {config.label}
               </h2>
             </div>
@@ -484,8 +484,8 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
-            <div class="inline-flex items-center gap-3 bg-[#1B140E] border-2 border-[#D4AF37] px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
-              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-[#F4E3B3] tracking-widest uppercase">
+            <div class="inline-flex items-center gap-3 bg-(--color-bistro-banner) border-2 border-(--color-bistro-banner-border) px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
+              <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-(--color-bistro-banner-text) tracking-widest uppercase">
                 {config.label}
               </h2>
             </div>
