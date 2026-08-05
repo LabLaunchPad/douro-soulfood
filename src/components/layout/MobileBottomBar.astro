@@ -20,7 +20,7 @@ const orderHref = siteSettings.lieferando_url || 'https://www.lieferando.at/en/m
   <!-- Call Button (Filled Terracotta Style with Rounded Corners) -->
   <a
     href={phoneHref}
-    class="btn-call flex-1 flex min-h-11 items-center justify-center gap-2 text-sm font-bold tracking-wider uppercase no-underline rounded-sm"
+    class="btn-call flex-1 flex min-h-11 items-center justify-center gap-2 text-xs sm:text-sm font-bold tracking-normal sm:tracking-wider uppercase no-underline rounded-sm"
     aria-label="Jetzt anrufen"
     data-analytics-event="call_click"
     data-analytics-id="mobile-bottom-bar"
@@ -34,7 +34,7 @@ const orderHref = siteSettings.lieferando_url || 'https://www.lieferando.at/en/m
   <!-- Order Online Button (Filled Gold Style with Rounded Corners) -->
   <a
     href={orderHref}
-    class="btn-order flex-1 flex min-h-11 items-center justify-center gap-2 text-sm font-bold tracking-wider uppercase no-underline rounded-sm shadow-glow-gold"
+    class="btn-order flex-1 flex min-h-11 items-center justify-center gap-2 text-xs sm:text-sm font-bold tracking-normal sm:tracking-wider uppercase no-underline rounded-sm shadow-glow-gold"
     aria-label="Jetzt online bestellen"
     data-analytics-event="order_click"
     data-analytics-id="mobile-bottom-bar"
