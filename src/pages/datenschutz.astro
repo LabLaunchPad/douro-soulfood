@@ -1,0 +1,114 @@
+---
+export const prerender = true;
+
+import Base from '@/layouts/Base.astro';
+import NavBar from '@/components/NavBar.astro';
+import Footer from '@/components/Footer.astro';
+
+/**
+ * DATENSCHUTZERKLÄRUNG — grounded in what actually happens on this site
+ * today: a Google Maps embed on / and /contact (contact.astro, index.astro),
+ * Cloudflare as host, and analytics scaffolding (src/lib/analytics,
+ * src/components/analytics) that ships zero tracking unless PUBLIC_GTM_ID
+ * is set — see docs/analytics.md. No contact form, no account system,
+ * no cookies set by first-party code today. The "Verantwortlicher" name
+ * gap mirrors impressum.astro — same reasoning, not repeated here.
+ *
+ * This is a solid, honest draft, not a substitute for legal review —
+ * update it (especially the analytics/cookie section) the moment
+ * PUBLIC_GTM_ID is actually set in any environment.
+ */
+---
+
+<Base title="Datenschutz">
+  <NavBar slot="nav" />
+
+  <section class="pt-28 md:pt-32 pb-16 md:pb-24 px-4 md:px-16 max-w-7xl mx-auto">
+    <h1 class="text-[clamp(2rem,4vw,3rem)] font-bold text-brand-gold-ink mb-4 font-display">Datenschutzerklärung</h1>
+    <p class="text-text-secondary max-w-[75ch] leading-relaxed mb-12">
+      Der Schutz Ihrer personenbezogenen Daten ist uns wichtig. Diese Erklärung informiert Sie darüber,
+      welche Daten bei einem Besuch dieser Website verarbeitet werden.
+    </p>
+
+    <div class="flex flex-col gap-10 max-w-3xl">
+      <div class="flex flex-col gap-2">
+        <h2 class="text-lg font-semibold text-text-primary font-display">1. Verantwortlicher</h2>
+        <p class="text-text-secondary leading-relaxed">
+          D'ouro Soulfood Bistro, Auerspergstraße 10, 5020 Salzburg, Österreich<br />
+          E-Mail: <a href="mailto:info@douro-soulfood.at" class="hover:text-brand-gold-ink transition-colors">info@douro-soulfood.at</a><br />
+          Weitere Angaben siehe <a href="/impressum" class="hover:text-brand-gold-ink transition-colors underline">Impressum</a>.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <h2 class="text-lg font-semibold text-text-primary font-display">2. Hosting</h2>
+        <p class="text-text-secondary leading-relaxed max-w-[65ch]">
+          Diese Website wird über Cloudflare (Cloudflare, Inc.) gehostet und ausgeliefert. Beim Aufruf
+          der Website verarbeitet Cloudflare technisch notwendige Daten (u. a. IP-Adresse,
+          Zeitstempel, angeforderte Datei) zur Auslieferung der Inhalte und zum Schutz vor Missbrauch.
+          Details siehe die Datenschutzhinweise von Cloudflare.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <h2 class="text-lg font-semibold text-text-primary font-display">3. Google Maps</h2>
+        <p class="text-text-secondary leading-relaxed max-w-[65ch]">
+          Auf der Startseite und der Kontaktseite binden wir eine Kartenansicht von Google Maps ein, um
+          unseren Standort anzuzeigen. Beim Laden dieser Seiten wird eine Verbindung zu Servern von
+          Google (Google Ireland Limited) hergestellt; dabei können Daten wie Ihre IP-Adresse an Google
+          übertragen werden. Diese Verarbeitung erfolgt unabhängig davon, ob Sie mit der Karte
+          interagieren. Nähere Informationen entnehmen Sie der Datenschutzerklärung von Google.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <h2 class="text-lg font-semibold text-text-primary font-display">4. Cookies &amp; Analyse-Tools</h2>
+        <p class="text-text-secondary leading-relaxed max-w-[65ch]">
+          Diese Website setzt derzeit keine eigenen Analyse- oder Marketing-Cookies und bindet keine
+          Analyse-Tools (z. B. Google Analytics) aktiv ein. Sollte künftig ein Analyse- oder
+          Marketing-Tool aktiviert werden, wird diese Erklärung vorab aktualisiert und, sofern
+          erforderlich, Ihre Einwilligung eingeholt.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <h2 class="text-lg font-semibold text-text-primary font-display">5. Kontaktaufnahme</h2>
+        <p class="text-text-secondary leading-relaxed max-w-[65ch]">
+          Wenn Sie uns per Telefon oder E-Mail kontaktieren, verarbeiten wir die von Ihnen
+          mitgeteilten Daten (z. B. Name, Kontaktdaten, Inhalt der Anfrage) ausschließlich zur
+          Bearbeitung Ihrer Anfrage. Diese Website enthält aktuell kein eigenes Kontaktformular.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <h2 class="text-lg font-semibold text-text-primary font-display">6. Ihre Rechte</h2>
+        <p class="text-text-secondary leading-relaxed max-w-[65ch]">
+          Sie haben nach der DSGVO das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung
+          (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie
+          Widerspruch (Art. 21) hinsichtlich der Sie betreffenden personenbezogenen Daten. Wenden Sie
+          sich dazu an die oben genannte Kontaktadresse.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <h2 class="text-lg font-semibold text-text-primary font-display">7. Beschwerderecht</h2>
+        <p class="text-text-secondary leading-relaxed max-w-[65ch]">
+          Sie haben das Recht, sich bei der österreichischen Datenschutzbehörde zu beschweren, wenn Sie
+          der Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen Daten gegen die DSGVO
+          verstößt:
+          {' '}
+          <a
+            href="https://www.dsb.gv.at"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-brand-gold-ink transition-colors underline"
+          >
+            www.dsb.gv.at
+          </a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

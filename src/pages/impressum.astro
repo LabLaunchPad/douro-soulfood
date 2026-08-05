@@ -1,0 +1,97 @@
+---
+export const prerender = true;
+
+import Base from '@/layouts/Base.astro';
+import NavBar from '@/components/NavBar.astro';
+import Footer from '@/components/Footer.astro';
+
+/**
+ * IMPRESSUM — required under Austrian §5 ECG (E-Commerce Act) and
+ * §§24-25 Mediengesetz (Media Act).
+ *
+ * Fields below are grounded in what's actually in the repo (site name,
+ * address, phone, email — src/content/settings/default.json; founder
+ * first name — src/pages/about.astro). Fields the repo has no source of
+ * truth for (full legal name of the proprietor/entity, UID/VAT number if
+ * applicable, Firmenbuchnummer if registered as a company, exact trade
+ * licensing authority) are marked "wird ergänzt" rather than invented —
+ * publishing a fabricated register number or VAT ID would be actively
+ * false, not just incomplete. Have the business owner fill these in
+ * before treating this page as legally complete; see docs/content-model.md.
+ */
+---
+
+<Base title="Impressum">
+  <NavBar slot="nav" />
+
+  <section class="pt-28 md:pt-32 pb-16 md:pb-24 px-4 md:px-16 max-w-7xl mx-auto">
+    <h1 class="text-[clamp(2rem,4vw,3rem)] font-bold text-brand-gold-ink mb-4 font-display">Impressum</h1>
+    <p class="text-text-secondary max-w-[75ch] leading-relaxed mb-12">
+      Angaben gemäß § 5 E-Commerce-Gesetz (ECG) und §§ 24, 25 Mediengesetz (MedienG).
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-3xl">
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-2">
+          <h2 class="text-lg font-semibold text-text-primary font-display">Medieninhaber &amp; Betreiber</h2>
+          <p class="text-text-secondary leading-relaxed">
+            D'ouro Soulfood Bistro<br />
+            Inhaberin: Angela <span class="text-text-tertiary italic">(Nachname wird ergänzt)</span><br />
+            Auerspergstraße 10<br />
+            5020 Salzburg, Österreich
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <h2 class="text-lg font-semibold text-text-primary font-display">Kontakt</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Telefon: <a href="tel:+436764231921" class="hover:text-brand-gold-ink transition-colors">+43 676 4231921</a><br />
+            E-Mail: <a href="mailto:info@douro-soulfood.at" class="hover:text-brand-gold-ink transition-colors">info@douro-soulfood.at</a>
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <h2 class="text-lg font-semibold text-text-primary font-display">Unternehmensgegenstand</h2>
+          <p class="text-text-secondary leading-relaxed">Gastronomiebetrieb (Restaurant/Bistro)</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-2">
+          <h2 class="text-lg font-semibold text-text-primary font-display">Gewerberechtliche Angaben</h2>
+          <p class="text-text-secondary leading-relaxed italic">
+            Gewerbebehörde, UID-Nummer (sofern vorhanden) und ggf. Firmenbuchnummer werden ergänzt.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <h2 class="text-lg font-semibold text-text-primary font-display">EU-Streitschlichtung</h2>
+          <p class="text-text-secondary leading-relaxed max-w-[65ch]">
+            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+            {' '}
+            <a
+              href="https://ec.europa.eu/consumers/odr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-brand-gold-ink transition-colors underline"
+            >
+              ec.europa.eu/consumers/odr
+            </a>. Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor
+            einer Verbraucherschlichtungsstelle teilzunehmen.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <h2 class="text-lg font-semibold text-text-primary font-display">Haftungshinweis</h2>
+          <p class="text-text-secondary leading-relaxed max-w-[65ch] text-sm">
+            Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte
+            externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber
+            verantwortlich.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

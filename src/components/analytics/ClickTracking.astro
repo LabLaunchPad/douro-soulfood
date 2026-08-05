@@ -1,0 +1,47 @@
+---
+/**
+ * ClickTracking — one delegated listener pair for the whole page,
+ * instead of a tracking snippet duplicated onto every CTA. Any element
+ * with `data-analytics-event="<name>"` (one of AnalyticsEventName) is
+ * tracked automatically; `data-analytics-id` becomes element_id in the
+ * payload. Include once, in Base.astro.
+ *
+ * Click example: <a href="tel:..." data-analytics-event="call_click" data-analytics-id="mobile-bottom-bar">
+ * Toggle example (native <details>/<summary> accordions, e.g. FAQ):
+ *   <details data-analytics-event="faq_toggle" data-analytics-id="faq-...">
+ */
+---
+
+<script>
+  import { trackEvent, type AnalyticsEventName } from '@/lib/analytics/events';
+
+  function track(target: HTMLElement) {
+    const eventName = target.dataset.analyticsEvent as AnalyticsEventName | undefined;
+    if (!eventName) return;
+
+    trackEvent({
+      event: eventName,
+      element_id: target.dataset.analyticsId,
+      destination: target.getAttribute('href') ?? undefined,
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    const target = (e.target as HTMLElement)?.closest<HTMLElement>('[data-analytics-event]');
+    if (target) track(target);
+  });
+
+  // Native <details> fires 'toggle' on open AND close (any input method —
+  // click, keyboard, or find-in-page); it doesn't bubble, so listen with
+  // capture on the document instead of delegating via a single bubbling handler.
+  document.addEventListener(
+    'toggle',
+    (e) => {
+      const target = e.target as HTMLElement;
+      if (target?.dataset?.analyticsEvent && (target as HTMLDetailsElement).open) {
+        track(target);
+      }
+    },
+    { capture: true }
+  );
+</script>

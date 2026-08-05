@@ -1,25 +1,13 @@
 ---
 import '@/styles/global.css';
 import MobileBottomBar from '@/components/layout/MobileBottomBar.astro';
+import GoogleTagManager from '@/components/analytics/GoogleTagManager.astro';
+import ClickTracking from '@/components/analytics/ClickTracking.astro';
+import { buildPageMeta, type PageMetaInput } from '@/lib/seo/meta';
 
-interface Props {
-  title: string;
-  description?: string;
-  image?: string;
-  canonical?: string;
-  type?: 'website' | 'article';
-}
+interface Props extends PageMetaInput {}
 
-const {
-  title,
-  description = "D'ouro Soulfood Bistro — Brazilian & Latin soul food in Salzburg, Austria. Fresh, flavorful, made with love.",
-  image = '/images/og-default.jpg',
-  canonical = Astro.url.href,
-  type = 'website',
-} = Astro.props;
-
-const siteName = "D'ouro Soulfood Bistro";
-const fullTitle = title === siteName ? title : `${siteName} | ${title}`;
+const meta = buildPageMeta(Astro.props, Astro.url);
 ---
 
 <!doctype html>
@@ -28,28 +16,31 @@ const fullTitle = title === siteName ? title : `${siteName} | ${title}`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" href="/dourologo.png" />
     <meta name="theme-color" content="oklch(0.98 0.005 80)" />
 
+    <!-- Analytics: no-ops unless PUBLIC_GTM_ID is set for this environment -->
+    <GoogleTagManager />
+
     <!-- SEO -->
-    <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={meta.canonical} />
 
     <!-- Open Graph -->
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:type" content={type} />
-    <meta property="og:site_name" content={siteName} />
-    <meta property="og:locale" content="de_AT" />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:image" content={new URL(meta.image, Astro.site)} />
+    <meta property="og:url" content={meta.canonical} />
+    <meta property="og:type" content={meta.type} />
+    <meta property="og:site_name" content={meta.siteName} />
+    <meta property="og:locale" content={meta.locale} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
+    <meta name="twitter:image" content={new URL(meta.image, Astro.site)} />
 
     <!-- Fonts: Fraunces (display/headings) + DM Sans (body/labels) -->
     <!-- Async font loading: preconnect for DNS + load stylesheet with media="print" onload
@@ -74,7 +65,7 @@ const fullTitle = title === siteName ? title : `${siteName} | ${title}`;
       "@context": "https://schema.org",
       "@type": "Restaurant",
       "name": "D'ouro Soulfood Bistro",
-      "image": new URL(image, Astro.site),
+      "image": new URL(meta.image, Astro.site),
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Auerspergstraße 10",
@@ -106,12 +97,22 @@ const fullTitle = title === siteName ? title : `${siteName} | ${title}`;
   </head>
 
   <body class="bg-[var(--color-surface-primary)] text-[var(--color-text-primary)] min-h-screen">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]
+             focus:rounded-[var(--radius-sm)] focus:bg-[var(--color-surface-primary)]
+             focus:px-4 focus:py-2 focus:text-[var(--color-text-primary)]
+             focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-gold)]"
+    >
+      Zum Inhalt springen
+    </a>
     <slot name="nav" />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <slot name="footer" />
     <MobileBottomBar />
+    <ClickTracking />
   </body>
 </html>
 
