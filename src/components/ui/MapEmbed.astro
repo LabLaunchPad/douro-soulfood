@@ -1,0 +1,75 @@
+---
+/**
+ * MapEmbed — consent-gated Google Maps iframe ("two-click" pattern).
+ *
+ * Renders a static placeholder (address + a "Karte anzeigen" button) by
+ * default. The real Google Maps iframe is only inserted into the DOM
+ * after the visitor clicks through, so no request to Google fires (and
+ * no visitor IP is sent) until the visitor explicitly opts in.
+ *
+ * Each instance gets a unique id so multiple embeds can coexist on one
+ * page without their scripts colliding.
+ */
+interface Props {
+  src: string;
+  title: string;
+  addressLabel: string;
+  class?: string;
+}
+
+const { src, title, addressLabel, class: className = '' } = Astro.props;
+const uid = `map-embed-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div
+  id={uid}
+  data-map-embed
+  data-src={src}
+  data-title={title}
+  class:list={['relative w-full h-full flex items-center justify-center bg-surface-elevated', className]}
+>
+  <div class="flex flex-col items-center gap-3 text-center p-6">
+    <svg class="w-8 h-8 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20.42 4.42A10 10 0 1 0 4.42 20.42 10 10 0 0 0 20.42 4.42z" />
+      <path d="M12 8v4l3 3" />
+      <circle cx="12" cy="12" r="1" />
+    </svg>
+    <p class="text-sm text-text-secondary max-w-[30ch]">{addressLabel}</p>
+    <button
+      type="button"
+      data-map-embed-trigger
+      class="inline-flex items-center gap-2 rounded-sm bg-brand-gold hover:bg-brand-gold-light active:bg-brand-gold-dark
+             px-4 py-2 text-sm font-semibold text-brand-espresso
+             focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold
+             transition-colors duration-[var(--duration-fast)] ease-[var(--ease-spring)]"
+    >
+      Karte anzeigen
+    </button>
+    <p class="text-xs text-text-tertiary max-w-[38ch]">
+      Beim Anzeigen wird eine Verbindung zu Google Maps hergestellt.
+      <a href="/datenschutz#karten" class="underline hover:text-brand-gold">Mehr dazu in unserer Datenschutzerklärung.</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-map-embed]').forEach((container) => {
+    const trigger = container.querySelector('[data-map-embed-trigger]');
+    trigger?.addEventListener('click', () => {
+      const src = container.dataset.src;
+      const title = container.dataset.title;
+      if (!src) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.title = title ?? 'Karte';
+      iframe.className = 'w-full h-full border-0';
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'no-referrer-when-downgrade';
+      iframe.allowFullscreen = true;
+
+      container.replaceChildren(iframe);
+      container.classList.remove('bg-surface-elevated');
+    }, { once: true });
+  });
+</script>
