@@ -96,8 +96,16 @@ const fullTitle = title === siteName ? title : `${siteName} | ${title}`;
   </head>
 
   <body class="bg-[var(--color-surface-primary)] text-[var(--color-text-primary)] min-h-screen">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]
+             focus:rounded-sm focus:bg-brand-gold focus:px-4 focus:py-2 focus:text-sm focus:font-semibold
+             focus:text-brand-espresso focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-espresso"
+    >
+      Zum Hauptinhalt springen
+    </a>
     <slot name="nav" />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <slot name="footer" />

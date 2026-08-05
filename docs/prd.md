@@ -45,11 +45,11 @@ Reflects what `src/pages/index.astro` actually renders — mostly hand-written i
 2. **Hero** — single image (optional video), headline, dual CTA (`HeroSection.astro`)
 3. **Review Badge** — star rating strip below the hero
 4. **Category Grid** — icon-linked scroll to menu categories
-5. **Popular Dishes** — static photo grid of featured items
+5. **Popular Dishes** — photo grid of featured items, using `PhotoGrid.astro`
 6. **Feature Cards** — catering + reviews, using `FeatureCard.astro`
-7. **Our Story** — Angela's lockdown origin story (inline markup)
-8. **Photo Gallery** — plain grid, no lightbox
-9. **FAQ Accordion** — plain `<details>`-based accordion (inline markup, not a separate component)
+7. **Our Story** — Angela's lockdown origin story, using `OurStorySection.astro`
+8. **Photo Gallery** — plain grid, no lightbox, using `PhotoGrid.astro` (same component as Popular Dishes)
+9. **FAQ Accordion** — plain `<details>`-based accordion, using `FaqAccordion.astro`
 10. **Location/Map** — address, hours, consent-gated Google Maps embed (static placeholder until the visitor clicks "Karte anzeigen")
 11. **Footer** — social links, legal, quick nav
 

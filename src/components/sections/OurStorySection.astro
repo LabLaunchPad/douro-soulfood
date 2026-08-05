@@ -1,0 +1,53 @@
+---
+/**
+ * OurStorySection — founder-story block ("Wie D'ouro begann" on the home page).
+ *
+ * Not the same as the old `OurStory.astro` removed in an earlier cleanup
+ * pass (that one was dead: zero importers). This one is authored fresh and
+ * is actually wired into index.astro.
+ */
+interface Props {
+  eyebrow: string;
+  title: string;
+  text: string;
+  founderName: string;
+  founderTitle: string;
+  ariaLabel: string;
+}
+
+const { eyebrow, title, text, founderName, founderTitle, ariaLabel } = Astro.props;
+---
+
+<section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label={ariaLabel}>
+  <div class="glass-gold rounded-2xl p-6 md:p-8 max-w-3xl mx-auto text-center border border-brand-gold/20 shadow-lg">
+    <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-2">
+      {eyebrow}
+    </span>
+    <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display mb-3">
+      {title}
+    </h2>
+    <p class="text-sm md:text-base text-text-secondary leading-relaxed max-w-[75ch] mx-auto">
+      {text}
+    </p>
+    <div class="mt-6 flex items-center justify-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center" aria-hidden="true">
+        <svg
+          class="w-5 h-5 text-brand-gold"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+      </div>
+      <div class="text-left">
+        <p class="text-xs md:text-sm font-semibold text-text-primary">{founderName}</p>
+        <p class="text-[10px] md:text-xs text-text-tertiary">{founderTitle}</p>
+      </div>
+    </div>
+  </div>
+</section>
