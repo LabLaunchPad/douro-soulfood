@@ -8,8 +8,16 @@ compatibility_flags = ["nodejs_compat"]
 # else in public/ doesn't honor Range requests (confirmed: a ranged
 # request against a public/*.mp4 file returns 200, not 206 — no
 # Accept-Ranges header), which iOS Safari requires for <video> autoplay
-# of larger files. bucket_name must match a real R2 bucket created with
-# `wrangler r2 bucket create douro-media` before this binding resolves.
-[[r2_buckets]]
-binding = "MEDIA"
-bucket_name = "douro-media"
+# of larger files.
+#
+# Left commented out: Cloudflare's build/deploy step validates bindings
+# against real resources, and R2 isn't even enabled on this account yet
+# (confirmed via API: 403 "Please enable R2 through the Cloudflare
+# Dashboard"). Uncommenting this before R2 is enabled AND the bucket is
+# created breaks every deploy. Re-enable only as part of the coordinated
+# cutover: enable R2 -> `wrangler r2 bucket create douro-media` -> upload
+# the videos -> uncomment this -> rerun `wrangler types` -> then remove
+# public/douroherovideo.mp4 / douroheromobile.mp4.
+# [[r2_buckets]]
+# binding = "MEDIA"
+# bucket_name = "douro-media"
