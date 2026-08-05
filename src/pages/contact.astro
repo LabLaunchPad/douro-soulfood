@@ -5,6 +5,10 @@ import Base from '@/layouts/Base.astro';
 import NavBar from '@/components/layout/NavBar.astro';
 import Footer from '@/components/layout/Footer.astro';
 import Button from '@/components/ui/Button.astro';
+import siteSettings from '@/content/settings/default.json';
+
+const { address_line1, address_line2, city, postal_code, phone, hours } = siteSettings;
+const phoneHref = `tel:${phone.replace(/[^+\d]/g, '')}`;
 ---
 
 <Base title="Kontakt">
@@ -19,29 +23,28 @@ import Button from '@/components/ui/Button.astro';
         <div class="flex flex-col gap-2">
           <h2 class="text-lg font-semibold text-text-primary font-display">Adresse</h2>
           <address class="not-italic text-text-secondary leading-relaxed">
-            Auerspergstraße 10<br />
-            5020 Salzburg, Austria
+            {address_line1}<br />
+            {address_line2 && <>{address_line2}<br /></>}
+            {postal_code} {city}, Austria
           </address>
         </div>
 
         <div class="flex flex-col gap-2">
           <h2 class="text-lg font-semibold text-text-primary font-display">Telefon</h2>
-          <a href="tel:+436764231921" class="text-text-secondary hover:text-brand-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold transition-colors duration-[var(--duration-fast)] ease-[var(--ease-spring)] no-underline">
-            +43 676 4231921
+          <a href={phoneHref} class="text-text-secondary hover:text-brand-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold transition-colors duration-[var(--duration-fast)] ease-[var(--ease-spring)] no-underline">
+            {phone}
           </a>
         </div>
 
         <div class="flex flex-col gap-2">
           <h2 class="text-lg font-semibold text-text-primary font-display">Öffnungszeiten</h2>
           <dl class="text-text-secondary space-y-1">
-            <div class="flex gap-4">
-              <dt class="text-text-tertiary">Mo – Sa</dt>
-              <dd>11:00 – 22:00</dd>
-            </div>
-            <div class="flex gap-4">
-              <dt class="text-text-tertiary">So</dt>
-              <dd>Geschlossen</dd>
-            </div>
+            {hours.map((entry) => (
+              <div class="flex gap-4">
+                <dt class="text-text-tertiary">{entry.day}</dt>
+                <dd>{entry.time}</dd>
+              </div>
+            ))}
           </dl>
         </div>
 
