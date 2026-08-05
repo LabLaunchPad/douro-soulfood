@@ -5,6 +5,7 @@ import Base from '@/layouts/Base.astro';
 import NavBar from '@/components/layout/NavBar.astro';
 import Footer from '@/components/layout/Footer.astro';
 import Button from '@/components/ui/Button.astro';
+import MapEmbed from '@/components/ui/MapEmbed.astro';
 import siteSettings from '@/content/settings/default.json';
 
 const { address_line1, address_line2, city, postal_code, phone, hours } = siteSettings;
@@ -58,16 +59,14 @@ const phoneHref = `tel:${phone.replace(/[^+\d]/g, '')}`;
         </div>
       </div>
 
-      <!-- Map iframe -->
+      <!-- Map (consent-gated: real iframe only loads after visitor clicks through) -->
       <div class="rounded-xl overflow-hidden bg-surface-card border border-border-subtle min-h-[400px]">
-        <iframe
+        <MapEmbed
           src="https://maps.google.com/maps?q=Auerspergstra%C3%9Fe%2010,%205020%20Salzburg&t=&z=15&ie=UTF8&iwloc=&output=embed"
-          class="w-full h-full min-h-[400px] border-0"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
           title="D'ouro Soulfood Standort"
-        ></iframe>
+          addressLabel={`${address_line1}, ${postal_code} ${city}`}
+          class="min-h-[400px]"
+        />
       </div>
     </div>
   </section>

@@ -8,6 +8,7 @@ import ReviewBadge from '@/components/ui/ReviewBadge.astro';
 import CategoryIcon from '@/components/ui/CategoryIcon.astro';
 import FeatureCard from '@/components/sections/FeatureCard.astro';
 import UserReviews from '@/components/sections/UserReviews.astro';
+import MapEmbed from '@/components/ui/MapEmbed.astro';
 import Footer from '@/components/layout/Footer.astro';
 import { getCollection } from 'astro:content';
 
@@ -344,16 +345,14 @@ const PAGE_DESCRIPTION =
 
     <article class="rounded-2xl overflow-hidden bg-surface-glass backdrop-blur-sm border border-border-subtle shadow-lg">
       <div class="flex flex-col md:flex-row">
-        {/* Map */}
+        {/* Map (consent-gated: real iframe only loads after visitor clicks through) */}
         <div class="w-full md:w-1/2 min-h-[260px] md:min-h-[340px]">
-          <iframe
+          <MapEmbed
             src="https://maps.google.com/maps?q=Auerspergstra%C3%9Fe%2010,%205020%20Salzburg&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            class="w-full h-full min-h-[260px] border-0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
             title="D'ouro Soulfood Standort"
-          ></iframe>
+            addressLabel="Auerspergstraße 10, 5020 Salzburg"
+            class="min-h-[260px] md:min-h-[340px]"
+          />
         </div>
 
         {/* Details */}
