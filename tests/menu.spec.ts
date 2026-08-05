@@ -89,7 +89,9 @@ test.describe('Menu page — content', () => {
   });
 
   test('allergen notice section is visible', async ({ page }) => {
-    const noticeSection = page.locator('h3', { hasText: 'Hinweis' });
+    // AllergenHeaderLegend renders "ALLERGENE / ALLERGENS:" as a label,
+    // not a heading - there is no "Hinweis" text anywhere on the page
+    const noticeSection = page.locator('text=ALLERGENE / ALLERGENS:');
     await expect(noticeSection).toBeVisible();
   });
 
