@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import DietaryBadge from './DietaryBadge.astro';
-import AllergenBadge from './AllergenBadge.astro';
+import DietaryBadge from '@/components/ui/DietaryBadge.astro';
+import AllergenBadge from '@/components/ui/AllergenBadge.astro';
 import siteSettings from '@/content/settings/default.json';
 
 const orderHref = siteSettings.lieferando_url || 'https://www.lieferando.at/en/menu/douro';
