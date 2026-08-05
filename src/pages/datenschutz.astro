@@ -13,7 +13,6 @@ const sections = [
   { id: 'verantwortlicher', label: 'Verantwortlicher' },
   { id: 'hosting', label: 'Hosting & Server-Logs' },
   { id: 'kontakt', label: 'Kontaktaufnahme' },
-  { id: 'schriftarten', label: 'Google Fonts' },
   { id: 'karten', label: 'Google Maps' },
   { id: 'cms', label: 'Content-Management (Keystatic)' },
   { id: 'externe-links', label: 'Externe Links (Lieferando)' },
@@ -65,8 +64,9 @@ const sections = [
           <p class="text-sm md:text-base text-text-secondary leading-relaxed">
             Diese Website ist als statische Seite umgesetzt: Es gibt keine Nutzerkonten, kein Tracking und
             aktuell keine Analyse- oder Marketing-Cookies. Personenbezogene Daten fallen im Wesentlichen dann an,
-            wenn Sie uns per Telefon oder E-Mail kontaktieren, oder technisch bedingt durch die eingebundenen
-            Drittanbieter-Dienste (Google Fonts, Google Maps) sowie durch das Hosting selbst.
+            wenn Sie uns per Telefon oder E-Mail kontaktieren, oder technisch bedingt durch das Hosting selbst
+            sowie durch die Google-Maps-Karte, die Sie aktiv per Klick laden können. Die Schriftarten dieser
+            Website werden selbst gehostet, es findet dabei keine Verbindung zu Google statt.
           </p>
         </article>
 
@@ -127,46 +127,23 @@ const sections = [
           </p>
         </article>
 
-        <article id="schriftarten" class="scroll-mt-28">
-          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Google Fonts</h2>
-          <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">
-            Diese Website lädt die Schriftarten „Fraunces" und „DM Sans" von den Servern von Google
-            (Google Ireland Limited). Dabei wird beim Laden der Seite eine Verbindung zu Google-Servern
-            aufgebaut, wobei Ihre IP-Adresse an Google übermittelt wird.
-          </p>
-          <dl class="text-sm text-text-secondary leading-relaxed space-y-2">
-            <div>
-              <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Rechtsgrundlage</dt>
-              <dd>Berechtigtes Interesse an einer einheitlichen Darstellung (Art 6 Abs 1 lit f DSGVO)</dd>
-            </div>
-            <div>
-              <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Empfänger</dt>
-              <dd>Google Ireland Limited bzw. Google LLC (USA)</dd>
-            </div>
-          </dl>
-          <p class="text-xs text-text-tertiary italic mt-3">
-            Hinweis: Diese Übermittlung lässt sich vollständig vermeiden, indem die Schriftdateien selbst
-            gehostet werden, statt sie von Google-Servern zu laden. Das ist technisch empfehlenswert und
-            würde diesen Abschnitt überflüssig machen.
-          </p>
-        </article>
-
         <article id="karten" class="scroll-mt-28">
           <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Google Maps</h2>
           <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">
-            Auf der Startseite und der Kontaktseite binden wir eine Karte des Kartendienstes Google Maps
-            (Google Ireland Limited) ein, um unseren Standort anzuzeigen. Beim Laden der Seite wird dabei
-            eine Verbindung zu Google-Servern hergestellt und Ihre IP-Adresse an Google übermittelt — unabhängig
-            davon, ob Sie mit der Karte interagieren.
+            Auf der Startseite und der Kontaktseite zeigen wir standardmäßig nur eine statische Vorschaukarte
+            mit unserer Adresse und einer Schaltfläche „Karte anzeigen". Erst wenn Sie diese Schaltfläche
+            anklicken, wird die eigentliche Karte des Kartendienstes Google Maps (Google Ireland Limited)
+            geladen. Erst zu diesem Zeitpunkt wird eine Verbindung zu Google-Servern hergestellt und Ihre
+            IP-Adresse an Google übermittelt — ohne Klick findet keine Übermittlung statt.
           </p>
           <dl class="text-sm text-text-secondary leading-relaxed space-y-2">
             <div>
               <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Zweck</dt>
-              <dd>Anzeige unseres Standorts und Anfahrtsplanung</dd>
+              <dd>Anzeige unseres Standorts und Anfahrtsplanung, auf ausdrücklichen Wunsch</dd>
             </div>
             <div>
               <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Rechtsgrundlage</dt>
-              <dd>Berechtigtes Interesse (Art 6 Abs 1 lit f DSGVO), da die Kartendarstellung nicht zwingend zur Kernfunktion der Website erforderlich ist</dd>
+              <dd>Einwilligung durch aktives Anklicken der Karte (Art 6 Abs 1 lit a DSGVO)</dd>
             </div>
             <div>
               <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Weitere Informationen</dt>
@@ -177,11 +154,6 @@ const sections = [
               </dd>
             </div>
           </dl>
-          <p class="text-xs text-text-tertiary italic mt-3">
-            Hinweis: Für eine rechtssichere Umsetzung sollte die Karte erst nach ausdrücklicher Zustimmung
-            geladen werden (z. B. „Zwei-Klick-Lösung" oder Cookie-Consent-Gate), statt automatisch beim
-            Seitenaufruf. Das ist derzeit technisch noch nicht umgesetzt.
-          </p>
         </article>
 
         <article id="cms" class="scroll-mt-28">
