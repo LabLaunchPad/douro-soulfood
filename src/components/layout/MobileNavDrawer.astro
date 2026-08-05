@@ -29,6 +29,8 @@ const { links } = Astro.props;
   role="dialog"
   aria-modal="true"
   aria-label="Navigationsmenü"
+  aria-hidden="true"
+  inert
   data-open="false"
 >
   <!-- Top Bar inside open mobile menu -->
@@ -79,21 +81,33 @@ const { links } = Astro.props;
   const closeBtn = document.getElementById('mobile-menu-close-btn');
   const menu = document.getElementById('mobile-menu');
 
+  function getFocusable(): HTMLElement[] {
+    if (!menu) return [];
+    return Array.from(menu.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'));
+  }
+
   function openMenu() {
     if (menu) {
       menu.dataset.open = 'true';
       menu.classList.remove('opacity-0', 'pointer-events-none');
+      menu.removeAttribute('inert');
+      menu.setAttribute('aria-hidden', 'false');
     }
     btn?.setAttribute('aria-expanded', 'true');
+    btn?.setAttribute('aria-label', 'Navigationsmenü schließen');
     document.body.style.overflow = 'hidden';
+    closeBtn?.focus();
   }
 
   function closeMenu() {
     if (menu) {
       menu.dataset.open = 'false';
       menu.classList.add('opacity-0', 'pointer-events-none');
+      menu.setAttribute('inert', '');
+      menu.setAttribute('aria-hidden', 'true');
     }
     btn?.setAttribute('aria-expanded', 'false');
+    btn?.setAttribute('aria-label', 'Navigationsmenü öffnen');
     document.body.style.overflow = '';
   }
 
@@ -103,12 +117,33 @@ const { links } = Astro.props;
     else openMenu();
   });
 
-  closeBtn?.addEventListener('click', closeMenu);
+  closeBtn?.addEventListener('click', () => {
+    closeMenu();
+    btn?.focus();
+  });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menu?.dataset.open === 'true') {
+    if (menu?.dataset.open !== 'true') return;
+
+    if (e.key === 'Escape') {
       closeMenu();
       btn?.focus();
+      return;
+    }
+
+    if (e.key === 'Tab') {
+      const focusable = getFocusable();
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
 </script>

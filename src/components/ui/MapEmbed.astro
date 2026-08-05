@@ -7,8 +7,8 @@
  * after the visitor clicks through, so no request to Google fires (and
  * no visitor IP is sent) until the visitor explicitly opts in.
  *
- * Each instance gets a unique id so multiple embeds can coexist on one
- * page without their scripts colliding.
+ * Each instance is queried independently via querySelectorAll/forEach,
+ * so multiple embeds coexist on one page without id collisions.
  */
 interface Props {
   src: string;
@@ -18,11 +18,9 @@ interface Props {
 }
 
 const { src, title, addressLabel, class: className = '' } = Astro.props;
-const uid = `map-embed-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
 <div
-  id={uid}
   data-map-embed
   data-src={src}
   data-title={title}
@@ -67,9 +65,13 @@ const uid = `map-embed-${Math.random().toString(36).slice(2, 9)}`;
       iframe.loading = 'lazy';
       iframe.referrerPolicy = 'no-referrer-when-downgrade';
       iframe.allowFullscreen = true;
+      iframe.tabIndex = -1;
 
       container.replaceChildren(iframe);
       container.classList.remove('bg-surface-elevated');
+      // The clicked button is gone now; without this the focused element
+      // silently becomes <body>, disorienting keyboard/screen-reader users.
+      iframe.focus();
     }, { once: true });
   });
 </script>
