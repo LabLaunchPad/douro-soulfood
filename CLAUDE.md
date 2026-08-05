@@ -36,7 +36,7 @@ pnpm lhci                     # Lighthouse CI (uses .lighthouserc.js)
 
 ### Running E2E tests locally
 
-Playwright's `baseURL` defaults to `http://localhost:8788` and there is **no `webServer` auto-start** in `playwright.config.ts` — you must have a server running on 8788 yourself before running tests (e.g. `pnpm dev`, or build + `wrangler pages dev dist --port 8788`). Tests run against the built/served site, not `astro dev`, because `wrangler pages dev` emulates the actual Cloudflare Workers runtime (adapter is `output: 'server'` with the Cloudflare adapter). `run-e2e.sh` is a CI-era helper script with a hardcoded path (`/home/z/my-project/douro-soulfood`) — it does not apply to this environment; prefer running `pnpm dev` + `npx playwright test` directly.
+Playwright's `baseURL` defaults to `http://localhost:8788` and there is **no `webServer` auto-start** in `playwright.config.ts` — you must have a server running on 8788 yourself before running tests (e.g. `pnpm dev`, or build + `wrangler pages dev dist --port 8788`). Tests run against the built/served site, not `astro dev`, because `wrangler pages dev` emulates the actual Cloudflare Workers runtime (adapter is `output: 'server'` with the Cloudflare adapter). Run `pnpm dev` + `npx playwright test` directly — there is no helper script in this repo.
 
 Playwright runs two projects — `desktop` (1440×900) and `mobile` (375×812, iPhone UA) — both on Chromium only (no WebKit/Firefox, to avoid extra browser installs). Tests use `@axe-core/playwright` for accessibility assertions and select elements via aria-label/id/semantic HTML, not `data-testid`.
 
