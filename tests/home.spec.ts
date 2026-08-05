@@ -266,7 +266,7 @@ test.describe('Home page — mobile menu', () => {
     const bottomBar = page.locator('.mobile-bottom-bar');
     await expect(bottomBar).toBeVisible();
     await expect(bottomBar.getByRole('link', { name: 'Jetzt anrufen' })).toBeVisible();
-    await expect(bottomBar.getByRole('link', { name: 'Jetzt online bestellen' })).toBeVisible();
+    await expect(bottomBar.getByRole('link', { name: 'Jetzt bestellen (online)' })).toBeVisible();
   });
 });
 
