@@ -38,7 +38,6 @@ const {
     { label: 'Catering & Events', href: '/catering' },
     { label: 'Über uns', href: '/about' },
     { label: 'Kontakt', href: '/contact' },
-    { label: 'Geschenkkarten', href: '/gift-cards' },
   ],
   cta = { label: 'Jetzt bestellen', href: 'https://www.lieferando.at/en/menu/douro' },
   address = ['Auerspergstraße 10, 5020 Salzburg'],
@@ -87,7 +86,7 @@ const {
           {links.map((link) => (
             <a
               href={link.href}
-              class="text-sm md:text-base font-bold text-zinc-900 hover:text-brand-gold
+              class="text-sm md:text-base font-bold text-zinc-900 hover:text-brand-gold-ink
                      no-underline transition-colors duration-200 rounded-sm"
             >
               {link.label}
@@ -122,21 +121,25 @@ const {
         </div>
       </div>
 
-      <!-- Horizontal Divider Line -->
-      <div class="border-t border-zinc-300 my-6 md:my-8"></div>
+      {legalLinks.length > 0 && (
+        <>
+          <!-- Horizontal Divider Line -->
+          <div class="border-t border-zinc-300 my-6 md:my-8"></div>
 
-      <!-- Inner Bottom Row: Legal Links -->
-      <div class="flex flex-wrap items-center gap-6">
-        {legalLinks.map((link) => (
-          <a
-            href={link.href}
-            class="text-xs md:text-sm font-bold text-zinc-700 hover:text-zinc-950
-                   no-underline transition-colors duration-200"
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
+          <!-- Inner Bottom Row: Legal Links -->
+          <div class="flex flex-wrap items-center gap-6">
+            {legalLinks.map((link) => (
+              <a
+                href={link.href}
+                class="text-xs md:text-sm font-bold text-zinc-700 hover:text-zinc-950
+                       no-underline transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </>
+      )}
     </div>
 
     <!-- Slot for additional footer content -->
@@ -152,7 +155,7 @@ const {
           href="https://www.instagram.com"
           target="_blank"
           rel="noopener noreferrer"
-          class="p-1.5 text-stone-600 hover:text-brand-gold transition-colors duration-200"
+          class="p-1.5 text-stone-600 hover:text-brand-gold-ink transition-colors duration-200"
           aria-label="Instagram"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
@@ -167,7 +170,7 @@ const {
           href="https://www.facebook.com/dourosoulfood/"
           target="_blank"
           rel="noopener noreferrer"
-          class="p-1.5 text-stone-600 hover:text-brand-gold transition-colors duration-200"
+          class="p-1.5 text-stone-600 hover:text-brand-gold-ink transition-colors duration-200"
           aria-label="Facebook"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
@@ -178,7 +181,7 @@ const {
         <!-- Phone / Contact Link -->
         <a
           href={phoneHref}
-          class="text-xs text-stone-600 hover:text-brand-gold transition-colors duration-200 no-underline"
+          class="text-xs text-stone-600 hover:text-brand-gold-ink transition-colors duration-200 no-underline"
         >
           {phone}
         </a>

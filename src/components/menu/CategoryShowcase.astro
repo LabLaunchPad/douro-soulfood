@@ -1,0 +1,32 @@
+---
+/**
+ * CategoryShowcase — 3-photo row shown above a category's dish grid on
+ * /menu (Quesadillas, Tacos, Bowls). Extracted from menu.astro, where this
+ * markup was previously repeated verbatim per category.
+ */
+interface ShowcaseImage {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  images: ShowcaseImage[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="mb-8 rounded-sm overflow-hidden bg-[var(--color-menu-paper)] border border-[var(--color-menu-paper-border)] shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
+  <div class="grid grid-cols-3 gap-3 sm:gap-4">
+    {images.map((img) => (
+      <div class="aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
+        <img
+          src={img.src}
+          alt={img.alt}
+          class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 ease-out"
+          loading="lazy"
+        />
+      </div>
+    ))}
+  </div>
+</div>

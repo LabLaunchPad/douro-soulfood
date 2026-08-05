@@ -9,6 +9,11 @@ import AxeBuilder from '@axe-core/playwright';
  * - At least one menu category heading (e.g. Tacos, Bowls)
  * - At least one menu item with a Euro price
  *
+ * Menu items are rendered by MenuBistroCard.astro (the "bistro paper"
+ * card used for every current menu category), which formats prices as
+ * "8,90 €" (de-DE Intl.NumberFormat, symbol after the number) rather
+ * than the "€14,90" shape assumed by earlier versions of these tests.
+ *
  * Runs on both desktop and mobile viewports via config projects.
  */
 
@@ -24,31 +29,18 @@ test.describe('Menu page — content', () => {
 
   test('at least one menu category heading is visible', async ({ page }) => {
     // Category sections use id="category-{slug}" and contain h2 headings
-    // e.g. "Tacos", "Bowls", "African Specials", "Sides & Extras", "Drinks"
+    // e.g. Vorspeisen / Entradas, Quesadillas, Tacos, Bowls, Bebidas ...
     const categoryHeadings = page.locator('section[id^="category-"] h2');
     const count = await categoryHeadings.count();
     expect(count).toBeGreaterThanOrEqual(1);
   });
 
-  test('at least one menu item with price (€) is visible', async ({ page }) => {
-    // MenuItemCard renders prices as "€14,90" via Intl.NumberFormat('de-AT')
-    // The price element uses class "text-brand-gold" with font-bold
-    const priceElements = page.locator('span.font-bold.text-brand-gold');
+  test('at least one menu item with a Euro price is visible', async ({ page }) => {
+    // MenuBistroCard renders prices as "8,90 €" via Intl.NumberFormat('de-DE'),
+    // symbol after the number with a non-breaking space.
+    const priceElements = page.locator('text=/\\d+,\\d{2}\\s*€/');
     const count = await priceElements.count();
-
-    // At least one price should be present
     expect(count).toBeGreaterThanOrEqual(1);
-
-    // Verify at least one contains the Euro sign
-    let foundEuroPrice = false;
-    for (let i = 0; i < count; i++) {
-      const text = await priceElements.nth(i).textContent();
-      if (text?.includes('€')) {
-        foundEuroPrice = true;
-        break;
-      }
-    }
-    expect(foundEuroPrice).toBe(true);
   });
 
   test('category navigation links are present', async ({ page }) => {
@@ -76,21 +68,29 @@ test.describe('Menu page — content', () => {
     await expect(targetSection).toBeVisible();
   });
 
-  test('menu items have names (h3) and descriptions', async ({ page }) => {
-    // MenuItemCard renders item names as h3 elements
+  test('menu items have names (h3) and a description', async ({ page }) => {
+    // MenuBistroCard renders item names as h3 elements inside <article>
     const itemNames = page.locator('article h3');
     const count = await itemNames.count();
     expect(count).toBeGreaterThanOrEqual(1);
 
-    // Each card should also have a description paragraph
-    const descriptions = page.locator('article p.text-text-secondary');
+    // Each card also has a German description paragraph
+    const descriptions = page.locator('article p');
     const descCount = await descriptions.count();
     expect(descCount).toBeGreaterThanOrEqual(1);
   });
 
-  test('allergen notice section is visible', async ({ page }) => {
-    const noticeSection = page.locator('h3', { hasText: 'Hinweis' });
-    await expect(noticeSection).toBeVisible();
+  test('menu item cards do not have duplicate DOM ids', async ({ page }) => {
+    // MenuBistroCard renders inline SVG <clipPath> ids for the flag icons;
+    // with many cards on the page, these must be unique per instance.
+    const ids = await page.evaluate(() => Array.from(document.querySelectorAll('[id]')).map((el) => el.id));
+    const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+    expect(duplicates).toEqual([]);
+  });
+
+  test('allergen legend is visible', async ({ page }) => {
+    const legend = page.getByText('ALLERGENE / ALLERGENS:');
+    await expect(legend.first()).toBeVisible();
   });
 
   test('NavBar is present on menu page', async ({ page }) => {
@@ -131,5 +131,14 @@ test.describe('Menu page — accessibility', () => {
     }
 
     expect(results.violations).toEqual([]);
+  });
+
+  test('category anchor links have visible focus indicators', async ({ page, browserName }) => {
+    test.skip(browserName !== 'chromium', 'Focus-visible outline check is most reliable on Chromium');
+
+    const firstCategoryLink = page.locator('nav[aria-label="Menü-Kategorien"] a[href^="#category-"]').first();
+    await firstCategoryLink.focus();
+    const outline = await firstCategoryLink.evaluate((el) => getComputedStyle(el).outlineStyle);
+    expect(outline).not.toBe('none');
   });
 });

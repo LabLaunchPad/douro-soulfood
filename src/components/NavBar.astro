@@ -92,6 +92,8 @@ const {
             href={ctaSecondary.href}
             class="px-4 py-2 text-sm font-bold tracking-wider uppercase text-white rounded-sm border border-white/20
                    hover:bg-white/10 hover:border-white/40 no-underline transition-all duration-200"
+            data-analytics-event="cta_click"
+            data-analytics-id="navbar-secondary"
           >
             {ctaSecondary.label}
           </a>
@@ -103,6 +105,8 @@ const {
             href={ctaPrimary.href}
             target="_blank"
             rel="noopener noreferrer"
+            data-analytics-event="order_click"
+            data-analytics-id="navbar-primary"
             class="group inline-flex items-center gap-1.5 px-5 py-2 text-sm font-extrabold tracking-wider uppercase rounded-sm
                    bg-brand-gold hover:bg-brand-gold-light active:bg-brand-gold-dark text-brand-espresso
                    no-underline transition-all duration-200 shadow-md hover:shadow-lg hover:scale-[1.02]"
@@ -156,10 +160,16 @@ const {
   </div>
 </nav>
 
-<!-- Full-Screen Mobile Drawer Overlay (Top-Left Aligned List) -->
+<!-- Full-Screen Mobile Drawer Overlay (Top-Left Aligned List)
+     z-40, one below the nav's z-50: the collapsed nav bar (and its
+     #mobile-menu-btn toggle) must stay clickable while the drawer is
+     open, since the toggle's own click handler closes the drawer too.
+     At equal z-index the drawer (later in DOM order) painted over the
+     button, making that close path unreachable by mouse — only the
+     drawer's dedicated X button or Escape could close it. -->
 <div
   id="mobile-menu"
-  class="fixed inset-0 z-50 bg-brand-espresso/98 backdrop-blur-2xl
+  class="fixed inset-0 z-40 bg-brand-espresso/98 backdrop-blur-2xl
          opacity-0 pointer-events-none transition-all duration-300
          md:hidden flex flex-col justify-start gap-8 p-6 overflow-y-auto"
   role="dialog"

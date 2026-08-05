@@ -1,8 +1,9 @@
 ---
 
 /**
- * HeroSection — Full-bleed hero with background image carousel,
- * headline overlay, and dual CTA buttons.
+ * HeroSection — Full-bleed hero with a background video (or a single
+ * fallback image when no video is supplied), headline overlay, and
+ * dual CTA buttons.
  *
  * Slot composition: Use <slot /> for any additional hero content
  * (e.g. scroll indicator, trust badges).
@@ -27,7 +28,7 @@ interface Props {
   subheadline?: string;
   /** Hero background video URL (e.g. /douroherovideo.mp4) */
   videoSrc?: string;
-  /** Hero background images (fallback source) */
+  /** Fallback hero image — used as the video poster, or as the background when videoSrc is omitted. Only the first entry is used. */
   images?: HeroImage[];
   /** Primary CTA config */
   ctaPrimary: { label: string; href: string };
@@ -62,7 +63,9 @@ const heroImage = images[0];
       <>
         <!-- Mobile Video -->
         <video
+          data-hero-video
           src="/douroheromobile.mp4"
+          poster={heroImage?.src}
           autoplay
           loop
           muted
@@ -72,6 +75,7 @@ const heroImage = images[0];
         ></video>
         <!-- Desktop Video -->
         <video
+          data-hero-video
           src={videoSrc}
           poster={heroImage?.src}
           autoplay
@@ -161,22 +165,19 @@ const heroImage = images[0];
 
 <script>
   /**
-   * Hero carousel — fades between background images.
-   * No external dependencies. Respects prefers-reduced-motion.
+   * The hero video is muted and purely decorative, but `autoplay loop`
+   * still starts continuous motion that CSS-only `prefers-reduced-motion`
+   * rules (see Base.astro) cannot stop — that override only shortens CSS
+   * transitions/animations, not <video> playback. Pause it explicitly for
+   * users who asked for reduced motion, falling back to the poster frame.
    */
   const prefersReducedMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!prefersReducedMotion) {
-    const heroImages = document.querySelectorAll<HTMLImageElement>('[aria-label="Hero-Bildkarussell"] img');
-    if (heroImages.length > 1) {
-      let current = 0;
-      setInterval(() => {
-        heroImages[current]?.classList.remove('opacity-100');
-        heroImages[current]?.classList.add('opacity-0');
-        current = (current + 1) % heroImages.length;
-        heroImages[current]?.classList.remove('opacity-0');
-        heroImages[current]?.classList.add('opacity-100');
-      }, 6000);
-    }
+  if (prefersReducedMotion) {
+    document.querySelectorAll<HTMLVideoElement>('[data-hero-video]').forEach((video) => {
+      video.pause();
+      video.removeAttribute('autoplay');
+      video.removeAttribute('loop');
+    });
   }
 </script>

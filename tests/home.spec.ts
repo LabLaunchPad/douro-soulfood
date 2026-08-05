@@ -7,6 +7,10 @@ import AxeBuilder from '@axe-core/playwright';
  * Tests run at BOTH desktop (1440×900) and mobile (375×812) viewports
  * via the playwright.config.ts project matrix.
  *
+ * Assertions match the site's actual shipped German copy and markup
+ * (src/pages/index.astro, src/components/NavBar.astro, Footer.astro,
+ * HeroSection.astro) — not placeholder English content.
+ *
  * Selectors use aria-label, data-*, id, and semantic HTML —
  * no data-testid attributes needed (none exist in the codebase).
  */
@@ -20,22 +24,29 @@ test.describe('Home page — content & visibility', () => {
     await page.goto('/');
   });
 
-  test('H1 "Afro-Latin Soul in the Heart of Salzburg" is visible', async ({ page }) => {
+  test('H1 "Afro-Latin Soul im Herzen von Salzburg" is visible', async ({ page }) => {
     const h1 = page.locator('h1');
     await expect(h1).toBeVisible();
-    await expect(h1).toHaveText('Afro-Latin Soul in the Heart of Salzburg');
+    await expect(h1).toHaveText("Afro-Latin Soul im Herzen von Salzburg");
   });
 
-  test('primary CTA "Visit Us Today" is visible and navigates to /contact', async ({ page }) => {
-    const primaryCta = page.locator('a[href="/contact"]', { hasText: 'Visit Us Today' });
+  // Hero CTAs are hidden below the md breakpoint (HeroSection.astro: "hidden md:flex") —
+  // on mobile they're reached instead via the NavBar's Speisekarte link and the
+  // MobileBottomBar's call/order buttons.
+  test('hero primary CTA "Besuchen Sie uns" is visible and navigates to /contact', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'Hero CTAs are hidden on mobile viewport (hidden md:flex)');
+
+    const primaryCta = page.locator('header a[href="/contact"]', { hasText: 'Besuchen Sie uns' });
     await expect(primaryCta).toBeVisible();
 
     await primaryCta.click();
     await expect(page).toHaveURL(/\/contact/);
   });
 
-  test('secondary CTA "See Our Menu" navigates to /menu', async ({ page }) => {
-    const secondaryCta = page.locator('a[href="/menu"]', { hasText: 'See Our Menu' });
+  test('hero secondary CTA "Speisekarte ansehen" navigates to /menu', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'Hero CTAs are hidden on mobile viewport (hidden md:flex)');
+
+    const secondaryCta = page.locator('header a[href="/menu"]', { hasText: 'Speisekarte ansehen' });
     await expect(secondaryCta).toBeVisible();
 
     await secondaryCta.click();
@@ -43,44 +54,70 @@ test.describe('Home page — content & visibility', () => {
   });
 
   test('4.8 star review badge is visible', async ({ page }) => {
-    // ReviewBadge component uses aria-label containing the rating
-    const reviewBadge = page.locator('[aria-label*="4.8"]');
+    // ReviewBadge component uses aria-label "{rating} von {maxRating} Sternen — {count} {source}"
+    const reviewBadge = page.locator('[aria-label*="4.8 von 5 Sternen"]');
     await expect(reviewBadge).toBeVisible();
 
-    // Verify the numeric rating text
-    const ratingText = page.locator('span.font-semibold.text-brand-gold', { hasText: '4.8' });
+    const ratingText = page.locator('span.font-semibold.text-brand-gold-ink', { hasText: '4.8' });
     await expect(ratingText).toBeVisible();
   });
 
-  test('featured menu section shows "Bestsellers" heading', async ({ page }) => {
-    const bestsellersLabel = page.locator('span.text-brand-gold', { hasText: 'Bestsellers' });
-    await expect(bestsellersLabel).toBeVisible();
-
-    // The section has an h2 with the featured dishes heading
-    const featuredHeading = page.locator('h2', { hasText: 'The Dishes Everyone Comes Back For' });
-    await expect(featuredHeading).toBeVisible();
+  test('"Beliebte Gerichte im D\'ouro Bistro" section is visible', async ({ page }) => {
+    const heading = page.locator('h2', { hasText: "Beliebte Gerichte im D'ouro Bistro" });
+    await expect(heading).toBeVisible();
   });
 
-  test('"See Full Menu" CTA links to /menu', async ({ page }) => {
-    const fullMenuCta = page.locator('a[href="/menu"]', { hasText: 'See Full Menu' });
+  test('"Komplette Speisekarte ansehen" CTA links to /menu', async ({ page }) => {
+    const fullMenuCta = page.locator('a[href="/menu"]', { hasText: 'Komplette Speisekarte ansehen' });
     await expect(fullMenuCta).toBeVisible();
   });
 
-  test('Our Story section contains Angela\'s lockdown origin story', async ({ page }) => {
-    const storySection = page.locator('section[aria-label="Our Story"]');
+  test('"Wie D\'ouro begann" story section is visible', async ({ page }) => {
+    const storySection = page.locator('section[aria-label="Unsere Geschichte"]');
     await expect(storySection).toBeVisible();
 
-    // Verify the key narrative text
-    await expect(storySection.locator('h2', { hasText: "How D'ouro Began" })).toBeVisible();
+    await expect(storySection.locator('h2', { hasText: "Wie D'ouro begann" })).toBeVisible();
     await expect(
-      storySection.locator('p', { hasText: /D'ouro started during lockdown/ })
+      storySection.locator('p', { hasText: /D'ouro begann während des Lockdowns/ })
     ).toBeVisible();
+  });
+
+  test('FAQ accordion is visible and expands on click', async ({ page }) => {
+    const faqSection = page.locator('section[aria-label="Häufig gestellte Fragen"]');
+    await expect(faqSection).toBeVisible();
+
+    const firstItem = faqSection.locator('details').first();
+    await expect(firstItem).toBeVisible();
+    await expect(firstItem).not.toHaveAttribute('open', '');
+
+    // Native <details>/<summary> is keyboard- and screen-reader-accessible by default.
+    await firstItem.locator('summary').click();
+    await expect(firstItem).toHaveAttribute('open', '');
   });
 
   test('Footer contains address "Auerspergstraße 10"', async ({ page }) => {
     const footer = page.locator('footer');
     await expect(footer).toBeVisible();
-    await expect(footer.locator('address', { hasText: 'Auerspergstraße 10' })).toBeVisible();
+    await expect(footer.getByText('Auerspergstraße 10', { exact: false })).toBeVisible();
+  });
+
+  test('Footer has no links to non-existent routes', async ({ page }) => {
+    const footer = page.locator('footer');
+    const hrefs = await footer.locator('a').evaluateAll((els) => els.map((el) => el.getAttribute('href')));
+    // gift-cards is not a real page (no route, no content backing it);
+    // impressum/datenschutz are real routes (src/pages/impressum.astro, datenschutz.astro).
+    for (const href of hrefs) {
+      expect(href).not.toBe('/gift-cards');
+    }
+  });
+
+  test('Footer legal links (Impressum, Datenschutz) navigate to real pages', async ({ page }) => {
+    const footer = page.locator('footer');
+    const impressum = footer.locator('a[href="/impressum"]', { hasText: 'Impressum' });
+    await expect(impressum).toBeVisible();
+    await impressum.click();
+    await expect(page).toHaveURL(/\/impressum/);
+    await expect(page.locator('h1', { hasText: 'Impressum' })).toBeVisible();
   });
 });
 
@@ -101,15 +138,17 @@ test.describe('Home page — NavBar', () => {
     await expect(nav).toHaveAttribute('aria-label', 'Hauptmenü');
   });
 
-  test('brand name "D\'ouro" is visible in NavBar', async ({ page }) => {
-    const brand = page.locator('nav[data-nav] span.text-brand-gold.font-display', { hasText: "D'ouro" });
+  test('brand logo link to homepage is visible in NavBar', async ({ page }) => {
+    const brand = page.locator('nav[data-nav] a[aria-label="D\'ouro Soulfood Homepage"]');
     await expect(brand).toBeVisible();
+    await expect(brand).toHaveAttribute('href', '/');
+    await expect(brand.locator('img[alt="D\'ouro Soulfood Logo"]')).toBeVisible();
   });
 
   test('all desktop nav links are present in DOM', async ({ page }) => {
     const nav = page.locator('nav[data-nav]');
 
-    // Expected nav links (German labels from NavBar defaults)
+    // Expected nav links (German labels from NavBar.astro defaults)
     const expectedLinks = [
       { label: 'Speisekarte', href: '/menu' },
       { label: 'Catering', href: '/catering' },
@@ -124,7 +163,7 @@ test.describe('Home page — NavBar', () => {
   });
 
   // Desktop-only: nav links are hidden on mobile (md:flex breakpoint)
-  test('desktop nav link to /menu is clickable and navigates', async ({ page, browserName, isMobile }) => {
+  test('desktop nav link to /menu is clickable and navigates', async ({ page, isMobile }) => {
     test.skip(isMobile, 'Desktop nav links hidden on mobile viewport');
 
     const menuLink = page.locator('nav[data-nav] a[href="/menu"]', { hasText: 'Speisekarte' }).first();
@@ -156,10 +195,10 @@ test.describe('Home page — mobile menu', () => {
   });
 
   test('hamburger menu button exists on mobile viewport', async ({ page }) => {
-    // The mobile menu button is only visible at md: breakpoint and below
     const hamburgerBtn = page.locator('button#mobile-menu-btn');
     await expect(hamburgerBtn).toBeVisible();
     await expect(hamburgerBtn).toHaveAttribute('aria-label', 'Navigationsmenü öffnen');
+    await expect(hamburgerBtn).toHaveAttribute('aria-expanded', 'false');
   });
 
   test('clicking hamburger opens mobile navigation overlay', async ({ page }) => {
@@ -177,7 +216,7 @@ test.describe('Home page — mobile menu', () => {
     await expect(hamburgerBtn).toHaveAttribute('aria-expanded', 'true');
 
     // Mobile nav links should be visible inside the overlay
-    const mobileNav = mobileMenu.locator('nav[aria-label="Mobile Navigation"]');
+    const mobileNav = mobileMenu.locator('nav[aria-label="Mobile Navigation Drawer"]');
     await expect(mobileNav).toBeVisible();
   });
 
@@ -185,11 +224,28 @@ test.describe('Home page — mobile menu', () => {
     const hamburgerBtn = page.locator('button#mobile-menu-btn');
     await hamburgerBtn.click();
 
-    const mobileMenu = page.locator('div#mobile-menu');
-    const menuLink = mobileMenu.locator('a[href="/menu"]', { hasText: 'Speisekarte' });
+    // Scoped to the drawer's link list — #mobile-menu also has its own
+    // top-bar "Speisekarte" quick link, so an unscoped href match here
+    // would resolve to two elements and violate Playwright's strict mode.
+    const mobileNav = page.locator('nav[aria-label="Mobile Navigation Drawer"]');
+    const menuLink = mobileNav.locator('a[href="/menu"]', { hasText: 'Speisekarte' });
     await expect(menuLink).toBeVisible();
     await menuLink.click();
     await expect(page).toHaveURL(/\/menu/);
+  });
+
+  test('Escape key closes the mobile menu and returns focus to the toggle', async ({ page }) => {
+    const hamburgerBtn = page.locator('button#mobile-menu-btn');
+    const mobileMenu = page.locator('div#mobile-menu');
+
+    await hamburgerBtn.click();
+    await expect(mobileMenu).toHaveAttribute('data-open', 'true');
+
+    await page.keyboard.press('Escape');
+
+    await expect(mobileMenu).toHaveAttribute('data-open', 'false');
+    await expect(hamburgerBtn).toHaveAttribute('aria-expanded', 'false');
+    await expect(hamburgerBtn).toBeFocused();
   });
 
   test('closing hamburger menu restores collapsed state', async ({ page }) => {
@@ -204,6 +260,13 @@ test.describe('Home page — mobile menu', () => {
     await hamburgerBtn.click();
     await expect(mobileMenu).toHaveAttribute('data-open', 'false');
     await expect(hamburgerBtn).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('sticky mobile bottom bar with call and order actions is visible', async ({ page }) => {
+    const bottomBar = page.locator('.mobile-bottom-bar');
+    await expect(bottomBar).toBeVisible();
+    await expect(bottomBar.getByRole('link', { name: 'Jetzt anrufen' })).toBeVisible();
+    await expect(bottomBar.getByRole('link', { name: 'Jetzt online bestellen' })).toBeVisible();
   });
 });
 
@@ -241,6 +304,16 @@ test.describe('Home page — accessibility', () => {
 
     expect(results.violations).toEqual([]);
   });
+
+  test('reduced motion disables hero video autoplay', async ({ page, browserName }) => {
+    test.skip(browserName !== 'chromium', 'emulateMedia reduced-motion is most reliable on Chromium');
+
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+
+    const video = page.locator('[data-hero-video]').first();
+    await expect(video).toHaveJSProperty('paused', true);
+  });
 });
 
 /* ═══════════════════════════════════════════════════════════════
@@ -254,12 +327,12 @@ test.describe('Home page — SEO meta tags', () => {
 
   test('page has correct title', async ({ page }) => {
     const title = await page.title();
-    expect(title).toContain('Afro-Latin');
+    expect(title).toContain('Afro-Lateinamerikanische');
   });
 
   test('page has meta description', async ({ page }) => {
     const metaDesc = page.locator('meta[name="description"]');
-    await expect(metaDesc).toHaveAttribute('content', /Brazilian.*African.*Salzburg/);
+    await expect(metaDesc).toHaveAttribute('content', /brasilianische.*Salzburg/);
   });
 
   test('page has canonical URL', async ({ page }) => {

@@ -58,11 +58,20 @@ const dualPriceDisplay = hasDualPrice
 
 /** Allergen code display format: (A, M) */
 const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
+
+/**
+ * Unique id suffix for this card instance's inline SVG <clipPath> defs.
+ * MenuBistroCard is rendered many times per page (one per dish); without
+ * a per-instance suffix, every card would emit the same "uk-clip-*" ids,
+ * producing duplicate DOM ids that break clip-path references in some
+ * browsers once more than one card is on the page.
+ */
+const uid = crypto.randomUUID().slice(0, 8);
 ---
 
 <article
   class:list={[
-    'group relative flex flex-row justify-between items-start md:items-center rounded-sm p-3.5 sm:p-4 md:p-4 bg-[#FFFDF9] border border-[#E8DFC8] shadow-sm hover:shadow-md hover:border-[#D6C4A5] transition-all duration-200 gap-3.5 sm:gap-4 md:gap-5 overflow-hidden w-full max-w-full',
+    'group relative flex flex-row justify-between items-start md:items-center rounded-sm p-3.5 sm:p-4 md:p-4 bg-[var(--color-menu-paper)] border border-[var(--color-menu-paper-border)] shadow-sm hover:shadow-md hover:border-[var(--color-menu-paper-border-hover)] transition-all duration-200 gap-3.5 sm:gap-4 md:gap-5 overflow-hidden w-full max-w-full',
     !available && 'opacity-60',
     className,
   ]}
@@ -97,18 +106,19 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
     <div>
       {/* Title + Highlighted Price Header */}
       <div class="flex items-center justify-between gap-2 w-full mb-2">
-        <h3 class="text-sm sm:text-base md:text-lg font-serif font-black text-[#2C1810] tracking-wide uppercase break-words leading-snug min-w-0 flex-1 self-center">
+        <h3 class="text-sm sm:text-base md:text-lg font-serif font-black text-[var(--color-menu-ink)] tracking-wide uppercase break-words leading-snug min-w-0 flex-1 self-center">
           {name}
         </h3>
 
         {/* Highlighted Price Badge — dual or single */}
         {hasDualPrice ? (
           <div class="shrink-0 flex flex-col items-end gap-1 ml-1 self-center">
-            <div class="font-serif font-extrabold text-[#F4E3B3] bg-[#1B140E] border border-[#D4AF37]/50 px-3 py-1 rounded-sm shadow-xs text-sm sm:text-base tracking-wide whitespace-nowrap">
+            <div class="font-serif font-extrabold text-[var(--color-menu-banner-text)] bg-[var(--color-menu-banner)] border border-[var(--color-menu-gold)]/50 px-3 py-1 rounded-sm shadow-xs text-sm sm:text-base tracking-wide whitespace-nowrap">
               {dualPriceDisplay}
             </div>
             <div class="flex flex-col items-end gap-0.5">
               <div class="flex items-center gap-1">
+                {/* Brazilian flag colors — factual national-flag color, not a brand token */}
                 <svg class="w-3.5 h-2.5 rounded-[2px] shadow-xs shrink-0" viewBox="0 0 5 3" aria-hidden="true">
                   <rect width="5" height="1" y="0" fill="#000000"/>
                   <rect width="5" height="1" y="1" fill="#DD0000"/>
@@ -117,13 +127,14 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
                 <span class="text-[10px] text-stone-500 font-sans font-medium tracking-wide whitespace-nowrap">ohne / mit Alkohol</span>
               </div>
               <div class="flex items-center gap-1">
+                {/* UK flag colors — factual national-flag color, not a brand token */}
                 <svg class="w-3.5 h-2.5 rounded-[2px] shadow-xs shrink-0" viewBox="0 0 60 30" aria-hidden="true">
-                  <clipPath id="uk-clip-dual"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-                  <clipPath id="uk-diag-dual"><path d="M0,0 L60,30 M60,0 L0,30"/></clipPath>
-                  <g clip-path="url(#uk-clip-dual)">
+                  <clipPath id={`uk-clip-dual-${uid}`}><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+                  <clipPath id={`uk-diag-dual-${uid}`}><path d="M0,0 L60,30 M60,0 L0,30"/></clipPath>
+                  <g clip-path={`url(#uk-clip-dual-${uid})`}>
                     <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
-                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" clip-path="url(#uk-diag-dual)"/>
-                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path="url(#uk-diag-dual)"/>
+                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" clip-path={`url(#uk-diag-dual-${uid})`}/>
+                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path={`url(#uk-diag-dual-${uid})`}/>
                     <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
                     <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
                   </g>
@@ -134,7 +145,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
           </div>
         ) : (
           <div class="shrink-0 flex flex-col items-end ml-1 self-center">
-            <div class="font-serif font-extrabold text-[#F4E3B3] bg-[#1B140E] border border-[#D4AF37]/50 px-3 py-1 rounded-sm shadow-xs text-sm sm:text-base md:text-lg tracking-wide whitespace-nowrap">
+            <div class="font-serif font-extrabold text-[var(--color-menu-banner-text)] bg-[var(--color-menu-banner)] border border-[var(--color-menu-gold)]/50 px-3 py-1 rounded-sm shadow-xs text-sm sm:text-base md:text-lg tracking-wide whitespace-nowrap">
               {formattedPrice}
             </div>
             {prepTime && (
@@ -146,7 +157,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
         )}
       </div>
 
-      {/* Language 1: German with SVG Flag */}
+      {/* Language 1: German with SVG Flag (Brazilian flag colors — factual, not a brand token) */}
       {description && (
         <div class="flex items-start gap-1.5 sm:gap-2 mb-1.5 text-xs sm:text-sm text-stone-800 leading-snug">
           <svg class="w-4 h-3 rounded-[2px] shadow-xs shrink-0 mt-0.5 sm:mt-1" viewBox="0 0 5 3" aria-hidden="true">
@@ -166,16 +177,16 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
         </div>
       )}
 
-      {/* Language 2: English with SVG Flag */}
+      {/* Language 2: English with SVG Flag (UK flag colors — factual, not a brand token) */}
       {descriptionEn && (
         <div class="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-stone-600 leading-snug">
           <svg class="w-4 h-3 rounded-[2px] shadow-xs shrink-0 mt-0.5 sm:mt-1" viewBox="0 0 60 30" aria-hidden="true">
-            <clipPath id="uk-clip-card-single"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-            <clipPath id="uk-diag-card-single"><path d="M0,0 L60,30 M60,0 L0,30"/></clipPath>
-            <g clip-path="url(#uk-clip-card-single)">
+            <clipPath id={`uk-clip-single-${uid}`}><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+            <clipPath id={`uk-diag-single-${uid}`}><path d="M0,0 L60,30 M60,0 L0,30"/></clipPath>
+            <g clip-path={`url(#uk-clip-single-${uid})`}>
               <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
-              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" clip-path="url(#uk-diag-card-single)"/>
-              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path="url(#uk-diag-card-single)"/>
+              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" clip-path={`url(#uk-diag-single-${uid})`}/>
+              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path={`url(#uk-diag-single-${uid})`}/>
               <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
               <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
             </g>

@@ -71,10 +71,25 @@
   --color-brand-terracotta-light: oklch(0.66 0.18 24.5);
   --color-brand-terracotta-dark: oklch(0.42 0.18 24.5);
 
-  /* ── Brand Secondary: Honey Gold / Yellow Accent ── */
+  /* ── Brand Secondary: Honey Gold / Yellow Accent ──
+     Kept light — this ladder backs bg-brand-gold/border-brand-gold
+     (button fills, glows, icon accents), which need to stay light
+     enough to contrast against the dark espresso text/icons drawn on
+     top of them. See --color-brand-gold-ink below for the separate,
+     darker variant used wherever gold is the TEXT color on a light
+     surface (a different, and here opposite, contrast requirement). */
   --color-brand-gold: oklch(0.78 0.18 85.0);
   --color-brand-gold-light: oklch(0.85 0.16 85.0);
   --color-brand-gold-dark: oklch(0.65 0.18 85.0);
+
+  /* ── Brand Secondary — Text-safe variant ──
+     axe flagged text-brand-gold on light surfaces sitewide: the large
+     bold /menu H1 needed 3:1, and small uppercase eyebrow labels
+     ("Unsere Speisekarte", "FAQ", "Standort", …) needed 4.5:1 as
+     normal-size text. L=0.50 clears 4.5:1 even against the lightest
+     card surface (~white). Use `text-brand-gold-ink` (not
+     `text-brand-gold`) for any gold text on a light background. */
+  --color-brand-gold-ink: oklch(0.50 0.18 85.0);
 
   /* ── Brand Accent: Taco Green (#06B906) ── */
   --color-brand-forest: oklch(0.68 0.22 142.5);
@@ -94,6 +109,7 @@
   --color-douro-gold: oklch(0.78 0.18 85.0);
   --color-douro-gold-light: oklch(0.85 0.16 85.0);
   --color-douro-gold-dark: oklch(0.65 0.18 85.0);
+  --color-douro-gold-ink: oklch(0.50 0.18 85.0);
   --color-douro-terracotta: oklch(0.56 0.18 24.5);
   --color-douro-terracotta-light: oklch(0.66 0.18 24.5);
   --color-douro-ember: oklch(0.56 0.18 24.5);
@@ -166,8 +182,10 @@
 
   /* ── Text: Tertiary ──
      Subtle labels, timestamps, footnotes. Warm, desaturated,
-     respectful, maintaining accessibility. */
-  --color-text-tertiary: oklch(0.58 0.015 50);
+     respectful, maintaining accessibility.
+     Darkened from L=0.58: axe measured 4.23:1 against the cream
+     surface, just under the 4.5:1 WCAG AA minimum for normal text. */
+  --color-text-tertiary: oklch(0.50 0.015 50);
 
   /* ── Text: Inverse ──
      Light text on dark surfaces. Used for buttons with terracotta/gold fills. */
@@ -177,6 +195,28 @@
      The forest green accent for text links and highlighted brands,
      ensuring legible contrast against light cream backgrounds. */
   --color-text-brand: oklch(0.35 0.15 142.67);
+
+
+  /* ─────────────────────────────────────────────────────────────
+     MENU PAPER SUB-PALETTE
+     The /menu page's dish cards, category banners, and allergen
+     legend use a distinct "printed bistro menu" surface — cream
+     paper, ink-brown text, dark banners with a gold rule — layered
+     on top of the main brand palette above. Defined as literal
+     hex here (rather than converted to OKLCH) to preserve the
+     exact existing look while centralizing what were previously
+     magic hex values scattered across MenuBistroCard, the menu
+     category banners, and AllergenHeaderLegend.
+     ───────────────────────────────────────────────────────────── */
+
+  --color-menu-paper: #FFFDF9;
+  --color-menu-paper-alt: #FAF6EE;
+  --color-menu-paper-border: #E8DFC8;
+  --color-menu-paper-border-hover: #D6C4A5;
+  --color-menu-ink: #2C1810;
+  --color-menu-gold: #D4AF37;
+  --color-menu-banner: #1B140E;
+  --color-menu-banner-text: #F4E3B3;
 
 
   /* ─────────────────────────────────────────────────────────────

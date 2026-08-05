@@ -1,0 +1,26 @@
+---
+/**
+ * CategoryBanner — Dark gold-bordered header used above each menu category
+ * on the /menu "bistro paper" layout. Extracted from menu.astro, where this
+ * markup was previously repeated verbatim in 8 separate category branches.
+ */
+interface Props {
+  label: string;
+  subtitle?: string;
+}
+
+const { label, subtitle } = Astro.props;
+---
+
+<div class="flex justify-center mb-6">
+  <div class="inline-flex flex-col items-center gap-1 bg-[var(--color-menu-banner)] border-2 border-[var(--color-menu-gold)] px-6 sm:px-10 py-3 rounded-sm shadow-md text-center">
+    <h2 class="text-xl sm:text-2xl md:text-3xl font-serif font-extrabold text-[var(--color-menu-banner-text)] tracking-widest uppercase">
+      {label}
+    </h2>
+    {subtitle && (
+      <span class="text-xs sm:text-sm font-sans font-medium text-[var(--color-menu-gold)]/80 tracking-wide">
+        {subtitle}
+      </span>
+    )}
+  </div>
+</div>
