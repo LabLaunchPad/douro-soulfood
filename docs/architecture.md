@@ -87,8 +87,12 @@ Base.astro (layout)
 │   ├── CategoryIcon.astro        (src/components/ui/)
 │   ├── FeatureCard.astro          (src/components/sections/)
 │   ├── UserReviews.astro           (src/components/sections/)
-│   └── inline sections (gallery, story, FAQ accordion, map/location —
-│       hand-written markup in index.astro, not separate components)
+│   ├── PhotoGrid.astro              (src/components/sections/, used twice:
+│   │   Popular Dishes + Galerie)
+│   ├── OurStorySection.astro         (src/components/sections/)
+│   ├── FaqAccordion.astro             (src/components/sections/)
+│   └── inline sections (map/location — hand-written markup in
+│       index.astro, composing the MapEmbed.astro component)
 │
 ├── MenuItemCard.astro / MenuBistroCard.astro  (src/components/sections/,
 │   used on menu.astro)

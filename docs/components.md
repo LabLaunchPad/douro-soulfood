@@ -88,6 +88,29 @@ The primary/secondary CTAs render inside a `hidden md:flex` container — not vi
 **File:** `src/components/sections/UserReviews.astro`
 Renders the guest-reviews section on the home page.
 
+### PhotoGrid
+**File:** `src/components/sections/PhotoGrid.astro`
+Heading + responsive photo grid (2 cols mobile, 3 cols desktop; 8 photos on mobile, 9 on desktop). Used on the home page for both "Beliebte Gerichte" (Popular Dishes) and "Galerie" — these previously duplicated the same markup inline; this component is the single shared implementation.
+**Props:**
+| Prop | Type | Description |
+|------|------|-------------|
+| ariaLabel | string | `<section aria-label>` |
+| eyebrow | string | Small uppercase label above the heading |
+| title | string | Section `<h2>` |
+| description | string? | Supporting text below the heading |
+| items | { src, alt, width, height }[] | Photos to render via Astro `<Image>` |
+| cta | { label, href }? | Optional CTA button below the grid (used by "Beliebte Gerichte", not "Galerie") |
+
+### OurStorySection
+**File:** `src/components/sections/OurStorySection.astro`
+Founder-story block ("Wie D'ouro begann" on the home page). Not the same as the `OurStory.astro` removed in an earlier cleanup pass (that one was dead code with zero importers) — this is a fresh component, actually wired into `index.astro`.
+**Props:** `ariaLabel`, `eyebrow`, `title`, `text`, `founderName`, `founderTitle` (all strings).
+
+### FaqAccordion
+**File:** `src/components/sections/FaqAccordion.astro`
+Plain `<details>`-based accordion for the home page's FAQ section, reading from the `faq` content collection. Renders nothing if `items` is empty.
+**Props:** `items: { question, answer }[]`, `ariaLabel`, `eyebrow`, `title`.
+
 ### MenuItemCard
 **File:** `src/components/sections/MenuItemCard.astro`
 Full-detail menu item card (used for most menu categories). Reads `siteSettings` directly for the order-online link. Composes `DietaryBadge` and `AllergenBadge`.
