@@ -20,22 +20,27 @@ test.describe('Home page — content & visibility', () => {
     await page.goto('/');
   });
 
-  test('H1 "Afro-Latin Soul in the Heart of Salzburg" is visible', async ({ page }) => {
+  test('H1 "Afro-Latin Soul im Herzen von Salzburg" is visible', async ({ page }) => {
     const h1 = page.locator('h1');
     await expect(h1).toBeVisible();
-    await expect(h1).toHaveText('Afro-Latin Soul in the Heart of Salzburg');
+    await expect(h1).toHaveText("Afro-Latin Soul im Herzen von Salzburg");
   });
 
-  test('primary CTA "Visit Us Today" is visible and navigates to /contact', async ({ page }) => {
-    const primaryCta = page.locator('a[href="/contact"]', { hasText: 'Visit Us Today' });
+  // Desktop-only: hero CTAs live in a `hidden md:flex` container, not shown on mobile
+  test('primary CTA "Besuchen Sie uns" is visible and navigates to /contact', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'Hero CTAs hidden on mobile viewport');
+
+    const primaryCta = page.locator('a[href="/contact"]', { hasText: 'Besuchen Sie uns' });
     await expect(primaryCta).toBeVisible();
 
     await primaryCta.click();
     await expect(page).toHaveURL(/\/contact/);
   });
 
-  test('secondary CTA "See Our Menu" navigates to /menu', async ({ page }) => {
-    const secondaryCta = page.locator('a[href="/menu"]', { hasText: 'See Our Menu' });
+  test('secondary CTA "Speisekarte ansehen" navigates to /menu', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'Hero CTAs hidden on mobile viewport');
+
+    const secondaryCta = page.locator('a[href="/menu"]', { hasText: 'Speisekarte ansehen' });
     await expect(secondaryCta).toBeVisible();
 
     await secondaryCta.click();
@@ -52,28 +57,27 @@ test.describe('Home page — content & visibility', () => {
     await expect(ratingText).toBeVisible();
   });
 
-  test('featured menu section shows "Bestsellers" heading', async ({ page }) => {
-    const bestsellersLabel = page.locator('span.text-brand-gold', { hasText: 'Bestsellers' });
-    await expect(bestsellersLabel).toBeVisible();
+  test('featured dishes section shows "Empfehlungen" heading', async ({ page }) => {
+    const eyebrow = page.locator('section[aria-label="Beliebte Gerichte"] span.text-brand-gold', { hasText: 'Empfehlungen' });
+    await expect(eyebrow).toBeVisible();
 
-    // The section has an h2 with the featured dishes heading
-    const featuredHeading = page.locator('h2', { hasText: 'The Dishes Everyone Comes Back For' });
+    const featuredHeading = page.locator('h2', { hasText: "Beliebte Gerichte im D'ouro Bistro" });
     await expect(featuredHeading).toBeVisible();
   });
 
-  test('"See Full Menu" CTA links to /menu', async ({ page }) => {
-    const fullMenuCta = page.locator('a[href="/menu"]', { hasText: 'See Full Menu' });
+  test('"Komplette Speisekarte ansehen" CTA links to /menu', async ({ page }) => {
+    const fullMenuCta = page.locator('a[href="/menu"]', { hasText: 'Komplette Speisekarte ansehen' });
     await expect(fullMenuCta).toBeVisible();
   });
 
-  test('Our Story section contains Angela\'s lockdown origin story', async ({ page }) => {
-    const storySection = page.locator('section[aria-label="Our Story"]');
+  test('Unsere Geschichte section contains Angela\'s lockdown origin story', async ({ page }) => {
+    const storySection = page.locator('section[aria-label="Unsere Geschichte"]');
     await expect(storySection).toBeVisible();
 
     // Verify the key narrative text
-    await expect(storySection.locator('h2', { hasText: "How D'ouro Began" })).toBeVisible();
+    await expect(storySection.locator('h2', { hasText: "Wie D'ouro begann" })).toBeVisible();
     await expect(
-      storySection.locator('p', { hasText: /D'ouro started during lockdown/ })
+      storySection.locator('p', { hasText: /D'ouro begann während des Lockdowns/ })
     ).toBeVisible();
   });
 
@@ -101,9 +105,10 @@ test.describe('Home page — NavBar', () => {
     await expect(nav).toHaveAttribute('aria-label', 'Hauptmenü');
   });
 
-  test('brand name "D\'ouro" is visible in NavBar', async ({ page }) => {
-    const brand = page.locator('nav[data-nav] span.text-brand-gold.font-display', { hasText: "D'ouro" });
-    await expect(brand).toBeVisible();
+  test('brand logo is visible in NavBar', async ({ page }) => {
+    // NavBar renders only a logo image, no text brand name span
+    const logo = page.locator('nav[data-nav] img[alt="D\'ouro Soulfood Logo"]');
+    await expect(logo).toBeVisible();
   });
 
   test('all desktop nav links are present in DOM', async ({ page }) => {
@@ -177,7 +182,7 @@ test.describe('Home page — mobile menu', () => {
     await expect(hamburgerBtn).toHaveAttribute('aria-expanded', 'true');
 
     // Mobile nav links should be visible inside the overlay
-    const mobileNav = mobileMenu.locator('nav[aria-label="Mobile Navigation"]');
+    const mobileNav = mobileMenu.locator('nav[aria-label="Mobile Navigation Drawer"]');
     await expect(mobileNav).toBeVisible();
   });
 
@@ -254,12 +259,12 @@ test.describe('Home page — SEO meta tags', () => {
 
   test('page has correct title', async ({ page }) => {
     const title = await page.title();
-    expect(title).toContain('Afro-Latin');
+    expect(title).toContain('Afro-Lateinamerikanische');
   });
 
   test('page has meta description', async ({ page }) => {
     const metaDesc = page.locator('meta[name="description"]');
-    await expect(metaDesc).toHaveAttribute('content', /Brazilian.*African.*Salzburg/);
+    await expect(metaDesc).toHaveAttribute('content', /brasilianische.*afrikanische.*Salzburg/);
   });
 
   test('page has canonical URL', async ({ page }) => {
