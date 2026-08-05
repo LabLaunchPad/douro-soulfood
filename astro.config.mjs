@@ -19,7 +19,11 @@ export default defineConfig({
   },
 
   integrations: [
-    sitemap(),
+    sitemap({
+      // Exclude the internal /dev/ui component-preview route (404s outside
+      // dev mode anyway, but it shouldn't appear in the sitemap regardless).
+      filter: (page) => !page.includes('/dev/'),
+    }),
     keystatic(),
   ],
 
