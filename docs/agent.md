@@ -26,9 +26,9 @@ docs/
 
 src/
   components/
-    ui/               → Reusable atoms: Button, AllergenBadge, DietaryBadge, CategoryIcon, ReviewBadge, AllergenHeaderLegend
+    ui/               → Reusable atoms: Button, AllergenBadge, DietaryBadge, CategoryIcon, ReviewBadge, AllergenHeaderLegend, MapEmbed
     sections/         → Page composites: HeroSection, FeatureCard, UserReviews, MenuItemCard, MenuBistroCard
-    layout/           → NavBar, Footer, MobileBottomBar
+    layout/           → NavBar, MobileNavDrawer, Footer, MobileBottomBar
   content/
     menu-items/       → Keystatic collection, one JSON file per dish
     faq/               → Keystatic collection, one JSON file per Q&A
@@ -36,7 +36,7 @@ src/
   lib/
     menu.ts            → Menu category config + filter/sort/group logic
   layouts/
-    Base.astro         → Root layout with <head>, fonts, global CSS, nav/footer slots
+    Base.astro         → Root layout with <head>, self-hosted fonts (public/fonts/, tokens.css @font-face), global CSS, nav/footer slots
   pages/
     index.astro        → Home page
     menu.astro         → Menu page

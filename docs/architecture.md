@@ -12,8 +12,8 @@
 | Styling | Tailwind CSS v4 | Design token integration via `@theme`, JIT |
 | CMS | Keystatic | Git-backed, visual editing, Astro-native support |
 | Hosting | Cloudflare Pages / Workers | Free tier, edge CDN, zero cold starts |
-| Images | Astro Image | Compile-time optimization via `@astrojs/cloudflare`'s `imageService: 'compile'` |
-| Maps | Google Maps Embed | Static iframe embed for performance |
+| Images | Astro `<Image>` (partial) | `imageService: 'compile'` is configured and used by `MenuItemCard`, `MenuBistroCard`, `FeatureCard`; most page-level image grids (`menu.astro`, `index.astro`) still use raw `<img>` — not yet a blanket policy across the codebase |
+| Maps | Google Maps Embed, consent-gated | Two-click `MapEmbed.astro` component: static placeholder by default, real iframe only loads after the visitor clicks through (no request to Google before consent) |
 
 ---
 
