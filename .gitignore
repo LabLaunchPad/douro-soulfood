@@ -20,6 +20,9 @@ Thumbs.db
 .vscode/settings.json
 .idea/
 
+# Claude Code local/machine-specific settings (impeccable skill hooks, etc.)
+.claude/settings.local.json
+
 # Test results
 test-results/
 playwright-report/
