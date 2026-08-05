@@ -84,6 +84,36 @@ export default config({
           label: 'Currently Available',
           defaultValue: true,
         }),
+        prepTime: fields.text({
+          label: 'Prep Time (German)',
+        }),
+        prepTimeEn: fields.text({
+          label: 'Prep Time (English)',
+        }),
+        allergens: fields.array(
+          fields.text({ label: 'Allergen Code' }),
+          {
+            label: 'Allergens',
+            itemLabel: (props) => props.value || 'Allergen',
+          }
+        ),
+        addOns: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Add-on Label' }),
+            price: fields.integer({ label: 'Add-on Price (EUR cents)', validation: { min: 0 } }),
+          }),
+          {
+            label: 'Add-ons',
+            itemLabel: (props) => props.fields.label.value || 'Add-on',
+          }
+        ),
+        priceVariants: fields.object(
+          {
+            nonAlcoholic: fields.integer({ label: 'Non-Alcoholic Price (EUR cents)', validation: { min: 0 } }),
+            alcoholic: fields.integer({ label: 'Alcoholic Price (EUR cents)', validation: { min: 0 } }),
+          },
+          { label: 'Price Variants (alcoholic/non-alcoholic drinks only)' }
+        ),
       },
     }),
 
