@@ -9,59 +9,16 @@ import MenuBistroCard from '@/components/sections/MenuBistroCard.astro';
 import AllergenHeaderLegend from '@/components/ui/AllergenHeaderLegend.astro';
 import CategoryIcon from '@/components/ui/CategoryIcon.astro';
 import { getCollection } from 'astro:content';
+import { categoryConfig, drinkSubLabels, getSortedGroupedMenu, type DietaryTag } from '@/lib/menu';
 
 /**
  * MENU PAGE — D'ouro Soulfood Bistro
  */
 
-type DietaryTag = 'vegan' | 'vegetarian' | 'gluten-free' | 'spicy' | 'halal' | 'dairy-free';
-
-/** Category display config — controls order, labels, and vector icon names */
-const categoryConfig: Record<string, { label: string; order: number; icon: string }> = {
-  'appetizers':   { label: 'Vorspeisen / Entradas',  order: 10, icon: 'appetizers' },
-  'quesadillas':  { label: 'Quesadillas',            order: 20, icon: 'quesadillas' },
-  'tacos':        { label: 'Tacos',                  order: 30, icon: 'tacos' },
-  'bowls':        { label: 'Bowls',                  order: 40, icon: 'bowls' },
-  'mains':        { label: 'Pratos Feitos',          order: 50, icon: 'mains' },
-  'seafood':      { label: 'Pratos Do Mar',          order: 60, icon: 'seafood' },
-  'sides':        { label: 'Beilagen / Sides',       order: 65, icon: 'sides' },
-  'drinks':       { label: 'Bebidas',                order: 70, icon: 'drinks' },
-  'desserts':     { label: 'Sobremesas',             order: 80, icon: 'desserts' },
-};
-
-/** Sub-category titles & icons for Bebidas section */
-const drinkSubLabels: Record<string, { label: string; icon: string }> = {
-  'aguas-frescas': { label: 'Águas Frescas', icon: '🍹' },
-  'cocktails':     { label: 'Cocktails',     icon: '🍸' },
-  'softdrinks':    { label: 'Softdrinks',    icon: '🥤' },
-  'cafes':         { label: 'Cafés',         icon: '☕' },
-};
-
 /** Fetch all menu items from KeystaticCMS */
 const allItems = await getCollection('menu_items');
 
-/** Filter to only available items, sort by category order then item order */
-const menuItems = allItems
-  .filter((item) => item.data.available !== false)
-  .sort((a, b) => {
-    const catA = categoryConfig[a.data.category]?.order ?? 99;
-    const catB = categoryConfig[b.data.category]?.order ?? 99;
-    if (catA !== catB) return catA - catB;
-    return (a.data.order ?? 0) - (b.data.order ?? 0);
-  });
-
-/** Group items by category */
-const grouped = menuItems.reduce<Record<string, typeof menuItems>>((acc, item) => {
-  const cat = item.data.category || 'other';
-  if (!acc[cat]) acc[cat] = [];
-  acc[cat].push(item);
-  return acc;
-}, {});
-
-/** Sort categories by their display order */
-const sortedCategories = Object.entries(grouped).sort(
-  ([a], [b]) => (categoryConfig[a]?.order ?? 99) - (categoryConfig[b]?.order ?? 99)
-);
+const { sortedCategories } = getSortedGroupedMenu(allItems);
 ---
 
 <Base title="Speisekarte">
@@ -152,7 +109,6 @@ const sortedCategories = Object.entries(grouped).sort(
                         description={item.data.description}
                         descriptionEn={item.data.descriptionEn}
                         priceInCents={item.data.price}
-                        priceDisplay={item.data.priceDisplay}
                         priceVariants={item.data.priceVariants}
                         prepTime={item.data.prepTime}
                         prepTimeEn={item.data.prepTimeEn}

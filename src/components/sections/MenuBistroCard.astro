@@ -9,7 +9,6 @@ interface Props {
   description: string;
   descriptionEn?: string;
   priceInCents: number;
-  priceDisplay?: string;
   priceVariants?: { nonAlcoholic?: number; alcoholic?: number };
   prepTime?: string;
   prepTimeEn?: string;
@@ -26,7 +25,6 @@ const {
   description,
   descriptionEn,
   priceInCents,
-  priceDisplay,
   priceVariants,
   prepTime,
   prepTimeEn,
@@ -48,7 +46,7 @@ const formatPrice = (cents: number): string => {
   }).format(euros);
 };
 
-const formattedPrice = priceDisplay || formatPrice(priceInCents);
+const formattedPrice = formatPrice(priceInCents);
 
 /** Dual price display for items with alcoholic/non-alcoholic variants */
 const hasDualPrice = priceVariants?.nonAlcoholic !== undefined && priceVariants?.alcoholic !== undefined;
