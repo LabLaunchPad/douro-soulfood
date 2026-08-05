@@ -300,6 +300,96 @@
   --font-body: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
 
+
+  /* ─────────────────────────────────────────────────────────────
+     TYPE SCALE — Semantic role tokens
+     A modular scale (~1.25 ratio, base 1rem) snapped to practical
+     rem values, mapped onto three roles: display (Fraunces, hero
+     and section headers), heading (Fraunces, subheadings and card
+     titles), body (DM Sans, paragraph and UI text), plus a single
+     label token for eyebrows/badges/uppercase micro-text.
+
+     These are additive — existing `text-xs`…`text-7xl` usage in
+     components is untouched. New/refactored components should
+     prefer `text-display-*` / `text-heading-*` / `text-body-*` /
+     `text-label` so headings and body copy pull from one
+     intentional scale instead of ad hoc Tailwind steps.
+
+     Tailwind v4 pairs a `--text-{name}--line-height` key with
+     each `--text-{name}` font-size to bundle line-height into
+     the same utility class.
+     ───────────────────────────────────────────────────────────── */
+
+  --text-label: 0.75rem;              /* 12px — eyebrows, badges, uppercase micro-copy */
+  --text-label--line-height: 1.4;
+
+  --text-body-sm: 0.875rem;           /* 14px — captions, metadata */
+  --text-body-sm--line-height: 1.6;
+  --text-body-base: 1rem;             /* 16px — default paragraph text */
+  --text-body-base--line-height: 1.6;
+  --text-body-lg: 1.125rem;           /* 18px — lead paragraphs, emphasized body */
+  --text-body-lg--line-height: 1.6;
+
+  --text-heading-sm: 1.375rem;        /* 22px — card titles, small subheadings */
+  --text-heading-sm--line-height: 1.25;
+  --text-heading-md: 1.75rem;         /* 28px — section subheadings */
+  --text-heading-md--line-height: 1.2;
+  --text-heading-lg: 2.25rem;         /* 36px — section headings */
+  --text-heading-lg--line-height: 1.15;
+
+  --text-display-sm: 2.75rem;         /* 44px — small hero / page titles */
+  --text-display-sm--line-height: 1.1;
+  --text-display-md: 3.5rem;          /* 56px — standard hero heading */
+  --text-display-md--line-height: 1.05;
+  --text-display-lg: 4.5rem;          /* 72px — large hero heading */
+  --text-display-lg--line-height: 1.0;
+  --text-display-xl: 5.5rem;          /* 88px — largest hero, desktop-only */
+  --text-display-xl--line-height: 0.98;
+
+
+  /* ─────────────────────────────────────────────────────────────
+     BREAKPOINTS — Explicit grid steps
+     These match Tailwind v4's own defaults exactly — declared
+     here so the full responsive grid is visible in one token
+     file instead of relying on implicit framework defaults.
+     Mobile-first: unprefixed styles are the mobile baseline,
+     each step below adds/overrides at that min-width.
+     ───────────────────────────────────────────────────────────── */
+
+  --breakpoint-sm: 40rem;    /* 640px  — large phones, landscape */
+  --breakpoint-md: 48rem;    /* 768px  — tablets */
+  --breakpoint-lg: 64rem;    /* 1024px — small laptops */
+  --breakpoint-xl: 80rem;    /* 1280px — desktops */
+  --breakpoint-2xl: 96rem;   /* 1536px — large desktops */
+
+
+  /* ─────────────────────────────────────────────────────────────
+     CONTAINER — Semantic content width
+     Alias for Tailwind's `--container-7xl` (80rem / 1280px),
+     already the de facto page content width across the site
+     (`max-w-7xl`). Named for atomic "Container"/"Section"
+     components so intent reads clearly at the call site.
+     ───────────────────────────────────────────────────────────── */
+
+  --container-content: var(--container-7xl);
+
+
+  /* ─────────────────────────────────────────────────────────────
+     Z-INDEX — Named stacking layers
+     Standard layering convention (dropdown < sticky < overlay <
+     modal < popover < toast) so new components stack predictably
+     instead of guessing arbitrary numbers. Existing numeric
+     `z-10`/`z-20`/etc. usage is untouched; prefer these for new
+     overlay-type components (mobile nav, modals, toasts).
+     ───────────────────────────────────────────────────────────── */
+
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1100;
+  --z-index-overlay: 1200;
+  --z-index-modal: 1300;
+  --z-index-popover: 1400;
+  --z-index-toast: 1500;
+
 }
 
 
