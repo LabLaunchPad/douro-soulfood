@@ -9,6 +9,7 @@ import MenuBistroCard from '@/components/sections/MenuBistroCard.astro';
 import AllergenHeaderLegend from '@/components/ui/AllergenHeaderLegend.astro';
 import CategoryIcon from '@/components/ui/CategoryIcon.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import { categoryConfig, drinkSubLabels, getSortedGroupedMenu, type DietaryTag } from '@/lib/menu';
 
 /**
@@ -192,25 +193,31 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
           <div class="mb-8 rounded-sm overflow-hidden bg-(--color-bistro-paper) border border-(--color-bistro-paper-border) shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
               <div class="aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
-                <img
+                <Image
                   src="/images/menu/Quesadillas.webp"
                   alt="D'ouro Quesadillas"
+                  width={1254}
+                  height={1254}
                   class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 ease-out"
                   loading="lazy"
                 />
               </div>
               <div class="aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
-                <img
+                <Image
                   src="/images/menu/quesdillas2.webp"
                   alt="D'ouro Quesadillas 2"
+                  width={2048}
+                  height={2048}
                   class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 ease-out"
                   loading="lazy"
                 />
               </div>
               <div class="aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
-                <img
+                <Image
                   src="/images/menu/ques3.webp"
                   alt="D'ouro Quesadillas 3"
+                  width={2048}
+                  height={2048}
                   class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 ease-out"
                   loading="lazy"
                 />
@@ -264,25 +271,31 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
           <div class="mb-8 rounded-sm overflow-hidden bg-(--color-bistro-paper) border border-(--color-bistro-paper-border) shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
-                <img
+                <Image
                   src="/images/menu/tacos1.webp"
                   alt="D'ouro Taco Showcase 1"
+                  width={1254}
+                  height={1254}
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
-                <img
+                <Image
                   src="/images/menu/tacos2.webp"
                   alt="D'ouro Taco Showcase 2"
+                  width={1254}
+                  height={1254}
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
-                <img
+                <Image
                   src="/images/menu/tacos3.webp"
                   alt="D'ouro Taco Showcase 3"
+                  width={1254}
+                  height={1254}
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -337,25 +350,34 @@ const { sortedCategories } = getSortedGroupedMenu(allItems);
           <div class="mb-8 rounded-sm overflow-hidden bg-(--color-bistro-paper) border border-(--color-bistro-paper-border) shadow-sm p-3.5 sm:p-5 max-w-4xl lg:max-w-5xl mx-auto">
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
-                <img
+                <Image
                   src="/images/menu/bowl1.jfif"
                   alt="D'ouro Bowls Showcase 1"
+                  width={1254}
+                  height={1254}
+                  format="jpeg"
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
-                <img
+                <Image
                   src="/images/menu/bowl2.jfif"
                   alt="D'ouro Bowls Showcase 2"
+                  width={1254}
+                  height={1254}
+                  format="jpeg"
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-stone-100">
-                <img
+                <Image
                   src="/images/menu/bowl3.jfif"
                   alt="D'ouro Bowls Showcase 3"
+                  width={1254}
+                  height={1254}
+                  format="jpeg"
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
