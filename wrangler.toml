@@ -1,3 +1,15 @@
 name = "douro-soulfood"
 compatibility_date = "2026-01-14"
 compatibility_flags = ["nodejs_compat"]
+
+# Hero video files, served with proper HTTP Range support via
+# src/pages/douroherovideo.mp4.ts / douroheromobile.mp4.ts — see
+# docs/runbook.md. The Workers static-asset serving used for everything
+# else in public/ doesn't honor Range requests (confirmed: a ranged
+# request against a public/*.mp4 file returns 200, not 206 — no
+# Accept-Ranges header), which iOS Safari requires for <video> autoplay
+# of larger files. bucket_name must match a real R2 bucket created with
+# `wrangler r2 bucket create douro-media` before this binding resolves.
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "douro-media"
