@@ -1,6 +1,10 @@
 # Components Reference
 
 > API docs for all components in the D'ouro Soulfood design system. All components are `.astro` — no client-side JS framework is used anywhere in this codebase.
+>
+> Building a new component that's hard to get right from scratch (a11y-sensitive interactions like a combobox or modal)? See `docs/prebuilt-components.md` for the borrow-and-adapt protocol before hand-rolling one. If the component needs real client-side interactive state, see `docs/adr/react-islands.md` first — React is not installed in this repo and requires explicit approval.
+>
+> All new components must be previewable at `/dev/ui` in dev mode (see `CLAUDE.md`'s visual outcome protocol).
 
 ---
 
