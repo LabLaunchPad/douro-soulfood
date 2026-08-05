@@ -11,6 +11,7 @@ import UserReviews from '@/components/sections/UserReviews.astro';
 import MapEmbed from '@/components/ui/MapEmbed.astro';
 import Footer from '@/components/layout/Footer.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import siteSettings from '@/content/settings/default.json';
 
 const { address_line1, city, postal_code, phone, hours } = siteSettings;
@@ -30,30 +31,30 @@ const categorySlots = [
   { slug: 'drinks', title: 'Bebidas & Sobremesas', desc: 'Caipirinha, Guaraná & Brigadeiros', icon: 'drinks' },
 ];
 
-/** 9 Popular dishes photos (image-only gallery layout) */
+/** 9 Popular dishes photos (image-only gallery layout). width/height match the actual source files (300×300). */
 const popularDishes = [
-  { src: '/images/menu/taco-especial.png', alt: 'Taco Especial' },
-  { src: '/images/menu/quesadilla-haehnchen.png', alt: 'Quesadilla Hähnchen' },
-  { src: '/images/menu/feijoada.png', alt: 'Feijoada Brasileira' },
-  { src: '/images/menu/pao-de-queijo.png', alt: 'Pão de Queijo' },
-  { src: '/images/menu/mango-ceviche.png', alt: 'Mango Ceviche' },
-  { src: '/images/menu/coxinha.png', alt: 'Coxinha' },
-  { src: '/images/menu/african-stew.jpg', alt: 'African Peanut Stew' },
-  { src: '/images/menu/brigadeiros.jpg', alt: 'Brigadeiros' },
-  { src: '/images/menu/brisa-do-mar.png', alt: 'Brisa do Mar' },
+  { src: '/images/menu/taco-especial.png', alt: 'Taco Especial', width: 300, height: 300 },
+  { src: '/images/menu/quesadilla-haehnchen.png', alt: 'Quesadilla Hähnchen', width: 300, height: 300 },
+  { src: '/images/menu/feijoada.png', alt: 'Feijoada Brasileira', width: 300, height: 300 },
+  { src: '/images/menu/pao-de-queijo.png', alt: 'Pão de Queijo', width: 300, height: 300 },
+  { src: '/images/menu/mango-ceviche.png', alt: 'Mango Ceviche', width: 300, height: 300 },
+  { src: '/images/menu/coxinha.png', alt: 'Coxinha', width: 300, height: 300 },
+  { src: '/images/menu/african-stew.jpg', alt: 'African Peanut Stew', width: 300, height: 300 },
+  { src: '/images/menu/brigadeiros.jpg', alt: 'Brigadeiros', width: 300, height: 300 },
+  { src: '/images/menu/brisa-do-mar.png', alt: 'Brisa do Mar', width: 300, height: 300 },
 ];
 
-/** 9 Photos for Galerie section */
+/** 9 Photos for Galerie section. width/height match each source file's actual dimensions. */
 const galleryImages = [
-  { src: '/images/gallery/1.webp', alt: 'D\'ouro Bistro Spezialität 1' },
-  { src: '/images/gallery/2.webp', alt: 'D\'ouro Bistro Spezialität 2' },
-  { src: '/images/gallery/3.webp', alt: 'D\'ouro Bistro Spezialität 3' },
-  { src: '/images/gallery/4.webp', alt: 'D\'ouro Bistro Spezialität 4' },
-  { src: '/images/gallery/5.webp', alt: 'D\'ouro Bistro Spezialität 5' },
-  { src: '/images/gallery/6.webp', alt: 'D\'ouro Bistro Spezialität 6' },
-  { src: '/images/gallery/7.webp', alt: 'D\'ouro Bistro Spezialität 7' },
-  { src: '/images/gallery/8.webp', alt: 'D\'ouro Bistro Spezialität 8' },
-  { src: '/images/gallery/9.webp', alt: 'D\'ouro Bistro Spezialität 9' },
+  { src: '/images/gallery/1.webp', alt: 'D\'ouro Bistro Spezialität 1', width: 680, height: 510 },
+  { src: '/images/gallery/2.webp', alt: 'D\'ouro Bistro Spezialität 2', width: 594, height: 510 },
+  { src: '/images/gallery/3.webp', alt: 'D\'ouro Bistro Spezialität 3', width: 382, height: 510 },
+  { src: '/images/gallery/4.webp', alt: 'D\'ouro Bistro Spezialität 4', width: 382, height: 510 },
+  { src: '/images/gallery/5.webp', alt: 'D\'ouro Bistro Spezialität 5', width: 382, height: 510 },
+  { src: '/images/gallery/6.webp', alt: 'D\'ouro Bistro Spezialität 6', width: 382, height: 510 },
+  { src: '/images/gallery/7.webp', alt: 'D\'ouro Bistro Spezialität 7', width: 382, height: 510 },
+  { src: '/images/gallery/8.webp', alt: 'D\'ouro Bistro Spezialität 8', width: 382, height: 510 },
+  { src: '/images/gallery/9.webp', alt: 'D\'ouro Bistro Spezialität 9', width: 680, height: 510 },
 ];
 
 /** FAQ entries from KeystaticCMS */
@@ -163,11 +164,13 @@ const PAGE_DESCRIPTION =
           "group relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]",
           index === 8 && "hidden sm:block"
         ]}>
-          <img
+          <Image
             src={item.src}
             alt={item.alt}
-            width="600"
-            height="450"
+            width={item.width}
+            height={item.height}
+            format="webp"
+            quality={85}
             class="w-full h-full object-cover transition-transform duration-[var(--duration-normal)] ease-[var(--ease-out-quart)] group-hover:scale-105"
             loading="lazy"
           />
@@ -284,11 +287,13 @@ const PAGE_DESCRIPTION =
           "group relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]",
           index === 8 && "hidden sm:block"
         ]}>
-          <img
+          <Image
             src={img.src}
             alt={img.alt}
-            width="600"
-            height="450"
+            width={img.width}
+            height={img.height}
+            format="webp"
+            quality={85}
             class="w-full h-full object-cover transition-transform duration-[var(--duration-normal)] ease-[var(--ease-out-quart)] group-hover:scale-105"
             loading="lazy"
           />
