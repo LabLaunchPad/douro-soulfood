@@ -44,6 +44,17 @@ Renders the star-rating badge shown on the home page below the hero.
 **File:** `src/components/ui/AllergenHeaderLegend.astro`
 Renders the allergen code legend and bilingual (DE/EN) disclaimer shown at the top of the menu page.
 
+### MapEmbed
+**File:** `src/components/ui/MapEmbed.astro`
+Consent-gated Google Maps embed ("two-click" pattern): renders a static placeholder card (address text + a "Karte anzeigen" button) by default, and only injects the real `<iframe>` after the visitor clicks through — no request to Google fires, and no visitor IP is sent, until they opt in. Used on the home page and `contact.astro`.
+**Props:**
+| Prop | Type | Description |
+|------|------|-------------|
+| src | string | The Google Maps embed URL to load after consent |
+| title | string | `<iframe>` accessible title |
+| addressLabel | string | Address text shown on the placeholder card |
+| class | string | Additional classes |
+
 ---
 
 ## Section Components (`src/components/sections/`)
@@ -83,7 +94,7 @@ Full-detail menu item card (used for most menu categories). Reads `siteSettings`
 
 ### MenuBistroCard
 **File:** `src/components/sections/MenuBistroCard.astro`
-Compact menu item card, used for the drinks/bebidas sub-sections. Supports `priceVariants` (non-alcoholic/alcoholic dual pricing) and `addOns`.
+Compact menu item card, used across most of `menu.astro`'s categories (quesadillas, tacos, bowls, drinks/bebidas, and more) — not limited to drinks. Supports `priceVariants` (non-alcoholic/alcoholic dual pricing) and `addOns`.
 **Props:**
 | Prop | Type | Description |
 |------|------|-------------|
@@ -104,7 +115,11 @@ Compact menu item card, used for the drinks/bebidas sub-sections. Supports `pric
 
 ### NavBar
 **File:** `src/components/layout/NavBar.astro`
-Desktop scroll-transition header plus a coupled full-screen mobile drawer (`aria-label="Mobile Navigation Drawer"`), all in one component with its own `<script>` for scroll/open-close behavior.
+Desktop scroll-transition header plus the mobile capsule trigger (logo, "Speisekarte" link, hamburger button). Renders `MobileNavDrawer` and owns the scroll-transition `<script>`; the drawer's own open/close/focus-trap logic lives in `MobileNavDrawer.astro`.
+
+### MobileNavDrawer
+**File:** `src/components/layout/MobileNavDrawer.astro`
+Full-screen mobile navigation overlay (`role="dialog"`, `aria-label="Navigationsmenü"`), split out of `NavBar.astro`. Talks to `NavBar`'s hamburger button (`#mobile-menu-btn`) by id rather than component subtree, since Astro doesn't scope `<script>` tags. Owns open/close, `Escape`-to-close, a Tab focus trap, and `inert`/`aria-hidden` toggling while closed.
 
 ### Footer
 **File:** `src/components/layout/Footer.astro`

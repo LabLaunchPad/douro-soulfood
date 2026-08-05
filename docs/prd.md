@@ -50,7 +50,7 @@ Reflects what `src/pages/index.astro` actually renders — mostly hand-written i
 7. **Our Story** — Angela's lockdown origin story (inline markup)
 8. **Photo Gallery** — plain grid, no lightbox
 9. **FAQ Accordion** — plain `<details>`-based accordion (inline markup, not a separate component)
-10. **Location/Map** — address, hours, embedded Google Maps iframe
+10. **Location/Map** — address, hours, consent-gated Google Maps embed (static placeholder until the visitor clicks "Karte anzeigen")
 11. **Footer** — social links, legal, quick nav
 
 ---
@@ -78,7 +78,7 @@ The home page's copy (hero headline, story text, gallery images) is currently ha
 | i18n | German (primary) + English (some fields) |
 | Accessibility | Playwright + `@axe-core/playwright` accessibility assertions in E2E tests |
 | Security headers | CSP, HSTS, X-Frame-Options, etc. via `public/_headers` |
-| Images | Astro Image compile-time optimization |
+| Images | Astro `<Image>` used by menu-card/feature components; raw `<img>` still used in page-level image grids |
 | Analytics | None currently configured |
 
 ---
@@ -106,7 +106,7 @@ The home page's copy (hero headline, story text, gallery images) is currently ha
 | Service | Purpose |
 |---------|---------|
 | Lieferando | Delivery/order link-out (migrated from Foodora) |
-| Google Maps | Location embed (Contact page + home page location section) |
+| Google Maps | Consent-gated location embed (Contact page + home page location section) |
 
 ---
 

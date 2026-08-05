@@ -11,6 +11,10 @@ import UserReviews from '@/components/sections/UserReviews.astro';
 import MapEmbed from '@/components/ui/MapEmbed.astro';
 import Footer from '@/components/layout/Footer.astro';
 import { getCollection } from 'astro:content';
+import siteSettings from '@/content/settings/default.json';
+
+const { address_line1, city, postal_code, phone, hours } = siteSettings;
+const phoneHref = `tel:${phone.replace(/[^+\d]/g, '')}`;
 
 /**
  * HOME PAGE — D'ouro Soulfood Bistro
@@ -369,17 +373,17 @@ const PAGE_DESCRIPTION =
               <div class="flex flex-col gap-0.5">
                 <span class="text-[11px] text-text-tertiary uppercase font-medium">Adresse</span>
                 <address class="not-italic text-xs md:text-sm text-text-secondary leading-relaxed">
-                  <p>Auerspergstraße 10</p>
-                  <p>5020 Salzburg</p>
+                  <p>{address_line1}</p>
+                  <p>{postal_code} {city}</p>
                 </address>
               </div>
               <div class="flex flex-col gap-0.5">
                 <span class="text-[11px] text-text-tertiary uppercase font-medium">Kontakt</span>
                 <a
-                  href="tel:+436764231921"
+                  href={phoneHref}
                   class="text-xs md:text-sm text-text-secondary hover:text-brand-gold no-underline transition-colors"
                 >
-                  +43 676 4231921
+                  {phone}
                 </a>
               </div>
             </div>
@@ -388,7 +392,13 @@ const PAGE_DESCRIPTION =
           <div class="border-t border-border-subtle pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
               <span class="text-[11px] text-text-tertiary block">Öffnungszeiten</span>
-              <span class="text-xs md:text-sm font-medium text-text-primary">Heute: 11:00 – 20:00 Uhr</span>
+              <span
+                id="today-hours"
+                data-hours={JSON.stringify(hours)}
+                class="text-xs md:text-sm font-medium text-text-primary"
+              >
+                Heute: {hours[0].time} Uhr
+              </span>
             </div>
             <a
               href="/menu"
@@ -406,18 +416,16 @@ const PAGE_DESCRIPTION =
   </section>
 
   {/* 13. FOOTER */}
-  <Footer
-    slot="footer"
-    links={[
-      { label: 'Speisekarte', href: '/menu' },
-      { label: 'Catering & Events', href: '/catering' },
-      { label: 'Über uns', href: '/about' },
-      { label: 'Kontakt', href: '/contact' },
-      { label: 'Geschenkkarten', href: '/gift-cards' },
-    ]}
-    legalLinks={[
-      { label: 'Impressum', href: '/impressum' },
-      { label: 'Datenschutz', href: '/datenschutz' },
-    ]}
-  />
+  <Footer slot="footer" />
 </Base>
+
+<script>
+  const el = document.getElementById('today-hours');
+  const hours = el ? JSON.parse(el.dataset.hours ?? '[]') : [];
+  const today = new Intl.DateTimeFormat('de-AT', { timeZone: 'Europe/Vienna', weekday: 'long' }).format(new Date());
+  const entry = hours.find((h: { day: string; time: string }) => h.day === today);
+
+  if (el && entry) {
+    el.textContent = entry.time === 'Geschlossen' ? 'Heute geschlossen' : `Heute: ${entry.time} Uhr`;
+  }
+</script>
