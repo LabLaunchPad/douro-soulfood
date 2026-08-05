@@ -62,7 +62,7 @@ public/
 - **ALWAYS** use the easing curves: `transition: all var(--duration-normal) var(--ease-spring)`
 
 ### 2. Astro 6 Patterns
-- `.astro` components only — this site ships **zero client-side JS framework**. There is no React integration; do not add one without discussing it first.
+- `.astro` components only — this site ships **zero client-side JS framework**. There is no React integration; do not add one without discussing it first. See `docs/adr/react-islands.md` for the full policy: Astro + vanilla `<script>` is the default for all interactivity, React-as-island is allowed only for a narrow, explicitly-approved set of cases, and it must never replace a working static component.
 - Use Astro's built-in `<Image />` component for optimized images.
 - Use content collections (`getCollection()`) for CMS-managed data — `menu_items` and `faq` are declared in `src/content.config.ts`. `settings` is read via a direct JSON import (`import siteSettings from '@/content/settings/default.json'`) since it's a singleton, not a collection.
 - Node 22.12+ required — do NOT use APIs deprecated before that version.
