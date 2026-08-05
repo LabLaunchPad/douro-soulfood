@@ -86,6 +86,17 @@ test.describe('Home page — content & visibility', () => {
     await expect(footer).toBeVisible();
     await expect(footer.locator('address', { hasText: 'Auerspergstraße 10' })).toBeVisible();
   });
+
+  test('skip-to-main-content link is focusable and targets #main-content', async ({ page }) => {
+    const skipLink = page.locator('a[href="#main-content"]');
+    await expect(skipLink).toHaveClass(/sr-only/);
+
+    await skipLink.focus();
+    await expect(skipLink).toBeVisible();
+
+    const main = page.locator('main#main-content');
+    await expect(main).toBeAttached();
+  });
 });
 
 /* ═══════════════════════════════════════════════════════════════
