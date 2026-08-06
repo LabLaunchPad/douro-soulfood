@@ -4,6 +4,8 @@
  * - If `allergens` prop is passed: Only displays allergen definitions present in that section.
  * - If `allergens` is omitted: Displays global allergen key.
  */
+import FlagIcon from '@/components/ui/FlagIcon.astro';
+
 interface Props {
   allergens?: string[];
   class?: string;
@@ -76,25 +78,11 @@ const itemsToRender = activeKeys
   {!allergens && (
     <div class="max-w-6xl mx-auto pt-2.5 mt-2.5 border-t border-(--color-bistro-paper-border)/70 flex flex-col lg:flex-row items-center justify-between gap-x-6 gap-y-1 text-[11px] text-stone-500 font-sans italic text-center lg:text-left leading-tight">
       <p class="flex items-center gap-1.5 justify-center lg:justify-start">
-        <svg class="w-3.5 h-2.5 rounded-[2px] shadow-xs shrink-0" viewBox="0 0 5 3" aria-hidden="true">
-          <rect width="5" height="1" y="0" fill="#000000"/>
-          <rect width="5" height="1" y="1" fill="#DD0000"/>
-          <rect width="5" height="1" y="2" fill="#FFCE00"/>
-        </svg>
+        <FlagIcon lang="de" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
         <span>Fragen Sie unser Team nach detaillierten Informationen zu Allergenen und Zutaten. Alle Preise inkl. MwSt. Änderungen und Irrtümer vorbehalten.</span>
       </p>
       <p class="flex items-center gap-1.5 justify-center lg:justify-start">
-        <svg class="w-3.5 h-2.5 rounded-[2px] shadow-xs shrink-0" viewBox="0 0 60 30" aria-hidden="true">
-          <clipPath id="uk-clip-disclaimer"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-          <clipPath id="uk-diag-disclaimer"><path d="M0,0 L60,30 M60,0 L0,30"/></clipPath>
-          <g clip-path="url(#uk-clip-disclaimer)">
-            <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
-            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" clip-path="url(#uk-diag-disclaimer)"/>
-            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path="url(#uk-diag-disclaimer)"/>
-            <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
-            <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
-          </g>
-        </svg>
+        <FlagIcon lang="uk" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
         <span>Please ask our team for detailed information regarding allergens and ingredients. All prices incl. VAT. Subject to changes and errors.</span>
       </p>
     </div>
