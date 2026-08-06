@@ -13,8 +13,8 @@ Defined here with structure only — **no values are invented**. Each is `pendin
 
 | ID | Measures | Status |
 |---|---|---|
-| `PERF-001` | Lighthouse performance score, all 5 real routes | **collected** — 4/5 pass (≥0.90); `/menu` fails at 0.64, LCP 8960ms. See `reports/PERF-POST-MIGRATION.okf.md`. |
-| `PERF-IMG-001` | Image payload — bytes, request count, format mix | **partial** — request counts collected (`current/image-audit.json`); byte-size breakdown not yet extracted |
+| `PERF-001` | Lighthouse performance score, all 5 real routes | **collected, `/menu` partially fixed** — `/menu`'s image payload issue fixed (-80% bytes), but the score still doesn't reliably clear ≥0.90 (0.81-0.94 across runs) due to a newly-found, separate DOM-size factor. See `reports/MENU-IMAGE-FIX.okf.md`. |
+| `PERF-IMG-001` | Image payload — bytes, request count, format mix | **collected** — `/menu`'s byte-size breakdown extracted and fixed: 4.18MB → 828KB. See `reports/MENU-IMAGE-FIX.okf.md`. |
 | `A11Y-001` | Lighthouse + axe-core accessibility score | **collected** — all 5 routes pass ≥0.92 (0.95–0.96) |
 | `SEO-001` | Lighthouse SEO score, structured-data validity | **collected** — all 5 routes score 1.00 |
 | `BUILD-001` | `pnpm build` duration and output size | **collected** — ~21s, 36M `dist/` output |
