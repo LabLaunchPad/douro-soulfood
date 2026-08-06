@@ -32,11 +32,11 @@ related: [".ai/metrics/agent-efficiency.md", ".ai/performance/agent-performance-
 | Rework rate | Low | pending | — | not yet instrumented |
 | Human intervention rate | Low (only for real stop conditions) | pending | — | not yet instrumented |
 | Hallucination/incident rate | Zero | **0 known incidents this session** | This session's own work — every claim traced to a real check; one prior overly-broad assumption (Playwright/Chromium "unavailable") was caught and corrected before being acted on further | measured, this session only |
-| Build pass rate | High | **100% this session** (every `pnpm build` run this session succeeded, ~15+ runs across all phases) | Direct session history | measured, this session only |
-| Test pass rate | High | pending (full Playwright execution not run — `--list` only, 76/76 collecting correctly) | `npx playwright test --list` output | partial |
-| Benchmark regression rate | Low | **1 real regression found this session** (`/menu` performance) | `benchmarks/reports/PERF-POST-MIGRATION.okf.md` | measured, this session only |
-| Doc drift rate | Low | pending — no repeat audit has run yet to check whether this session's own docs stayed accurate over time | — | not yet instrumented |
+| Build pass rate | High | **100% across all sessions to date** (every `pnpm build` run has succeeded, 30+ runs across all phases and follow-up sessions) | Direct session history | measured |
+| Test pass rate | High | pending (full Playwright execution not run — `--list` only, now 134/134 collecting correctly, up from 76) | `npx playwright test --list` output | partial |
+| Benchmark regression rate | Low | **1 real regression found and fixed** (`/menu` performance: image payload -80%, DOM size -28%) | `benchmarks/reports/MENU-IMAGE-FIX.okf.md`, `benchmarks/reports/MENU-DOM-SIZE-FIX.okf.md` | measured |
+| Doc drift rate | Low | **1 real instance found and fixed** — `.ai/packs/security.okf.md` exceeded its own token budget (686 vs 500 est. tokens) after CSP-fix content was added without trimming; caught by a real `token-report.mjs` run and re-verified after the fix (498/500) | `node .ai/scripts/token-report.mjs` output, before and after | measured |
 | Command success rate | High | pending — the command registry itself was just created this session, unused in practice yet | — | not yet instrumented |
 
 ## Honest summary
-This scorecard is **mostly structure, not data** — consistent with `benchmarks/README.md`'s same honest framing for performance benchmarks. The 4 entries with real values reflect this single session's own work, not a track record across many sessions. Re-run this assessment after future sessions accumulate real task history via `.ai/tasks/completed/`.
+This scorecard is **mostly structure, not data** — consistent with `benchmarks/README.md`'s same honest framing for performance benchmarks. The 5 entries with real values now span two sessions' actual work (initial setup + a follow-up perf/CSP/E2E/harness-verification pass), not a long track record. Re-run this assessment after future sessions accumulate real task history via `.ai/tasks/completed/`.
