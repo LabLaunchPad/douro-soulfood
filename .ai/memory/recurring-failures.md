@@ -32,3 +32,11 @@ If any of the above suddenly works (e.g. a future environment has a working Chro
 - **Evidence**: Headless-Chrome click test before the fix: clicking #mobile-menu-btn left #mobile-menu's data-open attribute at 'false'. After adding all 5 script hashes to public/_headers: data-open became 'true' and the map consent-gate iframe loaded on click, zero CSP console violations.
 - **Recommended behavior**: When a backlog item says a CSP/security gap only affects SEO or a narrow feature, verify that scope directly (grep for ALL inline <script> tags site-wide, not just the one named in the note) before assuming the blast radius is as documented -- the actual impact here was much larger than what was written down
 - **Status**: active
+
+- **Date**: 2026-08-06
+- **Source**: manual entry via memory-append.mjs
+- **Type**: recurring-failure
+- **Insight**: Content added to a thin OKF pack (.ai/packs/security.okf.md) during a real fix expanded it past its own frontmatter token_budget without anyone re-checking node .ai/scripts/token-report.mjs afterward -- the pack grew from a 350-token pointer to a 686-token near-duplicate of docs/security.md's full narrative before this was caught.
+- **Evidence**: node .ai/scripts/token-report.mjs before fix: security.okf.md 686 tokens vs 500 budget, OVER BUDGET; after trimming back to a pointer: 498/500, ok
+- **Recommended behavior**: Run node .ai/scripts/token-report.mjs as a matter of course after editing any .ai/packs/*.okf.md file, not just when told to -- packs are meant to stay thin pointers to docs/*.md, and it is easy to accidentally duplicate full narrative content into them while documenting a fix in the moment
+- **Status**: active
