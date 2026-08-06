@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/architecture"
+type: "knowledge"
+title: "Architecture: D'ouro Soulfood"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "human", references: [] }
+attestation: { method: "manual", checks: [] }
+summary: "Stack decision matrix, rendering strategy, content architecture, component hierarchy, build pipeline, directory conventions."
+load_when: "Structural/rendering/build-pipeline questions."
+token_budget: 1200
+related: [".ai/packs/architecture.okf.md"]
+---
+
 # Architecture: D'ouro Soulfood
 
 > **Version:** 0.2.0

@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/prd"
+type: "knowledge"
+title: "PRD: D'ouro Soulfood Bistro — Website"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "human", references: [] }
+attestation: { method: "manual", checks: [] }
+summary: "Product overview, target audience, core pages, homepage section inventory, Keystatic content model, technical requirements, SEO/performance targets, third-party integrations."
+load_when: "Product-scope questions, new page/feature decisions, understanding what the site is for."
+token_budget: 1200
+related: [".ai/packs/repo-overview.okf.md"]
+---
+
 # PRD: D'ouro Soulfood Bistro — Website
 
 > **Version:** 0.2.0

@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/performance-budget"
+type: "knowledge"
+title: "Performance Budget"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "ai", references: [".lighthouserc.js"] }
+attestation: { method: "manual", checks: ["values copied verbatim from .lighthouserc.js"] }
+summary: "Real, enforced Lighthouse thresholds and Core Web Vitals budgets, sourced directly from .lighthouserc.js."
+load_when: "Any change touching JS/images/page weight, or a React island proposal."
+token_budget: 700
+related: [".ai/packs/performance.okf.md"]
+---
+
 # Performance Budget
 
 ## Machine Contract

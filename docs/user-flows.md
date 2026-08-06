@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/user-flows"
+type: "knowledge"
+title: "User Flows"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "ai", references: ["src/pages/", "src/components/"] }
+attestation: { method: "manual", checks: ["verified no contact form exists anywhere via repo-wide search"] }
+summary: "Five real user flows traced to actual files/components — no flow describes a page or interaction this codebase doesn't actually have."
+load_when: "New CTA, new interactive component, navigation changes."
+token_budget: 800
+related: [".ai/packs/repo-overview.okf.md"]
+---
+
 # User Flows
 
 ## Machine Contract

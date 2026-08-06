@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/personas"
+type: "knowledge"
+title: "Personas"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "reviewed"
+provenance: { source: "ai", references: ["docs/prd.md"] }
+attestation: { method: "manual", checks: [] }
+summary: "Three inferred (not measured — zero analytics configured) audience personas, each mapped to real user journeys through actual files/components."
+load_when: "Copy/UX/prioritization decisions."
+token_budget: 800
+related: [".ai/packs/repo-overview.okf.md"]
+---
+
 # Personas
 
 ## Machine Contract

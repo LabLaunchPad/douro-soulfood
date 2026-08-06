@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/components"
+type: "knowledge"
+title: "Components Reference"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "human", references: [] }
+attestation: { method: "manual", checks: [] }
+summary: "Full prop-level API reference for every component in the design system, organized by ui/sections/layout."
+load_when: "Building or modifying any component."
+token_budget: 1500
+related: [".ai/packs/components.okf.md"]
+---
+
 # Components Reference
 
 > API docs for all components in the D'ouro Soulfood design system. All components are `.astro` — no client-side JS framework is used anywhere in this codebase.

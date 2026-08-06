@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/design-system"
+type: "knowledge"
+title: "Design System: D'ouro Soulfood"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "human", references: ["src/styles/tokens.css"] }
+attestation: { method: "manual", checks: [] }
+summary: "Design philosophy, tokens, typography, spacing, motion conventions. Source of truth is src/styles/tokens.css; this doc describes it and must stay in sync."
+load_when: "Any styling/token work."
+token_budget: 800
+related: [".ai/packs/design-system.okf.md", "src/styles/tokens.css"]
+---
+
 # Design System: D'ouro Soulfood
 
 > **Version:** 0.2.0
