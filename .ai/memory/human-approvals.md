@@ -8,3 +8,11 @@ Explicit approvals given by the repo owner in this session, for decisions that o
 
 ## What this log is for
 An agent should check here before assuming something needs a fresh approval — if a closely analogous decision was already explicitly approved, treat that as standing permission for the same class of action, not as requiring a brand-new ask every time. But a *different* class of decision (e.g. installing a new dependency, touching deployment secrets) still needs its own explicit approval — approvals here don't generalize beyond their actual scope.
+
+- **Date**: 2026-08-06
+- **Source**: manual entry via memory-append.mjs
+- **Type**: approval
+- **Insight**: User explicitly deferred the public/images/ -> src/assets/ full pipeline migration (via AskUserQuestion, choosing 'Skip it') rather than having it done automatically, specifically because it requires a Keystatic content-collection schema change (image field type) that risks breaking how the business owner edits menu items in the CMS admin -- one of AGENTS.md's own standing stop conditions.
+- **Evidence**: AskUserQuestion in this session: 'Want me to proceed with the full public/images/ -> src/assets/ migration, which requires changing the Keystatic CMS schema?' -> answer: 'Skip it (recommended)'
+- **Recommended behavior**: Do not attempt this migration without a fresh, explicit ask -- the direct image-resize fix already merged (PR #34) captured the large practical performance win without this risk; treat the schema-touching version of this backlog item as staying open/deferred, not silently retried
+- **Status**: active
