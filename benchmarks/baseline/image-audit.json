@@ -1,0 +1,36 @@
+{
+  "note": "all <img> tags are Astro <Image>-rendered output; zero are hand-written raw <img> in source per docs/audit/image-audit.md",
+  "collected_at": "2026-08-06T07:22:59.104Z",
+  "pages": {
+    "index.html": {
+      "totalImgTags": 23,
+      "lazyLoaded": 20,
+      "eagerLoaded": 0,
+      "noLoadingAttr": 3
+    },
+    "menu/index.html": {
+      "totalImgTags": 27,
+      "lazyLoaded": 24,
+      "eagerLoaded": 0,
+      "noLoadingAttr": 3
+    },
+    "about/index.html": {
+      "totalImgTags": 3,
+      "lazyLoaded": 0,
+      "eagerLoaded": 0,
+      "noLoadingAttr": 3
+    },
+    "catering/index.html": {
+      "totalImgTags": 5,
+      "lazyLoaded": 2,
+      "eagerLoaded": 0,
+      "noLoadingAttr": 3
+    },
+    "contact/index.html": {
+      "totalImgTags": 3,
+      "lazyLoaded": 0,
+      "eagerLoaded": 0,
+      "noLoadingAttr": 3
+    }
+  }
+}
