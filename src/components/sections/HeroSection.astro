@@ -25,8 +25,10 @@ interface Props {
   headline: string;
   /** Supporting subheadline text */
   subheadline?: string;
-  /** Hero background video URL (e.g. /douroherovideo.mp4) */
+  /** Hero background video URL (e.g. /douroherovideo.mp4) — desktop/tablet */
   videoSrc?: string;
+  /** Hero background video URL — mobile (smaller file, different crop) */
+  videoSrcMobile?: string;
   /** Hero background images (fallback source) */
   images?: HeroImage[];
   /** Primary CTA config */
@@ -40,6 +42,7 @@ const {
   headline,
   subheadline,
   videoSrc = '/douroherovideo.mp4',
+  videoSrcMobile = '/douroheromobile.mp4',
   images = [],
   ctaPrimary,
   ctaSecondary,
@@ -60,25 +63,34 @@ const heroImage = images[0];
   >
     {videoSrc ? (
       <>
+        {/* Mobile and desktop videos share a poster fallback and load lazily —
+            see the script below. Neither has a static `src`/`autoplay`: both
+            browsers otherwise start fetching BOTH files regardless of which
+            is actually visible (CSS `hidden`/`block` only affects rendering,
+            not resource loading), doubling real bandwidth cost on every
+            visit. The script sets `src` only on the video matching the
+            current viewport, and skips playback entirely for visitors who
+            prefer reduced motion — the poster then stays visible instead. */}
         <!-- Mobile Video -->
         <video
-          src="/douroheromobile.mp4"
-          autoplay
+          data-hero-video="mobile"
+          data-video-src={videoSrcMobile}
+          poster={heroImage?.src}
           loop
           muted
           playsinline
-          preload="auto"
+          preload="none"
           class="block md:hidden absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
         ></video>
         <!-- Desktop Video -->
         <video
-          src={videoSrc}
+          data-hero-video="desktop"
+          data-video-src={videoSrc}
           poster={heroImage?.src}
-          autoplay
           loop
           muted
           playsinline
-          preload="auto"
+          preload="none"
           class="hidden md:block absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
         ></video>
       </>
@@ -158,3 +170,54 @@ const heroImage = images[0];
     <slot />
   </div>
 </header>
+
+<script>
+  // Loads and plays only the hero video matching the current viewport —
+  // see the comment above the <video> tags for why this can't be left to
+  // CSS alone. Also respects prefers-reduced-motion: if set, no video is
+  // loaded at all and the poster image stays visible (WCAG 2.2.2 — this
+  // background video is purely decorative, loops indefinitely, and has no
+  // pause control, so it must not autoplay for users who've asked for
+  // reduced motion). Autoplay can still fail even when allowed (iOS/macOS
+  // Safari Low Power Mode blocks it unconditionally, with no way to detect
+  // or work around this) — .play()'s rejection is caught silently and the
+  // poster remains visible, which is the correct fallback.
+  const videos = document.querySelectorAll<HTMLVideoElement>('[data-hero-video]');
+  if (videos.length > 0) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const desktopQuery = window.matchMedia('(min-width: 768px)');
+
+    let activeVideo: HTMLVideoElement | null = null;
+
+    const activate = () => {
+      if (reduceMotion.matches) return;
+
+      const wantDesktop = desktopQuery.matches;
+      const next = document.querySelector<HTMLVideoElement>(
+        `[data-hero-video="${wantDesktop ? 'desktop' : 'mobile'}"]`
+      );
+      if (!next || next === activeVideo) return;
+
+      if (activeVideo) {
+        activeVideo.pause();
+        activeVideo.removeAttribute('src');
+        activeVideo.load();
+      }
+
+      const src = next.dataset.videoSrc;
+      if (src) {
+        next.src = src;
+        next.load();
+        next.play().catch(() => {
+          // Autoplay rejected (Low Power Mode, restrictive in-app browser,
+          // data-saver mode, etc.) — poster image stays visible, no error.
+        });
+      }
+      activeVideo = next;
+    };
+
+    activate();
+    desktopQuery.addEventListener('change', activate);
+    reduceMotion.addEventListener('change', activate);
+  }
+</script>

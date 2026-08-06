@@ -27,7 +27,7 @@ Skip link (`#main-content`) present in `Base.astro`, `sr-only`/`focus:not-sr-onl
 
 Every interactive element needs a visible `focus-visible` outline — a prior bug (`outline: none` with nothing replacing it) was already caught and fixed once in `MobileNavDrawer.astro`'s close button; don't reintroduce that pattern.
 
-`prefers-reduced-motion` is respected globally via `Base.astro`'s `<style>` block.
+`prefers-reduced-motion` is respected globally via `Base.astro`'s `<style>` block for CSS animations/transitions — that block does **not** cover `<video autoplay>`, which needs its own JS check (see `HeroSection.astro`'s hero-video script: skips loading/playing entirely when reduced motion is set, satisfying WCAG 2.2.2 for the looping, non-essential background video).
 
 CI runs `@axe-core/playwright` against WCAG 2A/2AA/2.1A/2.1AA tags on both tested pages — a real, enforced gate, not aspirational.
 

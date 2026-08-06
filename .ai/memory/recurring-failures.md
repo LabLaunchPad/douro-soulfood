@@ -40,3 +40,11 @@ If any of the above suddenly works (e.g. a future environment has a working Chro
 - **Evidence**: node .ai/scripts/token-report.mjs before fix: security.okf.md 686 tokens vs 500 budget, OVER BUDGET; after trimming back to a pointer: 498/500, ok
 - **Recommended behavior**: Run node .ai/scripts/token-report.mjs as a matter of course after editing any .ai/packs/*.okf.md file, not just when told to -- packs are meant to stay thin pointers to docs/*.md, and it is easy to accidentally duplicate full narrative content into them while documenting a fix in the moment
 - **Status**: active
+
+- **Date**: 2026-08-06
+- **Source**: manual entry via memory-append.mjs
+- **Type**: recurring-failure
+- **Insight**: HeroSection.astro's two background videos (mobile 4.9MB + desktop 7.6MB) were both fetched by the browser on EVERY page load regardless of viewport, confirmed via real network-request capture in headless Chrome -- CSS hidden/block (display:none) only affects rendering, not whether the browser starts downloading a <video> resource with a static src attribute. This roughly doubled real bandwidth cost on every single homepage visit, mobile or desktop, and was never caught by prior Lighthouse runs since /menu was the only route benchmarked, not /.
+- **Evidence**: Before fix: node network-capture test showed 2 video requests (both douroheromobile.mp4 AND douroherovideo.mp4) fetched on both a 375px and a 1440px viewport. After fix (viewport-matched JS loader, src set dynamically instead of statically): exactly 1 request per viewport, matching the visible video.
+- **Recommended behavior**: When a component conditionally shows/hides two heavy same-purpose resources (video, iframe, etc.) via CSS breakpoint classes alone, verify with a real network-request capture (not just visual inspection) whether the hidden one is still being fetched -- CSS visibility and resource loading are two independent things browsers do not automatically couple for <video>/<audio>/<iframe> elements with a static src
+- **Status**: active

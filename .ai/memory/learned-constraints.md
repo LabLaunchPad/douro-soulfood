@@ -24,3 +24,11 @@ Real constraints discovered through actual work in this repo, not assumed.
 - **Evidence**: npx playwright test tests/about.spec.ts --project=desktop -> Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/chromium_headless_shell-1223/...
 - **Recommended behavior**: Use npx playwright test --list to verify new specs collect/parse correctly (this always works, no browser needed) and verify content assertions by grep/reading the built dist/ HTML output directly, rather than assuming full test execution is available in this sandbox
 - **Status**: active
+
+- **Date**: 2026-08-06
+- **Source**: manual entry via memory-append.mjs
+- **Type**: constraint
+- **Insight**: iOS/macOS Safari's Low Power Mode unconditionally blocks ALL <video autoplay> playback, even with the correct muted+playsinline+autoplay attributes -- verified via web research (Apple developer forums, 2026), and there is no way for a website to detect Low Power Mode is active (Apple deliberately doesn't expose this, to avoid a fingerprinting vector). The only real mitigation is: always set a poster image on the <video>, and always call .play() via JS with a .catch() that silently no-ops on rejection -- the poster then remains visibly correct instead of a black box, with no error.
+- **Evidence**: Verified via https://milkmidi.medium.com/html-autoplay-video-and-ios-low-power-mode-818dbdc982a0 and https://wojtek.im/journal/safari-autoplay-not-working-in-low-power-mode -- applied to HeroSection.astro: both mobile and desktop <video> now have a poster attribute (mobile previously had none) and the loader script's .play() call has a .catch(() => {}) for graceful silent fallback.
+- **Recommended behavior**: Any new autoplaying <video> element in this repo must always include a poster attribute and must call .play() via JS with error handling -- never rely on the autoplay HTML attribute alone reliably working on Apple devices
+- **Status**: active
