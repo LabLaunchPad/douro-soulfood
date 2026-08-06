@@ -3,12 +3,12 @@ okf_version: "0.2"
 id: "task/agent-performance-bootstrap"
 type: "task"
 title: "Agent Performance Bootstrap"
-status: "active"
+status: "completed"
 created: "2026-08-06"
 updated: "2026-08-06"
 freshness: "current"
-lifecycle: "active"
-trust: "draft"
+lifecycle: "stable"
+trust: "verified"
 provenance:
   source: "ai"
   references: [".ai/performance/agent-performance-model.md", ".ai/dashboards/agent-scorecard.okf.md"]
@@ -61,3 +61,17 @@ None directly — this is documentation/tooling scaffolding, not application cod
 ## Stop/ask conditions
 - If any lint/validation script fails and the fix isn't a small, obvious correction (e.g. a missing field), stop and report rather than mass-editing files to force a pass.
 - If a future agent is tempted to fill in `pending` scorecard values with plausible-looking numbers instead of real measurements, that's a hard stop — leave them `pending`.
+
+## Completion report
+**What changed**: nothing new — this task's scope (the agent role matrix, command registry, hook specs, status system, memory/metrics scaffolding, eval harness) was already built and committed in an earlier round of this same session. This task existed to formally verify it.
+
+**What was verified, with real command output**:
+- `node .ai/scripts/command-lint.mjs` → `15/15 commands pass.`
+- `node .ai/scripts/hook-lint.mjs` → `13/13 hooks pass.`
+- `node .ai/scripts/validate-agent-docs.mjs` → `All checks passed.`
+- `node .ai/scripts/validate-okf.mjs` → `Checked 45 OKF file(s). 45 passed, 0 failed.` (count includes files added in a later round of this session — the OKF format itself stayed consistent)
+- `pnpm build` → exits 0
+
+**What wasn't re-verified**: the scorecard's `pending` entries (`.ai/dashboards/agent-scorecard.okf.md`) — still genuinely pending, no cross-session instrumentation exists yet to fill them. Not a gap in this task; that's the correct, honest state.
+
+**Follow-up risk**: none identified. This was documentation/tooling scaffolding with no application-code impact, confirmed by the acceptance criteria above.
