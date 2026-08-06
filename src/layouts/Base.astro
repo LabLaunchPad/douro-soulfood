@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import MobileBottomBar from '@/components/layout/MobileBottomBar.astro';
+import FlagSprites from '@/components/ui/FlagSprites.astro';
 
 interface Props {
   title: string;
@@ -105,6 +106,7 @@ const fullTitle = title === siteName ? title : `${siteName} | ${title}`;
   </head>
 
   <body class="bg-[var(--color-surface-primary)] text-[var(--color-text-primary)] min-h-screen">
+    <FlagSprites />
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]
