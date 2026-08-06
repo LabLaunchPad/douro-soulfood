@@ -24,3 +24,11 @@ If any of the above suddenly works (e.g. a future environment has a working Chro
 - **Evidence**: 3 Lighthouse runs post-DOM-fix vs 3 runs post-image-fix, both recorded in benchmarks/reports/MENU-DOM-SIZE-FIX.okf.md
 - **Recommended behavior**: Do not keep chasing a specific Lighthouse score number in this sandbox once a real, verified structural improvement has been made and the score still doesn't clearly move -- re-measure from an unrestricted environment before concluding further work is or isn't warranted
 - **Status**: active
+
+- **Date**: 2026-08-06
+- **Source**: manual entry via memory-append.mjs
+- **Type**: recurring-failure
+- **Insight**: A CSP policy documented as a 'known SEO-only gap' (JSON-LD blocked) turned out on investigation to be a much more severe, currently-live functional bug: ALL inline scripts on the site were CSP-blocked, including the mobile hamburger menu toggle and the Google Maps consent-gate button -- both silently did nothing for real production visitors.
+- **Evidence**: Headless-Chrome click test before the fix: clicking #mobile-menu-btn left #mobile-menu's data-open attribute at 'false'. After adding all 5 script hashes to public/_headers: data-open became 'true' and the map consent-gate iframe loaded on click, zero CSP console violations.
+- **Recommended behavior**: When a backlog item says a CSP/security gap only affects SEO or a narrow feature, verify that scope directly (grep for ALL inline <script> tags site-wide, not just the one named in the note) before assuming the blast radius is as documented -- the actual impact here was much larger than what was written down
+- **Status**: active
