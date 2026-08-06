@@ -1,0 +1,218 @@
+# .ai/manifest.yaml — machine-readable doc registry
+# One entry per major knowledge artifact. Kept in sync with .ai/INDEX.md's human-readable table.
+
+docs:
+  - id: agents-entrypoint
+    path: AGENTS.md
+    type: policy
+    summary: Universal agent-agnostic entrypoint — identity, prime directives, constraints, task loop.
+    load_when: Always, first, every session.
+    token_budget: 700
+    status: active
+
+  - id: claude-pointer
+    path: CLAUDE.md
+    type: policy
+    summary: Short pointer to AGENTS.md and .ai/INDEX.md; historical full policy relocated to the outcome-operator pack.
+    load_when: Only if entering via Claude Code specifically and AGENTS.md wasn't already read.
+    token_budget: 150
+    status: active
+
+  - id: index
+    path: .ai/INDEX.md
+    type: knowledge
+    summary: Doc map, token budgets, and load-when guidance for every deeper artifact.
+    load_when: Always, second, every session.
+    token_budget: 500
+    status: active
+
+  - id: outcome-operator-pack
+    path: .ai/packs/outcome-operator.okf.md
+    type: policy
+    summary: Full outcome-driven SDLC operator policy, relocated from CLAUDE.md.
+    load_when: Running the outcome loop or executing a specific OUTCOME-XXX item.
+    token_budget: 2800
+    status: active
+
+  - id: audit-current-state
+    path: okf/audit/current-state.okf.md
+    type: audit
+    summary: Verified current-state audit of stack, docs, tests, CI, constraints.
+    load_when: First task in a session, before trusting any other doc's claims.
+    token_budget: 900
+    status: approved
+
+  - id: prd
+    path: docs/prd.md
+    type: knowledge
+    summary: Product overview, audience, core pages, content management, technical requirements.
+    load_when: Product-scope questions, new page/feature decisions.
+    token_budget: 1200
+    status: active
+
+  - id: architecture
+    path: docs/architecture.md
+    type: knowledge
+    summary: Stack decision matrix, rendering strategy, content architecture, component hierarchy, build pipeline.
+    load_when: Structural/rendering/build-pipeline questions.
+    token_budget: 1200
+    status: active
+
+  - id: design-system
+    path: docs/design-system.md
+    type: knowledge
+    summary: Design tokens, typography, spacing, motion conventions.
+    load_when: Any styling work.
+    token_budget: 800
+    status: active
+
+  - id: components
+    path: docs/components.md
+    type: knowledge
+    summary: API reference for every component in the design system.
+    load_when: Building or modifying any component.
+    token_budget: 1500
+    status: active
+
+  - id: agent-rules
+    path: docs/agent.md
+    type: policy
+    summary: Canonical AI-agent rules file — critical rules, component patterns, accessibility, git conventions.
+    load_when: Before any code change, if not already covered by AGENTS.md.
+    token_budget: 1000
+    status: active
+
+  - id: personas
+    path: docs/personas.md
+    type: knowledge
+    summary: Three inferred (not measured) audience personas and their real user journeys.
+    load_when: Copy/UX/prioritization decisions.
+    token_budget: 800
+    status: approved
+
+  - id: user-flows
+    path: docs/user-flows.md
+    type: knowledge
+    summary: Five real user flows traced to actual files/components.
+    load_when: New CTA, new interactive component, navigation changes.
+    token_budget: 800
+    status: approved
+
+  - id: test-plan
+    path: docs/test-plan.md
+    type: knowledge
+    summary: Real test coverage and documented gaps.
+    load_when: Writing or updating tests.
+    token_budget: 800
+    status: approved
+
+  - id: security
+    path: docs/security.md
+    type: knowledge
+    summary: CSP, GDPR consent-gate patterns, known unfixed gaps.
+    load_when: Third-party scripts, embeds, consent, CSP changes.
+    token_budget: 800
+    status: approved
+
+  - id: release
+    path: docs/release.md
+    type: knowledge
+    summary: CI/CD pipeline, branch behavior, known Deploy Preview CI gap.
+    load_when: CI failures, deployment questions.
+    token_budget: 800
+    status: approved
+
+  - id: analytics
+    path: docs/analytics.md
+    type: policy
+    summary: No analytics configured; process for adding it if requested.
+    load_when: Any analytics/tracking request.
+    token_budget: 500
+    status: approved
+
+  - id: performance-budget
+    path: docs/performance-budget.md
+    type: knowledge
+    summary: Enforced Lighthouse thresholds and Core Web Vitals budgets, sourced from .lighthouserc.js.
+    load_when: Any change touching JS/images/page weight, or a React island proposal.
+    token_budget: 700
+    status: approved
+
+  - id: prebuilt-components
+    path: docs/prebuilt-components.md
+    type: policy
+    summary: Borrow-and-adapt protocol for hard-to-build components.
+    load_when: Considering an external component pattern.
+    token_budget: 900
+    status: approved
+
+  - id: react-islands-adr
+    path: docs/adr/react-islands.md
+    type: decision
+    summary: React-as-island policy — Astro-first default, narrow allowed conditions, adapter pattern, hydration rules.
+    load_when: Any interactive-component decision.
+    token_budget: 900
+    status: approved
+
+  - id: image-audit
+    path: docs/audit/image-audit.md
+    type: audit
+    summary: Confirms zero raw <img> remain in index.astro/menu.astro; documents the public/ passthrough limitation.
+    load_when: Image-optimization questions.
+    token_budget: 400
+    status: approved
+
+# Added by the AI Agent Performance and Efficiency OS setup — listed compactly
+# (one line per file) rather than one full entry each, to stay token-efficient
+# given the entrypoint/pack docs above already cover the detailed-entry pattern.
+
+agents:
+  directory: .ai/agents/
+  index: .ai/agents/README.md
+  files: [orchestrator, context-librarian, spec-writer, implementer, design-system-guardian,
+          cms-content-guardian, accessibility-guardian, performance-engineer, qa-verifier,
+          benchmark-analyst, docs-guardian, memory-curator, security-guardian, release-guardian]
+  token_budget_each: 800
+
+commands:
+  directory: .ai/commands/
+  index: .ai/commands/README.md
+  files: [agent-bootstrap, agent-status, context-pack, start-task, plan-task, implement-task,
+          verify-task, bench-run, bench-compare, eval-agent, doc-sync, learn, fix-issue,
+          borrow-component, release-check]
+  token_budget_each: 350
+
+hooks:
+  directory: .ai/hooks/
+  index: .ai/hooks/README.md
+  files: [session-start, task-intake, context-selection, truth-verification, spec-gate,
+          pattern-reuse, safety-gate, code-change, verification, benchmark, docs-sync,
+          memory-capture, final-report]
+  token_budget_each: 250
+
+status_system:
+  status: .ai/status.md
+  next_action: .ai/next-action.md
+  note: Point-in-time snapshots — go stale unless updated; prefer live script output where available.
+
+performance:
+  model: .ai/performance/agent-performance-model.md
+
+metrics:
+  directory: .ai/metrics/
+  files: [agent-efficiency, token-efficiency]
+
+dashboards:
+  directory: .ai/dashboards/
+  files: [agent-scorecard.okf.md]
+
+memory:
+  directory: .ai/memory/
+  files: [learned-constraints, anti-patterns, recurring-failures, human-approvals,
+          approved-decisions, human-preferences, experience-ledger.okf.md]
+  templates: [.ai/memory/templates/learning-entry.md]
+
+evals_ai:
+  directory: evals/ai/
+  files: [repo-quiz.json, adversarial-checks.md, agent-commands.json, context-routing.json]
+  golden_tasks_dir: evals/ai/golden-tasks/

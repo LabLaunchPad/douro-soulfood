@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/release"
+type: "knowledge"
+title: "Release Process"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "ai", references: [".github/workflows/deploy.yml"] }
+attestation: { method: "manual", checks: ["verified line-by-line against deploy.yml"] }
+summary: "Real 5-job CI/CD pipeline, branch behavior, and the known pre-existing Deploy Preview CI gap (missing CLOUDFLARE_API_TOKEN)."
+load_when: "CI failures, deployment questions."
+token_budget: 800
+related: ["okf/audit/current-state.okf.md"]
+---
+
 # Release Process
 
 ## Machine Contract

@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/analytics"
+type: "policy"
+title: "Analytics"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "ai", references: ["docs/prd.md"] }
+attestation: { method: "manual", checks: [] }
+summary: "No analytics currently configured (deliberate). Process defined for evaluating and consent-gating any future analytics request."
+load_when: "Any analytics/tracking request."
+token_budget: 500
+related: [".ai/packs/security.okf.md"]
+---
+
 # Analytics
 
 ## Machine Contract

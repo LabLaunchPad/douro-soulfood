@@ -1,0 +1,48 @@
+{
+  "eval_id": "context-routing-v1",
+  "description": "Sample tasks with their expected context packs, per .ai/routing.md. Tests whether an agent (or node .ai/scripts/context-pack.mjs) routes correctly.",
+  "cases": [
+    {
+      "task": "Add a hover state to the Button component",
+      "expected_type": "ui",
+      "expected_context": [".ai/packs/design-system.okf.md", ".ai/packs/components.okf.md", ".ai/packs/visual-outcomes.okf.md"]
+    },
+    {
+      "task": "Add a 'featured' boolean field to the faq collection",
+      "expected_type": "cms",
+      "expected_context": [".ai/packs/content-cms.okf.md", ".ai/packs/architecture.okf.md"]
+    },
+    {
+      "task": "Investigate why /menu's Lighthouse score is low",
+      "expected_type": "performance",
+      "expected_context": [".ai/packs/performance.okf.md", "benchmarks/README.md"]
+    },
+    {
+      "task": "Add a focus trap to a new modal component",
+      "expected_type": "accessibility",
+      "expected_context": [".ai/packs/accessibility.okf.md", ".ai/packs/testing.okf.md"]
+    },
+    {
+      "task": "Add a live chat widget",
+      "expected_type": "security",
+      "expected_context": [".ai/packs/security.okf.md"],
+      "note": "Also implies react-island routing if the widget needs client state — a correctly-routing agent should flag both."
+    },
+    {
+      "task": "Build a menu filter with checkboxes and live results",
+      "expected_type": "react-island",
+      "expected_context": [".ai/packs/react-islands.okf.md", ".ai/packs/performance.okf.md", ".ai/packs/components.okf.md", ".ai/decisions/no-global-react.okf.md"]
+    },
+    {
+      "task": "Fix a stale claim in docs/architecture.md",
+      "expected_type": "docs",
+      "expected_context": ["docs/architecture.md (directly — plus its pack if the pack itself needs correcting)"]
+    },
+    {
+      "task": "First task in a brand new session, no specifics given yet",
+      "expected_type": "first-task",
+      "expected_context": [".ai/packs/repo-overview.okf.md", "okf/audit/current-state.okf.md"]
+    }
+  ],
+  "pass_condition": "For each case, node .ai/scripts/context-pack.mjs <expected_type> returns exactly the expected_context list (order-independent)."
+}

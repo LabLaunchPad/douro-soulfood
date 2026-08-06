@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/test-plan"
+type: "knowledge"
+title: "Test Plan"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "ai", references: ["tests/home.spec.ts", "tests/menu.spec.ts", ".lighthouserc.js"] }
+attestation: { method: "manual", checks: ["cross-checked against real test files and Lighthouse config"] }
+summary: "Real test coverage (Playwright + axe-core, 76 tests) and documented gaps (zero tests for about/catering/contact, no unit-test layer)."
+load_when: "Writing or updating tests."
+token_budget: 800
+related: [".ai/packs/testing.okf.md"]
+---
+
 # Test Plan
 
 ## Machine Contract

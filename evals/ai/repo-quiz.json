@@ -1,0 +1,79 @@
+{
+  "quiz_id": "repo-quiz-v1",
+  "description": "Tests whether an AI agent has actually read AGENTS.md/.ai/INDEX.md and the linked packs, not guessing from a generic Astro-project prior.",
+  "instructions": "An agent should be able to answer every question below correctly using only AGENTS.md, .ai/INDEX.md, and the packs it routes to — without opening full docs/ files. If it can't, the token-efficiency system has failed its purpose.",
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "What is the default component model for new UI in this repo?",
+      "expected_answer": "Astro components (.astro) by default. React is not installed and requires explicit, per-component approval per docs/adr/react-islands.md.",
+      "tests": "default_component_model"
+    },
+    {
+      "id": "Q2",
+      "question": "Where do design tokens live, and what happens if a change introduces a hardcoded hex color?",
+      "expected_answer": "src/styles/tokens.css. A hardcoded hex color (outside legitimate flag-SVG fills) violates the design-tokens decision and should be flagged/fixed.",
+      "tests": "design_token_source"
+    },
+    {
+      "id": "Q3",
+      "question": "What is the rule about keystatic.config.ts and src/content.config.ts?",
+      "expected_answer": "They independently define the same content shapes and must be hand-synced on any schema change — there is no automatic sync, and drift has happened before.",
+      "tests": "keystatic_schema_sync_rule"
+    },
+    {
+      "id": "Q4",
+      "question": "Is it currently safe to add a raw <img> tag to a new page-level image grid?",
+      "expected_answer": "No — Astro <Image> is the required pattern, achieved in index.astro and menu.astro. Note the known limitation: images referenced from public/ pass through unprocessed (no compression gain, only correct width/height/decoding).",
+      "tests": "image_policy"
+    },
+    {
+      "id": "Q5",
+      "question": "What is the React island policy in one sentence?",
+      "expected_answer": "Astro + vanilla <script> is the default for all interactivity; React-as-island is allowed only under narrow, explicitly-approved conditions via the adapter pattern, and no React dependency currently exists in this repo.",
+      "tests": "react_island_policy"
+    },
+    {
+      "id": "Q6",
+      "question": "What commands verify a change before it's considered done?",
+      "expected_answer": "pnpm build at minimum; pnpm test:e2e and pnpm lhci where practical, though both may fail to execute in a sandboxed environment lacking a Chromium binary — report not_run honestly rather than faking a result.",
+      "tests": "testing_commands"
+    },
+    {
+      "id": "Q7",
+      "question": "What is the Total Blocking Time budget, and why does it matter most for React islands specifically?",
+      "expected_answer": "TBT < 200ms, error-level (blocks CI). It's the tightest real constraint on adding any client-side JS — a single unnecessarily-hydrated island can consume the whole budget.",
+      "tests": "performance_budget"
+    },
+    {
+      "id": "Q8",
+      "question": "What accessibility feature must exist on any keyboard-navigable page, and where's the reference implementation for a modal/overlay?",
+      "expected_answer": "A skip-to-main-content link (present in Base.astro). MobileNavDrawer.astro is the reference pattern for focus-trap/inert/aria-hidden toggling on any future modal.",
+      "tests": "accessibility_rules"
+    },
+    {
+      "id": "Q9",
+      "question": "Where do in-progress, backlog, and completed outcome tasks live?",
+      "expected_answer": ".ai/tasks/active/, .ai/tasks/backlog/, .ai/tasks/completed/ respectively, using the templates in .ai/tasks/templates/.",
+      "tests": "task_locations"
+    },
+    {
+      "id": "Q10",
+      "question": "Where do benchmark results live, and what's the actual current state of the benchmark data as of this setup?",
+      "expected_answer": "benchmarks/{baseline,current,deltas,reports}/. As of this setup, no historical benchmark data exists — structure is created, values are 'pending', not invented.",
+      "tests": "benchmark_locations_and_honesty"
+    },
+    {
+      "id": "Q11",
+      "question": "Does this site have a contact form, user accounts, or a shopping cart?",
+      "expected_answer": "No to all three — verified via repo-wide search. The only conversion flow hands off externally to Lieferando.",
+      "tests": "product_scope_accuracy"
+    },
+    {
+      "id": "Q12",
+      "question": "Why does CLAUDE.md look different from the large system-prompt content it had earlier this session?",
+      "expected_answer": "CLAUDE.md was intentionally shrunk to a pointer to AGENTS.md/.ai/INDEX.md per the Agent-Native Repo OS setup; the full prior content was relocated (not deleted) to .ai/packs/outcome-operator.okf.md — see .ai/decisions/agent-entrypoint-reconciliation.okf.md.",
+      "tests": "entrypoint_reconciliation_awareness"
+    }
+  ]
+}

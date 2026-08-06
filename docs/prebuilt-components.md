@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/prebuilt-components"
+type: "policy"
+title: "Prebuilt Component Protocol"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "ai", references: [] }
+attestation: { method: "manual", checks: [] }
+summary: "Borrow-and-adapt protocol for hard-to-build components: approved sources, license process, adaptation checklist, source attribution format."
+load_when: "Considering an external component pattern."
+token_budget: 900
+related: [".ai/packs/prebuilt-components.okf.md"]
+---
+
 # Prebuilt Component Protocol
 
 ## Machine Contract

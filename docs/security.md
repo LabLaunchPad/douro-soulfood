@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/security"
+type: "knowledge"
+title: "Security"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "ai", references: ["public/_headers", "src/components/ui/MapEmbed.astro"] }
+attestation: { method: "manual", checks: ["CSP copied verbatim from public/_headers"] }
+summary: "Real CSP, GDPR consent-gate patterns already shipped (self-hosted fonts, two-click Maps), and one verified-but-unfixed gap (JSON-LD likely blocked by CSP)."
+load_when: "Third-party scripts, embeds, consent, CSP changes."
+token_budget: 800
+related: [".ai/packs/security.okf.md"]
+---
+
 # Security
 
 ## Machine Contract

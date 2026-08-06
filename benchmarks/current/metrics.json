@@ -1,0 +1,67 @@
+{
+  "collected_at": "2026-08-06T07:22:47.330Z",
+  "method": "lighthouse CLI against astro preview (local Node server, http://localhost:4321) — NOT wrangler pages dev (fails to start in this sandbox) and NOT the live Cloudflare Workers preview (Chrome headless hits a proxy-TLS interstitial in this sandbox that ignore-certificate-errors did not suppress)",
+  "caveat": "astro preview is a plain Node static server, not the Cloudflare Workers runtime — results are directionally real but not a perfect production match",
+  "routes": {
+    "home": {
+      "url": "http://localhost:4321/",
+      "performance": 0.95,
+      "accessibility": 0.96,
+      "bestPractices": 0.92,
+      "seo": 1,
+      "fcp_ms": 1691,
+      "lcp_ms": 2816,
+      "cls": 0,
+      "tbt_ms": 14,
+      "speedIndex_ms": 1691
+    },
+    "menu": {
+      "url": "http://localhost:4321/menu/",
+      "performance": 0.64,
+      "accessibility": 0.95,
+      "bestPractices": 0.92,
+      "seo": 1,
+      "fcp_ms": 2714,
+      "lcp_ms": 8960,
+      "cls": 0,
+      "tbt_ms": 159,
+      "speedIndex_ms": 5825
+    },
+    "about": {
+      "url": "http://localhost:4321/about/",
+      "performance": 0.98,
+      "accessibility": 0.95,
+      "bestPractices": 0.92,
+      "seo": 1,
+      "fcp_ms": 1383,
+      "lcp_ms": 2283,
+      "cls": 0,
+      "tbt_ms": 0,
+      "speedIndex_ms": 1383
+    },
+    "catering": {
+      "url": "http://localhost:4321/catering/",
+      "performance": 0.96,
+      "accessibility": 0.95,
+      "bestPractices": 0.92,
+      "seo": 1,
+      "fcp_ms": 1377,
+      "lcp_ms": 2652,
+      "cls": 0,
+      "tbt_ms": 0,
+      "speedIndex_ms": 1377
+    },
+    "contact": {
+      "url": "http://localhost:4321/contact/",
+      "performance": 0.98,
+      "accessibility": 0.96,
+      "bestPractices": 0.92,
+      "seo": 1,
+      "fcp_ms": 1373,
+      "lcp_ms": 2273,
+      "cls": 0,
+      "tbt_ms": 0,
+      "speedIndex_ms": 1373
+    }
+  }
+}

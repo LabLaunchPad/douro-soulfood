@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/agent"
+type: "policy"
+title: "Agent Instructions: D'ouro Soulfood"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "human", references: [] }
+attestation: { method: "manual", checks: [] }
+summary: "Critical rules for AI agents: design system compliance, Astro patterns, styling, component architecture, performance, accessibility, git conventions, deployment."
+load_when: "Before any code change, if AGENTS.md's short-form constraints aren't sufficient."
+token_budget: 1000
+related: ["AGENTS.md"]
+---
+
 # Agent Instructions: D'ouro Soulfood
 
 > **Read this file FIRST before any code changes.**

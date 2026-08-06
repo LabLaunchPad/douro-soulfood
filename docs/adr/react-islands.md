@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/adr/react-islands"
+type: "decision"
+title: "ADR: React Islands Policy"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "ai", references: ["package.json", "astro.config.mjs"] }
+attestation: { method: "manual", checks: ["confirmed zero React deps in package.json"] }
+summary: "React-as-island policy — Astro-first default, narrow allowed conditions, adapter pattern, hydration rules. No React currently installed."
+load_when: "Any interactive-component decision."
+token_budget: 900
+related: [".ai/packs/react-islands.okf.md", ".ai/decisions/no-global-react.okf.md"]
+---
+
 # ADR: React Islands Policy
 
 ## Machine Contract
