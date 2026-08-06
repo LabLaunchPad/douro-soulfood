@@ -1,7 +1,7 @@
 # Next Best Action
 
 ## The action
-No urgent, currently-known repo issue remains open. Merge the 4 open PRs (#34 image payload, #35 DOM size, #36 E2E coverage, #37 CSP fix — all have green `Build`/`Workers Builds` checks) when ready, then pick a fresh task.
+No urgent, currently-known repo issue remains open. Pick a fresh task, or check `.ai/tasks/backlog/README.md` for lower-priority items.
 
 ## Why it matters
 Every concretely-actionable item from `.ai/tasks/backlog/README.md` was resolved this session: the `/menu` performance regression (image payload -80%, DOM size -28%), a real production bug where CSP was silently blocking the mobile menu and Maps consent-gate, and missing E2E coverage for 3 routes. The one remaining backlog item (`public/images/` → `src/assets/` pipeline migration) was explicitly deferred by the user because it requires a Keystatic CMS schema change — see `.ai/memory/human-approvals.md`.
