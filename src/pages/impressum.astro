@@ -1,0 +1,132 @@
+---
+export const prerender = true;
+
+import Base from '@/layouts/Base.astro';
+import NavBar from '@/components/layout/NavBar.astro';
+import Footer from '@/components/layout/Footer.astro';
+import siteSettings from '@/content/settings/default.json';
+
+const { phone, email, address_line1, city, postal_code, country } = siteSettings;
+---
+
+<Base title="Impressum" description="Impressum von D'ouro Soulfood Bistro gemäß §5 ECG und §25 Mediengesetz.">
+  <NavBar slot="nav" />
+
+  <section class="pt-28 md:pt-32 pb-16 md:pb-24 px-4 md:px-16 max-w-3xl mx-auto">
+    <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-2">
+      Rechtliches
+    </span>
+    <h1 class="text-[clamp(2rem,4vw,3rem)] font-bold text-text-primary mb-3 font-display">Impressum</h1>
+    <p class="text-text-secondary leading-relaxed max-w-[65ch]">
+      Informationspflicht laut §5 E-Commerce-Gesetz (ECG) und Offenlegungspflicht laut §25 Mediengesetz (MedienG).
+    </p>
+
+    <div class="mt-10 md:mt-14 flex flex-col gap-8">
+
+      {/* Angaben gemäß §5 ECG */}
+      <div class="glass rounded-2xl p-6 md:p-8 border border-border-subtle">
+        <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-4">
+          Angaben gemäß §5 ECG
+        </h2>
+        <dl class="text-sm md:text-base text-text-secondary leading-relaxed space-y-3">
+          <div>
+            <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Unternehmen</dt>
+            <dd>D'ouro Soulfood Bistro<br /><span class="text-text-tertiary">Einzelunternehmen (e.U.)</span></dd>
+          </div>
+          <div>
+            <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Anschrift</dt>
+            <dd>{address_line1}, {postal_code} {city}, {country}</dd>
+          </div>
+          <div>
+            <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Kontakt</dt>
+            <dd>
+              Telefon: <a href={`tel:${phone.replace(/[^+\d]/g, '')}`} class="text-brand-gold hover:underline">{phone}</a><br />
+              E-Mail: <a href={`mailto:${email}`} class="text-brand-gold hover:underline">{email}</a>
+            </dd>
+          </div>
+          <div>
+            <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Unternehmensgegenstand</dt>
+            <dd>Gastronomiebetrieb (Restaurant, Catering)</dd>
+          </div>
+          <div>
+            <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Gewerbeberechtigung</dt>
+            <dd class="text-text-tertiary">
+              Magistrat der Stadt Salzburg, gemäß der
+              <a href="https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&amp;Gesetzesnummer=10007517" target="_blank" rel="noopener noreferrer" class="text-brand-gold hover:underline">Gewerbeordnung 1994</a> (abrufbar unter www.ris.bka.gv.at)
+            </dd>
+          </div>
+          <div>
+            <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Mitgliedschaft</dt>
+            <dd class="text-text-tertiary">
+              Wirtschaftskammer Salzburg, Fachgruppe Gastronomie
+            </dd>
+          </div>
+          <div>
+            <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">UID-Nummer</dt>
+            <dd class="text-text-tertiary">
+              Kleinunternehmer gemäß §6 Abs 1 Z 27 UStG — keine Umsatzsteuer ausgewiesen
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      {/* Offenlegung gemäß §25 MedienG */}
+      <div class="glass rounded-2xl p-6 md:p-8 border border-border-subtle">
+        <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-4">
+          Offenlegung gemäß §25 Mediengesetz
+        </h2>
+        <dl class="text-sm md:text-base text-text-secondary leading-relaxed space-y-3">
+          <div>
+            <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Medieninhaber &amp; Herausgeber</dt>
+            <dd>D'ouro Soulfood Bistro, {address_line1}, {postal_code} {city}</dd>
+          </div>
+          <div>
+            <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Unternehmensgegenstand der Website</dt>
+            <dd>Information über das gastronomische Angebot, die Speisekarte, Öffnungszeiten und Kontaktmöglichkeiten des Unternehmens D'ouro Soulfood Bistro.</dd>
+          </div>
+          <div>
+            <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Blattlinie</dt>
+            <dd>Sachliche Information über das Unternehmen und dessen Leistungen ohne redaktionelle, meinungsbildende Inhalte.</dd>
+          </div>
+        </dl>
+      </div>
+
+      {/* EU-Streitschlichtung */}
+      <div class="rounded-2xl p-6 md:p-8 border border-border-subtle bg-surface-elevated">
+        <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">
+          EU-Streitschlichtung
+        </h2>
+        <p class="text-sm md:text-base text-text-secondary leading-relaxed max-w-[65ch]">
+          Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit, abrufbar unter
+          <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" class="text-brand-gold hover:underline"> ec.europa.eu/consumers/odr</a>.
+          Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer
+          Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+      </div>
+
+      {/* Haftungsausschluss */}
+      <div class="rounded-2xl p-6 md:p-8 border border-border-subtle">
+        <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">
+          Haftung für Inhalte dieser Website
+        </h2>
+        <p class="text-sm md:text-base text-text-secondary leading-relaxed max-w-[65ch] mb-4">
+          Wir entwickeln die Inhalte dieser Website ständig weiter und bemühen uns, korrekte und aktuelle
+          Informationen bereitzustellen. Trotzdem können Fehler nicht vollkommen ausgeschlossen werden. Wir
+          übernehmen keine Haftung für die Richtigkeit und Vollständigkeit der Inhalte dieser Website.
+        </p>
+        <p class="text-sm md:text-base text-text-secondary leading-relaxed max-w-[65ch]">
+          Sofern uns rechtswidrige Tätigkeiten bekannt werden, entfernen wir derartige Inhalte umgehend.
+          Für den Inhalt verlinkter externer Seiten (z. B. Lieferando, Google Maps) sind ausschließlich deren
+          Betreiber verantwortlich.
+        </p>
+      </div>
+
+    </div>
+
+    <p class="mt-10 text-xs text-text-tertiary leading-relaxed max-w-[65ch]">
+      Stand: {new Date().toLocaleDateString('de-AT', { year: 'numeric', month: 'long' })}
+    </p>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

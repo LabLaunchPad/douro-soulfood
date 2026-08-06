@@ -1,0 +1,238 @@
+---
+export const prerender = true;
+
+import Base from '@/layouts/Base.astro';
+import NavBar from '@/components/layout/NavBar.astro';
+import Footer from '@/components/layout/Footer.astro';
+import siteSettings from '@/content/settings/default.json';
+
+const { phone, email, address_line1, city, postal_code, country } = siteSettings;
+
+const sections = [
+  { id: 'ueberblick', label: 'Überblick' },
+  { id: 'verantwortlicher', label: 'Verantwortlicher' },
+  { id: 'hosting', label: 'Hosting & Server-Logs' },
+  { id: 'kontakt', label: 'Kontaktaufnahme' },
+  { id: 'karten', label: 'Google Maps' },
+  { id: 'cms', label: 'Content-Management (Keystatic)' },
+  { id: 'externe-links', label: 'Externe Links (Lieferando)' },
+  { id: 'cookies', label: 'Cookies' },
+  { id: 'rechte', label: 'Ihre Rechte' },
+  { id: 'beschwerde', label: 'Beschwerderecht' },
+  { id: 'aenderungen', label: 'Änderungen dieser Erklärung' },
+];
+---
+
+<Base title="Datenschutz" description="Datenschutzerklärung von D'ouro Soulfood Bistro gemäß DSGVO.">
+  <NavBar slot="nav" />
+
+  <section class="pt-28 md:pt-32 pb-16 md:pb-24 px-4 md:px-16 max-w-7xl mx-auto">
+    <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-2">
+      Rechtliches
+    </span>
+    <h1 class="text-[clamp(2rem,4vw,3rem)] font-bold text-text-primary mb-3 font-display">Datenschutzerklärung</h1>
+    <p class="text-text-secondary leading-relaxed max-w-[65ch]">
+      Der Schutz Ihrer persönlichen Daten ist uns wichtig. Diese Erklärung informiert Sie, welche Daten wir
+      beim Besuch dieser Website verarbeiten, zu welchem Zweck, auf welcher Rechtsgrundlage und welche
+      Rechte Ihnen zustehen — gemäß Datenschutz-Grundverordnung (DSGVO) und österreichischem Datenschutzgesetz (DSG).
+    </p>
+
+    <div class="mt-10 md:mt-14 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-10 lg:gap-16 items-start">
+
+      {/* Sticky table of contents — desktop only */}
+      <nav aria-label="Inhaltsverzeichnis" class="hidden lg:block sticky top-28 self-start">
+        <span class="block text-xs uppercase tracking-wide text-text-tertiary font-medium mb-3">Inhalt</span>
+        <ul class="flex flex-col gap-2 text-sm border-l border-border-subtle">
+          {sections.map((s) => (
+            <li>
+              <a
+                href={`#${s.id}`}
+                class="block pl-4 -ml-px border-l-2 border-transparent hover:border-brand-gold text-text-secondary hover:text-brand-gold no-underline transition-colors duration-[var(--duration-fast)] py-0.5"
+              >
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* Content */}
+      <div class="flex flex-col gap-10 max-w-[70ch]">
+
+        <article id="ueberblick" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Überblick</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed">
+            Diese Website ist als statische Seite umgesetzt: Es gibt keine Nutzerkonten, kein Tracking und
+            aktuell keine Analyse- oder Marketing-Cookies. Personenbezogene Daten fallen im Wesentlichen dann an,
+            wenn Sie uns per Telefon oder E-Mail kontaktieren, oder technisch bedingt durch das Hosting selbst
+            sowie durch die Google-Maps-Karte, die Sie aktiv per Klick laden können. Die Schriftarten dieser
+            Website werden selbst gehostet, es findet dabei keine Verbindung zu Google statt.
+          </p>
+        </article>
+
+        <article id="verantwortlicher" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Verantwortlicher</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-2">
+            Verantwortlich für die Datenverarbeitung auf dieser Website im Sinne der DSGVO ist:
+          </p>
+          <address class="not-italic text-sm md:text-base text-text-secondary leading-relaxed">
+            D'ouro Soulfood Bistro<br />
+            {address_line1}, {postal_code} {city}, {country}<br />
+            Telefon: <a href={`tel:${phone.replace(/[^+\d]/g, '')}`} class="text-brand-gold hover:underline">{phone}</a><br />
+            E-Mail: <a href={`mailto:${email}`} class="text-brand-gold hover:underline">{email}</a>
+          </address>
+          <p class="text-xs text-text-tertiary italic mt-2">
+            [Falls ein Datenschutzbeauftragter bestellt ist, dessen Kontaktdaten hier ergänzen — für einen
+            Betrieb dieser Größe in der Regel nicht verpflichtend.]
+          </p>
+        </article>
+
+        <article id="hosting" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Hosting &amp; Server-Log-Files</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">
+            Diese Website wird über Cloudflare Pages / Workers gehostet und ausgeliefert. Beim Aufruf der
+            Website erfasst der Hosting-Provider automatisch technische Zugriffsdaten in sogenannten
+            Server-Log-Files, z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, verwendeter
+            Browser und Betriebssystem.
+          </p>
+          <dl class="text-sm text-text-secondary leading-relaxed space-y-2">
+            <div>
+              <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Zweck</dt>
+              <dd>Sicherer und stabiler Betrieb der Website (Erkennung von Störungen und Missbrauch)</dd>
+            </div>
+            <div>
+              <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Rechtsgrundlage</dt>
+              <dd>Berechtigtes Interesse gemäß Art 6 Abs 1 lit f DSGVO</dd>
+            </div>
+            <div>
+              <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Empfänger</dt>
+              <dd>Cloudflare, Inc. — Datenübermittlung in die USA erfolgt auf Basis von EU-Standardvertragsklauseln</dd>
+            </div>
+            <div>
+              <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Speicherdauer</dt>
+              <dd class="text-text-tertiary">Zugriffsprotokolle werden von Cloudflare für einen begrenzten Zeitraum (in der Regel wenige Tage bis Wochen) gespeichert und danach automatisch gelöscht.</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article id="kontakt" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Kontaktaufnahme</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed">
+            Wenn Sie uns per Telefon, E-Mail oder über einen verlinkten Messenger-Dienst kontaktieren, verarbeiten
+            wir die von Ihnen mitgeteilten Daten (z. B. Name, Kontaktdaten, Inhalt Ihrer Anfrage) ausschließlich
+            zur Bearbeitung Ihres Anliegens. Rechtsgrundlage ist die Anbahnung bzw. Erfüllung eines Vertrags
+            (Art 6 Abs 1 lit b DSGVO) oder unser berechtigtes Interesse an der Beantwortung Ihrer Anfrage
+            (Art 6 Abs 1 lit f DSGVO). Die Daten werden gelöscht, sobald sie für die Bearbeitung nicht mehr
+            erforderlich sind, soweit keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+          </p>
+        </article>
+
+        <article id="karten" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Google Maps</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">
+            Auf der Startseite und der Kontaktseite zeigen wir standardmäßig nur eine statische Vorschaukarte
+            mit unserer Adresse und einer Schaltfläche „Karte anzeigen". Erst wenn Sie diese Schaltfläche
+            anklicken, wird die eigentliche Karte des Kartendienstes Google Maps (Google Ireland Limited)
+            geladen. Erst zu diesem Zeitpunkt wird eine Verbindung zu Google-Servern hergestellt und Ihre
+            IP-Adresse an Google übermittelt — ohne Klick findet keine Übermittlung statt.
+          </p>
+          <dl class="text-sm text-text-secondary leading-relaxed space-y-2">
+            <div>
+              <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Zweck</dt>
+              <dd>Anzeige unseres Standorts und Anfahrtsplanung, auf ausdrücklichen Wunsch</dd>
+            </div>
+            <div>
+              <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Rechtsgrundlage</dt>
+              <dd>Einwilligung durch aktives Anklicken der Karte (Art 6 Abs 1 lit a DSGVO)</dd>
+            </div>
+            <div>
+              <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Weitere Informationen</dt>
+              <dd>
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-brand-gold hover:underline">
+                  Datenschutzerklärung von Google
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </article>
+
+        <article id="cms" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Content-Management-System (Keystatic)</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed">
+            Zur Pflege der Website-Inhalte (Speisekarte, FAQ, Kontaktdaten) verwenden wir das
+            Content-Management-System Keystatic. Der Zugriff darauf ist ausschließlich autorisierten
+            Mitarbeiter:innen des Unternehmens vorbehalten. Für gewöhnliche Website-Besucher:innen werden über
+            dieses System keine personenbezogenen Daten verarbeitet.
+          </p>
+        </article>
+
+        <article id="externe-links" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Externe Links (Lieferando)</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed">
+            Für Online-Bestellungen verlinken wir auf die externe Plattform Lieferando. Sobald Sie diesen Link
+            anklicken, verlassen Sie unsere Website und die Datenschutzbestimmungen des jeweiligen Anbieters
+            gelten. Wir haben keinen Einfluss auf die dort verarbeiteten Daten. Informationen dazu finden Sie in der
+            <a href="https://www.lieferando.at/datenschutz" target="_blank" rel="noopener noreferrer" class="text-brand-gold hover:underline"> Datenschutzerklärung von Lieferando</a>.
+          </p>
+        </article>
+
+        <article id="cookies" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Cookies</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed">
+            Diese Website setzt selbst keine Analyse- oder Marketing-Cookies ein. Es werden aktuell keine
+            Tracking- oder Statistik-Tools verwendet. Sollte sich dies ändern (z. B. durch Einbindung von
+            Webanalyse-Diensten), werden wir diese Erklärung entsprechend aktualisieren und, soweit erforderlich,
+            eine Einwilligung über ein Cookie-Consent-Tool einholen.
+          </p>
+        </article>
+
+        <article id="rechte" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Ihre Rechte</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">
+            Ihnen stehen hinsichtlich Ihrer personenbezogenen Daten grundsätzlich folgende Rechte zu:
+          </p>
+          <ul class="text-sm md:text-base text-text-secondary leading-relaxed list-disc pl-5 space-y-1">
+            <li>Recht auf Auskunft (Art 15 DSGVO)</li>
+            <li>Recht auf Berichtigung (Art 16 DSGVO)</li>
+            <li>Recht auf Löschung (Art 17 DSGVO)</li>
+            <li>Recht auf Einschränkung der Verarbeitung (Art 18 DSGVO)</li>
+            <li>Recht auf Datenübertragbarkeit (Art 20 DSGVO)</li>
+            <li>Widerspruchsrecht (Art 21 DSGVO)</li>
+            <li>Recht auf Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft</li>
+          </ul>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed mt-3">
+            Zur Ausübung dieser Rechte genügt eine formlose Nachricht an
+            <a href={`mailto:${email}`} class="text-brand-gold hover:underline"> {email}</a>.
+          </p>
+        </article>
+
+        <article id="beschwerde" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Beschwerderecht</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed">
+            Sie haben das Recht, sich bei der österreichischen Datenschutzbehörde zu beschweren, wenn Sie der
+            Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen Daten gegen die DSGVO verstößt:
+          </p>
+          <address class="not-italic text-sm md:text-base text-text-secondary leading-relaxed mt-2">
+            Österreichische Datenschutzbehörde<br />
+            Barichgasse 40–42, 1030 Wien<br />
+            <a href="https://www.dsb.gv.at" target="_blank" rel="noopener noreferrer" class="text-brand-gold hover:underline">www.dsb.gv.at</a>
+          </address>
+        </article>
+
+        <article id="aenderungen" class="scroll-mt-28">
+          <h2 class="text-lg md:text-xl font-semibold text-text-primary font-display mb-3">Änderungen dieser Erklärung</h2>
+          <p class="text-sm md:text-base text-text-secondary leading-relaxed">
+            Wir passen diese Datenschutzerklärung an, sobald sich unsere Datenverarbeitung ändert (z. B. bei
+            Einbindung neuer Dienste). Die jeweils aktuelle Fassung finden Sie stets auf dieser Seite.
+          </p>
+          <p class="text-xs text-text-tertiary mt-4">
+            Stand: {new Date().toLocaleDateString('de-AT', { year: 'numeric', month: 'long' })}
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>
