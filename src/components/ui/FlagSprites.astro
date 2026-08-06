@@ -1,0 +1,27 @@
+---
+/**
+ * FlagSprites — defines the DE/UK flag icons once as <symbol>s, referenced
+ * via <use> by FlagIcon.astro. Included once in Base.astro so pages that
+ * render many flag icons (e.g. /menu's dish cards) don't pay the full
+ * multi-node SVG cost per instance.
+ */
+---
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flag-de" viewBox="0 0 5 3">
+    <rect width="5" height="1" y="0" fill="#000000" />
+    <rect width="5" height="1" y="1" fill="#DD0000" />
+    <rect width="5" height="1" y="2" fill="#FFCE00" />
+  </symbol>
+  <symbol id="flag-uk" viewBox="0 0 60 30">
+    <clipPath id="uk-clip"><path d="M0,0 v30 h60 v-30 z" /></clipPath>
+    <clipPath id="uk-diag"><path d="M0,0 L60,30 M60,0 L0,30" /></clipPath>
+    <g clip-path="url(#uk-clip)">
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" clip-path="url(#uk-diag)" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path="url(#uk-diag)" />
+      <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10" />
+      <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6" />
+    </g>
+  </symbol>
+</svg>

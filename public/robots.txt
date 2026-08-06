@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /keystatic/
+Disallow: /dev/
 
 Sitemap: https://douro-soulfood.com/sitemap-index.xml

@@ -158,25 +158,3 @@ const heroImage = images[0];
     <slot />
   </div>
 </header>
-
-<script>
-  /**
-   * Hero carousel — fades between background images.
-   * No external dependencies. Respects prefers-reduced-motion.
-   */
-  const prefersReducedMotion = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (!prefersReducedMotion) {
-    const heroImages = document.querySelectorAll<HTMLImageElement>('[aria-label="Hero-Bildkarussell"] img');
-    if (heroImages.length > 1) {
-      let current = 0;
-      setInterval(() => {
-        heroImages[current]?.classList.remove('opacity-100');
-        heroImages[current]?.classList.add('opacity-0');
-        current = (current + 1) % heroImages.length;
-        heroImages[current]?.classList.remove('opacity-0');
-        heroImages[current]?.classList.add('opacity-100');
-      }, 6000);
-    }
-  }
-</script>

@@ -1,6 +1,29 @@
+---
+okf_version: "0.2"
+id: "docs/components"
+type: "knowledge"
+title: "Components Reference"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "human", references: [] }
+attestation: { method: "manual", checks: [] }
+summary: "Full prop-level API reference for every component in the design system, organized by ui/sections/layout."
+load_when: "Building or modifying any component."
+token_budget: 1500
+related: [".ai/packs/components.okf.md"]
+---
+
 # Components Reference
 
 > API docs for all components in the D'ouro Soulfood design system. All components are `.astro` — no client-side JS framework is used anywhere in this codebase.
+>
+> Building a new component that's hard to get right from scratch (a11y-sensitive interactions like a combobox or modal)? See `docs/prebuilt-components.md` for the borrow-and-adapt protocol before hand-rolling one. If the component needs real client-side interactive state, see `docs/adr/react-islands.md` first — React is not installed in this repo and requires explicit approval.
+>
+> All new components must be previewable at `/dev/ui` in dev mode (see `CLAUDE.md`'s visual outcome protocol).
 
 ---
 
@@ -44,6 +67,17 @@ Renders the star-rating badge shown on the home page below the hero.
 **File:** `src/components/ui/AllergenHeaderLegend.astro`
 Renders the allergen code legend and bilingual (DE/EN) disclaimer shown at the top of the menu page.
 
+### MapEmbed
+**File:** `src/components/ui/MapEmbed.astro`
+Consent-gated Google Maps embed ("two-click" pattern): renders a static placeholder card (address text + a "Karte anzeigen" button) by default, and only injects the real `<iframe>` after the visitor clicks through — no request to Google fires, and no visitor IP is sent, until they opt in. Used on the home page and `contact.astro`.
+**Props:**
+| Prop | Type | Description |
+|------|------|-------------|
+| src | string | The Google Maps embed URL to load after consent |
+| title | string | `<iframe>` accessible title |
+| addressLabel | string | Address text shown on the placeholder card |
+| class | string | Additional classes |
+
 ---
 
 ## Section Components (`src/components/sections/`)
@@ -77,13 +111,36 @@ The primary/secondary CTAs render inside a `hidden md:flex` container — not vi
 **File:** `src/components/sections/UserReviews.astro`
 Renders the guest-reviews section on the home page.
 
+### PhotoGrid
+**File:** `src/components/sections/PhotoGrid.astro`
+Heading + responsive photo grid (2 cols mobile, 3 cols desktop; 8 photos on mobile, 9 on desktop). Used on the home page for both "Beliebte Gerichte" (Popular Dishes) and "Galerie" — these previously duplicated the same markup inline; this component is the single shared implementation.
+**Props:**
+| Prop | Type | Description |
+|------|------|-------------|
+| ariaLabel | string | `<section aria-label>` |
+| eyebrow | string | Small uppercase label above the heading |
+| title | string | Section `<h2>` |
+| description | string? | Supporting text below the heading |
+| items | { src, alt, width, height }[] | Photos to render via Astro `<Image>` |
+| cta | { label, href }? | Optional CTA button below the grid (used by "Beliebte Gerichte", not "Galerie") |
+
+### OurStorySection
+**File:** `src/components/sections/OurStorySection.astro`
+Founder-story block ("Wie D'ouro begann" on the home page). Not the same as the `OurStory.astro` removed in an earlier cleanup pass (that one was dead code with zero importers) — this is a fresh component, actually wired into `index.astro`.
+**Props:** `ariaLabel`, `eyebrow`, `title`, `text`, `founderName`, `founderTitle` (all strings).
+
+### FaqAccordion
+**File:** `src/components/sections/FaqAccordion.astro`
+Plain `<details>`-based accordion for the home page's FAQ section, reading from the `faq` content collection. Renders nothing if `items` is empty.
+**Props:** `items: { question, answer }[]`, `ariaLabel`, `eyebrow`, `title`.
+
 ### MenuItemCard
 **File:** `src/components/sections/MenuItemCard.astro`
 Full-detail menu item card (used for most menu categories). Reads `siteSettings` directly for the order-online link. Composes `DietaryBadge` and `AllergenBadge`.
 
 ### MenuBistroCard
 **File:** `src/components/sections/MenuBistroCard.astro`
-Compact menu item card, used for the drinks/bebidas sub-sections. Supports `priceVariants` (non-alcoholic/alcoholic dual pricing) and `addOns`.
+Compact menu item card, used across most of `menu.astro`'s categories (quesadillas, tacos, bowls, drinks/bebidas, and more) — not limited to drinks. Supports `priceVariants` (non-alcoholic/alcoholic dual pricing) and `addOns`.
 **Props:**
 | Prop | Type | Description |
 |------|------|-------------|
@@ -104,7 +161,11 @@ Compact menu item card, used for the drinks/bebidas sub-sections. Supports `pric
 
 ### NavBar
 **File:** `src/components/layout/NavBar.astro`
-Desktop scroll-transition header plus a coupled full-screen mobile drawer (`aria-label="Mobile Navigation Drawer"`), all in one component with its own `<script>` for scroll/open-close behavior.
+Desktop scroll-transition header plus the mobile capsule trigger (logo, "Speisekarte" link, hamburger button). Renders `MobileNavDrawer` and owns the scroll-transition `<script>`; the drawer's own open/close/focus-trap logic lives in `MobileNavDrawer.astro`.
+
+### MobileNavDrawer
+**File:** `src/components/layout/MobileNavDrawer.astro`
+Full-screen mobile navigation overlay (`role="dialog"`, `aria-label="Navigationsmenü"`), split out of `NavBar.astro`. Talks to `NavBar`'s hamburger button (`#mobile-menu-btn`) by id rather than component subtree, since Astro doesn't scope `<script>` tags. Owns open/close, `Escape`-to-close, a Tab focus trap, and `inert`/`aria-hidden` toggling while closed.
 
 ### Footer
 **File:** `src/components/layout/Footer.astro`

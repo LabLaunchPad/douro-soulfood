@@ -1,0 +1,15 @@
+---
+/**
+ * FlagIcon — references a <symbol> defined once by FlagSprites.astro
+ * (included in Base.astro), instead of inlining the full flag SVG
+ * markup at every usage site.
+ */
+interface Props {
+  lang: 'de' | 'uk';
+  class?: string;
+}
+
+const { lang, class: className = '' } = Astro.props;
+---
+
+<svg class:list={['shrink-0', className]} aria-hidden="true"><use href={`#flag-${lang}`} /></svg>

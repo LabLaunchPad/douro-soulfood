@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/prd"
+type: "knowledge"
+title: "PRD: D'ouro Soulfood Bistro — Website"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "human", references: [] }
+attestation: { method: "manual", checks: [] }
+summary: "Product overview, target audience, core pages, homepage section inventory, Keystatic content model, technical requirements, SEO/performance targets, third-party integrations."
+load_when: "Product-scope questions, new page/feature decisions, understanding what the site is for."
+token_budget: 1200
+related: [".ai/packs/repo-overview.okf.md"]
+---
+
 # PRD: D'ouro Soulfood Bistro — Website
 
 > **Version:** 0.2.0
@@ -45,12 +64,12 @@ Reflects what `src/pages/index.astro` actually renders — mostly hand-written i
 2. **Hero** — single image (optional video), headline, dual CTA (`HeroSection.astro`)
 3. **Review Badge** — star rating strip below the hero
 4. **Category Grid** — icon-linked scroll to menu categories
-5. **Popular Dishes** — static photo grid of featured items
+5. **Popular Dishes** — photo grid of featured items, using `PhotoGrid.astro`
 6. **Feature Cards** — catering + reviews, using `FeatureCard.astro`
-7. **Our Story** — Angela's lockdown origin story (inline markup)
-8. **Photo Gallery** — plain grid, no lightbox
-9. **FAQ Accordion** — plain `<details>`-based accordion (inline markup, not a separate component)
-10. **Location/Map** — address, hours, embedded Google Maps iframe
+7. **Our Story** — Angela's lockdown origin story, using `OurStorySection.astro`
+8. **Photo Gallery** — plain grid, no lightbox, using `PhotoGrid.astro` (same component as Popular Dishes)
+9. **FAQ Accordion** — plain `<details>`-based accordion, using `FaqAccordion.astro`
+10. **Location/Map** — address, hours, consent-gated Google Maps embed (static placeholder until the visitor clicks "Karte anzeigen")
 11. **Footer** — social links, legal, quick nav
 
 ---
@@ -78,7 +97,7 @@ The home page's copy (hero headline, story text, gallery images) is currently ha
 | i18n | German (primary) + English (some fields) |
 | Accessibility | Playwright + `@axe-core/playwright` accessibility assertions in E2E tests |
 | Security headers | CSP, HSTS, X-Frame-Options, etc. via `public/_headers` |
-| Images | Astro Image compile-time optimization |
+| Images | Astro `<Image>` used by menu-card/feature components; raw `<img>` still used in page-level image grids |
 | Analytics | None currently configured |
 
 ---
@@ -106,7 +125,7 @@ The home page's copy (hero headline, story text, gallery images) is currently ha
 | Service | Purpose |
 |---------|---------|
 | Lieferando | Delivery/order link-out (migrated from Foodora) |
-| Google Maps | Location embed (Contact page + home page location section) |
+| Google Maps | Consent-gated location embed (Contact page + home page location section) |
 
 ---
 

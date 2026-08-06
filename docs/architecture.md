@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/architecture"
+type: "knowledge"
+title: "Architecture: D'ouro Soulfood"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "human", references: [] }
+attestation: { method: "manual", checks: [] }
+summary: "Stack decision matrix, rendering strategy, content architecture, component hierarchy, build pipeline, directory conventions."
+load_when: "Structural/rendering/build-pipeline questions."
+token_budget: 1200
+related: [".ai/packs/architecture.okf.md"]
+---
+
 # Architecture: D'ouro Soulfood
 
 > **Version:** 0.2.0
@@ -12,8 +31,9 @@
 | Styling | Tailwind CSS v4 | Design token integration via `@theme`, JIT |
 | CMS | Keystatic | Git-backed, visual editing, Astro-native support |
 | Hosting | Cloudflare Pages / Workers | Free tier, edge CDN, zero cold starts |
-| Images | Astro Image | Compile-time optimization via `@astrojs/cloudflare`'s `imageService: 'compile'` |
-| Maps | Google Maps Embed | Static iframe embed for performance |
+| Images | Astro `<Image>` | `imageService: 'compile'` is used across `MenuItemCard`, `MenuBistroCard`, `FeatureCard`, `PhotoGrid`, and the `menu.astro` showcase rows — zero raw `<img>` remain in `index.astro`/`menu.astro` as of the IMG-01 fix. Note: since source files live in `public/images/` (not `src/assets/`), Astro's image service passes them through unprocessed (correct `width`/`height`/`decoding="async"`, no format/compression gain) — see `docs/audit/image-audit.md`. |
+| Maps | Google Maps Embed, consent-gated | Two-click `MapEmbed.astro` component: static placeholder by default, real iframe only loads after the visitor clicks through (no request to Google before consent) |
+| Client JS | None by default; React-as-island only, tightly scoped | See `docs/adr/react-islands.md` — Astro + vanilla `<script>` is the default for all interactivity (mobile nav drawer, Maps consent gate, today's-hours widget all use this pattern); React is not installed and requires an explicit, approved ADR-scoped exception before any dependency is added |
 
 ---
 
@@ -87,8 +107,12 @@ Base.astro (layout)
 │   ├── CategoryIcon.astro        (src/components/ui/)
 │   ├── FeatureCard.astro          (src/components/sections/)
 │   ├── UserReviews.astro           (src/components/sections/)
-│   └── inline sections (gallery, story, FAQ accordion, map/location —
-│       hand-written markup in index.astro, not separate components)
+│   ├── PhotoGrid.astro              (src/components/sections/, used twice:
+│   │   Popular Dishes + Galerie)
+│   ├── OurStorySection.astro         (src/components/sections/)
+│   ├── FaqAccordion.astro             (src/components/sections/)
+│   └── inline sections (map/location — hand-written markup in
+│       index.astro, composing the MapEmbed.astro component)
 │
 ├── MenuItemCard.astro / MenuBistroCard.astro  (src/components/sections/,
 │   used on menu.astro)

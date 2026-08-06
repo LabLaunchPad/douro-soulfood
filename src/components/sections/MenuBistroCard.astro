@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import siteSettings from '@/content/settings/default.json';
+import FlagIcon from '@/components/ui/FlagIcon.astro';
 
 const orderHref = siteSettings.lieferando_url || 'https://www.lieferando.at/en/menu/douro';
 
@@ -107,25 +108,11 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
             </div>
             <div class="flex flex-col items-end gap-0.5">
               <div class="flex items-center gap-1">
-                <svg class="w-3.5 h-2.5 rounded-[2px] shadow-xs shrink-0" viewBox="0 0 5 3" aria-hidden="true">
-                  <rect width="5" height="1" y="0" fill="#000000"/>
-                  <rect width="5" height="1" y="1" fill="#DD0000"/>
-                  <rect width="5" height="1" y="2" fill="#FFCE00"/>
-                </svg>
+                <FlagIcon lang="de" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
                 <span class="text-[10px] text-stone-500 font-sans font-medium tracking-wide whitespace-nowrap">ohne / mit Alkohol</span>
               </div>
               <div class="flex items-center gap-1">
-                <svg class="w-3.5 h-2.5 rounded-[2px] shadow-xs shrink-0" viewBox="0 0 60 30" aria-hidden="true">
-                  <clipPath id="uk-clip-dual"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-                  <clipPath id="uk-diag-dual"><path d="M0,0 L60,30 M60,0 L0,30"/></clipPath>
-                  <g clip-path="url(#uk-clip-dual)">
-                    <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
-                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" clip-path="url(#uk-diag-dual)"/>
-                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path="url(#uk-diag-dual)"/>
-                    <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
-                    <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
-                  </g>
-                </svg>
+                <FlagIcon lang="uk" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
                 <span class="text-[10px] text-stone-500 font-sans font-medium tracking-wide whitespace-nowrap">non-alc. / alcoholic</span>
               </div>
             </div>
@@ -147,11 +134,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
       {/* Language 1: German with SVG Flag */}
       {description && (
         <div class="flex items-start gap-1.5 sm:gap-2 mb-1.5 text-xs sm:text-sm text-stone-800 leading-snug">
-          <svg class="w-4 h-3 rounded-[2px] shadow-xs shrink-0 mt-0.5 sm:mt-1" viewBox="0 0 5 3" aria-hidden="true">
-            <rect width="5" height="1" y="0" fill="#000000"/>
-            <rect width="5" height="1" y="1" fill="#DD0000"/>
-            <rect width="5" height="1" y="2" fill="#FFCE00"/>
-          </svg>
+          <FlagIcon lang="de" class="w-4 h-3 rounded-[2px] shadow-xs mt-0.5 sm:mt-1" />
           <p class="font-sans font-medium break-words min-w-0">{description}</p>
         </div>
       )}
@@ -167,17 +150,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
       {/* Language 2: English with SVG Flag */}
       {descriptionEn && (
         <div class="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-stone-600 leading-snug">
-          <svg class="w-4 h-3 rounded-[2px] shadow-xs shrink-0 mt-0.5 sm:mt-1" viewBox="0 0 60 30" aria-hidden="true">
-            <clipPath id="uk-clip-card-single"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-            <clipPath id="uk-diag-card-single"><path d="M0,0 L60,30 M60,0 L0,30"/></clipPath>
-            <g clip-path="url(#uk-clip-card-single)">
-              <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
-              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6" clip-path="url(#uk-diag-card-single)"/>
-              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path="url(#uk-diag-card-single)"/>
-              <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
-              <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
-            </g>
-          </svg>
+          <FlagIcon lang="uk" class="w-4 h-3 rounded-[2px] shadow-xs mt-0.5 sm:mt-1" />
           <p class="font-sans break-words min-w-0">{descriptionEn}</p>
         </div>
       )}

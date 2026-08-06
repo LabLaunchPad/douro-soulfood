@@ -17,8 +17,6 @@ interface FooterLink {
 }
 
 interface Props {
-  brandName?: string;
-  brandSubtitle?: string;
   tagline?: string;
   links?: FooterLink[];
   cta?: { label: string; href: string };
@@ -38,7 +36,6 @@ const {
     { label: 'Catering & Events', href: '/catering' },
     { label: 'Über uns', href: '/about' },
     { label: 'Kontakt', href: '/contact' },
-    { label: 'Geschenkkarten', href: '/gift-cards' },
   ],
   cta = { label: 'Jetzt bestellen', href: 'https://www.lieferando.at/en/menu/douro' },
   address = ['Auerspergstraße 10, 5020 Salzburg'],

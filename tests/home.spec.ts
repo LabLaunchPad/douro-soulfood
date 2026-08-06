@@ -86,6 +86,17 @@ test.describe('Home page — content & visibility', () => {
     await expect(footer).toBeVisible();
     await expect(footer.locator('address', { hasText: 'Auerspergstraße 10' })).toBeVisible();
   });
+
+  test('skip-to-main-content link is focusable and targets #main-content', async ({ page }) => {
+    const skipLink = page.locator('a[href="#main-content"]');
+    await expect(skipLink).toHaveClass(/sr-only/);
+
+    await skipLink.focus();
+    await expect(skipLink).toBeVisible();
+
+    const main = page.locator('main#main-content');
+    await expect(main).toBeAttached();
+  });
 });
 
 /* ═══════════════════════════════════════════════════════════════
@@ -209,6 +220,61 @@ test.describe('Home page — mobile menu', () => {
     await hamburgerBtn.click();
     await expect(mobileMenu).toHaveAttribute('data-open', 'false');
     await expect(hamburgerBtn).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('closed drawer is inert and hidden from assistive tech', async ({ page }) => {
+    const mobileMenu = page.locator('div#mobile-menu');
+    await expect(mobileMenu).toHaveAttribute('aria-hidden', 'true');
+    await expect(mobileMenu).toHaveJSProperty('inert', true);
+  });
+
+  test('opening the drawer clears inert/aria-hidden and updates the hamburger label', async ({ page }) => {
+    const hamburgerBtn = page.locator('button#mobile-menu-btn');
+    const mobileMenu = page.locator('div#mobile-menu');
+
+    await hamburgerBtn.click();
+
+    await expect(mobileMenu).toHaveAttribute('aria-hidden', 'false');
+    await expect(mobileMenu).toHaveJSProperty('inert', false);
+    await expect(hamburgerBtn).toHaveAttribute('aria-label', 'Navigationsmenü schließen');
+  });
+
+  test('Escape key closes the open drawer and returns focus to the hamburger', async ({ page }) => {
+    const hamburgerBtn = page.locator('button#mobile-menu-btn');
+    const mobileMenu = page.locator('div#mobile-menu');
+
+    await hamburgerBtn.click();
+    await expect(mobileMenu).toHaveAttribute('data-open', 'true');
+
+    await page.keyboard.press('Escape');
+
+    await expect(mobileMenu).toHaveAttribute('data-open', 'false');
+    await expect(hamburgerBtn).toBeFocused();
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION: Google Maps consent gate (MapEmbed.astro)
+   ═══════════════════════════════════════════════════════════════ */
+
+test.describe('Home page — Google Maps consent gate', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('no Google Maps iframe is present before consent', async ({ page }) => {
+    const mapEmbed = page.locator('[data-map-embed]');
+    await expect(mapEmbed).toBeVisible();
+    await expect(mapEmbed.locator('iframe')).toHaveCount(0);
+  });
+
+  test('clicking "Karte anzeigen" loads the Google Maps iframe', async ({ page }) => {
+    const mapEmbed = page.locator('[data-map-embed]');
+    await mapEmbed.getByRole('button', { name: 'Karte anzeigen' }).click();
+
+    const iframe = mapEmbed.locator('iframe');
+    await expect(iframe).toHaveCount(1);
+    await expect(iframe).toHaveAttribute('src', /maps\.google\.com/);
   });
 });
 

@@ -1,0 +1,29 @@
+---
+// Snippet: correct Astro <Image> usage for this repo's public/images/
+// convention. width/height MUST be the source file's real pixel
+// dimensions (check via `file` or PIL) — never guessed, never copied
+// from an unrelated image. Guessing caused a real bug once (hardcoded
+// width="600" height="450" that matched none of the actual files).
+import { Image } from 'astro:assets';
+
+interface ImageItem {
+  src: string;
+  alt: string;
+  width: number; // real source file width in px
+  height: number; // real source file height in px
+}
+
+// Example usage in a .map():
+// {items.map((item: ImageItem) => (
+//   <Image
+//     src={item.src}
+//     alt={item.alt}
+//     width={item.width}
+//     height={item.height}
+//     format="webp"     // safe for .png/.jpg/.jpeg/.webp; use format="jpeg" explicitly for .jfif files
+//     quality={85}
+//     class="w-full h-full object-cover"
+//     loading="lazy"    // "eager" only for above-the-fold/LCP images
+//   />
+// ))}
+---

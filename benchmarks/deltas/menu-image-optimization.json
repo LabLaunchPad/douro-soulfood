@@ -1,0 +1,21 @@
+{
+  "compared_at": "2026-08-06T07:59:00.000Z",
+  "change": "Resized/recompressed 32 referenced files in public/images/menu/ in place (same filenames/formats), targeting real display sizes: 700px max for the 3-photo showcase grids (Quesadillas/Tacos/Bowls categories), 500px max for dish-card thumbnails and index.astro's PhotoGrid. Used sharp (already a transitive dependency via Astro's own image service) directly against the files, since public/-sourced images bypass Astro's <Image> build-time optimizer entirely (documented, accepted limitation — see .ai/decisions/image-policy.okf.md).",
+  "route": "/menu",
+  "before": {
+    "total_byte_weight_kb": 4183,
+    "performance_score": 0.64,
+    "lcp_ms": 8960,
+    "source": "benchmarks/reports/PERF-POST-MIGRATION.okf.md, single run"
+  },
+  "after": {
+    "total_byte_weight_kb": 828,
+    "performance_score_range": [0.81, 0.94],
+    "performance_score_representative": 0.81,
+    "lcp_ms_range": [2900, 4472],
+    "source": "6 Lighthouse runs this session, single representative run recorded in benchmarks/current/metrics.json"
+  },
+  "verified_unaffected_routes": ["home", "about", "catering", "contact"],
+  "honest_caveat": "Total byte weight reduction (-80%) is a solid, reproducible, directly-measured fact (total-byte-weight audit). The performance-score/LCP improvement is real but noisy in this sandboxed environment — /menu's score did not reliably clear the 0.90 budget even after this fix, because a separate, larger factor was found: /menu's DOM has 1526 elements vs ~127 on other routes (dom-size-insight audit), which drives more main-thread work under Lighthouse's simulated CPU throttling. That is a genuine, separate finding, not fixed in this pass — see benchmarks/reports/MENU-IMAGE-FIX.okf.md and .ai/tasks/backlog/README.md.",
+  "visual_regression_check": "Not verified via automated screenshot — Playwright's installed browser build (chromium_headless_shell-1223) does not match the pre-installed Chromium binary (chromium-1194) in this sandbox, a pre-existing environment limitation (see .ai/memory/learned-constraints.md). Verified instead via: pnpm build passing, and re-reading every resized file's metadata with sharp to confirm valid, non-corrupt images at the expected dimensions with preserved aspect ratio (fit: 'inside', no cropping/distortion)."
+}

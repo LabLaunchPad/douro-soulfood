@@ -1,3 +1,22 @@
+---
+okf_version: "0.2"
+id: "docs/agent"
+type: "policy"
+title: "Agent Instructions: D'ouro Soulfood"
+status: "approved"
+created: "unknown"
+updated: "unknown"
+freshness: "current"
+lifecycle: "active"
+trust: "verified"
+provenance: { source: "human", references: [] }
+attestation: { method: "manual", checks: [] }
+summary: "Critical rules for AI agents: design system compliance, Astro patterns, styling, component architecture, performance, accessibility, git conventions, deployment."
+load_when: "Before any code change, if AGENTS.md's short-form constraints aren't sufficient."
+token_budget: 1000
+related: ["AGENTS.md"]
+---
+
 # Agent Instructions: D'ouro Soulfood
 
 > **Read this file FIRST before any code changes.**
@@ -26,9 +45,9 @@ docs/
 
 src/
   components/
-    ui/               → Reusable atoms: Button, AllergenBadge, DietaryBadge, CategoryIcon, ReviewBadge, AllergenHeaderLegend
+    ui/               → Reusable atoms: Button, AllergenBadge, DietaryBadge, CategoryIcon, ReviewBadge, AllergenHeaderLegend, MapEmbed
     sections/         → Page composites: HeroSection, FeatureCard, UserReviews, MenuItemCard, MenuBistroCard
-    layout/           → NavBar, Footer, MobileBottomBar
+    layout/           → NavBar, MobileNavDrawer, Footer, MobileBottomBar
   content/
     menu-items/       → Keystatic collection, one JSON file per dish
     faq/               → Keystatic collection, one JSON file per Q&A
@@ -36,7 +55,7 @@ src/
   lib/
     menu.ts            → Menu category config + filter/sort/group logic
   layouts/
-    Base.astro         → Root layout with <head>, fonts, global CSS, nav/footer slots
+    Base.astro         → Root layout with <head>, self-hosted fonts (public/fonts/, tokens.css @font-face), global CSS, nav/footer slots
   pages/
     index.astro        → Home page
     menu.astro         → Menu page
@@ -62,7 +81,7 @@ public/
 - **ALWAYS** use the easing curves: `transition: all var(--duration-normal) var(--ease-spring)`
 
 ### 2. Astro 6 Patterns
-- `.astro` components only — this site ships **zero client-side JS framework**. There is no React integration; do not add one without discussing it first.
+- `.astro` components only — this site ships **zero client-side JS framework**. There is no React integration; do not add one without discussing it first. See `docs/adr/react-islands.md` for the full policy: Astro + vanilla `<script>` is the default for all interactivity, React-as-island is allowed only for a narrow, explicitly-approved set of cases, and it must never replace a working static component.
 - Use Astro's built-in `<Image />` component for optimized images.
 - Use content collections (`getCollection()`) for CMS-managed data — `menu_items` and `faq` are declared in `src/content.config.ts`. `settings` is read via a direct JSON import (`import siteSettings from '@/content/settings/default.json'`) since it's a singleton, not a collection.
 - Node 22.12+ required — do NOT use APIs deprecated before that version.

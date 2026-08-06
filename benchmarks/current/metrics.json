@@ -1,0 +1,63 @@
+{
+  "collected_at": "2026-08-06T07:59:00.000Z",
+  "method": "lighthouse CLI against astro preview (local Node server, http://localhost:4321) — NOT wrangler pages dev (fails to start in this sandbox) and NOT the live Cloudflare Workers preview (Chrome headless hits a proxy-TLS interstitial in this sandbox that ignore-certificate-errors did not suppress)",
+  "caveat": "astro preview is a plain Node static server, not the Cloudflare Workers runtime — results are directionally real but not a perfect production match. Lighthouse performance scores in this sandbox show real run-to-run variance (observed /menu range across 6 runs pre-fix and post-fix: 0.81-0.94) — single-run numbers below are one representative run each, not a guaranteed reproduction.",
+  "routes": {
+    "home": {
+      "url": "http://localhost:4321/",
+      "performance": 0.96,
+      "accessibility": 0.96,
+      "bestPractices": 0.92,
+      "seo": 1,
+      "fcp_ms": 1696,
+      "lcp_ms": 2596,
+      "cls": 0,
+      "tbt_ms": 0
+    },
+    "menu": {
+      "url": "http://localhost:4321/menu/",
+      "performance": 0.81,
+      "accessibility": 0.95,
+      "bestPractices": 0.92,
+      "seo": 1,
+      "fcp_ms": 2597,
+      "lcp_ms": 4472,
+      "cls": 0,
+      "tbt_ms": 35,
+      "note": "Improved from the prior 0.64/8960ms after fixing /menu's image payload (see benchmarks/deltas/menu-image-optimization.json), but still below the 0.90/2500ms budget. Root cause of the remainder is now identified as DOM size (1526 elements vs ~127 on other routes), not images — see benchmarks/reports/MENU-IMAGE-FIX.okf.md."
+    },
+    "about": {
+      "url": "http://localhost:4321/about/",
+      "performance": 0.98,
+      "accessibility": 0.95,
+      "bestPractices": 0.92,
+      "seo": 1,
+      "fcp_ms": 1368,
+      "lcp_ms": 2268,
+      "cls": 0,
+      "tbt_ms": 0
+    },
+    "catering": {
+      "url": "http://localhost:4321/catering/",
+      "performance": 0.96,
+      "accessibility": 0.95,
+      "bestPractices": 0.92,
+      "seo": 1,
+      "fcp_ms": 1400,
+      "lcp_ms": 2675,
+      "cls": 0,
+      "tbt_ms": 0
+    },
+    "contact": {
+      "url": "http://localhost:4321/contact/",
+      "performance": 0.98,
+      "accessibility": 0.96,
+      "bestPractices": 0.92,
+      "seo": 1,
+      "fcp_ms": 1374,
+      "lcp_ms": 2274,
+      "cls": 0,
+      "tbt_ms": 0
+    }
+  }
+}

@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import MobileBottomBar from '@/components/layout/MobileBottomBar.astro';
+import FlagSprites from '@/components/ui/FlagSprites.astro';
 
 interface Props {
   title: string;
@@ -59,7 +60,16 @@ const fullTitle = title === siteName ? title : `${siteName} | ${title}`;
     <link rel="preload" href="/fonts/dm-sans-normal-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/fraunces-normal-variable.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Restaurant Schema.org -->
+    <!-- Restaurant Schema.org
+         WARNING: public/_headers' CSP allows this exact inline block via a
+         SHA-256 hash (not 'unsafe-inline') — CSP's script-src blocks every
+         inline script element regardless of its type attribute. This only
+         works because the block below is byte-identical on every real page
+         today (no page overrides Base.astro's `image` prop, and Astro.site
+         is a fixed config value). If that ever changes, or if any inline
+         script in the site changes at all, run
+         `pnpm build && node scripts/checks/verify-csp-hashes.mjs` to find
+         the new hash(es) needed in public/_headers' script-src. -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Restaurant",
@@ -96,8 +106,17 @@ const fullTitle = title === siteName ? title : `${siteName} | ${title}`;
   </head>
 
   <body class="bg-[var(--color-surface-primary)] text-[var(--color-text-primary)] min-h-screen">
+    <FlagSprites />
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]
+             focus:rounded-sm focus:bg-brand-gold focus:px-4 focus:py-2 focus:text-sm focus:font-semibold
+             focus:text-brand-espresso focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-espresso"
+    >
+      Zum Hauptinhalt springen
+    </a>
     <slot name="nav" />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <slot name="footer" />

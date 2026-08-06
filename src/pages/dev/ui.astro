@@ -1,0 +1,201 @@
+---
+/**
+ * /dev/ui — internal component preview route (OUTCOME-004).
+ *
+ * Not linked from any public navigation. Additionally gated to dev mode
+ * only: in a production build, this route 404s instead of shipping an
+ * internal-tooling page to visitors. Astro's `output: 'server'` means
+ * every file under src/pages/ is a live route unless explicitly guarded,
+ * so the import.meta.env.DEV check below is load-bearing, not decorative.
+ */
+export const prerender = false;
+
+import '@/styles/global.css';
+import Button from '@/components/ui/Button.astro';
+import AllergenBadge from '@/components/ui/AllergenBadge.astro';
+import DietaryBadge from '@/components/ui/DietaryBadge.astro';
+import ReviewBadge from '@/components/ui/ReviewBadge.astro';
+import MenuItemCard from '@/components/sections/MenuItemCard.astro';
+import MenuBistroCard from '@/components/sections/MenuBistroCard.astro';
+import FeatureCard from '@/components/sections/FeatureCard.astro';
+import HeroSection from '@/components/sections/HeroSection.astro';
+
+if (!import.meta.env.DEV) {
+  return new Response(null, { status: 404 });
+}
+---
+
+<!doctype html>
+<html lang="de" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component Preview — dev only</title>
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body class="bg-[var(--color-surface-primary)] text-[var(--color-text-primary)] p-8 flex flex-col gap-12 max-w-5xl mx-auto">
+    <header>
+      <h1 class="text-2xl font-bold font-display">Component Preview (dev only)</h1>
+      <p class="text-text-secondary text-sm mt-1">
+        Internal QA route — not linked from public navigation, 404s outside dev mode.
+        Per <code>CLAUDE.md</code>'s visual outcome protocol: inspect each state below against
+        <code>src/styles/tokens.css</code> before considering a component change finished.
+      </p>
+    </header>
+
+    <section>
+      <h2 class="text-lg font-semibold mb-3 font-display">Button</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <Button variant="primary">Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="ghost">Ghost</Button>
+        <Button variant="primary" arrow>With arrow</Button>
+        <Button variant="primary" size="sm">Small</Button>
+        <Button variant="primary" size="lg">Large</Button>
+        <Button variant="primary" href="#">As link</Button>
+      </div>
+      <p class="text-xs text-text-tertiary mt-2">
+        Manual check: Tab to each button — focus ring must be visible (focus-visible outline in brand-gold).
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold mb-3 font-display">AllergenBadge</h2>
+      <div class="flex flex-wrap gap-2">
+        <AllergenBadge code="A" />
+        <AllergenBadge code="G" />
+        <AllergenBadge code="M" />
+        <AllergenBadge code="B" />
+        <AllergenBadge code="R" />
+        <AllergenBadge code="E" />
+        <AllergenBadge code="F" />
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold mb-3 font-display">DietaryBadge</h2>
+      <div class="flex flex-wrap gap-2">
+        <DietaryBadge tag="vegan" />
+        <DietaryBadge tag="vegetarian" />
+        <DietaryBadge tag="gluten-free" />
+        <DietaryBadge tag="spicy" />
+        <DietaryBadge tag="halal" />
+        <DietaryBadge tag="dairy-free" />
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold mb-3 font-display">ReviewBadge</h2>
+      <div class="flex flex-col gap-3 items-start">
+        <ReviewBadge rating={4.8} reviewCount={978} source="Google Reviews" size="lg" />
+        <ReviewBadge rating={4.8} reviewCount={978} source="Google Reviews" size="md" />
+        <ReviewBadge rating={4.8} reviewCount={978} source="Google Reviews" size="sm" />
+        <ReviewBadge rating={4.8} reviewCount={978} source="Google Reviews" href="#" size="md" />
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold mb-3 font-display">MenuItemCard</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <MenuItemCard
+          name="Feijoada Brasileira"
+          description="Klassischer brasilianischer Bohneneintopf mit Schweinefleisch, serviert mit Reis und Farofa."
+          priceInCents={1690}
+          dietary={['gluten-free']}
+          allergens={['G']}
+          prepTime="20 min"
+          featured
+          imageSrc="/images/menu/feijoada.png"
+          imageAlt="Feijoada Brasileira"
+          imageWidth={300}
+          imageHeight={300}
+        />
+        <MenuItemCard
+          name="Vegane Bowl (no photo — empty state)"
+          description="Text-only card layout when imageSrc is not provided."
+          priceInCents={1290}
+          dietary={['vegan', 'gluten-free']}
+          allergens={[]}
+        />
+        <MenuItemCard
+          name="Coxinha (unavailable state)"
+          description="Demonstrates the !available overlay."
+          priceInCents={890}
+          available={false}
+          imageSrc="/images/menu/coxinha.png"
+          imageWidth={300}
+          imageHeight={300}
+        />
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold mb-3 font-display">MenuBistroCard</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <MenuBistroCard
+          name="Caipirinha"
+          description="Cachaça, Limette, Zucker"
+          descriptionEn="Cachaça, lime, sugar"
+          priceInCents={890}
+          priceVariants={{ nonAlcoholic: 490, alcoholic: 890 }}
+          allergens={[]}
+          available={true}
+        />
+        <MenuBistroCard
+          name="Pão de Queijo"
+          description="Brasilianisches Käsebrot"
+          priceInCents={590}
+          prepTime="10 min"
+          allergens={['G']}
+          addOns={[{ label: 'Extra Käse', price: 100 }]}
+        />
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold mb-3 font-display">FeatureCard</h2>
+      <FeatureCard
+        title="Firmenevents"
+        description="Von Team-Lunches bis Firmenfeiern — unsere Catering-Pakete passen sich Ihren Bedürfnissen an."
+        image={{ src: '/images/catering/event.webp', alt: 'Firmenevent Catering', width: 800, height: 600 }}
+        cta={{ label: 'Anfrage senden', href: '#' }}
+      />
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold mb-3 font-display">HeroSection</h2>
+      <p class="text-xs text-text-tertiary mb-2">
+        Rendered inline below rather than full-viewport, since HeroSection is a `&lt;header&gt;`-level component sized for the real page.
+        Manual check: open <code>/</code> directly to see it at intended scale.
+      </p>
+      <div class="border border-border-subtle rounded-lg overflow-hidden" style="height: 400px; position: relative;">
+        <HeroSection
+          accent="Preview"
+          headline="Component Preview Headline"
+          subheadline="Subheadline text for visual QA"
+          videoSrc={undefined}
+          images={[
+            {
+              src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=60',
+              alt: 'Preview image',
+              width: 800,
+              height: 450,
+            },
+          ]}
+          ctaPrimary={{ label: 'Primary CTA', href: '#' }}
+          ctaSecondary={{ label: 'Secondary CTA', href: '#' }}
+        />
+      </div>
+    </section>
+
+    <footer class="text-xs text-text-tertiary border-t border-border-subtle pt-4">
+      <p><strong>Manual visual QA checklist</strong> (per CLAUDE.md's visual_outcome_protocol):</p>
+      <ul class="list-disc pl-5 mt-1 space-y-0.5">
+        <li>Resize the browser to mobile width (&lt; 640px) and re-check every section above.</li>
+        <li>Tab through every interactive element (buttons, cards, review badge link) — focus-visible outline must be present.</li>
+        <li>Toggle OS-level "reduce motion" and confirm hover/transition animations stop.</li>
+        <li>Confirm every color reads as a design token, not a hardcoded value (compare against src/styles/tokens.css).</li>
+      </ul>
+    </footer>
+  </body>
+</html>
