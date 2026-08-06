@@ -21,8 +21,13 @@ Astro 6 + Tailwind v4 + Keystatic CMS restaurant marketing site for D'ouro Soulf
 
 ## Where to read next (load only what the task needs)
 - `.ai/INDEX.md` — full doc map, token budgets, routing by task type. **Load this second, always.**
+- `.ai/status.md` (or `node .ai/scripts/agent-status.mjs` for live data) — current repo state, active tasks, latest benchmark, known blockers.
+- `.ai/next-action.md` — the single most valuable next step, if you don't already have a task.
 - `.ai/routing.md` — which domain pack(s) to load for your specific task type.
 - `.ai/context-budget.md` — how much to load, when to stop.
+- `.ai/agents/README.md` — the 14-role agent matrix, if your task benefits from adopting a specific role's checklist.
+- `.ai/commands/README.md` — the 15-command registry (agent-bootstrap, start-task, verify-task, bench-run, etc.) — prefer an existing command's spec over improvising a workflow.
+- `.ai/hooks/README.md` — the 13 hook specs describing expected agent behavior at each stage (session start, before/after code changes, verification, memory capture, etc.).
 - `.ai/decisions/*.okf.md` — settled architectural decisions; don't re-litigate without new information.
 - `.ai/memory/anti-patterns.md` and `.ai/memory/recurring-failures.md` — known mistakes made in this repo before; don't repeat them.
 

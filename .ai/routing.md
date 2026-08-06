@@ -17,3 +17,33 @@ Route by task type. Load only the listed packs — not everything.
 | First task in a new session | `.ai/packs/repo-overview.okf.md`, `okf/audit/current-state.okf.md` |
 
 If a task spans multiple types (e.g. a React island that's also a performance concern), load the union of the relevant rows — don't load every pack "to be safe."
+
+## Role sequences by task type
+
+Per `.ai/agents/README.md` — typical role sequence for common task shapes (skip a role if the task genuinely doesn't touch its concern):
+
+| Task type | Typical role sequence |
+|---|---|
+| New component | Context Librarian → Spec Writer (if no spec) → Implementer → Design System Guardian → Accessibility Guardian → QA Verifier → Docs Guardian |
+| CMS/content change | Context Librarian → CMS/Content Guardian → Implementer → QA Verifier → Docs Guardian |
+| Performance work | Context Librarian → Performance Engineer → Benchmark Analyst → Implementer → QA Verifier |
+| Bug fix | Context Librarian → Implementer (root-cause first) → QA Verifier |
+| Docs-only | Context Librarian → Docs Guardian |
+| Multi-step feature | Orchestrator (sequences the rest) → Spec Writer → Implementer → relevant guardians → QA Verifier → Docs Guardian → Memory Curator (if a new lesson surfaced) |
+| CI/merge decision | Release Guardian |
+| Security-sensitive change | Security Guardian → Implementer → QA Verifier |
+
+## Command-to-hook mapping
+
+Each `.ai/commands/*.md` command implicitly applies certain `.ai/hooks/*.hook.md` checkpoints:
+
+| Command | Applies hooks |
+|---|---|
+| START TASK | `task-intake`, `context-selection` |
+| PLAN TASK | `spec-gate`, `pattern-reuse`, `safety-gate` |
+| IMPLEMENT TASK | `code-change`, `truth-verification` |
+| VERIFY TASK | `verification` |
+| BENCH RUN / BENCH COMPARE | `benchmark` |
+| DOC SYNC | `docs-sync`, `truth-verification` |
+| LEARN | `memory-capture` |
+| Any command's conclusion | `final-report` |

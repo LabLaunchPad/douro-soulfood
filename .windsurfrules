@@ -2,4 +2,6 @@ Read AGENTS.md first, then .ai/INDEX.md, before making any change in this reposi
 
 AGENTS.md is the agent-agnostic entrypoint: repo identity, prime directives, non-negotiable constraints, task execution loop, stop/ask conditions. .ai/INDEX.md maps every deeper doc, its token budget, and when to load it — load only what the current task needs.
 
+Also load, as needed: .ai/status.md (current repo state), .ai/agents/README.md (role matrix), .ai/commands/README.md (command registry), .ai/hooks/README.md (expected behavior at each stage).
+
 This file intentionally contains no separate rules of its own, to avoid drifting out of sync with AGENTS.md. If a rule here ever contradicts AGENTS.md, AGENTS.md wins — report the contradiction rather than silently picking one.

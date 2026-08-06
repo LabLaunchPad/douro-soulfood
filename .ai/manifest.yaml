@@ -161,3 +161,58 @@ docs:
     load_when: Image-optimization questions.
     token_budget: 400
     status: approved
+
+# Added by the AI Agent Performance and Efficiency OS setup — listed compactly
+# (one line per file) rather than one full entry each, to stay token-efficient
+# given the entrypoint/pack docs above already cover the detailed-entry pattern.
+
+agents:
+  directory: .ai/agents/
+  index: .ai/agents/README.md
+  files: [orchestrator, context-librarian, spec-writer, implementer, design-system-guardian,
+          cms-content-guardian, accessibility-guardian, performance-engineer, qa-verifier,
+          benchmark-analyst, docs-guardian, memory-curator, security-guardian, release-guardian]
+  token_budget_each: 800
+
+commands:
+  directory: .ai/commands/
+  index: .ai/commands/README.md
+  files: [agent-bootstrap, agent-status, context-pack, start-task, plan-task, implement-task,
+          verify-task, bench-run, bench-compare, eval-agent, doc-sync, learn, fix-issue,
+          borrow-component, release-check]
+  token_budget_each: 350
+
+hooks:
+  directory: .ai/hooks/
+  index: .ai/hooks/README.md
+  files: [session-start, task-intake, context-selection, truth-verification, spec-gate,
+          pattern-reuse, safety-gate, code-change, verification, benchmark, docs-sync,
+          memory-capture, final-report]
+  token_budget_each: 250
+
+status_system:
+  status: .ai/status.md
+  next_action: .ai/next-action.md
+  note: Point-in-time snapshots — go stale unless updated; prefer live script output where available.
+
+performance:
+  model: .ai/performance/agent-performance-model.md
+
+metrics:
+  directory: .ai/metrics/
+  files: [agent-efficiency, token-efficiency]
+
+dashboards:
+  directory: .ai/dashboards/
+  files: [agent-scorecard.okf.md]
+
+memory:
+  directory: .ai/memory/
+  files: [learned-constraints, anti-patterns, recurring-failures, human-approvals,
+          approved-decisions, human-preferences, experience-ledger.okf.md]
+  templates: [.ai/memory/templates/learning-entry.md]
+
+evals_ai:
+  directory: evals/ai/
+  files: [repo-quiz.json, adversarial-checks.md, agent-commands.json, context-routing.json]
+  golden_tasks_dir: evals/ai/golden-tasks/

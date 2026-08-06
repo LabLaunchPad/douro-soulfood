@@ -1,0 +1,12 @@
+{
+  "eval_id": "agent-commands-v1",
+  "description": "Tests whether every command in .ai/commands/README.md's registry actually has a complete spec file with all required fields.",
+  "required_fields": ["Aliases", "Purpose", "Inputs required", "Context to load", "Actions to perform", "Outputs produced", "Stop/ask conditions", "Example usage"],
+  "commands_to_check": [
+    "agent-bootstrap", "agent-status", "context-pack", "start-task", "plan-task",
+    "implement-task", "verify-task", "bench-run", "bench-compare", "eval-agent",
+    "doc-sync", "learn", "fix-issue", "borrow-component", "release-check"
+  ],
+  "pass_condition": "Every file in .ai/commands/{name}.md exists and contains all 8 required field headers (as '**Field**:' markdown bold-prefixed lines).",
+  "how_to_run": "Manually, or via node .ai/scripts/command-lint.mjs once implemented (see Phase 9)."
+}
