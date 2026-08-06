@@ -12,6 +12,14 @@ If any of the above suddenly works (e.g. a future environment has a working Chro
 - **Date**: 2026-08-06
 - **Source**: manual entry via memory-append.mjs
 - **Type**: recurring-failure
+- **Insight**: A single Lighthouse run in this sandbox is not reliable evidence of a fix's magnitude — /menu's performance score varied 0.81-0.94 across 6 runs (3 before, 3 after an 80% image-payload reduction), with no clean before/after separation, and the original 0.64/8960ms reading could not be reliably reproduced even before the fix.
+- **Evidence**: 6 real lighthouse CLI runs against astro preview this session, recorded in benchmarks/deltas/menu-image-optimization.json
+- **Recommended behavior**: Always run Lighthouse 3+ times before treating a single score as ground truth for a regression or a fix's impact in this environment; report score ranges, not single numbers, when variance is this high
+- **Status**: active
+
+- **Date**: 2026-08-06
+- **Source**: manual entry via memory-append.mjs
+- **Type**: recurring-failure
 - **Insight**: Reducing /menu's DOM size by a real, verified 28% (1526 -> 1092 elements, via a shared SVG symbol/use sprite for repeated flag icons) did not produce a cleanly separated Lighthouse performance score in this sandbox (0.77-0.89 after vs 0.81-0.94 before) -- confirming the earlier finding that this environment's Lighthouse measurement noise can swamp real, targeted optimizations.
 - **Evidence**: 3 Lighthouse runs post-DOM-fix vs 3 runs post-image-fix, both recorded in benchmarks/reports/MENU-DOM-SIZE-FIX.okf.md
 - **Recommended behavior**: Do not keep chasing a specific Lighthouse score number in this sandbox once a real, verified structural improvement has been made and the score still doesn't clearly move -- re-measure from an unrestricted environment before concluding further work is or isn't warranted

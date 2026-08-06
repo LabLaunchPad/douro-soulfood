@@ -1,15 +1,19 @@
 # Next Best Action
 
 ## The action
-Investigate and fix `/menu`'s real, measured Lighthouse performance regression (0.64 vs required ≥0.90; LCP 8960ms vs required <2500ms).
+Investigate `/menu`'s DOM-size finding: 1526 elements vs ~127 on other routes, now confirmed as the dominant remaining factor behind its Lighthouse performance score (the image-payload cause was fixed — see `benchmarks/reports/MENU-IMAGE-FIX.okf.md`).
 
 ## Why it matters
-It's the only real, currently-known budget-breaking issue in the repo — everything else (docs, task system, memory, benchmarks structure) is now in place, but this is a genuine product-affecting problem an actual visitor would experience as slow menu loading. It's also the first real exercise of the just-built benchmark/task system on a genuine finding rather than a demonstration.
+It's the next real, currently-known lever on the only route that still doesn't reliably meet the performance budget. Likely cause: `MenuBistroCard.astro` renders 2 full inline SVG flag icons per dish card, repeated across 40+ items.
 
 ## Exact command to run
-1. Reproduce: `pnpm build && pnpm preview` (background), then `CHROME_PATH=/opt/pw-browsers/chromium-*/chrome-linux/chrome npx lighthouse http://localhost:4321/menu --view --chrome-flags="--headless --no-sandbox"` — use `--view` (not `--output=json`) this time to get the interactive report and see the actual network waterfall/LCP element, which the JSON-only run this session didn't surface clearly.
-2. Once the LCP-blocking resource is identified, decide the fix: likely candidate is moving the largest, non-lazy-loaded menu images into `src/assets/` so Astro's image service can actually recompress them (see `.ai/decisions/image-policy.okf.md`'s documented `public/`-passthrough limitation).
-3. Start via: "Fix issue: /menu's Lighthouse performance score is 0.64 with an 8960ms LCP" (see `.ai/commands/fix-issue.md`).
+1. Reproduce: `pnpm build && pnpm preview` (background), then Lighthouse against `/menu/` with `--only-categories=performance`, check the `dom-size-insight` audit's `numericValue`.
+2. Consider extracting the repeated DE/UK flag SVGs into a single shared component or sprite (`<use href="#flag-de">`) to cut duplicate DOM nodes without a visual change.
+3. Re-measure DOM size and Lighthouse score before/after; commit only if genuinely improved and `pnpm build` + `npx playwright test --list` still pass.
+4. Start via: "Fix issue: /menu's DOM has 1526 elements, ~12x other routes" (see `.ai/commands/fix-issue.md`).
 
 ## Files likely needed
-`src/pages/menu.astro`, `.ai/packs/performance.okf.md`, `.ai/decisions/image-policy.okf.md`, `benchmarks/reports/PERF-POST-MIGRATION.okf.md` (the existing finding), `.ai/tasks/backlog/README.md` (where it's currently logged).
+`src/components/sections/MenuBistroCard.astro`, `.ai/packs/performance.okf.md`, `benchmarks/reports/MENU-IMAGE-FIX.okf.md` (this session's finding), `.ai/tasks/backlog/README.md`.
+
+## Lower-priority, also open
+A 64KB `Footer.*.css` render-blocking chunk affects every route (440–750ms estimated savings) — repo-wide, not menu-specific, worth a separate look.
