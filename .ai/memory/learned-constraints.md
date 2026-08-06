@@ -16,3 +16,11 @@ Real constraints discovered through actual work in this repo, not assumed.
 - **Evidence**: node .ai/scripts/command-lint.mjs -> 15/15 pass; node .ai/scripts/hook-lint.mjs -> 13/13 pass, both on first run
 - **Recommended behavior**: when authoring new command/hook spec files, keep using the exact bold-field-name convention (**Field**: ...) so the lint scripts keep working without special-casing
 - **Status**: active
+
+- **Date**: 2026-08-06
+- **Source**: manual entry via memory-append.mjs
+- **Type**: constraint
+- **Insight**: Playwright test EXECUTION (not --list) fails in this sandbox with a browser-binary version mismatch: the pinned @playwright/test wants chromium_headless_shell-1223, but only chromium-1194 and chromium_headless_shell-1194 are pre-installed at /opt/pw-browsers. This is narrower than the earlier-recorded 'Playwright browser binary is missing' note -- a binary IS present and DOES work for Lighthouse CLI (see benchmarks/reports/MENU-IMAGE-FIX.okf.md), just not at the revision this Playwright version expects for its own test runner.
+- **Evidence**: npx playwright test tests/about.spec.ts --project=desktop -> Error: browserType.launch: Executable doesn't exist at /opt/pw-browsers/chromium_headless_shell-1223/...
+- **Recommended behavior**: Use npx playwright test --list to verify new specs collect/parse correctly (this always works, no browser needed) and verify content assertions by grep/reading the built dist/ HTML output directly, rather than assuming full test execution is available in this sandbox
+- **Status**: active
