@@ -59,7 +59,16 @@ const fullTitle = title === siteName ? title : `${siteName} | ${title}`;
     <link rel="preload" href="/fonts/dm-sans-normal-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/fraunces-normal-variable.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Restaurant Schema.org -->
+    <!-- Restaurant Schema.org
+         WARNING: public/_headers' CSP allows this exact inline block via a
+         SHA-256 hash (not 'unsafe-inline') — CSP's script-src blocks every
+         inline script element regardless of its type attribute. This only
+         works because the block below is byte-identical on every real page
+         today (no page overrides Base.astro's `image` prop, and Astro.site
+         is a fixed config value). If that ever changes, or if any inline
+         script in the site changes at all, run
+         `pnpm build && node scripts/checks/verify-csp-hashes.mjs` to find
+         the new hash(es) needed in public/_headers' script-src. -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Restaurant",
