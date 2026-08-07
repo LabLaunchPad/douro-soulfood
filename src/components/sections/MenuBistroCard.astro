@@ -141,7 +141,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
 
       {/* Prep time in German if detailed */}
       {prepTime && (
-        <div class="flex items-center gap-1.5 ml-5 sm:ml-6 mb-1.5 text-[11px] sm:text-xs text-amber-900/90 italic">
+        <div class="flex items-center gap-1.5 ml-5 sm:ml-6 mb-1.5 text-xs text-amber-900/90 italic">
           <span class="text-xs">⏱️</span>
           <span>Wartezeit ca. {prepTime}.</span>
         </div>
@@ -157,7 +157,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
 
       {/* Prep time in English if detailed */}
       {prepTimeEn && (
-        <div class="flex items-center gap-1.5 ml-5 sm:ml-6 mt-0.5 text-[11px] sm:text-xs text-stone-500 italic">
+        <div class="flex items-center gap-1.5 ml-5 sm:ml-6 mt-0.5 text-xs text-stone-500 italic">
           <span class="text-xs">⏱️</span>
           <span>Waiting time {prepTimeEn}.</span>
         </div>
