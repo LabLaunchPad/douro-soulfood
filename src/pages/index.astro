@@ -2,6 +2,7 @@
 export const prerender = true;
 
 import Base from '@/layouts/Base.astro';
+import Button from '@/components/ui/Button.astro';
 import NavBar from '@/components/layout/NavBar.astro';
 import HeroSection from '@/components/sections/HeroSection.astro';
 import ReviewBadge from '@/components/ui/ReviewBadge.astro';
@@ -101,7 +102,7 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 3. REVIEW BADGE */}
-  <section class="py-section-mobile md:py-3 px-4 md:px-16 border-b border-border-subtle" aria-label="Bewertungen">
+  <section class="py-section-mobile md:py-5 px-4 md:px-16 border-b border-border-subtle" aria-label="Bewertungen">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
       <ReviewBadge
         rating={4.8}
@@ -115,7 +116,7 @@ const PAGE_DESCRIPTION =
   </section>
 
   {/* 4. 6 AFRO-LATINO SPEZIALITÄTEN */}
-  <section class="pt-4 md:pt-6 pb-3 md:pb-4 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Speisekarte Kategorien">
+  <section class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Speisekarte Kategorien">
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
         Unsere Speisekarte
@@ -166,7 +167,7 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 7. FIRMENEVENTS SECTION */}
-  <section class="py-section-mobile md:py-3" aria-label="Firmenevents">
+  <section class="py-section-mobile md:py-5" aria-label="Firmenevents">
     <FeatureCard
       title="Firmenevents"
       description="Von Team-Lunches bis Firmenfeiern — unsere Catering-Pakete passen sich Ihren Bedürfnissen an."
@@ -178,12 +179,12 @@ const PAGE_DESCRIPTION =
   {/* 8. REVIEWS SECTION — UserReviews.astro declares its own aria-label
        landmark; this wrapper stays unlabeled to avoid a duplicate
        nested "Gästebewertungen" region (axe landmark-unique). */}
-  <section class="py-section-mobile md:py-3">
+  <section class="py-section-mobile md:py-5">
     <UserReviews />
   </section>
 
   {/* 9. PRIVATE FEIERN SECTION */}
-  <section class="py-section-mobile md:py-3" aria-label="Private Feiern">
+  <section class="py-section-mobile md:py-5" aria-label="Private Feiern">
     <FeatureCard
       title="Private Feiern"
       description="Geburtstage, Hochzeiten, Familientreffen — wir bringen Soul Food direkt zu Ihnen."
@@ -274,15 +275,9 @@ const PAGE_DESCRIPTION =
                 Heute: {hours[0].time} Uhr
               </span>
             </div>
-            <a
-              href="/menu"
-              class="group inline-flex items-center gap-2 rounded-sm bg-brand-gold hover:bg-brand-gold-light active:bg-brand-gold-dark
-                     px-4 py-2 text-xs md:text-sm font-semibold text-brand-espresso
-                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold
-                     no-underline transition-colors shadow-glow-gold"
-            >
+            <Button href="/menu" variant="primary" size="sm" class="shadow-glow-gold">
               Jetzt bestellen
-            </a>
+            </Button>
           </div>
         </div>
       </div>

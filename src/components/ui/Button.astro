@@ -1,6 +1,8 @@
 ---
 interface Props {
   href?: string;
+  target?: '_blank' | '_self';
+  rel?: string;
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   arrow?: boolean;
@@ -9,6 +11,8 @@ interface Props {
 
 const {
   href,
+  target,
+  rel,
   variant = 'primary',
   size = 'md',
   arrow = false,
@@ -41,7 +45,7 @@ const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}
 const Tag = href ? 'a' : 'button';
 ---
 
-<Tag href={href} class={classes}>
+<Tag href={href} target={target} rel={rel} class={classes}>
   <slot />
   {arrow && (
     <svg
