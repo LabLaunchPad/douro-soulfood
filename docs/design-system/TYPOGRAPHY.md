@@ -12,21 +12,22 @@ Fonts are self-hosted, not loaded from Google — a deliberate fix for the GDPR/
 
 Only two families ship (display + body) — clears the "limit font families" rule with room to spare.
 
-## Type scale (defined, not yet adopted — see Verification below)
+## Type scale (realigned 2026-08-07 — see history below)
 
-| Token | Size | Line-height | Intended role |
-|---|---|---|---|
-| `--text-label` | 0.75rem (12px) | 1.4 | eyebrows, badges, uppercase micro-copy |
-| `--text-body-sm` | 0.875rem (14px) | 1.6 | captions, metadata |
-| `--text-body-base` | 1rem (16px) | 1.6 | default paragraph text |
-| `--text-body-lg` | 1.125rem (18px) | 1.6 | lead paragraphs, emphasized body |
-| `--text-heading-sm` | 1.375rem (22px) | 1.25 | card titles, small subheadings |
-| `--text-heading-md` | 1.75rem (28px) | 1.2 | section subheadings |
-| `--text-heading-lg` | 2.25rem (36px) | 1.15 | section headings |
-| `--text-display-sm` | 2.75rem (44px) | 1.1 | small hero / page titles |
-| `--text-display-md` | 3.5rem (56px) | 1.05 | standard hero heading |
-| `--text-display-lg` | 4.5rem (72px) | 1.0 | large hero heading |
-| `--text-display-xl` | 5.5rem (88px) | 0.98 | maximal display, rarely used |
+| Token | Size | Tailwind equivalent | Line-height | Role |
+|---|---|---|---|---|
+| `--text-label` | 0.75rem (12px) | `text-xs` | 1.4 | eyebrows, badges, uppercase micro-copy — 46 real uses |
+| `--text-body-sm` | 0.875rem (14px) | `text-sm` | 1.5 | captions, metadata — 26 real uses |
+| `--text-body-base` | 1rem (16px) | `text-base` | 1.6 | default paragraph text — 4 real uses |
+| `--text-body-lg` | 1.125rem (18px) | `text-lg` | 1.6 | lead paragraphs, emphasized body — 12 real uses |
+| `--text-title-sm` | 1.25rem (20px) | `text-xl` | 1.3 | card/section titles — 9 real uses |
+| `--text-title-md` | 1.5rem (24px) | `text-2xl` | 1.25 | larger titles, eyebrow+title pairs — 2 real uses |
+| `--text-title-lg` | 1.875rem (30px) | `text-3xl` | 1.2 | title/headline boundary |
+| `--text-heading-sm` | 1.875rem (30px) | `text-3xl` | 1.2 | subheadings |
+| `--text-heading-md` | 2.25rem (36px) | `text-4xl` | 1.15 | section headings |
+| `--text-heading-lg` | 3rem (48px) | `text-5xl` | 1.1 | large section headings |
+| `--text-display-sm` | 3.75rem (60px) | `text-6xl` | 1.05 | page/hero titles |
+| `--text-display-md` | 4.5rem (72px) | `text-7xl` | 1.0 | large hero heading |
 
 ## Global rules
 
@@ -34,19 +35,10 @@ Only two families ship (display + body) — clears the "limit font families" rul
 - Body text defaults to `1.6` line-height.
 - Real-content line-length target: 45–75 characters/line (`max-w-[52ch]`/`[48ch]`/`[45ch]` containers on prose blocks — the exact ch-value is tuned per-page because DM Sans's `ch` unit renders wider than a literal character count would suggest; verified empirically via the Impeccable detector, not assumed. Tuning was applied as a `~0.685×` scale factor from the naive value across `about.astro`, `catering.astro`, `menu.astro`, `datenschutz.astro`, `impressum.astro`, `OurStorySection.astro`, `FeatureCard.astro`, `MenuItemCard.astro`, `PhotoGrid.astro`, `UserReviews.astro`, `HeroSection.astro`).
 
-## Verification finding (2026-08-07 audit)
+## History: how the "0% adoption" finding was actually resolved
 
-**The scale above has zero adoption.** Grep against `src/pages` + `src/components`:
+The 2026-08-07 audit's first pass found the custom `--text-*` scale had zero adoption (298 raw Tailwind-utility call sites instead). Investigating *why* revealed the real problem: the custom scale's values (22/28/44/56/88px) were invented and never matched any size actually used in the codebase — the real, organically-emerged usage pattern is Tailwind's own native scale, applied with real discipline (298 instances collapse into just 17 distinct, consistent size combinations, e.g. `text-lg md:text-xl` used identically 17 times, `text-sm md:text-base` used 23 times).
 
-```
-grep -rn "text-label\b|text-body-sm\b|text-body-base\b|..." → 0 matches
-grep -rnoE '\btext-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)\b' → 298 matches
-```
+**The fix applied**: realigned every `--text-*` token to equal the Tailwind step it was supposed to represent (documented above), rather than migrating 298 markup call sites to match invented values. This means `text-xl` and the new `--text-title-sm` token render identically — **zero visual change**, verified by construction (every new token value equals the pre-existing Tailwind step) and confirmed via `pnpm build` + a full visual re-audit (screenshots, all 7 routes, before/after). New/refactored components should reach for the named token going forward; existing raw-Tailwind markup is not "wrong," it's the reference the tokens now describe accurately.
 
-Every heading and body-text size decision in the actual markup goes through Tailwind's raw utility scale instead, each combined ad hoc with its own responsive breakpoints (e.g. `text-xl md:text-6xl lg:text-7xl` on `menu.astro`'s h1). This is not a broken scale — the mapping from raw sizes to the intended semantic roles is mostly recoverable (raw `text-4xl md:text-6xl lg:text-7xl` clearly wants to *be* `--text-display-md`/`lg`/`xl`) — but it means:
-- Two components with the same visual role can drift to different exact sizes over time with nothing to catch it.
-- New components have no scale to reach for by default, so the raw-utility habit self-perpetuates.
-
-### Fix (not yet applied — needs a phased, visually-verified pass)
-
-Per component, one at a time: identify the raw-utility combination's intended semantic role, swap to the matching `--text-*` token via a `text-[length:var(--text-heading-md)] leading-[var(--text-heading-md--line-height)]` pattern (Tailwind v4 arbitrary-property syntax) or a small set of new named utility classes (`.text-display-md` etc.) generated from the same tokens, then visually diff before/after at both viewports per this repo's stress-test loop. Do **not** attempt as a single global find-replace — 298 call sites include enough context-dependent exceptions (hover-state colour changes bundled into the same class string, responsive breakpoints that don't map 1:1 to a single scale step) that a blind regex would introduce real regressions.
+Two token names from the original (unaligned) scale were retired since nothing in the real 17-combination set needed them: the old `--text-display-lg` (72px) and `--text-display-xl` (88px) steps. The new `--text-display-md` (72px) now covers the real large-hero use case that the old `--text-display-lg` was aiming for, just at the correct value. Confirmed zero source references to the retired names before removal.

@@ -77,7 +77,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
 
   {/* Image Column — Mobile (< md): Right side (order-2, w-24 h-24). Desktop (>= md): Left side (md:order-1, md:w-36 md:h-36 lg:w-40 lg:h-40) */}
   {imageSrc && (
-    <div class="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 shrink-0 aspect-square rounded-md overflow-hidden relative shadow-inner bg-stone-100 self-start md:self-center order-2 md:order-1">
+    <div class="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 shrink-0 aspect-square rounded-md overflow-hidden relative shadow-inner bg-(--color-bistro-placeholder) self-start md:self-center order-2 md:order-1">
       <Image
         src={imageSrc}
         alt={imageAlt || name}
@@ -109,11 +109,11 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
             <div class="flex flex-col items-end gap-0.5">
               <div class="flex items-center gap-1">
                 <FlagIcon lang="de" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
-                <span class="text-[11px] text-stone-500 font-sans font-medium tracking-wide whitespace-nowrap">ohne / mit Alkohol</span>
+                <span class="text-[11px] text-(--color-bistro-muted) font-sans font-medium tracking-wide whitespace-nowrap">ohne / mit Alkohol</span>
               </div>
               <div class="flex items-center gap-1">
                 <FlagIcon lang="uk" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
-                <span class="text-[11px] text-stone-500 font-sans font-medium tracking-wide whitespace-nowrap">non-alc. / alcoholic</span>
+                <span class="text-[11px] text-(--color-bistro-muted) font-sans font-medium tracking-wide whitespace-nowrap">non-alc. / alcoholic</span>
               </div>
             </div>
           </div>
@@ -123,7 +123,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
               {formattedPrice}
             </div>
             {prepTime && (
-              <span class="text-[11px] sm:text-xs text-stone-500 font-sans font-medium tracking-wide whitespace-nowrap mt-0.5">
+              <span class="text-[11px] sm:text-xs text-(--color-bistro-muted) font-sans font-medium tracking-wide whitespace-nowrap mt-0.5">
                 ⏱️ {prepTime}
               </span>
             )}
@@ -133,7 +133,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
 
       {/* Language 1: German with SVG Flag */}
       {description && (
-        <div class="flex items-start gap-1.5 sm:gap-2 mb-1.5 text-xs sm:text-sm text-stone-800 leading-snug">
+        <div class="flex items-start gap-1.5 sm:gap-2 mb-1.5 text-xs sm:text-sm text-(--color-bistro-text-strong) leading-snug">
           <FlagIcon lang="de" class="w-4 h-3 rounded-[2px] shadow-xs mt-0.5 sm:mt-1" />
           <p class="font-sans font-medium break-words min-w-0">{description}</p>
         </div>
@@ -149,7 +149,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
 
       {/* Language 2: English with SVG Flag */}
       {descriptionEn && (
-        <div class="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-stone-600 leading-snug">
+        <div class="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-(--color-bistro-muted-dark) leading-snug">
           <FlagIcon lang="uk" class="w-4 h-3 rounded-[2px] shadow-xs mt-0.5 sm:mt-1" />
           <p class="font-sans break-words min-w-0">{descriptionEn}</p>
         </div>
@@ -157,7 +157,7 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
 
       {/* Prep time in English if detailed */}
       {prepTimeEn && (
-        <div class="flex items-center gap-1.5 ml-5 sm:ml-6 mt-0.5 text-xs text-stone-500 italic">
+        <div class="flex items-center gap-1.5 ml-5 sm:ml-6 mt-0.5 text-xs text-(--color-bistro-muted) italic">
           <span class="text-xs">⏱️</span>
           <span>Waiting time {prepTimeEn}.</span>
         </div>

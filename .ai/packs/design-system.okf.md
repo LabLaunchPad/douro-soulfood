@@ -29,6 +29,6 @@ Light theme is default (warm cream surfaces, high-contrast espresso text) — no
 
 Use `class:list={[...]}` for conditional/merged classes. No `cn()`/`clsx` helper exists — don't reintroduce one.
 
-Known, documented gap: `tokens.css` defines a full semantic type scale but it has zero adoption in actual markup (298 raw-Tailwind-utility call sites instead). See `docs/design-system/TYPOGRAPHY.md`.
+`tokens.css`'s semantic type scale was realigned 2026-08-07 to match the real, disciplined Tailwind-utility usage pattern already in `src/` (was invented values with zero adoption; now the token values equal the Tailwind steps in real use, zero visual change). See `docs/design-system/TYPOGRAPHY.md`.
 
 **Full detail**: `docs/design-system.md` (summary) → `docs/design-system/` (deep reference: component registry, accessibility playbook, audit template).

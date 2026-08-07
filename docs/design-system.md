@@ -93,7 +93,7 @@ Taupe:                #D6C4A5
 ```
 
 ### Known gap: un-tokenized neutral/warning colors
-44 call sites (verified via grep, 2026-08-07) use Tailwind's default palette directly — `text-stone-*`/`bg-stone-*` for secondary/muted UI text (`Footer`, `MenuBistroCard`, `AllergenHeaderLegend`, `menu.astro`) and `text-amber-*`/`bg-amber-*`/`border-amber-*` for prep-time and allergen-warning accents (`AllergenBadge`, `MenuItemCard`, `MenuBistroCard`) — bypassing `--color-text-tertiary` and having no dedicated `--color-warning` token to route through. Zero raw hex outside `FlagSprites.astro`'s literal national-flag fills (an explicit, correct exception).
+**Fixed 2026-08-07**: 38 of 44 call sites that used Tailwind's default palette directly (`text-stone-*`/`bg-stone-*`) now route through tokens — Footer's muted text through `--color-text-tertiary`, the bistro-themed components (`MenuBistroCard`, `AllergenHeaderLegend`, `menu.astro`) through 5 new bistro-scoped muted/placeholder tokens (matching their prior exact values, zero visual change). The remaining 6 `amber-*` call sites (prep-time/allergen accents) were investigated and left as-is — they correctly serve two different visual contexts that would need two different token values, and are internally consistent within each. See `docs/design-system/COLOR_SYSTEM.md` for full detail. Zero raw hex outside `FlagSprites.astro`'s literal national-flag fills (an explicit, correct exception).
 
 ## 3. Typography
 
@@ -105,7 +105,7 @@ Taupe:                #D6C4A5
 Self-hosted `.woff2` files under `public/fonts/`, `@font-face`-declared in `tokens.css`, preloaded via `<link rel="preload">` in `Base.astro`'s `<head>` — not loaded from Google (GDPR/IP-transmission concern, see `docs/security.md`).
 
 ### Type Scale
-`tokens.css` defines a modular semantic scale (`--text-display-*`, `--text-heading-*`, `--text-body-*`, `--text-label`), but **zero components use it** (verified via grep, 2026-08-07) — every text-size decision in `src/` goes through Tailwind's raw `text-xs`…`text-7xl` utilities instead (298 call sites), each combined ad hoc with its own responsive breakpoints and line-height. The token scale below is therefore aspirational, not descriptive of current markup. Treat as the target for new/refactored components; do not treat its mere existence as evidence of an enforced hierarchy.
+`tokens.css` defines a modular semantic scale (`--text-display-*`, `--text-heading-*`, `--text-title-*`, `--text-body-*`, `--text-label`). **Realigned 2026-08-07**: the scale's values previously didn't match any size actually used in `src/` (invented 22/28/44/56/88px steps against a real, disciplined pattern of Tailwind's native scale used in 17 consistent combinations across 298 call sites). Rather than migrate 298 markup call sites to match invented values, the token *values* were corrected to equal the Tailwind steps they were meant to represent — a documentation/naming fix verified to produce zero visual change. Raw `text-xs`…`text-7xl` utilities in existing markup now render identically to the matching named token; new/refactored components should reach for the token. See `docs/design-system/TYPOGRAPHY.md` for the full before/after and the exact mapping.
 
 | Token | Size | Line-height |
 |-------|------|-------------|

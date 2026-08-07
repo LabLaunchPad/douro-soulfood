@@ -60,13 +60,13 @@ const itemsToRender = activeKeys
     </div>
 
     {/* Allergen Badges Row */}
-    <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-xs font-sans text-stone-700">
+    <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-xs font-sans text-(--color-bistro-text)">
       {itemsToRender.map((item) => (
         <div class="inline-flex items-center gap-1.5 bg-(--color-bistro-paper-alt) border border-(--color-bistro-paper-border) px-2.5 py-1 rounded-sm shadow-xs">
           <span class="px-1.5 py-0.5 rounded bg-(--color-bistro-banner) text-(--color-bistro-banner-text) font-mono font-black text-[11px]">
             {item.codeDisplay}
           </span>
-          <span class="font-medium text-stone-800">
+          <span class="font-medium text-(--color-bistro-text-strong)">
             {item.de === item.en ? item.de : `${item.de} / ${item.en}`}
           </span>
         </div>
@@ -76,7 +76,7 @@ const itemsToRender = activeKeys
 
   {/* Disclaimer Note for Top Global Bar */}
   {!allergens && (
-    <div class="max-w-6xl mx-auto pt-2.5 mt-2.5 border-t border-(--color-bistro-paper-border)/70 flex flex-col lg:flex-row items-center justify-between gap-x-6 gap-y-1 text-xs text-stone-500 font-sans italic text-center lg:text-left leading-snug">
+    <div class="max-w-6xl mx-auto pt-2.5 mt-2.5 border-t border-(--color-bistro-paper-border)/70 flex flex-col lg:flex-row items-center justify-between gap-x-6 gap-y-1 text-xs text-(--color-bistro-muted) font-sans italic text-center lg:text-left leading-snug">
       <p class="flex items-center gap-1.5 justify-center lg:justify-start">
         <FlagIcon lang="de" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
         <span>Fragen Sie unser Team nach detaillierten Informationen zu Allergenen und Zutaten. Alle Preise inkl. MwSt. Änderungen und Irrtümer vorbehalten.</span>

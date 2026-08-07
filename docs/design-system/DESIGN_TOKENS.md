@@ -6,8 +6,8 @@ Source of truth: `src/styles/tokens.css`, a single `@theme { }` block (Tailwind 
 
 | Category | Count | Detail doc | Adoption status |
 |---|---|---|---|
-| Color | ~40 tokens across brand/surface/text/border roles + 8 bistro-menu-specific hex | [`COLOR_SYSTEM.md`](./COLOR_SYSTEM.md) | Strong (0 raw hex outside literal flag SVGs; 44 call sites still use Tailwind's default `stone-*`/`amber-*` for muted-text/warning roles instead of tokens) |
-| Typography | 11 semantic scale steps (`--text-label` → `--text-display-xl`) + 3 font families | [`TYPOGRAPHY.md`](./TYPOGRAPHY.md) | **Weak — 0/298 call sites use the scale** |
+| Color | ~45 tokens across brand/surface/text/border roles + 8 bistro-menu hex + 5 bistro-muted hex | [`COLOR_SYSTEM.md`](./COLOR_SYSTEM.md) | Strong (0 raw hex outside literal flag SVGs; 38/44 previously-un-tokenized call sites fixed 2026-08-07, remaining 6 verified as correctly context-specific, not a gap) |
+| Typography | 12 semantic scale steps (`--text-label` → `--text-display-md`), realigned 2026-08-07 to equal Tailwind's real, disciplined 17-combination usage pattern | [`TYPOGRAPHY.md`](./TYPOGRAPHY.md) | Tokens now describe reality (298 call sites render identically; new/refactored components should reach for the named token) |
 | Spacing | Tailwind's default 4px scale + 2 custom section tokens | [`SPACING_SYSTEM.md`](./SPACING_SYSTEM.md) | Good (75 documented half-step exceptions in compact UI, not silent) |
 | Radius | 7 steps (`--radius-xs` 6px → `--radius-full`) | this doc | Strong (Tailwind's `rounded-*` utilities map directly to these; fully adopted) |
 | Shadow/Elevation | 5 steps + 1 brand glow | this doc | Consistent |
