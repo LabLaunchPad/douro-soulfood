@@ -101,7 +101,7 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 3. REVIEW BADGE */}
-  <section class="py-2 md:py-3 px-4 md:px-16 border-b border-border-subtle" aria-label="Bewertungen">
+  <section class="py-section-mobile md:py-3 px-4 md:px-16 border-b border-border-subtle" aria-label="Bewertungen">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
       <ReviewBadge
         rating={4.8}
@@ -166,7 +166,7 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 7. FIRMENEVENTS SECTION */}
-  <section class="py-2 md:py-3" aria-label="Firmenevents">
+  <section class="py-section-mobile md:py-3" aria-label="Firmenevents">
     <FeatureCard
       title="Firmenevents"
       description="Von Team-Lunches bis Firmenfeiern — unsere Catering-Pakete passen sich Ihren Bedürfnissen an."
@@ -178,12 +178,12 @@ const PAGE_DESCRIPTION =
   {/* 8. REVIEWS SECTION — UserReviews.astro declares its own aria-label
        landmark; this wrapper stays unlabeled to avoid a duplicate
        nested "Gästebewertungen" region (axe landmark-unique). */}
-  <section class="py-2 md:py-3">
+  <section class="py-section-mobile md:py-3">
     <UserReviews />
   </section>
 
   {/* 9. PRIVATE FEIERN SECTION */}
-  <section class="py-2 md:py-3" aria-label="Private Feiern">
+  <section class="py-section-mobile md:py-3" aria-label="Private Feiern">
     <FeatureCard
       title="Private Feiern"
       description="Geburtstage, Hochzeiten, Familientreffen — wir bringen Soul Food direkt zu Ihnen."
@@ -211,7 +211,7 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 12. MAP & STANDORT SECTION */}
-  <section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Unser Standort">
+  <section class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Unser Standort">
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
         Standort
