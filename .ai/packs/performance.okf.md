@@ -31,4 +31,6 @@ New routes must be added to both `.lighthouserc.js` and `deploy.yml`'s `--collec
 
 Known accepted gap: images referenced from `public/images/` (not `src/assets/`) pass through Astro's `<Image>` unprocessed — no format/compression gain, only correct `width`/`height`/`decoding="async"`. Documented in `docs/audit/image-audit.md`, not a live regression.
 
+**Fixed**: `HeroSection.astro`'s two hero videos (4.9MB + 7.6MB) both loaded on every visit regardless of viewport — CSS `hidden`/`block` doesn't stop fetching. Fixed with a viewport-matched JS loader; verified only 1 loads per viewport, none under `prefers-reduced-motion: reduce`.
+
 **Full detail**: `docs/performance-budget.md`.
