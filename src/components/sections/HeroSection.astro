@@ -104,8 +104,10 @@ const heroImage = images[0];
         loading="eager"
       />
     )}
-    <!-- Gradient overlay: dark overlay for text contrast -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
+    <!-- Scrim: strongest where the headline/CTA text actually sits (bottom-anchored),
+         fading toward the top — guarantees WCAG 4.5:1 for the white text regardless
+         of the underlying photo/video content. -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/45 to-black/15"></div>
   </div>
 
   <!-- Hero content: 100vh full-screen on mobile, text shifted significantly higher -->

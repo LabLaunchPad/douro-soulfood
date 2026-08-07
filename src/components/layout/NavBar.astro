@@ -75,11 +75,11 @@ const {
         class="flex items-center gap-3 rounded-md px-4 py-2 bg-brand-espresso/90 border border-white/15 backdrop-blur-md shadow-2xl transition-all duration-300 ease-out"
       >
         <!-- Nav links -->
-        <div class="flex items-center gap-1">
+        <div class="flex items-center gap-2">
           {links.map((link) => (
             <a
               href={link.href}
-              class="px-3.5 py-2 text-sm font-bold tracking-wider uppercase text-white hover:text-brand-gold
+              class="min-h-12 flex items-center px-3.5 py-2 text-sm font-bold tracking-wider uppercase text-white hover:text-brand-gold
                      no-underline transition-colors duration-200 rounded-sm"
             >
               {link.label}
@@ -91,7 +91,7 @@ const {
         {ctaSecondary && (
           <a
             href={ctaSecondary.href}
-            class="px-4 py-2 text-sm font-bold tracking-wider uppercase text-white rounded-sm border border-white/20
+            class="min-h-12 flex items-center px-4 py-2 text-sm font-bold tracking-wider uppercase text-white rounded-sm border border-white/20
                    hover:bg-white/10 hover:border-white/40 no-underline transition-all duration-200"
           >
             {ctaSecondary.label}
@@ -104,7 +104,7 @@ const {
             href={ctaPrimary.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="group inline-flex items-center gap-1.5 px-5 py-2 text-sm font-extrabold tracking-wider uppercase rounded-sm
+            class="group min-h-12 inline-flex items-center gap-1.5 px-5 py-2 text-sm font-extrabold tracking-wider uppercase rounded-sm
                    bg-brand-gold hover:bg-brand-gold-light active:bg-brand-gold-dark text-brand-espresso
                    no-underline transition-all duration-200 shadow-md hover:shadow-lg hover:scale-[1.02]"
           >
@@ -132,7 +132,7 @@ const {
         <!-- German "Speisekarte" Link Button (SSOT: rounded-sm = 10px) -->
         <a
           href="/menu"
-          class="px-3 py-1 text-xs font-extrabold tracking-wide text-white border border-white/20 rounded-sm
+          class="min-h-12 flex items-center px-3 py-1 text-xs font-extrabold tracking-wide text-white border border-white/20 rounded-sm
                  hover:bg-white/10 no-underline transition-colors"
         >
           Speisekarte
@@ -142,7 +142,7 @@ const {
         <button
           id="mobile-menu-btn"
           type="button"
-          class="flex justify-center items-center w-11 h-11 rounded-sm text-white focus:outline-none"
+          class="flex justify-center items-center w-12 h-12 rounded-sm text-white focus:outline-none"
           aria-label="Navigationsmenü öffnen"
           aria-expanded="false"
         >
