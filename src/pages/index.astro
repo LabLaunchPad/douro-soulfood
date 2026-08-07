@@ -175,8 +175,10 @@ const PAGE_DESCRIPTION =
     />
   </section>
 
-  {/* 8. REVIEWS SECTION */}
-  <section class="py-2 md:py-3" aria-label="Gästebewertungen">
+  {/* 8. REVIEWS SECTION — UserReviews.astro declares its own aria-label
+       landmark; this wrapper stays unlabeled to avoid a duplicate
+       nested "Gästebewertungen" region (axe landmark-unique). */}
+  <section class="py-2 md:py-3">
     <UserReviews />
   </section>
 

@@ -1,6 +1,8 @@
 # Accessibility Playbook (WCAG 2.2)
 
-Real status against WCAG 2.2, verified via actual browser tests this session — not assumed from the presence of a CI gate alone (a real gap this playbook exists to close: CI's `@axe-core/playwright` currently only runs against 2 of 7 routes, per `docs/design-system.md`'s cross-reference; broader manual/scripted verification is what caught the findings below).
+Real status against WCAG 2.2, verified via actual browser tests this session — not assumed from the presence of a CI gate alone.
+
+Update 2026-08-07: CI's `@axe-core/playwright` gate now runs against all 7 routes (was 5/7 with working assertions — `about`/`catering`/`contact`/`home`/`menu` already had them; this doc's earlier "2 of 7" figure was itself stale. `impressum` and `datenschutz` had no spec file at all — added `tests/impressum.spec.ts` and `tests/datenschutz.spec.ts`, following the existing content+accessibility+SEO pattern). Running the full 7-route matrix at tablet/wide/narrow/mobile/desktop viewports surfaced three real violations, all fixed this pass: `MobileBottomBar` rendered outside any landmark (`region`) — changed its wrapper `<div>` to `<nav aria-label="…">`; a duplicate nested `Gästebewertungen` landmark on the homepage (`landmark-unique`) — removed the redundant outer wrapper's `aria-label` since `UserReviews.astro` already declares it; and body-text links on `/impressum`/`/datenschutz` distinguishable by color alone (`link-in-text-block`, serious) — added a default (not hover-only) underline.
 
 ## 1.4.3 Contrast (Minimum) — AA, 4.5:1 text / 3:1 large text
 
@@ -32,4 +34,4 @@ Skip-to-main-content link present (`Base.astro`, `sr-only`/`focus:not-sr-only`).
 
 ## Known process gap
 
-CI's automated accessibility gate (`@axe-core/playwright`) covers 2 of 7 routes. This playbook's manual/scripted verification catches what that gate can't see (cross-page consistency, contrast on routes CI doesn't visit, real keyboard-navigation flow) — but widening the CI gate to all 7 routes is the actual fix for making this repeatable without a human/agent audit each time. Tracked as a backlog item, not yet done.
+~~CI's automated accessibility gate (`@axe-core/playwright`) covers 2 of 7 routes.~~ **Closed 2026-08-07** — all 7 routes now have a passing `zero axe accessibility violations` test (`tests/*.spec.ts`, `wcag2a`/`wcag2aa`/`wcag21a`/`wcag21aa` tags). This playbook's manual/scripted verification still matters for what an automated gate structurally can't see (cross-page consistency, real keyboard-navigation flow) — but the "does every route pass axe" question is now answered by CI on every push, not by a periodic manual/agent audit.

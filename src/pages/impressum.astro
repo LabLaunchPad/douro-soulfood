@@ -16,7 +16,7 @@ const { phone, email, address_line1, city, postal_code, country } = siteSettings
     <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-2">
       Rechtliches
     </span>
-    <h1 class="text-[clamp(2rem,4vw,3rem)] font-bold text-text-primary mb-3 font-display">Impressum</h1>
+    <h1 class="text-[clamp(2rem,4vw,3rem)] font-bold text-text-primary mb-3 font-display break-words">Impressum</h1>
     <p class="text-text-secondary leading-relaxed max-w-[45ch]">
       Informationspflicht laut §5 E-Commerce-Gesetz (ECG) und Offenlegungspflicht laut §25 Mediengesetz (MedienG).
     </p>
@@ -40,8 +40,8 @@ const { phone, email, address_line1, city, postal_code, country } = siteSettings
           <div>
             <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Kontakt</dt>
             <dd>
-              Telefon: <a href={`tel:${phone.replace(/[^+\d]/g, '')}`} class="text-brand-gold-ink hover:underline">{phone}</a><br />
-              E-Mail: <a href={`mailto:${email}`} class="text-brand-gold-ink hover:underline">{email}</a>
+              Telefon: <a href={`tel:${phone.replace(/[^+\d]/g, '')}`} class="text-brand-gold-ink underline decoration-1 underline-offset-2 hover:decoration-2">{phone}</a><br />
+              E-Mail: <a href={`mailto:${email}`} class="text-brand-gold-ink underline decoration-1 underline-offset-2 hover:decoration-2">{email}</a>
             </dd>
           </div>
           <div>
@@ -52,7 +52,7 @@ const { phone, email, address_line1, city, postal_code, country } = siteSettings
             <dt class="text-text-tertiary text-xs uppercase tracking-wide font-medium">Gewerbeberechtigung</dt>
             <dd class="text-text-tertiary">
               Magistrat der Stadt Salzburg, gemäß der
-              <a href="https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&amp;Gesetzesnummer=10007517" target="_blank" rel="noopener noreferrer" class="text-brand-gold-ink hover:underline">Gewerbeordnung 1994</a> (abrufbar unter www.ris.bka.gv.at)
+              <a href="https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&amp;Gesetzesnummer=10007517" target="_blank" rel="noopener noreferrer" class="text-brand-gold-ink underline decoration-1 underline-offset-2 hover:decoration-2">Gewerbeordnung 1994</a> (abrufbar unter www.ris.bka.gv.at)
             </dd>
           </div>
           <div>

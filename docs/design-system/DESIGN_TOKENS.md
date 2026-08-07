@@ -2,6 +2,8 @@
 
 Source of truth: `src/styles/tokens.css`, a single `@theme { }` block (Tailwind v4 — every `--color-*`/`--radius-*`/`--text-*` custom property here auto-generates matching Tailwind utility classes). All values below verified against that file on 2026-08-07.
 
+The file is organized in two explicit tiers, labeled inline: `TIER 1 — PRIMITIVE` (brand/bistro palettes, radius/shadow/spacing/motion/type/breakpoint scales) and `TIER 2 — SEMANTIC` (surface/text/border/container/z-index, built from Tier 1). There's deliberately no third "component token" tier — see the file's own header comment and `.ai/decisions/design-tokens.okf.md` for why.
+
 ## Token categories
 
 | Category | Count | Detail doc | Adoption status |
