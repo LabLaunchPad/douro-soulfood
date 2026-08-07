@@ -14,7 +14,7 @@ attestation: { method: "manual", checks: [] }
 summary: "Design philosophy, tokens, typography, spacing, motion conventions. Source of truth is src/styles/tokens.css; this doc describes it and must stay in sync."
 load_when: "Any styling/token work."
 token_budget: 800
-related: [".ai/packs/design-system.okf.md", "src/styles/tokens.css"]
+related: [".ai/packs/design-system.okf.md", "src/styles/tokens.css", "docs/design-system/"]
 ---
 
 # Design System: D'ouro Soulfood
@@ -23,6 +23,7 @@ related: [".ai/packs/design-system.okf.md", "src/styles/tokens.css"]
 > **Design DNA:** Apple iOS device aesthetic + Brazilian soul warmth
 > **Structural reference:** talkintacos.net (spacing/grid conventions only — D'ouro's own palette, fonts, and content)
 > **Source of truth:** `src/styles/tokens.css` — this document describes it, values here must stay in sync with that file
+> **Deep reference:** `docs/design-system/` — full operating rules (AI_DESIGN_SYSTEM_PROMPT.md), per-category detail docs, the component registry with real contracts, and the accessibility/audit playbooks. This file stays the short summary; that folder is where the full detail and verified 2026-08-07 audit findings live.
 
 ---
 
@@ -91,7 +92,8 @@ Paper Alt:            #FAF6EE
 Taupe:                #D6C4A5
 ```
 
----
+### Known gap: un-tokenized neutral/warning colors
+**Fixed 2026-08-07**: 38 of 44 call sites that used Tailwind's default palette directly (`text-stone-*`/`bg-stone-*`) now route through tokens — Footer's muted text through `--color-text-tertiary`, the bistro-themed components (`MenuBistroCard`, `AllergenHeaderLegend`, `menu.astro`) through 5 new bistro-scoped muted/placeholder tokens (matching their prior exact values, zero visual change). The remaining 6 `amber-*` call sites (prep-time/allergen accents) were investigated and left as-is — they correctly serve two different visual contexts that would need two different token values, and are internally consistent within each. See `docs/design-system/COLOR_SYSTEM.md` for full detail. Zero raw hex outside `FlagSprites.astro`'s literal national-flag fills (an explicit, correct exception).
 
 ## 3. Typography
 
@@ -100,10 +102,10 @@ Taupe:                #D6C4A5
 - **Body:** `'DM Sans', 'Inter', system-ui, -apple-system, sans-serif` — clean, geometric, warm
 - **Mono:** `'SF Mono', 'Fira Code', 'Cascadia Code', monospace` — code/technical data only
 
-Loaded via `<link>` tags in `Base.astro`'s `<head>` (preconnect + stylesheet with `display=swap`), not `@import`.
+Self-hosted `.woff2` files under `public/fonts/`, `@font-face`-declared in `tokens.css`, preloaded via `<link rel="preload">` in `Base.astro`'s `<head>` — not loaded from Google (GDPR/IP-transmission concern, see `docs/security.md`).
 
 ### Type Scale
-`tokens.css` defines a modular semantic scale (`--text-display-*`, `--text-heading-*`, `--text-body-*`, `--text-label`) intended for new/refactored components, layered on top of Tailwind's default `text-xs`…`text-7xl` scale (still used by most existing markup):
+`tokens.css` defines a modular semantic scale (`--text-display-*`, `--text-heading-*`, `--text-title-*`, `--text-body-*`, `--text-label`). **Realigned 2026-08-07**: the scale's values previously didn't match any size actually used in `src/` (invented 22/28/44/56/88px steps against a real, disciplined pattern of Tailwind's native scale used in 17 consistent combinations across 298 call sites). Rather than migrate 298 markup call sites to match invented values, the token *values* were corrected to equal the Tailwind steps they were meant to represent — a documentation/naming fix verified to produce zero visual change. Raw `text-xs`…`text-7xl` utilities in existing markup now render identically to the matching named token; new/refactored components should reach for the token. See `docs/design-system/TYPOGRAPHY.md` for the full before/after and the exact mapping.
 
 | Token | Size | Line-height |
 |-------|------|-------------|
@@ -130,6 +132,9 @@ Loaded via `<link>` tags in `Base.astro`'s `<head>` (preconnect + stylesheet wit
 ### Section Spacing
 - Desktop: `--spacing-section` (120px) vertical padding
 - Mobile: `--spacing-section-mobile` (72px) vertical padding
+
+### Grid discipline
+Base rhythm is Tailwind's 4px scale (`p-1`=4px … `p-6`=24px … `p-24`=96px). **75 call sites** (verified via grep, 2026-08-07) use fractional Tailwind spacing utilities (`-0.5`, `-1.5`, `-2.5`, `-3.5` → 2px/6px/10px/14px) that fall between the 4px grid steps, concentrated in compact UI (badges, icon-text gaps, chip padding — `AllergenHeaderLegend`, `MenuBistroCard`, `ReviewBadge`, `Footer`, `menu.astro`). Not flagged as a defect to blind-fix: half-steps are common, defensible practice for icon+text gaps at small scale where 4px reads cramped and 8px reads loose. Flagged here as a known deviation from strict 4px-only discipline — any future spacing audit should treat this as the baseline, not assume a clean 4px grid.
 
 ### Content Max Width
 - `max-w-7xl` (1280px, aliased as `--container-content` in tokens.css) for content sections

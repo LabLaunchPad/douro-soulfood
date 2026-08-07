@@ -140,7 +140,7 @@ const {
     <slot />
 
     <!-- Outer Bottom Bar: Social Icons, Copyright, Contact -->
-    <div class="mt-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 text-stone-500 text-xs md:text-sm">
+    <div class="mt-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 text-text-tertiary text-xs md:text-sm">
 
       <!-- Left: Social Media Icons -->
       <div class="flex items-center gap-1.5">
@@ -149,7 +149,7 @@ const {
           href="https://www.instagram.com"
           target="_blank"
           rel="noopener noreferrer"
-          class="p-1.5 text-stone-600 hover:text-brand-gold transition-colors duration-200"
+          class="p-1.5 text-text-tertiary hover:text-brand-gold transition-colors duration-200"
           aria-label="Instagram"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
@@ -164,7 +164,7 @@ const {
           href="https://www.facebook.com/dourosoulfood/"
           target="_blank"
           rel="noopener noreferrer"
-          class="p-1.5 text-stone-600 hover:text-brand-gold transition-colors duration-200"
+          class="p-1.5 text-text-tertiary hover:text-brand-gold transition-colors duration-200"
           aria-label="Facebook"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
@@ -175,7 +175,7 @@ const {
         <!-- Phone / Contact Link -->
         <a
           href={phoneHref}
-          class="text-xs text-stone-600 hover:text-brand-gold-ink transition-colors duration-200 no-underline"
+          class="text-xs text-text-tertiary hover:text-brand-gold-ink transition-colors duration-200 no-underline"
         >
           {phone}
         </a>
@@ -183,14 +183,14 @@ const {
 
       <!-- Center: Copyright Notice -->
       <div class="text-center">
-        <p class="text-stone-500">
+        <p class="text-text-tertiary">
           &copy; {currentYear} {copyrightName}. Alle Rechte vorbehalten.
         </p>
       </div>
 
       <!-- Right: Location -->
       <div class="text-right">
-        <address class="text-stone-500 not-italic">
+        <address class="text-text-tertiary not-italic">
           {address[0]}
         </address>
       </div>

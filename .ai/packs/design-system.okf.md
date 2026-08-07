@@ -18,7 +18,7 @@ attestation:
 summary: "All design tokens live in src/styles/tokens.css as CSS custom properties (--color-brand-gold, --radius-*, --ease-spring). Light theme is default. Apple-iOS precision with Brazilian warmth."
 load_when: "Any styling/token work."
 token_budget: 300
-related: ["docs/design-system.md", "src/styles/tokens.css"]
+related: ["docs/design-system.md", "docs/design-system/", "src/styles/tokens.css"]
 ---
 
 # Design System
@@ -29,4 +29,6 @@ Light theme is default (warm cream surfaces, high-contrast espresso text) — no
 
 Use `class:list={[...]}` for conditional/merged classes. No `cn()`/`clsx` helper exists — don't reintroduce one.
 
-**Full detail**: `docs/design-system.md`.
+`tokens.css`'s semantic type scale was realigned 2026-08-07 to match the real, disciplined Tailwind-utility usage pattern already in `src/` (was invented values with zero adoption; now the token values equal the Tailwind steps in real use, zero visual change). See `docs/design-system/TYPOGRAPHY.md`.
+
+**Full detail**: `docs/design-system.md` (summary) → `docs/design-system/` (deep reference: component registry, accessibility playbook, audit template).

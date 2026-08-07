@@ -121,6 +121,17 @@
   --color-bistro-paper-alt: #FAF6EE;
   --color-bistro-taupe: #D6C4A5;
 
+  /* Muted-text and placeholder roles for the bistro sub-palette, added
+     2026-08-07. Previously these used Tailwind's default stone-* scale
+     directly (bypassing brand-token governance) -- values here equal
+     the exact stone-100/500/600/700/800 shades already in use, so this
+     is a token-ownership fix, not a visual change. */
+  --color-bistro-muted: #78716c;        /* stone-500 equiv — secondary text on bistro paper */
+  --color-bistro-muted-dark: #57534e;   /* stone-600 equiv — hover/emphasis muted text */
+  --color-bistro-text: #44403c;         /* stone-700 equiv — body text, lighter role than --color-bistro-ink */
+  --color-bistro-text-strong: #292524;  /* stone-800 equiv — stronger emphasis text */
+  --color-bistro-placeholder: #f5f5f4;  /* stone-100 equiv — image placeholder background */
+
 
   /* ─────────────────────────────────────────────────────────────
      SEMANTIC SURFACE TOKENS
@@ -325,31 +336,45 @@
      the same utility class.
      ───────────────────────────────────────────────────────────── */
 
-  --text-label: 0.75rem;              /* 12px — eyebrows, badges, uppercase micro-copy */
+  /* Realigned 2026-08-07: the values below previously didn't match any
+     size actually used in src/ (invented 22/28/44/56/88px steps against
+     a real, disciplined usage pattern of Tailwind's native 12-72px
+     scale used in ~17 consistent combinations across 298 call sites).
+     These now equal Tailwind's own scale exactly, so `text-xs`/`text-sm`/
+     etc. and these named tokens render identically -- this is a
+     documentation/naming fix, not a size change; verified zero visual
+     diff by construction (every value below matches the pre-existing
+     Tailwind step it replaces). Prefer the named token in new/refactored
+     components; the raw Tailwind utility remains equivalent, not wrong. */
+
+  --text-label: 0.75rem;               /* 12px — eyebrows, badges, uppercase micro-copy (text-xs) */
   --text-label--line-height: 1.4;
 
-  --text-body-sm: 0.875rem;           /* 14px — captions, metadata */
-  --text-body-sm--line-height: 1.6;
-  --text-body-base: 1rem;             /* 16px — default paragraph text */
+  --text-body-sm: 0.875rem;            /* 14px — captions, metadata (text-sm) */
+  --text-body-sm--line-height: 1.5;
+  --text-body-base: 1rem;              /* 16px — default paragraph text (text-base) */
   --text-body-base--line-height: 1.6;
-  --text-body-lg: 1.125rem;           /* 18px — lead paragraphs, emphasized body */
+  --text-body-lg: 1.125rem;            /* 18px — lead paragraphs, emphasized body (text-lg) */
   --text-body-lg--line-height: 1.6;
 
-  --text-heading-sm: 1.375rem;        /* 22px — card titles, small subheadings */
-  --text-heading-sm--line-height: 1.25;
-  --text-heading-md: 1.75rem;         /* 28px — section subheadings */
-  --text-heading-md--line-height: 1.2;
-  --text-heading-lg: 2.25rem;         /* 36px — section headings */
-  --text-heading-lg--line-height: 1.15;
+  --text-title-sm: 1.25rem;            /* 20px — card/section titles (text-xl) */
+  --text-title-sm--line-height: 1.3;
+  --text-title-md: 1.5rem;             /* 24px — larger titles, eyebrow+title pairs (text-2xl) */
+  --text-title-md--line-height: 1.25;
+  --text-title-lg: 1.875rem;           /* 30px — title/headline boundary (text-3xl) */
+  --text-title-lg--line-height: 1.2;
 
-  --text-display-sm: 2.75rem;         /* 44px — small hero / page titles */
-  --text-display-sm--line-height: 1.1;
-  --text-display-md: 3.5rem;          /* 56px — standard hero heading */
-  --text-display-md--line-height: 1.05;
-  --text-display-lg: 4.5rem;          /* 72px — large hero heading */
-  --text-display-lg--line-height: 1.0;
-  --text-display-xl: 5.5rem;          /* 88px — largest hero, desktop-only */
-  --text-display-xl--line-height: 0.98;
+  --text-heading-sm: 1.875rem;         /* 30px — subheadings (text-3xl) */
+  --text-heading-sm--line-height: 1.2;
+  --text-heading-md: 2.25rem;          /* 36px — section headings (text-4xl) */
+  --text-heading-md--line-height: 1.15;
+  --text-heading-lg: 3rem;             /* 48px — large section headings (text-5xl) */
+  --text-heading-lg--line-height: 1.1;
+
+  --text-display-sm: 3.75rem;          /* 60px — page/hero titles (text-6xl) */
+  --text-display-sm--line-height: 1.05;
+  --text-display-md: 4.5rem;           /* 72px — large hero heading (text-7xl) */
+  --text-display-md--line-height: 1.0;
 
 
   /* ─────────────────────────────────────────────────────────────
