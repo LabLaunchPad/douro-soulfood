@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "fraunces",
+        "createdAt": "2026-08-07T14:47:25.787Z",
+        "reason": "User confirmed Fraunces is intentional brand typography (documented in docs/design-system.md, Talkin' Tacos / D'ouro brand identity), not an unexamined AI default"
+      }
+    ]
+  }
+}

@@ -193,17 +193,17 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
       <div class="flex items-start justify-between gap-3">
         <div class="flex flex-col gap-1">
           {featured && (
-            <span class="inline-self-start inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold rounded bg-brand-gold/20 text-brand-gold border border-brand-gold/30 uppercase tracking-wider font-display">
+            <span class="inline-self-start inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-semibold rounded bg-brand-gold/20 text-brand-gold-ink border border-brand-gold/30 uppercase tracking-wider font-display">
               Empfehlung
             </span>
           )}
-          <h3 class="text-base md:text-lg font-bold text-text-primary group-hover:text-brand-gold transition-colors font-display leading-snug">
+          <h3 class="text-base md:text-lg font-bold text-text-primary group-hover:text-brand-gold-ink transition-colors font-display leading-snug">
             {name}
           </h3>
         </div>
 
         <div class="flex flex-col items-end gap-1 shrink-0">
-          <span class="text-base md:text-lg font-bold text-brand-gold whitespace-nowrap px-2.5 py-1 rounded bg-surface-elevated border border-brand-gold/30">
+          <span class="text-base md:text-lg font-bold text-brand-gold-ink whitespace-nowrap px-2.5 py-1 rounded bg-surface-elevated border border-brand-gold/30">
             {displayPrice}
           </span>
           {prepTime && (
@@ -215,7 +215,7 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
       </div>
 
       {/* Description */}
-      <p class="text-xs md:text-sm text-text-secondary leading-relaxed max-w-[75ch]">
+      <p class="text-xs md:text-sm text-text-secondary leading-relaxed max-w-[52ch]">
         {description}
       </p>
     </div>
@@ -225,7 +225,7 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
       {addOns.length > 0 && (
         <div class="flex flex-wrap gap-1">
           {addOns.map((addon) => (
-            <span class="inline-flex items-center gap-1 text-[11px] font-medium text-brand-gold bg-brand-gold/15 px-2 py-0.5 rounded border border-brand-gold/30">
+            <span class="inline-flex items-center gap-1 text-[11px] font-medium text-brand-gold-ink bg-brand-gold/15 px-2 py-0.5 rounded border border-brand-gold/30">
               + {addon.label} ({formatPrice(addon.price)})
             </span>
           ))}

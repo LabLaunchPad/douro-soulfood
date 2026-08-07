@@ -76,6 +76,15 @@
   --color-brand-gold-light: oklch(0.85 0.16 85.0);
   --color-brand-gold-dark: oklch(0.65 0.18 85.0);
 
+  /* ── Brand Gold, text-safe ──
+     --color-brand-gold measures ~2:1 against the site's cream/white
+     surfaces — decorative-only (icons, fills, borders), never legible
+     as text. This darker variant (same hue, lower lightness) clears
+     4.5:1 against every light surface in use, including the zinc-300
+     footer capsule, while still reading as "gold." Use for any static
+     or hover text that was reaching for --color-brand-gold. */
+  --color-brand-gold-ink: oklch(0.46 0.16 85.0);
+
   /* ── Brand Accent: Taco Green (#06B906) ── */
   --color-brand-forest: oklch(0.68 0.22 142.5);
   --color-brand-forest-light: oklch(0.76 0.18 142.5);
@@ -141,8 +150,11 @@
 
   /* ── Surface: Glass ──
      Semi-transparent surface for glassmorphism effects.
-     Frosted glass over a warm candlelit scene. */
-  --color-surface-glass: oklch(1.0 0.002 80 / 0.72);
+     Frosted glass over a warm candlelit scene.
+     Opacity raised from 0.72 -> 0.9: testimonial text over this
+     surface measured down to ~1:1 contrast in places where the
+     blurred background image behind it was busy/dark. */
+  --color-surface-glass: oklch(1.0 0.002 80 / 0.9);
 
 
   /* ─────────────────────────────────────────────────────────────
@@ -163,8 +175,11 @@
 
   /* ── Text: Tertiary ──
      Subtle labels, timestamps, footnotes. Warm, desaturated,
-     respectful, maintaining accessibility. */
-  --color-text-tertiary: oklch(0.58 0.015 50);
+     respectful, maintaining accessibility.
+     Was oklch(0.58 ...) / ~4.1-4.3:1 on cream surfaces — a near-miss
+     against the 4.5:1 AA floor for normal text. Darkened to clear it
+     with margin (~5.7-6:1). */
+  --color-text-tertiary: oklch(0.50 0.015 50);
 
   /* ── Text: Inverse ──
      Light text on dark surfaces. Used for buttons with terracotta/gold fills. */
