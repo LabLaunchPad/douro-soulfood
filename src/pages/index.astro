@@ -8,7 +8,7 @@ import ReviewBadge from '@/components/ui/ReviewBadge.astro';
 import CategoryIcon from '@/components/ui/CategoryIcon.astro';
 import FeatureCard from '@/components/sections/FeatureCard.astro';
 import UserReviews from '@/components/sections/UserReviews.astro';
-import PhotoGrid from '@/components/sections/PhotoGrid.astro';
+import PhotoScroll from '@/components/sections/PhotoScroll.astro';
 import OurStorySection from '@/components/sections/OurStorySection.astro';
 import FaqAccordion from '@/components/sections/FaqAccordion.astro';
 import MapEmbed from '@/components/ui/MapEmbed.astro';
@@ -146,12 +146,13 @@ const PAGE_DESCRIPTION =
   </section>
 
   {/* 5. BELIEBTE GERICHTE IM D'OURO BISTRO */}
-  <PhotoGrid
+  <PhotoScroll
     ariaLabel="Beliebte Gerichte"
     eyebrow="Empfehlungen"
     title="Beliebte Gerichte im D'ouro Bistro"
     description="Frisch von Angela zubereitet — mit den besten Zutaten Brasiliens und Westafrikas."
     items={popularDishes}
+    rows={1}
     cta={{ label: 'Komplette Speisekarte ansehen', href: '/menu' }}
   />
 
@@ -192,12 +193,13 @@ const PAGE_DESCRIPTION =
   </section>
 
   {/* 10. GALERIE SECTION */}
-  <PhotoGrid
+  <PhotoScroll
     ariaLabel="Galerie"
     eyebrow="Impressionen"
     title="Galerie"
     description="Einblicke in unsere frischen Speisen und das Ambiente im D'ouro Bistro."
     items={galleryImages}
+    rows={2}
   />
 
   {/* 11. FAQ ACCORDION */}
