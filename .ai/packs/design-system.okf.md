@@ -18,7 +18,7 @@ attestation:
 summary: "All design tokens live in src/styles/tokens.css as CSS custom properties (--color-brand-gold, --radius-*, --ease-spring). Light theme is default. Apple-iOS precision with Brazilian warmth."
 load_when: "Any styling/token work."
 token_budget: 300
-related: ["docs/design-system.md", "docs/design-system/", "src/styles/tokens.css"]
+related: ["docs/design-system.md", "docs/design-system/", "docs/ui/", "src/styles/tokens.css"]
 ---
 
 # Design System
