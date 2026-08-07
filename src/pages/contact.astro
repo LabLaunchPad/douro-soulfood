@@ -42,7 +42,7 @@ const phoneHref = `tel:${phone.replace(/[^+\d]/g, '')}`;
           <dl class="text-text-secondary space-y-1">
             {hours.map((entry) => (
               <div class="flex gap-4">
-                <dt class="text-text-tertiary">{entry.day}</dt>
+                <dt class="text-text-tertiary min-w-[6.5rem]">{entry.day}</dt>
                 <dd>{entry.time}</dd>
               </div>
             ))}

@@ -14,7 +14,7 @@ attestation: { method: "manual", checks: [] }
 summary: "Design philosophy, tokens, typography, spacing, motion conventions. Source of truth is src/styles/tokens.css; this doc describes it and must stay in sync."
 load_when: "Any styling/token work."
 token_budget: 800
-related: [".ai/packs/design-system.okf.md", "src/styles/tokens.css"]
+related: [".ai/packs/design-system.okf.md", "src/styles/tokens.css", "docs/design-system/"]
 ---
 
 # Design System: D'ouro Soulfood
@@ -23,6 +23,7 @@ related: [".ai/packs/design-system.okf.md", "src/styles/tokens.css"]
 > **Design DNA:** Apple iOS device aesthetic + Brazilian soul warmth
 > **Structural reference:** talkintacos.net (spacing/grid conventions only — D'ouro's own palette, fonts, and content)
 > **Source of truth:** `src/styles/tokens.css` — this document describes it, values here must stay in sync with that file
+> **Deep reference:** `docs/design-system/` — full operating rules (AI_DESIGN_SYSTEM_PROMPT.md), per-category detail docs, the component registry with real contracts, and the accessibility/audit playbooks. This file stays the short summary; that folder is where the full detail and verified 2026-08-07 audit findings live.
 
 ---
 
