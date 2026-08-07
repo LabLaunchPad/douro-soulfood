@@ -16,7 +16,7 @@ const phoneHref = `tel:${phone.replace(/\s+/g, '')}`;
 const orderHref = siteSettings.lieferando_url || 'https://www.lieferando.at/en/menu/douro';
 ---
 
-<div class="mobile-bottom-bar fixed bottom-0 left-0 right-0 z-[60] flex md:hidden gap-2 p-3 rounded-none bg-brand-espresso/98 backdrop-blur-md shadow-2xl border-t border-white/10">
+<div class="mobile-bottom-bar fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden gap-2 p-3 rounded-none bg-brand-espresso/98 backdrop-blur-md shadow-2xl border-t border-white/10">
   <!-- Call Button (Filled Terracotta Style with Rounded Corners) -->
   <a
     href={phoneHref}
