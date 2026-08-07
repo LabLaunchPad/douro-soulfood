@@ -9,7 +9,7 @@ Read `AGENTS.md` first. This file is the second thing to read, always. It tells 
 | Full outcome-loop policy | `.ai/packs/outcome-operator.okf.md` | Running the outcome loop, executing a specific `OUTCOME-XXX`, or needing the full component/React-island/prebuilt policy in one place | ~2800 |
 | Repo overview | `.ai/packs/repo-overview.okf.md` | First task in a session, or unsure what the site does | ~400 |
 | Architecture | `.ai/packs/architecture.okf.md` → `docs/architecture.md` | Rendering strategy, content flow, component hierarchy, build pipeline questions | ~300 (pack) + full doc if needed |
-| Design system | `.ai/packs/design-system.okf.md` → `docs/design-system.md` | Any styling/token work | ~300 + full doc |
+| Design system | `.ai/packs/design-system.okf.md` → `docs/design-system.md` → `docs/design-system/` (component contracts, accessibility playbook, audit template) and `docs/ui/` (enterprise checklist lens: surface roles, component-state completeness, WCAG 2.2 target-size specifics — same tokens, different lens, kept separate by explicit choice) | Any styling/token work | ~300 + full doc |
 | Content/CMS | `.ai/packs/content-cms.okf.md` → `keystatic.config.ts`, `src/content.config.ts` | Any Keystatic schema or content-collection change | ~300 + schema files |
 | Components | `.ai/packs/components.okf.md` → `docs/components.md` | Building/modifying any component | ~300 + full doc |
 | Accessibility | `.ai/packs/accessibility.okf.md` → `docs/agent.md`'s a11y section | Any UI change | ~300 |
