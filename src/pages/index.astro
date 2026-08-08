@@ -184,12 +184,14 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 6. TESTIMONIALS — grouped near Story rather than split by two event-CTA
-       sections. UserReviews.astro declares its own aria-label landmark; this
-       wrapper stays unlabeled to avoid a duplicate nested "Gästebewertungen"
-       region (axe landmark-unique). */}
-  <section class="py-section-mobile md:py-5">
-    <UserReviews />
-  </section>
+       sections. Rendered directly (no wrapping <section>) since
+       UserReviews.astro's own root is already a full section with its own
+       aria-label landmark and py-section-mobile padding — an outer wrapper
+       here previously double-padded this section (96px combined gap vs
+       64px everywhere else), caught by a 2026-08-08 browser-measured
+       audit. Matches how PhotoGrid/OurStorySection/FaqAccordion are
+       already invoked below. */}
+  <UserReviews />
 
   {/* 7. 6 AFRO-LATINO SPEZIALITÄTEN — moved down: now a browse aid, the
        quick-access row above is the primary fast-access mechanism. */}

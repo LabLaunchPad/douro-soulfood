@@ -16,14 +16,14 @@ This matches the Material 3 / Carbon-style "4/8px rhythm" rule exactly — Tailw
 
 ```
 --spacing-section: 7.5rem (120px)        — desktop section vertical padding
---spacing-section-mobile: 4.5rem (72px)  — mobile section vertical padding
+--spacing-section-mobile: 2rem (32px)    — mobile section vertical padding (was 4.5rem/72px until the 2026-08-07 mobile-first conversion redesign — a deliberate tighter, app-like rhythm per an explicit design brief, not a consistency fix)
 ```
 
 ## Rules
 
 - Never invent a spacing value outside the scale above.
 - Align padding, margin, and gap to the same scale — don't mix a `p-4` card with a `gap-[13px]` internal layout.
-- On mobile, err toward more breathing room, not less — the 72px section rhythm holds even on small screens; components inside a section compress, the section rhythm itself does not.
+- On mobile, the 32px section rhythm holds consistently across all 9 homepage section-wrapper declarations (and every other route) — components inside a section compress further, the section rhythm itself does not. A component's own root section (e.g. `PhotoGrid.astro`, `OurStorySection.astro`, `FaqAccordion.astro`, `UserReviews.astro`) should be rendered directly, not wrapped in a second `<section class="py-section-mobile">` in the calling page — doing so silently doubles the padding (caught and fixed 2026-08-08 for `UserReviews` on the homepage, which had exactly this bug).
 
 ## Known deviation: fractional (half-step) spacing
 
