@@ -21,6 +21,25 @@ const { address_line1, city, postal_code, phone, hours } = siteSettings;
 const phoneHref = `tel:${phone.replace(/[^+\d]/g, '')}`;
 
 /**
+ * Pre-JS fallback for the "today" hours widget below: since this page is
+ * statically prerendered (no per-visitor server render), we can't know the
+ * visitor's actual "today" at build time. Rather than assert a specific
+ * (likely wrong) day's hours, summarize the whole week into groups of
+ * consecutive identical times — always factually correct — and let the
+ * client-side script replace it with the real "Heute: ..." once it knows
+ * the visitor's local day.
+ */
+const hoursSummary = hours
+  .reduce<{ time: string; days: string[] }[]>((groups, { day, time }) => {
+    const last = groups[groups.length - 1];
+    if (last && last.time === time) last.days.push(day);
+    else groups.push({ time, days: [day] });
+    return groups;
+  }, [])
+  .map((g) => `${g.days.length > 1 ? `${g.days[0]}–${g.days[g.days.length - 1]}` : g.days[0]}: ${g.time}`)
+  .join(' · ');
+
+/**
  * HOME PAGE — D'ouro Soulfood Bistro
  */
 
@@ -354,7 +373,7 @@ const PAGE_DESCRIPTION =
                 data-hours={JSON.stringify(hours)}
                 class="text-xs md:text-sm font-medium text-text-primary"
               >
-                Heute: {hours[0].time} Uhr
+                {hoursSummary}
               </span>
             </div>
             <Button href="/menu" variant="primary" size="sm" class="shadow-glow-gold">

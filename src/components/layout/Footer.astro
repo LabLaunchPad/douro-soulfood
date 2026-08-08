@@ -12,6 +12,7 @@
  */
 
 import Button from '@/components/ui/Button.astro';
+import siteSettings from '@/content/settings/default.json';
 
 interface FooterLink {
   label: string;
@@ -39,10 +40,10 @@ const {
     { label: 'Über uns', href: '/about' },
     { label: 'Kontakt', href: '/contact' },
   ],
-  cta = { label: 'Jetzt bestellen', href: 'https://www.lieferando.at/en/menu/douro' },
-  address = ['Auerspergstraße 10, 5020 Salzburg'],
-  phone = '+43 676 4231921',
-  phoneHref = 'tel:+436764231921',
+  cta = { label: 'Jetzt bestellen', href: siteSettings.lieferando_url || 'https://www.lieferando.at/en/menu/douro' },
+  address = [`${siteSettings.address_line1}, ${siteSettings.postal_code} ${siteSettings.city}`],
+  phone = siteSettings.phone || '+43 676 4231921',
+  phoneHref = `tel:${(siteSettings.phone || '+43 676 4231921').replace(/[^+\d]/g, '')}`,
   legalLinks = [
     { label: 'Impressum', href: '/impressum' },
     { label: 'Datenschutz', href: '/datenschutz' },
