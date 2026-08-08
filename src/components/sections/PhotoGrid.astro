@@ -33,7 +33,7 @@ const { ariaLabel, eyebrow, title, description, items, cta } = Astro.props;
     <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
       {eyebrow}
     </span>
-    <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display">
+    <h2 class="text-2xl md:text-3xl font-semibold text-text-primary font-display">
       {title}
     </h2>
     {description && (
@@ -46,7 +46,7 @@ const { ariaLabel, eyebrow, title, description, items, cta } = Astro.props;
   <div class="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4 md:gap-6">
     {items.map((item, index) => (
       <div class:list={[
-        'group relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]',
+        'group relative aspect-square sm:aspect-[4/3] rounded-lg overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]',
         index === 8 && 'hidden sm:block',
       ]}>
         <Image

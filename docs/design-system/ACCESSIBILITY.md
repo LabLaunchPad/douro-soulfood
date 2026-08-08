@@ -10,7 +10,7 @@ Update 2026-08-07: CI's `@axe-core/playwright` gate now runs against all 7 route
 
 ## 2.5.8 Target Size (Minimum) — AA, 24×24 CSS px
 
-**Status: compliant, verified.** Spot-checked: hamburger/close buttons 32×32px, footer social icons 32×32px (24px icon + 6px padding), `Button` component's smallest variant 36px min-height. All clear the floor with margin.
+**Status: compliant, verified, floor raised 2026-08-07.** WCAG's own floor is 24×24px; this site had already adopted a stricter 44px convention, and as of the mobile-first conversion redesign that floor is 48px sitewide — `Button.astro`'s `sm`/`md`/`lg` sizes are all `min-h-12` (48px, previously `sm` was 36px/`md` was 44px), and every hand-rolled tap target that previously used `min-h-11` (`MobileBottomBar`, `FaqAccordion` summary, `MapEmbed` button, `NavBar`/`MobileNavDrawer` pill, `Footer`/`ReviewBadge` mobile-only links) now uses `min-h-12`. Verified via measured `boundingBox()` height (not just class presence) across the homepage's CTAs post-redesign.
 
 ## 2.4.11 Focus Not Obscured (Minimum) — AA
 

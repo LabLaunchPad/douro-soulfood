@@ -11,6 +11,8 @@
  * Zero hex codes. All colors from tokens.css @theme.
  */
 
+import Button from '@/components/ui/Button.astro';
+
 interface HeroImage {
   src: string;
   alt: string;
@@ -112,7 +114,7 @@ const heroImage = images[0];
   <div class="relative max-w-7xl mx-auto px-4 md:px-16 min-h-screen min-h-[100svh] flex flex-col justify-end pb-48 md:pb-16">
     <div class="flex flex-col gap-3 lg:gap-4 max-w-2xl">
       <!-- Accent label — brand gold decorative text -->
-      <span class="text-sm md:text-xl lg:text-2xl font-semibold text-brand-gold leading-tight tracking-tight font-display">
+      <span class="text-xs md:text-xl lg:text-2xl font-semibold text-brand-gold leading-tight tracking-tight font-display">
         {accent}
       </span>
 
@@ -164,6 +166,17 @@ const heroImage = images[0];
           </a>
         )}
       </div>
+
+      <!-- Mobile CTA: one dominant primary action. Complements MobileBottomBar's
+           Call/Order pair rather than duplicating it — this surfaces the menu,
+           the one common next step those two buttons don't cover. -->
+      {ctaSecondary && (
+        <div class="flex md:hidden mt-4">
+          <Button href={ctaSecondary.href} variant="primary" size="lg" arrow class="w-full justify-center shadow-glow-gold">
+            {ctaSecondary.label}
+          </Button>
+        </div>
+      )}
     </div>
 
     <!-- Slot for additional hero content (scroll indicator, badges, etc.) -->

@@ -1,13 +1,13 @@
 ---
 export const prerender = true;
 
+import { Image } from 'astro:assets';
 import Base from '@/layouts/Base.astro';
 import Button from '@/components/ui/Button.astro';
 import NavBar from '@/components/layout/NavBar.astro';
 import HeroSection from '@/components/sections/HeroSection.astro';
 import ReviewBadge from '@/components/ui/ReviewBadge.astro';
 import CategoryIcon from '@/components/ui/CategoryIcon.astro';
-import FeatureCard from '@/components/sections/FeatureCard.astro';
 import UserReviews from '@/components/sections/UserReviews.astro';
 import PhotoGrid from '@/components/sections/PhotoGrid.astro';
 import OurStorySection from '@/components/sections/OurStorySection.astro';
@@ -115,13 +115,90 @@ const PAGE_DESCRIPTION =
     </div>
   </section>
 
-  {/* 4. 6 AFRO-LATINO SPEZIALITÄTEN */}
+  {/* 3b. QUICK-ACCESS ROW — fast access to menu/reservation/events/location,
+       consolidated into one scannable block (priority: fast access to menu,
+       ordering, reservation, events, and location). */}
+  <section class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Schnellzugriff">
+    <div class="grid grid-cols-4 gap-2 sm:gap-4">
+      {[
+        {
+          label: 'Speisekarte',
+          href: '/menu',
+          icon: 'M4 6h16M4 12h16M4 18h7',
+        },
+        {
+          label: 'Reservieren',
+          href: '/contact',
+          icon: 'M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z',
+        },
+        {
+          label: 'Events',
+          href: '/catering',
+          icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+        },
+        {
+          label: 'Standort',
+          href: '#standort',
+          icon: 'M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0zM12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
+        },
+      ].map((item) => (
+        <a
+          href={item.href}
+          class="group flex flex-col items-center gap-1.5 rounded-lg sm:rounded-2xl bg-surface-card border border-border-subtle hover:border-brand-gold/50 hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-sm p-3 sm:p-4 min-h-12"
+        >
+          <svg
+            class="w-5 h-5 sm:w-6 sm:h-6 text-brand-gold shrink-0"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d={item.icon} />
+          </svg>
+          <span class="text-xs sm:text-sm font-semibold text-text-primary group-hover:text-brand-gold-ink text-center leading-tight">
+            {item.label}
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {/* 4. BELIEBTE GERICHTE IM D'OURO BISTRO — moved up: strongest appetite-appeal
+       asset shouldn't be buried several sections deep. */}
+  <PhotoGrid
+    ariaLabel="Beliebte Gerichte"
+    eyebrow="Empfehlungen"
+    title="Beliebte Gerichte im D'ouro Bistro"
+    description="Frisch von Angela zubereitet — mit den besten Zutaten Brasiliens und Westafrikas."
+    items={popularDishes}
+    cta={{ label: 'Komplette Speisekarte ansehen', href: '/menu' }}
+  />
+
+  {/* 5. WIE D'OURO BEGANN */}
+  <OurStorySection
+    ariaLabel="Unsere Geschichte"
+    eyebrow="Unsere Geschichte"
+    title="Wie D'ouro begann"
+    text="D'ouro begann während des Lockdowns, als Angela von zu Hause aus selbstgemachtes brasilianisches Essen an alle verteilte, die ein Stück Heimat suchten. Genau diese Wärme und Leidenschaft stecken auch heute in jedem einzelnen Gericht."
+    founderName="Angela"
+    founderTitle="Gründerin & Chefköchin"
+  />
+
+  {/* 6. TESTIMONIALS — grouped near Story rather than split by two event-CTA
+       sections. UserReviews.astro declares its own aria-label landmark; this
+       wrapper stays unlabeled to avoid a duplicate nested "Gästebewertungen"
+       region (axe landmark-unique). */}
+  <section class="py-section-mobile md:py-5">
+    <UserReviews />
+  </section>
+
+  {/* 7. 6 AFRO-LATINO SPEZIALITÄTEN — moved down: now a browse aid, the
+       quick-access row above is the primary fast-access mechanism. */}
   <section class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Speisekarte Kategorien">
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
         Unsere Speisekarte
       </span>
-      <h2 class="text-xl md:text-3xl font-extrabold text-text-primary font-display uppercase tracking-tight">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-text-primary font-display uppercase tracking-tight">
         Entdecken Sie unsere 6 Afro-Latino Spezialitäten
       </h2>
     </div>
@@ -135,10 +212,10 @@ const PAGE_DESCRIPTION =
           <div class="w-7 h-7 sm:w-12 sm:h-12 rounded-md sm:rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center mb-1 sm:mb-3 group-hover:scale-110 transition-transform shrink-0">
             <CategoryIcon name={slot.icon} class="w-3.5 h-3.5 sm:w-6 sm:h-6" />
           </div>
-          <h3 class="text-[11px] sm:text-sm font-bold text-text-primary group-hover:text-brand-gold-ink font-display transition-colors leading-tight mb-0.5 sm:mb-1 line-clamp-2 break-words min-h-[2.2em] sm:min-h-[2.4em] w-full">
+          <h3 class="text-xs sm:text-sm font-bold text-text-primary group-hover:text-brand-gold-ink font-display transition-colors leading-tight mb-0.5 sm:mb-1 line-clamp-2 break-words min-h-[2.2em] sm:min-h-[2.4em] w-full">
             {slot.title.split('/')[0]}
           </h3>
-          <p class="hidden sm:block text-[11px] text-text-tertiary leading-tight line-clamp-2">
+          <p class="hidden sm:block text-xs text-text-tertiary leading-tight line-clamp-2">
             {slot.desc}
           </p>
         </a>
@@ -146,55 +223,58 @@ const PAGE_DESCRIPTION =
     </div>
   </section>
 
-  {/* 5. BELIEBTE GERICHTE IM D'OURO BISTRO */}
-  <PhotoGrid
-    ariaLabel="Beliebte Gerichte"
-    eyebrow="Empfehlungen"
-    title="Beliebte Gerichte im D'ouro Bistro"
-    description="Frisch von Angela zubereitet — mit den besten Zutaten Brasiliens und Westafrikas."
-    items={popularDishes}
-    cta={{ label: 'Komplette Speisekarte ansehen', href: '/menu' }}
-  />
+  {/* 8. EVENTS & FEIERN — Firmenevents + Private Feiern consolidated into one
+       section (two cards) instead of two separate full-width sections;
+       shorter scroll, same content. */}
+  <section class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Events & Feiern">
+    <div class="text-center mb-4 md:mb-5">
+      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
+        Feiern & Events
+      </span>
+      <h2 class="text-2xl md:text-3xl font-semibold text-text-primary font-display">
+        Für jeden Anlass das Richtige
+      </h2>
+    </div>
 
-  {/* 6. WIE D'OURO BEGANN */}
-  <OurStorySection
-    ariaLabel="Unsere Geschichte"
-    eyebrow="Unsere Geschichte"
-    title="Wie D'ouro begann"
-    text="D'ouro begann während des Lockdowns, als Angela von zu Hause aus selbstgemachtes brasilianisches Essen an alle verteilte, die ein Stück Heimat suchten. Genau diese Wärme und Leidenschaft stecken auch heute in jedem einzelnen Gericht."
-    founderName="Angela"
-    founderTitle="Gründerin & Chefköchin"
-  />
-
-  {/* 7. FIRMENEVENTS SECTION */}
-  <section class="py-section-mobile md:py-5" aria-label="Firmenevents">
-    <FeatureCard
-      title="Firmenevents"
-      description="Von Team-Lunches bis Firmenfeiern — unsere Catering-Pakete passen sich Ihren Bedürfnissen an."
-      image={{ src: '/images/catering/event.webp', alt: 'Firmenevent Catering', width: 800, height: 600 }}
-      cta={{ label: 'Anfrage senden', href: '/contact' }}
-    />
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+      {[
+        {
+          title: 'Firmenevents',
+          description: 'Von Team-Lunches bis Firmenfeiern — unsere Catering-Pakete passen sich Ihren Bedürfnissen an.',
+          image: { src: '/images/catering/event.webp', alt: 'Firmenevent Catering', width: 800, height: 600 },
+          cta: { label: 'Anfrage senden', href: '/contact' },
+        },
+        {
+          title: 'Private Feiern',
+          description: 'Geburtstage, Hochzeiten, Familientreffen — wir bringen Soul Food direkt zu Ihnen.',
+          image: { src: '/images/catering/private.webp', alt: 'Private Feiern Catering', width: 800, height: 600 },
+          cta: { label: 'Jetzt planen', href: '/contact' },
+        },
+      ].map((item) => (
+        <div class="flex flex-col rounded-lg overflow-hidden glass shadow-md">
+          <Image
+            src={item.image.src}
+            alt={item.image.alt}
+            width={item.image.width}
+            height={item.image.height}
+            format="webp"
+            quality={85}
+            class="w-full aspect-[4/3] object-cover"
+            loading="lazy"
+          />
+          <div class="flex flex-col gap-3 p-5 md:p-6">
+            <h3 class="text-xl font-semibold text-text-primary font-display">{item.title}</h3>
+            <p class="text-base text-text-secondary leading-relaxed">{item.description}</p>
+            <Button href={item.cta.href} variant="primary" size="sm" class="w-fit">
+              {item.cta.label}
+            </Button>
+          </div>
+        </div>
+      ))}
+    </div>
   </section>
 
-  {/* 8. REVIEWS SECTION — UserReviews.astro declares its own aria-label
-       landmark; this wrapper stays unlabeled to avoid a duplicate
-       nested "Gästebewertungen" region (axe landmark-unique). */}
-  <section class="py-section-mobile md:py-5">
-    <UserReviews />
-  </section>
-
-  {/* 9. PRIVATE FEIERN SECTION */}
-  <section class="py-section-mobile md:py-5" aria-label="Private Feiern">
-    <FeatureCard
-      title="Private Feiern"
-      description="Geburtstage, Hochzeiten, Familientreffen — wir bringen Soul Food direkt zu Ihnen."
-      image={{ src: '/images/catering/private.webp', alt: 'Private Feiern Catering', width: 800, height: 600 }}
-      cta={{ label: 'Jetzt planen', href: '/contact' }}
-      reverse
-    />
-  </section>
-
-  {/* 10. GALERIE SECTION */}
+  {/* 9. GALERIE SECTION */}
   <PhotoGrid
     ariaLabel="Galerie"
     eyebrow="Impressionen"
@@ -203,7 +283,7 @@ const PAGE_DESCRIPTION =
     items={galleryImages}
   />
 
-  {/* 11. FAQ ACCORDION */}
+  {/* 10. FAQ ACCORDION */}
   <FaqAccordion
     ariaLabel="Häufig gestellte Fragen"
     eyebrow="FAQ"
@@ -211,18 +291,18 @@ const PAGE_DESCRIPTION =
     items={faqItems}
   />
 
-  {/* 12. MAP & STANDORT SECTION */}
-  <section class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Unser Standort">
+  {/* 11. MAP & STANDORT SECTION */}
+  <section id="standort" class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Unser Standort">
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
         Standort
       </span>
-      <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display">
+      <h2 class="text-2xl md:text-3xl font-semibold text-text-primary font-display">
         Unser Bistro in Salzburg
       </h2>
     </div>
 
-    <article class="rounded-2xl overflow-hidden bg-surface-glass backdrop-blur-sm border border-border-subtle shadow-lg">
+    <article class="rounded-lg overflow-hidden bg-surface-glass backdrop-blur-sm border border-border-subtle shadow-md">
       <div class="flex flex-col md:flex-row">
         {/* Map (consent-gated: real iframe only loads after visitor clicks through) */}
         <div class="w-full md:w-1/2 min-h-[260px] md:min-h-[340px]">
@@ -284,7 +364,7 @@ const PAGE_DESCRIPTION =
     </article>
   </section>
 
-  {/* 13. FOOTER */}
+  {/* 12. FOOTER */}
   <Footer slot="footer" />
 </Base>
 

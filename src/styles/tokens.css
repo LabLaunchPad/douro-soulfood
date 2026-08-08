@@ -293,7 +293,7 @@
      ───────────────────────────────────────────────────────────── */
 
   --spacing-section: 7.5rem;       /* 120px — Desktop section padding */
-  --spacing-section-mobile: 4.5rem; /* 72px  — Mobile section padding */
+  --spacing-section-mobile: 2rem; /* 32px  — Mobile section padding (2026-08-07 redesign: tighter, app-like rhythm per conversion-focused brief; was 4.5rem/72px) */
 
 
   /* ─────────────────────────────────────────────────────────────
