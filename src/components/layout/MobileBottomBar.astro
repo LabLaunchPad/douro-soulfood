@@ -134,8 +134,8 @@ const orderHref = siteSettings.lieferando_url || 'https://www.lieferando.at/en/m
 
 <script>
   // Hide the bar while scrolling down, reveal it while scrolling up, and
-  // always keep it visible at the very top of the page (it's the mobile
-  // visitor's only CTA, since HeroSection has none — see docs/design-system).
+  // always keep it visible at the very top of the page (it's a persistent
+  // quick-access CTA alongside the hero's own CTAs).
   const bar = document.querySelector<HTMLElement>('[data-mobile-bottom-bar]');
 
   if (bar) {
@@ -147,13 +147,19 @@ const orderHref = siteSettings.lieferando_url || 'https://www.lieferando.at/en/m
 
       if (currentScrollY <= 0) {
         bar.dataset.hidden = 'false';
+        bar.removeAttribute('inert');
       } else {
         const delta = currentScrollY - lastScrollY;
         if (delta > HIDE_THRESHOLD) {
           bar.dataset.hidden = 'true';
+          // translateY(100%) only moves the bar visually off-screen;
+          // without `inert` its links stay focusable, so a keyboard/screen-
+          // reader user could tab into invisible controls while it's hidden.
+          bar.setAttribute('inert', '');
           lastScrollY = currentScrollY;
         } else if (delta < -HIDE_THRESHOLD) {
           bar.dataset.hidden = 'false';
+          bar.removeAttribute('inert');
           lastScrollY = currentScrollY;
         }
       }
