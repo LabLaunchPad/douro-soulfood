@@ -53,7 +53,7 @@ const {
             height={image.height}
             format="webp"
             quality={85}
-            class="w-full h-full object-cover min-h-[300px] transition-transform duration-[var(--duration-normal)] ease-[var(--ease-out-quart)] hover:scale-105"
+            class="w-full h-full object-cover aspect-[4/3] md:aspect-auto md:min-h-[300px] transition-transform duration-[var(--duration-normal)] ease-[var(--ease-out-quart)] hover:scale-105"
             loading="lazy"
           />
         </div>
@@ -61,10 +61,10 @@ const {
         {/* Content */}
         <div class="flex w-full items-center md:w-1/2">
           <div class="p-8 md:p-14 flex flex-col gap-6">
-            <h2 class="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold text-text-primary leading-tight tracking-tight font-display">
+            <h2 class="text-[clamp(1.25rem,3vw,2.25rem)] font-semibold text-text-primary leading-tight tracking-tight font-display">
               {title}
             </h2>
-            <p class="text-text-secondary leading-relaxed max-w-[52ch] whitespace-pre-wrap">
+            <p class="text-base text-text-secondary leading-relaxed max-w-[52ch] whitespace-pre-wrap">
               {description}
             </p>
             {cta && (

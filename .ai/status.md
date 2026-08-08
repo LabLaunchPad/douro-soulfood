@@ -37,7 +37,7 @@ None load-bearing. Environment-only gaps (sandbox-specific, not CI gaps):
 ## Latest known risks
 - A 64KB `Footer.*.css` chunk is render-blocking on every route — investigated, legitimate fully-used Tailwind output (zero wasted bytes per Lighthouse), not a bug. No fix attempted.
 - CSP hashes (`public/_headers`) are pinned to exact minified byte output and can go stale on any Astro/Vite/esbuild version bump, not just a source edit — run `node scripts/checks/verify-csp-hashes.mjs` after dependency updates.
-- CI's `@axe-core/playwright` accessibility gate only runs against 2 of 7 routes — real gap, not yet widened.
+- ~~CI's `@axe-core/playwright` accessibility gate only runs against 2 of 7 routes~~ closed 2026-08-07 — all 7 routes now covered (`tests/impressum.spec.ts`, `tests/datenschutz.spec.ts` added).
 
 ## Last updated
 Refreshed after the Impeccable-skill-install + design-system-audit work (PRs #43, #44) merged, and PR #20/legal-fix state was found stale and corrected. Prefer `node .ai/scripts/agent-status.mjs`'s live output over this static file when possible.

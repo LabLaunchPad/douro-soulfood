@@ -131,7 +131,7 @@ Self-hosted `.woff2` files under `public/fonts/`, `@font-face`-declared in `toke
 
 ### Section Spacing
 - Desktop: `--spacing-section` (120px) vertical padding
-- Mobile: `--spacing-section-mobile` (72px) vertical padding
+- Mobile: `--spacing-section-mobile` (32px vertical padding, changed from 72px in the 2026-08-07 mobile-first conversion redesign — a deliberate tighter, app-like rhythm per an explicit design brief)
 
 ### Grid discipline
 Base rhythm is Tailwind's 4px scale (`p-1`=4px … `p-6`=24px … `p-24`=96px). **75 call sites** (verified via grep, 2026-08-07) use fractional Tailwind spacing utilities (`-0.5`, `-1.5`, `-2.5`, `-3.5` → 2px/6px/10px/14px) that fall between the 4px grid steps, concentrated in compact UI (badges, icon-text gaps, chip padding — `AllergenHeaderLegend`, `MenuBistroCard`, `ReviewBadge`, `Footer`, `menu.astro`). Not flagged as a defect to blind-fix: half-steps are common, defensible practice for icon+text gaps at small scale where 4px reads cramped and 8px reads loose. Flagged here as a known deviation from strict 4px-only discipline — any future spacing audit should treat this as the baseline, not assume a clean 4px grid.

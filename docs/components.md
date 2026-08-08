@@ -35,10 +35,14 @@ related: [".ai/packs/components.okf.md"]
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | href | string | — | Link destination |
+| target | '_blank' \| '_self' | — | Added 2026-08-07 for external CTAs (Footer's order link); omit for internal links |
+| rel | string | — | Added alongside `target` — pass `"noopener noreferrer"` with `target="_blank"` |
 | variant | 'primary' \| 'secondary' \| 'ghost' | 'primary' | Visual style |
 | size | 'sm' \| 'md' \| 'lg' | 'md' | Size variant |
 | arrow | boolean | false | Show animated arrow icon |
-| class | string | '' | Additional classes |
+| class | string | '' | Additional classes — appended after the component's own classes, so a same-category utility (e.g. `font-extrabold`) here correctly overrides the default (e.g. `font-semibold`) |
+
+Consumers as of 2026-08-07: `FeatureCard.astro` (original), `PhotoGrid.astro`'s CTA, the homepage map section's "Jetzt bestellen" CTA, and `Footer.astro`'s order CTA — consolidated from hand-rolled `<a>` markup during a spacing-consistency pass to close tap-target and padding drift between otherwise-identical CTA buttons.
 
 ---
 

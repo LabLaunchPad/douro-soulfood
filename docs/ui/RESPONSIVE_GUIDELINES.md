@@ -21,9 +21,9 @@ Cross-reference: `docs/design-system/RESPONSIVE_GUIDELINES.md` covers the same v
 | No overflow | ✅ verified, zero horizontal scroll on any route |
 | No tiny action areas | ✅ (post-fix) |
 | No crowded headers | ✅ NavBar collapses to hamburger + logo on mobile |
-| No hidden primary actions | ✅ `MobileBottomBar` keeps Call/Order always visible |
+| No hidden primary actions | ✅ `MobileBottomBar` visible on load/scroll-up, hides only on scroll-down (added 2026-08-07 as an explicit UX requirement — no longer "always visible," but never hidden when the visitor would want it) |
 | No awkward wrapping | ✅ stress-tested with German compound words |
-| No dense blocks without breathing room | ✅ consistent section padding (72px mobile) |
+| No dense blocks without breathing room | ✅ consistent section padding (32px mobile, was 72px until the 2026-08-07 mobile-first conversion redesign) |
 
 ## One real defect found and fixed this session
 

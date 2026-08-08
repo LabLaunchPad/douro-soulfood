@@ -9,7 +9,7 @@ Apple's spatial clarity meets Brazilian sensory warmth. Every interaction should
 1. **Light, not dark** — Warm cream surfaces with high-contrast espresso text. Dark mode is explicitly not planned; the brand identity is light.
 2. **Motion is meaning** — Every animation communicates state or hierarchy, never decorates. `prefers-reduced-motion` is respected globally.
 3. **Warm contrast** — Gold/terracotta accents create appetite against a light backdrop, used for emphasis and CTAs, not as a base color.
-4. **Generous space** — iOS-level whitespace; section padding is 120px desktop / 72px mobile (`--spacing-section` / `--spacing-section-mobile`), never cramped.
+4. **Generous space** — section padding is 120px desktop / 32px mobile (`--spacing-section` / `--spacing-section-mobile`; mobile was 72px until the 2026-08-07 mobile-first conversion redesign deliberately tightened it for an app-like rhythm), never cramped.
 5. **One hero per section** — Every section has one focal point (a heading, an image, or a single CTA), not competing elements.
 
 ## Tradeoff rules (decision order when principles conflict)

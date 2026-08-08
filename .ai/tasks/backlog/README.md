@@ -14,4 +14,4 @@ Not-yet-started tasks live here as OKF files, using the templates in `.ai/tasks/
 - ~~Typography token scale had zero adoption~~ — **done**: realigned `--text-*` values to match the real, disciplined Tailwind-utility usage pattern (298 call sites, zero visual change).
 - ~~44 un-tokenized `stone-*`/`amber-*`/`zinc-*` call sites~~ — **done for 38**; remaining 6 amber accents verified as correctly context-specific, not a gap. See `docs/design-system/COLOR_SYSTEM.md`.
 - **Spacing (75 half-step Tailwind utility instances)** — investigated, deliberately left as-is (defensible for compact UI, not drift). See `docs/design-system/SPACING_SYSTEM.md`.
-- **CI's `@axe-core/playwright` accessibility gate only covers 2 of 7 routes** — real, not-yet-actioned gap. Widening it is a legitimate next task.
+- ~~**CI's `@axe-core/playwright` accessibility gate only covers 2 of 7 routes**~~ — done 2026-08-07: added `tests/impressum.spec.ts` and `tests/datenschutz.spec.ts`, closing the last gap to 7/7.

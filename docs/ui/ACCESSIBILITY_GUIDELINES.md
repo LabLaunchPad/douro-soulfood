@@ -32,4 +32,4 @@ Skip-to-main-content link, correct landmark elements (`<nav>`, `<main>`, `<foote
 
 ## Known process gap
 
-CI's `@axe-core/playwright` accessibility gate covers 2 of 7 routes. Not yet widened — a real, tracked gap, not hidden.
+CI's `@axe-core/playwright` accessibility gate covers all 7 routes (closed 2026-08-07 — see `docs/design-system/ACCESSIBILITY.md`'s "Known process gap" section).

@@ -25,7 +25,7 @@ Source of truth: `src/styles/tokens.css`, a single Tailwind v4 `@theme { }` bloc
 
 ## 4.4 Spacing tokens
 
-This repo's real scale is Tailwind's default (verified to already equal the standard's requested `4/8/12/16/24/32/40/48/56/64/80/96` scale exactly) plus two custom section-level tokens: `--spacing-section` (120px desktop) / `--spacing-section-mobile` (72px). See [`SPACING_SYSTEM.md`](./SPACING_SYSTEM.md).
+This repo's real scale is Tailwind's default (verified to already equal the standard's requested `4/8/12/16/24/32/40/48/56/64/80/96` scale exactly) plus two custom section-level tokens: `--spacing-section` (120px desktop) / `--spacing-section-mobile` (32px, changed from 72px in the 2026-08-07 mobile-first conversion redesign). See [`SPACING_SYSTEM.md`](./SPACING_SYSTEM.md).
 
 ## 4.5 Radius, elevation, motion
 

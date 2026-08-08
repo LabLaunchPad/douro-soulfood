@@ -83,6 +83,15 @@
   animation-play-state: paused;
 }
 
+/* :hover has no effect on touch devices, so mobile users could never pause
+   this otherwise-infinite auto-scroll — respect the same reduced-motion
+   contract already honored by the hero video and phone-ring icon. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
 /* ── Alpha Mask for Marquee ── */
 .marquee-mask {
   mask-image: linear-gradient(

@@ -5,6 +5,25 @@
    Tailwind v4: ALL tokens defined via @theme directives in CSS.
    NO tailwind.config.mjs — that file must NEVER exist.
    All color tokens use OKLCH format for perceptual uniformity.
+
+   TOKEN HIERARCHY: Primitive → Semantic → UI
+   Tier 1 (primitive): brand/bistro palettes, radius/shadow/spacing/
+     motion/type/breakpoint scales — raw values, named by what they
+     ARE, not what they're for.
+   Tier 2 (semantic): surface/text/border/container/z-index — named
+     by role, built from Tier 1.
+   There is deliberately no separate "component token" tier: Tailwind
+   v4's @theme turns every token here directly into a utility class
+   (bg-*, text-*, rounded-*, shadow-*, z-*), so components consume
+   Tier 1/2 tokens' generated utilities directly — an extra
+   indirection layer (e.g. --button-radius: var(--radius-full)) would
+   just rename an existing utility without adding meaning. See
+   docs/design-system/COMPONENT_REGISTRY.md for the per-component
+   token-mapping tables that play that role instead.
+
+   GOVERNANCE: before introducing any visual value, search this file
+   for an existing token first. Reuse > new alias > new primitive.
+   Never add a second token for a value that already has one.
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ─────────────────────────────────────────────────────────────────
@@ -62,11 +81,18 @@
 
 @theme {
 
+  /* ═════════════════════════════════════════════════════════════
+     TIER 1 — PRIMITIVE TOKENS
+     Raw palette/scale values. No semantic meaning attached.
+     Consumed by the semantic tier below, or directly where a
+     value is genuinely one-off (e.g. the bistro sub-palette).
+     ═════════════════════════════════════════════════════════════ */
+
   /* ─────────────────────────────────────────────────────────────
-     BRAND PALETTE — Talkin' Tacos OKLCH Color Tokens (Single Source of Truth)
+     BRAND PALETTE — D'ouro Soulfood OKLCH Color Tokens (Single Source of Truth)
      ───────────────────────────────────────────────────────────── */
 
-  /* ── Brand Primary: Taco Green (#06B906) ── */
+  /* ── Brand Primary: Terracotta ── */
   --color-brand-terracotta: oklch(0.56 0.18 24.5);
   --color-brand-terracotta-light: oklch(0.66 0.18 24.5);
   --color-brand-terracotta-dark: oklch(0.42 0.18 24.5);
@@ -85,12 +111,12 @@
      or hover text that was reaching for --color-brand-gold. */
   --color-brand-gold-ink: oklch(0.46 0.16 85.0);
 
-  /* ── Brand Accent: Taco Green (#06B906) ── */
+  /* ── Brand Accent: Forest / Sage ── */
   --color-brand-forest: oklch(0.68 0.22 142.5);
   --color-brand-forest-light: oklch(0.76 0.18 142.5);
   --color-brand-sage: oklch(0.72 0.12 142.5);
 
-  /* ── Brand Neutrals: Dark Black (#0D0D0D) & Charcoal (#4D4D4D) ── */
+  /* ── Brand Neutrals: Cream, Mist, Espresso, Charcoal, Smoke ── */
   --color-brand-cream: oklch(0.98 0.005 80);
   --color-brand-cream-warm: oklch(0.95 0.01 80);
   --color-brand-mist: oklch(0.97 0.008 80);
@@ -132,6 +158,15 @@
   --color-bistro-text-strong: #292524;  /* stone-800 equiv — stronger emphasis text */
   --color-bistro-placeholder: #f5f5f4;  /* stone-100 equiv — image placeholder background */
 
+
+  /* ═════════════════════════════════════════════════════════════
+     TIER 2 — SEMANTIC TOKENS
+     Named by role/meaning, built from Tier 1 primitives above.
+     Components should consume these (or the primitive scales
+     below, which are semantic in the sense that their names
+     already carry usage guidance — radius/shadow/spacing/motion/
+     type/breakpoints) rather than raw color values directly.
+     ═════════════════════════════════════════════════════════════ */
 
   /* ─────────────────────────────────────────────────────────────
      SEMANTIC SURFACE TOKENS
@@ -258,7 +293,7 @@
      ───────────────────────────────────────────────────────────── */
 
   --spacing-section: 7.5rem;       /* 120px — Desktop section padding */
-  --spacing-section-mobile: 4.5rem; /* 72px  — Mobile section padding */
+  --spacing-section-mobile: 2rem; /* 32px  — Mobile section padding (2026-08-07 redesign: tighter, app-like rhythm per conversion-focused brief; was 4.5rem/72px) */
 
 
   /* ─────────────────────────────────────────────────────────────

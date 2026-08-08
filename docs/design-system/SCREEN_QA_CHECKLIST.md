@@ -31,7 +31,7 @@ Every screen (page) in this repo should pass this review before being considered
 See `ACCESSIBILITY.md` for the full, current, verified status per WCAG 2.2 success criterion.
 
 ## Responsive
-Desktop (1440px) and mobile (390px) verified via real screenshots for all 7 routes, 2026-08-07. Tablet (768-1024px) and extreme widths (<375px, >1920px) not separately verified this pass — flagged as a gap in `RESPONSIVE_GUIDELINES.md`.
+Desktop (1440px), mobile (390px), tablet (768px), narrow (320px), and wide (1920px) all verified via real Playwright screenshots + horizontal-overflow detection (`document.documentElement.scrollWidth` vs `clientWidth`) for all 7 routes, 2026-08-07. One real defect found and fixed this pass (narrow-320 `/datenschutz` heading overflow, see `UI_AUDIT_TEMPLATE.md`). Zero remaining gaps in viewport coverage as of this pass.
 
 ## Performance
 Governed separately by `docs/performance-budget.md` (Lighthouse CI thresholds: performance ≥0.90, accessibility ≥0.92, SEO ≥0.92, all error-level in CI). Image optimization via Astro's `<Image>` component; layout stability and rendering are gated by that existing budget, not duplicated here.

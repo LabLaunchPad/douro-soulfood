@@ -2,14 +2,16 @@
 
 Source of truth: `src/styles/tokens.css`, a single `@theme { }` block (Tailwind v4 — every `--color-*`/`--radius-*`/`--text-*` custom property here auto-generates matching Tailwind utility classes). All values below verified against that file on 2026-08-07.
 
+The file is organized in two explicit tiers, labeled inline: `TIER 1 — PRIMITIVE` (brand/bistro palettes, radius/shadow/spacing/motion/type/breakpoint scales) and `TIER 2 — SEMANTIC` (surface/text/border/container/z-index, built from Tier 1). There's deliberately no third "component token" tier — see the file's own header comment and `.ai/decisions/design-tokens.okf.md` for why.
+
 ## Token categories
 
 | Category | Count | Detail doc | Adoption status |
 |---|---|---|---|
 | Color | ~45 tokens across brand/surface/text/border roles + 8 bistro-menu hex + 5 bistro-muted hex | [`COLOR_SYSTEM.md`](./COLOR_SYSTEM.md) | Strong (0 raw hex outside literal flag SVGs; 38/44 previously-un-tokenized call sites fixed 2026-08-07, remaining 6 verified as correctly context-specific, not a gap) |
 | Typography | 12 semantic scale steps (`--text-label` → `--text-display-md`), realigned 2026-08-07 to equal Tailwind's real, disciplined 17-combination usage pattern | [`TYPOGRAPHY.md`](./TYPOGRAPHY.md) | Tokens now describe reality (298 call sites render identically; new/refactored components should reach for the named token) |
-| Spacing | Tailwind's default 4px scale + 2 custom section tokens | [`SPACING_SYSTEM.md`](./SPACING_SYSTEM.md) | Good (75 documented half-step exceptions in compact UI, not silent) |
-| Radius | 7 steps (`--radius-xs` 6px → `--radius-full`) | this doc | Strong (Tailwind's `rounded-*` utilities map directly to these; fully adopted) |
+| Spacing | Tailwind's default 4px scale + 2 custom section tokens | [`SPACING_SYSTEM.md`](./SPACING_SYSTEM.md) | `--spacing-section-mobile` changed from `4.5rem` (72px) to `2rem` (32px) as of 2026-08-07's mobile-first conversion redesign — a deliberate visual-hierarchy decision (tighter, app-like rhythm per an explicit design brief), not a consistency fix like the change before it. Sitewide: applies to every `py-section-mobile` consumer across all 7 routes, not homepage-only. `md:` desktop pairing stays `md:py-5` (20px, unchanged by this pass — see prior entry below for that history). `--spacing-section` (desktop, 120px) remains unused. **9** homepage section-wrapper declarations use `py-section-mobile` as of 2026-08-08 (was 10) — a redundant outer `<section>` wrapper around `<UserReviews />` in `index.astro` was removed after a browser-measured audit found it double-padded the testimonials section (96px combined gap vs 64px everywhere else); `UserReviews.astro`'s own root already supplies the same class, matching how `PhotoGrid`/`OurStorySection`/`FaqAccordion` are invoked without an extra wrapper |
+| Radius | 7 steps (`--radius-xs` 6px → `--radius-full`) | this doc | Strong (Tailwind's `rounded-*` utilities map directly to these; fully adopted). Note the real values: `--radius-lg`=20px, `--radius-xl`=28px, `--radius-2xl`=40px — easy to misjudge from name alone (confirmed via source during the 2026-08-07 redesign after initially assuming `rounded-2xl` meant 24px; it's 40px). Homepage cards standardized to `rounded-lg` (20px) that pass, the closest fit for a 20–24px card-radius brief |
 | Shadow/Elevation | 5 steps + 1 brand glow | this doc | Consistent |
 | Motion | 4 easing curves + 4 durations | [`MOTION_SYSTEM.md`](./MOTION_SYSTEM.md) | Consistent |
 | Z-index | 6 named layers | this doc | Partial (new overlay components use it; older components use raw `z-10`/`z-20` etc.) |

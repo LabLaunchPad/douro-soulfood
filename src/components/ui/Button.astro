@@ -1,6 +1,8 @@
 ---
 interface Props {
   href?: string;
+  target?: '_blank' | '_self';
+  rel?: string;
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   arrow?: boolean;
@@ -9,6 +11,8 @@ interface Props {
 
 const {
   href,
+  target,
+  rel,
   variant = 'primary',
   size = 'md',
   arrow = false,
@@ -31,8 +35,8 @@ const variants = {
 };
 
 const sizes = {
-  sm: 'min-h-9 px-3 py-2 text-sm gap-1.5',
-  md: 'min-h-11 px-5 py-2.5 text-sm gap-2',
+  sm: 'min-h-12 px-3 py-2 text-base gap-1.5',
+  md: 'min-h-12 px-5 py-2.5 text-base gap-2',
   lg: 'min-h-12 px-6 py-3 text-base gap-2',
 };
 
@@ -41,7 +45,7 @@ const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}
 const Tag = href ? 'a' : 'button';
 ---
 
-<Tag href={href} class={classes}>
+<Tag href={href} target={target} rel={rel} class={classes}>
   <slot />
   {arrow && (
     <svg
