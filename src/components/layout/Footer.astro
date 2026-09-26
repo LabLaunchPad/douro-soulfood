@@ -6,12 +6,14 @@
  * - Outer container sits on light/white page surface (bg-surface-primary).
  * - Main footer content is enclosed in a floating Silver / Platinum Grey capsule card
  *   (bg-neutral-100 border border-neutral-200 rounded-2xl shadow-xl).
- * - Top row: Logo (/dourologo.webp), navigation links, and D'ouro Brand Gold CTA button.
+ * - Top row: Logo (optimized src/assets import; /dourologo.webp stays public for JSON-LD), navigation links, and D'ouro Brand Gold CTA button.
  * - Divider line & legal links inside the card.
  * - Outer bottom bar: Social icons, copyright notice, and location info.
  */
 
+import { Image } from 'astro:assets';
 import Button from '@/components/ui/Button.astro';
+import brandLogo from '@/assets/brand/dourologo.webp';
 import { settings as siteSettings } from '@/lib/site';
 import { FOOTER_NAV_LINKS, type NavLink as FooterLink } from '@/lib/nav';
 
@@ -59,11 +61,11 @@ const {
             class="inline-block no-underline hover:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold rounded-xs"
             aria-label="D'ouro Soulfood Homepage"
           >
-            <img
-              src="/dourologo.webp"
+            <Image
+              src={brandLogo}
               alt="D'ouro Soulfood Logo"
-              width="292"
-              height="139"
+              width={292}
+              height={139}
               class="h-10 md:h-12 w-auto object-contain transition-transform duration-200 hover:scale-105"
             />
           </a>
