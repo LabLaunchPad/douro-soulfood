@@ -20,12 +20,12 @@
     "check:i18n": "node --experimental-strip-types scripts/checks/verify-i18n.mjs"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.0.0",
+    "@astrojs/cloudflare": "^14.3.3",
     "@astrojs/sitemap": "^3.7.4",
     "@keystatic/astro": "^6.0.0",
     "@keystatic/core": "^0.6.9",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^6.4.8",
+    "astro": "^7.3.5",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
