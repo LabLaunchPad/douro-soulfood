@@ -1,7 +1,7 @@
 /**
  * Lighthouse CI Configuration — D'ouro Soulfood Bistro
  *
- * Performance budgets for an Astro v6 + Cloudflare Pages site.
+ * Performance budgets for an Astro v7 + Cloudflare Pages site.
  * Runs in CI after deployment to verify quality gates.
  *
  * Usage:

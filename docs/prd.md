@@ -22,7 +22,7 @@ related: [".ai/packs/repo-overview.okf.md"]
 > **Version:** 0.2.0
 > **Status:** Active Development
 > **Client:** D'ouro Soulfood Bistro, Salzburg, Austria
-> **Stack:** Astro 6 + Keystatic CMS + Cloudflare Pages
+> **Stack:** Astro 7 + Keystatic CMS + Cloudflare Pages
 
 ---
 
@@ -90,7 +90,7 @@ The home page's copy (hero headline, story text, gallery images) is currently ha
 
 | Requirement | Spec |
 |-------------|------|
-| Framework | Astro 6.x (Node 22.12+) |
+| Framework | Astro 7.x (Node 22.12+) |
 | CMS | Keystatic (Git-backed, local storage mode) |
 | Hosting | Cloudflare Pages (free tier) |
 | Styling | Tailwind CSS v4 + custom design token system |

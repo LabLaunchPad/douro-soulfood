@@ -1,7 +1,7 @@
 # ═══════════════════════════════════════════════════════════════════
 # D'OURO SOULFOOD BISTRO — CI Pipeline
 #
-# GitHub Actions workflow for Astro v6 + Cloudflare Workers.
+# GitHub Actions workflow for Astro v7 + Cloudflare Workers.
 #
 # Flow:
 #   1. Build (uploads dist/ as an artifact for both downstream jobs)

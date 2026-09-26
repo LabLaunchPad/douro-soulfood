@@ -42,8 +42,8 @@ related:
 Restaurant marketing website for D'ouro Soulfood Bistro (Salzburg, Austria) — Brazilian/Latin/African fusion. Goal: drive online orders (via Lieferando hand-off), showcase the menu, build local brand presence. No e-commerce, no accounts, no contact form (verified: zero `<form>` elements anywhere in `src/`).
 
 ## 2. Stack detected
-- Astro 6.4.8, `output: 'server'`, `@astrojs/cloudflare` adapter, `imageService: 'compile'`.
-- Keystatic 5.2.0/0.5.50, `storage.kind: 'local'` — Git-backed CMS.
+- Astro 7.3.5, `output: 'server'`, `@astrojs/cloudflare` adapter, `imageService: 'compile'`.
+- Keystatic 6.0.0/0.6.9, `storage.kind: 'local'` — Git-backed CMS.
 - Tailwind CSS v4 (`@tailwindcss/vite`), design tokens in `src/styles/tokens.css`.
 - Cloudflare Pages/Workers hosting.
 - Testing: Playwright + `@axe-core/playwright`. No unit-test runner.

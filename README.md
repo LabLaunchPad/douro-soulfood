@@ -1,6 +1,6 @@
 # D'ouro Soulfood Bistro — Website
 
-> Astro 6 + Keystatic CMS + Cloudflare Pages
+> Astro 7 + Keystatic CMS + Cloudflare Pages
 > Apple iOS-inspired design system with Brazilian soul warmth
 
 ---
@@ -23,7 +23,7 @@ pnpm dev
 
 | Layer | Tech |
 |-------|------|
-| Framework | Astro 6 (Node 22.12+) |
+| Framework | Astro 7 (Node 22.12+) |
 | CMS | Keystatic (Git-backed) |
 | Styling | Tailwind CSS v4 |
 | Hosting | Cloudflare Pages / Workers |

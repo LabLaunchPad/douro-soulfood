@@ -3,7 +3,7 @@
 Universal entrypoint for any AI coding agent (Claude Code, Cursor, Windsurf, Cline, Copilot, or any other). Read this file first, in full, before touching anything else.
 
 ## Repo identity
-Astro 6 + Tailwind v4 + Keystatic CMS restaurant marketing site for D'ouro Soulfood Bistro (Salzburg, Austria), deployed to Cloudflare Pages. No accounts, no cart, no contact form — the site's only "order" flow hands off to Lieferando.
+Astro 7 + Tailwind v4 + Keystatic CMS restaurant marketing site for D'ouro Soulfood Bistro (Salzburg, Austria), deployed to Cloudflare Pages. No accounts, no cart, no contact form — the site's only "order" flow hands off to Lieferando.
 
 ## Prime directives
 1. Outcome before output — define "done" before implementing.

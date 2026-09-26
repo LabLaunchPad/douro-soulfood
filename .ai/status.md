@@ -4,7 +4,7 @@
 
 ## Current repo status
 
-D'ouro Soulfood Bistro site — Astro 6 + Tailwind v4 + Keystatic, deployed to Cloudflare Pages/Workers. `main` branch is stable; `pnpm build` passes clean from a fresh checkout. Legal pages (Impressum/Datenschutz) are live. Google Fonts are self-hosted, Google Maps is consent-gated. The Impeccable design-audit skill is installed (project scope, Claude Code only, `.claude/skills/impeccable/`). A full design-system knowledge base lives at `docs/design-system/` (17 files, real project data, not placeholders). No open PRs, no open issues.
+D'ouro Soulfood Bistro site — Astro 7 + Tailwind v4 + Keystatic, deployed to Cloudflare Pages/Workers. `main` branch is stable; `pnpm build` passes clean from a fresh checkout. Legal pages (Impressum/Datenschutz) are live. Google Fonts are self-hosted, Google Maps is consent-gated. The Impeccable design-audit skill is installed (project scope, Claude Code only, `.claude/skills/impeccable/`). A full design-system knowledge base lives at `docs/design-system/` (17 files, real project data, not placeholders). No open PRs, no open issues.
 
 ## Active task
 

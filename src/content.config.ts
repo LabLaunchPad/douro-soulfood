@@ -4,7 +4,7 @@ import { glob } from 'astro/loaders';
 /**
  * Content Collection Config — D'ouro Soulfood Bistro
  *
- * Astro v6 uses the new content collections API:
+ * Astro v7 uses the new content collections API:
  *   - Config file: src/content.config.ts (NOT src/content/config.ts)
  *   - Each collection needs an explicit loader (glob for file-based)
  *   - Schema uses zod for validation

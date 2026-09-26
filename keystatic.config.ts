@@ -13,7 +13,7 @@ export default config({
     // Angela can add/edit/remove items via /keystatic admin.
     // Categories map to the D'ouro menu structure.
     // Price stored in EUR cents (e.g. 1490 = €14.90) to avoid floating-point issues.
-    // Using JSON format for compatibility with Astro v6 glob loader.
+    // Using JSON format for compatibility with Astro v7 glob loader.
     menu_items: collection({
       label: 'Menu Items',
       slugField: 'title',

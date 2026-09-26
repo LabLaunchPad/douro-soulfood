@@ -32,7 +32,7 @@ Playwright and Lighthouse both need a Chromium binary and may not run in a sandb
 
 ## Architecture
 
-- **Stack**: Astro 6 (static output) + Tailwind v4 + Keystatic CMS (Git-backed), deployed to Cloudflare Pages/Workers via `@astrojs/cloudflare`. No React or other client-JS framework is installed — see the "Non-negotiable constraints" in `AGENTS.md` before adding one.
+- **Stack**: Astro 7 (static output) + Tailwind v4 + Keystatic CMS (Git-backed), deployed to Cloudflare Pages/Workers via `@astrojs/cloudflare`. No React or other client-JS framework is installed — see the "Non-negotiable constraints" in `AGENTS.md` before adding one.
 - **Content flow**: content lives as JSON under `src/content/{menu-items,faq,settings}/`, editable through the Keystatic admin UI at `/keystatic` (config: `keystatic.config.ts`). Astro reads the same files through `src/content.config.ts` (zod-validated collections) for type-safe `getCollection()` calls in pages/components. **These two schema files are hand-synced, not generated from one another** — any content-shape change must be made in both.
 - **Component layers** (`src/components/`): `ui/` — small atoms (Button, AllergenBadge, DietaryBadge, CategoryIcon, ReviewBadge); `sections/` — page-level composites (HeroSection, MenuItemCard, MenuBistroCard, UserReviews); `layout/` — chrome shared across pages (NavBar, Footer, MobileBottomBar). `src/lib/menu.ts` holds shared menu logic consumed by both.
 - **Styling**: all colors/spacing/etc. come from CSS custom properties in `src/styles/tokens.css` (`var(--color-*)`) — no hardcoded hex values except literal flag-emoji SVG fills. Conditional classes use Astro's `class:list={[...]}`; there is no `cn()`/`clsx` helper in this repo.
