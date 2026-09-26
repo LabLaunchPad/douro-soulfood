@@ -10,8 +10,8 @@ freshness: "current"
 lifecycle: "stable"
 trust: "verified"
 provenance: { source: "repo", references: ["docs/adr/react-islands.md"] }
-attestation: { method: "agent", checks: ["confirmed react/react-dom/@astrojs/react/framer-motion/lucide-react absent from package.json"] }
-summary: "React, react-dom, @astrojs/react, framer-motion, and lucide-react were all deliberately removed in an earlier cleanup pass (zero .tsx/.jsx files existed). Reinstalling any of them requires explicit, per-component user approval."
+attestation: { method: "agent", checks: ["confirmed react/react-dom/@astrojs/react/framer-motion/lucide-react absent from package.json", "2026-09-27: scoped Keystatic-admin exception approved by owner"] }
+summary: "React was deliberately removed as a global framework and stays removed by default. One approved exception (2026-09-27): react/react-dom/@astrojs/react solely to mount the Keystatic admin island, which cannot render without the Astro React renderer. Any further React use still requires explicit, per-component user approval."
 load_when: "Any proposal to add React or a React-based dependency."
 token_budget: 250
 related: ["docs/adr/react-islands.md", ".ai/packs/react-islands.okf.md"]

@@ -10,8 +10,8 @@ freshness: "current"
 lifecycle: "active"
 trust: "verified"
 provenance: { source: "ai", references: ["package.json", "astro.config.mjs"] }
-attestation: { method: "manual", checks: ["confirmed zero React deps in package.json"] }
-summary: "React-as-island policy — Astro-first default, narrow allowed conditions, adapter pattern, hydration rules. No React currently installed."
+attestation: { method: "manual", checks: ["confirmed zero React deps in package.json", "2026-09-27: approved Keystatic-admin exception recorded below"] }
+summary: "React-as-island policy — Astro-first default, narrow allowed conditions, adapter pattern, hydration rules. One approved exception: react/react-dom/@astrojs/react solely for the Keystatic admin island (no site component uses React)."
 load_when: "Any interactive-component decision."
 token_budget: 900
 related: [".ai/packs/react-islands.okf.md", ".ai/decisions/no-global-react.okf.md"]
@@ -28,7 +28,7 @@ outputs:
   - `astro.config.mjs`'s `integrations` array (only if an island is actually approved and implemented)
 
 ## 1. Context
-This site currently ships **zero client-side JavaScript framework** — confirmed via `docs/audit/current-state.md`: no `react`/`react-dom`/`@astrojs/react` in `package.json`, no `react()` in `astro.config.mjs`'s integrations. That's a deliberate, hard-won state — `react`, `react-dom`, `@astrojs/react`, `framer-motion`, and `lucide-react` were all explicitly **removed** in an earlier cleanup pass this session because zero `.tsx`/`.jsx` files existed anywhere and Keystatic bundles its own React independently (the admin doesn't need the site integration to function). This ADR exists so that if React is reintroduced in the future, it's reintroduced deliberately, scoped tightly, and never as a repeat of that same drift.
+This site currently ships **zero client-side JavaScript framework** — confirmed via `docs/audit/current-state.md`: no `react`/`react-dom`/`@astrojs/react` in `package.json`, no `react()` in `astro.config.mjs`'s integrations. That's a deliberate, hard-won state — `react`, `react-dom`, `@astrojs/react`, `framer-motion`, and `lucide-react` were all explicitly **removed** in an earlier cleanup pass this session because zero `.tsx`/`.jsx` files existed anywhere. The removal commit claimed Keystatic bundles its own React so the admin needs no site integration — **that claim was disproven 2026-09-27**: `keystatic-astro-page.astro` renders `<Keystatic client:only="react" />`, which requires the `@astrojs/react` renderer to mount; without it `/keystatic` serves an empty shell (verified: 39-byte document, zero scripts, zero console errors). Keystatic ships the React *library* in its own chunks, but Astro still needs the *renderer integration*. This ADR exists so that if React is reintroduced in the future, it's reintroduced deliberately, scoped tightly, and never as a repeat of that same drift.
 
 **This ADR does not install React.** It defines the policy for when and how it would be added, per `CLAUDE.md`'s `directive id="6"`: "No silent architecture changes. React, new dependencies, or major structural changes require an ADR" — and per the explicit instruction accompanying this backlog: prepare the policy, do not install dependencies without separate approval.
 
@@ -50,6 +50,9 @@ Only when **all** of these hold:
 - The Total Blocking Time budget (`docs/performance-budget.md`) is not put at risk — checked before merging, not after.
 
 **Plausible future candidates** (none exist today, none are pre-approved by this ADR — each still needs its own explicit approval before implementation): live menu filtering with complex multi-facet state, a multi-step catering/contact form with client-side validation, a gallery/lightbox, a modal-driven booking flow, or a widget with non-trivial validation state.
+
+### Approved exception (2026-09-27): Keystatic admin island
+The Keystatic admin UI **is** a React app (`<Keystatic client:only="react" />` in `@keystatic/astro`'s injected page) — there is no Astro-native alternative, so conditions 1–3 are satisfied by construction and condition 4 holds by measurement: `react`/`react-dom`/`@astrojs/react` are installed and `react()` is registered **solely** to mount this island. Verified: public pages (`/`, `/menu`) contain zero `react` references in built HTML; the React chunks (`keystatic-page.*.js`, `react-dom.*.js`) are route-split and load only on `/keystatic`. No site component may import React — this exception covers the CMS admin route only and does not authorize any `.tsx` island or adapter.
 
 ### When React is never allowed
 As a global app framework, as a replacement for any currently-working static Astro component, or as the default choice for simple UI — a static card, a badge, a text section, the hero, a simple image grid, footer content, or a simple menu-item display must never become React components regardless of implementer preference.
