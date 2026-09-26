@@ -12,5 +12,5 @@
   "featured": true,
   "available": true,
   "allergens": [],
-  "image": "/images/menu/amazonas.webp"
+  "image": "/src/assets/menu/amazonas.webp"
 }

@@ -42,7 +42,7 @@ Environment-only gaps (sandbox-specific):
 - **`/menu` performance regression**: image payload cut 80%, DOM size cut 28%. See `benchmarks/reports/MENU-IMAGE-FIX.okf.md` and `MENU-DOM-SIZE-FIX.okf.md`.
 - **CSP bug**: was silently blocking the mobile menu and Maps consent-gate in production. Fixed via SHA-256 hash allowlisting; verify with `node scripts/checks/verify-csp-hashes.mjs` after any edit to inline-script-bearing components or a build-tooling dependency bump.
 - **E2E coverage**: `/about`, `/catering`, `/contact` added, 76 → 134 total tests.
-- **`public/images/` → `src/assets/` pipeline migration**: explicitly deferred, not done — requires a Keystatic CMS schema change the user chose to skip. See `.ai/memory/human-approvals.md`. Do not attempt without a fresh, explicit ask.
+- ~~`public/images/` → `src/assets/` pipeline migration~~ — **done** 2026-09-27 after fresh explicit approval (see `.ai/memory/human-approvals.md`); see `docs/image-policy.md`.
 - **Spacing (75 half-step Tailwind utility instances)**: investigated, deliberately left as-is — defensible for compact UI (icon+text gaps), not drift. See `docs/design-system/SPACING_SYSTEM.md`.
 
 ## Latest known risks

@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Button from '@/components/ui/Button.astro';
 
 /**
@@ -10,7 +11,7 @@ import Button from '@/components/ui/Button.astro';
  * "Galerie" sections, which previously duplicated this exact markup.
  */
 interface PhotoItem {
-  src: string;
+  src: ImageMetadata;
   alt: string;
   width: number;
   height: number;

@@ -24,10 +24,22 @@ const { src, title, addressLabel, class: className = '' } = Astro.props;
   data-map-embed
   data-src={src}
   data-title={title}
-  class:list={['relative w-full h-full flex items-center justify-center bg-surface-elevated', className]}
+  class:list={[
+    'relative w-full h-full flex items-center justify-center bg-surface-elevated',
+    className,
+  ]}
 >
   <div class="flex flex-col items-center gap-3 text-center p-6">
-    <svg class="w-8 h-8 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <svg
+      class="w-8 h-8 text-brand-gold"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
       <path d="M20.42 4.42A10 10 0 1 0 4.42 20.42 10 10 0 0 0 20.42 4.42z" />
       <path d="M12 8v4l3 3" />
       <circle cx="12" cy="12" r="1" />
@@ -45,7 +57,9 @@ const { src, title, addressLabel, class: className = '' } = Astro.props;
     </button>
     <p class="text-xs text-text-tertiary max-w-[38ch]">
       Beim Anzeigen wird eine Verbindung zu Google Maps hergestellt.
-      <a href="/datenschutz#karten" class="underline hover:text-brand-gold-ink">Mehr dazu in unserer Datenschutzerklärung.</a>
+      <a href="/datenschutz#karten" class="underline hover:text-brand-gold-ink">
+        Mehr dazu in unserer Datenschutzerklärung.
+      </a>
     </p>
   </div>
 </div>
@@ -53,25 +67,29 @@ const { src, title, addressLabel, class: className = '' } = Astro.props;
 <script>
   document.querySelectorAll<HTMLElement>('[data-map-embed]').forEach((container) => {
     const trigger = container.querySelector('[data-map-embed-trigger]');
-    trigger?.addEventListener('click', () => {
-      const src = container.dataset.src;
-      const title = container.dataset.title;
-      if (!src) return;
+    trigger?.addEventListener(
+      'click',
+      () => {
+        const src = container.dataset.src;
+        const title = container.dataset.title;
+        if (!src) return;
 
-      const iframe = document.createElement('iframe');
-      iframe.src = src;
-      iframe.title = title ?? 'Karte';
-      iframe.className = 'w-full h-full border-0';
-      iframe.loading = 'lazy';
-      iframe.referrerPolicy = 'no-referrer-when-downgrade';
-      iframe.allowFullscreen = true;
-      iframe.tabIndex = -1;
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = title ?? 'Karte';
+        iframe.className = 'w-full h-full border-0';
+        iframe.loading = 'lazy';
+        iframe.referrerPolicy = 'no-referrer-when-downgrade';
+        iframe.allowFullscreen = true;
+        iframe.tabIndex = -1;
 
-      container.replaceChildren(iframe);
-      container.classList.remove('bg-surface-elevated');
-      // The clicked button is gone now; without this the focused element
-      // silently becomes <body>, disorienting keyboard/screen-reader users.
-      iframe.focus();
-    }, { once: true });
+        container.replaceChildren(iframe);
+        container.classList.remove('bg-surface-elevated');
+        // The clicked button is gone now; without this the focused element
+        // silently becomes <body>, disorienting keyboard/screen-reader users.
+        iframe.focus();
+      },
+      { once: true },
+    );
   });
 </script>

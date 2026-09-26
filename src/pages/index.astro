@@ -15,6 +15,28 @@ import FaqAccordion from '@/components/sections/FaqAccordion.astro';
 import MapEmbed from '@/components/ui/MapEmbed.astro';
 import Footer from '@/components/layout/Footer.astro';
 import { getCollection } from 'astro:content';
+import heroPoster from '@/assets/hero/hero-fallback-1280.webp';
+import heroFallback from '@/assets/hero/hero-fallback.jpg';
+import dishTacoEspecial from '@/assets/menu/taco-especial.webp';
+import dishQuesadillaHaehnchen from '@/assets/menu/quesadilla-haehnchen.webp';
+import dishFeijoada from '@/assets/menu/feijoada.webp';
+import dishPaoDeQueijo from '@/assets/menu/pao-de-queijo.webp';
+import dishMangoCeviche from '@/assets/menu/mango-ceviche.webp';
+import dishCoxinha from '@/assets/menu/coxinha.webp';
+import dishAfricanStew from '@/assets/menu/african-stew.webp';
+import dishBrigadeiros from '@/assets/menu/brigadeiros.webp';
+import dishBrisaDoMar from '@/assets/menu/brisa-do-mar.webp';
+import gallery1 from '@/assets/gallery/1.webp';
+import gallery2 from '@/assets/gallery/2.webp';
+import gallery3 from '@/assets/gallery/3.webp';
+import gallery4 from '@/assets/gallery/4.webp';
+import gallery5 from '@/assets/gallery/5.webp';
+import gallery6 from '@/assets/gallery/6.webp';
+import gallery7 from '@/assets/gallery/7.webp';
+import gallery8 from '@/assets/gallery/8.webp';
+import gallery9 from '@/assets/gallery/9.webp';
+import cateringEvent from '@/assets/catering/event.webp';
+import cateringPrivate from '@/assets/catering/private.webp';
 import { settings as siteSettings, phoneHref, absoluteUrl, hours as parsedHours } from '@/lib/site';
 import { formatHoursSummary, toClientHours } from '@/lib/hours';
 import { faqNode } from '@/lib/seo/graph';
@@ -48,25 +70,50 @@ const clientHours = toClientHours(parsedHours);
 
 /** 6 Core Category Slots for Homepage */
 const categorySlots = [
-  { slug: 'appetizers', title: 'Vorspeisen / Entradas', desc: 'Coxinha, Pão de Queijo & Ceviche', icon: 'appetizers' },
-  { slug: 'quesadillas', title: 'Quesadillas', desc: 'Melted Gouda & Mozzarella-Mix', icon: 'quesadillas' },
+  {
+    slug: 'appetizers',
+    title: 'Vorspeisen / Entradas',
+    desc: 'Coxinha, Pão de Queijo & Ceviche',
+    icon: 'appetizers',
+  },
+  {
+    slug: 'quesadillas',
+    title: 'Quesadillas',
+    desc: 'Melted Gouda & Mozzarella-Mix',
+    icon: 'quesadillas',
+  },
   { slug: 'tacos', title: 'Tacos', desc: 'Picanha, Pollo, Vegano & Gambas', icon: 'tacos' },
   { slug: 'bowls', title: 'Bowls', desc: 'Brazil Beef, Chipotle & Surf & Turf', icon: 'bowls' },
-  { slug: 'mains', title: 'Pratos Feitos', desc: 'Feijoada & African Peanut Stew mit Fufu', icon: 'mains' },
-  { slug: 'drinks', title: 'Bebidas & Sobremesas', desc: 'Caipirinha, Guaraná & Brigadeiros', icon: 'drinks' },
+  {
+    slug: 'mains',
+    title: 'Pratos Feitos',
+    desc: 'Feijoada & African Peanut Stew mit Fufu',
+    icon: 'mains',
+  },
+  {
+    slug: 'drinks',
+    title: 'Bebidas & Sobremesas',
+    desc: 'Caipirinha, Guaraná & Brigadeiros',
+    icon: 'drinks',
+  },
 ];
 
 /** 9 Popular dishes photos (image-only gallery layout). width/height match the actual source files (300×300). */
 const popularDishes = [
-  { src: '/images/menu/taco-especial.webp', alt: 'Taco Especial', width: 300, height: 300 },
-  { src: '/images/menu/quesadilla-haehnchen.webp', alt: 'Quesadilla Hähnchen', width: 300, height: 300 },
-  { src: '/images/menu/feijoada.webp', alt: 'Feijoada Brasileira', width: 300, height: 300 },
-  { src: '/images/menu/pao-de-queijo.webp', alt: 'Pão de Queijo', width: 300, height: 300 },
-  { src: '/images/menu/mango-ceviche.webp', alt: 'Mango Ceviche', width: 300, height: 300 },
-  { src: '/images/menu/coxinha.webp', alt: 'Coxinha', width: 300, height: 300 },
-  { src: '/images/menu/african-stew.webp', alt: 'African Peanut Stew', width: 300, height: 300 },
-  { src: '/images/menu/brigadeiros.webp', alt: 'Brigadeiros', width: 300, height: 300 },
-  { src: '/images/menu/brisa-do-mar.webp', alt: 'Brisa do Mar', width: 300, height: 300 },
+  { src: dishTacoEspecial, alt: 'Taco Especial', width: 300, height: 300 },
+  {
+    src: dishQuesadillaHaehnchen,
+    alt: 'Quesadilla Hähnchen',
+    width: 300,
+    height: 300,
+  },
+  { src: dishFeijoada, alt: 'Feijoada Brasileira', width: 300, height: 300 },
+  { src: dishPaoDeQueijo, alt: 'Pão de Queijo', width: 300, height: 300 },
+  { src: dishMangoCeviche, alt: 'Mango Ceviche', width: 300, height: 300 },
+  { src: dishCoxinha, alt: 'Coxinha', width: 300, height: 300 },
+  { src: dishAfricanStew, alt: 'African Peanut Stew', width: 300, height: 300 },
+  { src: dishBrigadeiros, alt: 'Brigadeiros', width: 300, height: 300 },
+  { src: dishBrisaDoMar, alt: 'Brisa do Mar', width: 300, height: 300 },
 ];
 
 /**
@@ -79,20 +126,66 @@ const popularDishes = [
  * interior/exterior atmosphere shots, not dishes.
  */
 const galleryImages = [
-  { src: '/images/gallery/1.webp', alt: 'Gastraum des D\'ouro mit Fahrrad-Tisch, bunt gemusterten Kissen auf der Fensterbank und Orchidee', width: 680, height: 510 },
-  { src: '/images/gallery/2.webp', alt: 'Gäste an einem Holztisch im D\'ouro, davor bunte Getränkeflaschen und ein Weinregal', width: 594, height: 510 },
-  { src: '/images/gallery/3.webp', alt: 'Drei Tacos mit Guacamole auf schwarzer Platte, daneben ein grüner Cocktail', width: 382, height: 510 },
-  { src: '/images/gallery/4.webp', alt: 'Paella mit Garnelen, Muscheln und Paprika in der Pfanne, dazu ein Beilagenteller', width: 382, height: 510 },
-  { src: '/images/gallery/5.webp', alt: 'In der offenen Küche des D\'ouro wird frisch gekocht, mit brasilianischer Flagge auf der Kochmütze', width: 382, height: 510 },
-  { src: '/images/gallery/6.webp', alt: 'Fensterbank mit bunten Patchwork-Kissen und Pflanzen, Blick auf die Salzburger Straße', width: 382, height: 510 },
-  { src: '/images/gallery/7.webp', alt: 'Tisch am Fenster mit Palme und Blick auf die Salzburger Altbaufassaden', width: 382, height: 510 },
-  { src: '/images/gallery/8.webp', alt: 'Außenansicht: das Schild „D\'ouro Soul Food“ über dem Eingang in der Auerspergstraße', width: 382, height: 510 },
-  { src: '/images/gallery/9.webp', alt: 'Weinregal im D\'ouro mit Flaschen aus Chile und Portugal', width: 680, height: 510 },
+  {
+    src: gallery1,
+    alt: "Gastraum des D'ouro mit Fahrrad-Tisch, bunt gemusterten Kissen auf der Fensterbank und Orchidee",
+    width: 680,
+    height: 510,
+  },
+  {
+    src: gallery2,
+    alt: "Gäste an einem Holztisch im D'ouro, davor bunte Getränkeflaschen und ein Weinregal",
+    width: 594,
+    height: 510,
+  },
+  {
+    src: gallery3,
+    alt: 'Drei Tacos mit Guacamole auf schwarzer Platte, daneben ein grüner Cocktail',
+    width: 382,
+    height: 510,
+  },
+  {
+    src: gallery4,
+    alt: 'Paella mit Garnelen, Muscheln und Paprika in der Pfanne, dazu ein Beilagenteller',
+    width: 382,
+    height: 510,
+  },
+  {
+    src: gallery5,
+    alt: "In der offenen Küche des D'ouro wird frisch gekocht, mit brasilianischer Flagge auf der Kochmütze",
+    width: 382,
+    height: 510,
+  },
+  {
+    src: gallery6,
+    alt: 'Fensterbank mit bunten Patchwork-Kissen und Pflanzen, Blick auf die Salzburger Straße',
+    width: 382,
+    height: 510,
+  },
+  {
+    src: gallery7,
+    alt: 'Tisch am Fenster mit Palme und Blick auf die Salzburger Altbaufassaden',
+    width: 382,
+    height: 510,
+  },
+  {
+    src: gallery8,
+    alt: "Außenansicht: das Schild „D'ouro Soul Food“ über dem Eingang in der Auerspergstraße",
+    width: 382,
+    height: 510,
+  },
+  {
+    src: gallery9,
+    alt: "Weinregal im D'ouro mit Flaschen aus Chile und Portugal",
+    width: 680,
+    height: 510,
+  },
 ];
 
 /** FAQ entries from KeystaticCMS */
-const faqEntries = (await getCollection('faq'))
-  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const faqEntries = (await getCollection('faq')).sort(
+  (a, b) => (a.data.order ?? 0) - (b.data.order ?? 0),
+);
 
 const faqItems = faqEntries.map((item) => ({
   question: item.data.question,
@@ -105,9 +198,9 @@ const faqItems = faqEntries.map((item) => ({
 // form `https://douro-soulfood.com/` — the same form the sitemap's <loc> and the
 // JSON-LD `url` already emit. Hand-setting the slashless variant here used to
 // make one page advertise three different URLs for itself.
-const PAGE_TITLE = "Afro-Lateinamerikanische Küche in Salzburg";
+const PAGE_TITLE = 'Afro-Lateinamerikanische Küche in Salzburg';
 const PAGE_DESCRIPTION =
-  "Frische brasilianische & afrikanische Soulfood-Spezialitäten von Angela in Salzburg. Tacos, Bowls, Feijoada & afrikanische Gerichte. Auerspergstraße 10.";
+  'Frische brasilianische & afrikanische Soulfood-Spezialitäten von Angela in Salzburg. Tacos, Bowls, Feijoada & afrikanische Gerichte. Auerspergstraße 10.';
 ---
 
 <Base
@@ -123,7 +216,7 @@ const PAGE_DESCRIPTION =
     on that prop for why it's one file, not one per viewport).
   */}
   <Fragment slot="head">
-    <link rel="preload" as="image" type="image/webp" href="/images/hero-fallback-1280.webp" />
+    <link rel="preload" as="image" type="image/webp" href={heroPoster.src} />
   </Fragment>
 
   {/* 1. NAVBAR */}
@@ -136,7 +229,7 @@ const PAGE_DESCRIPTION =
     subheadline="Frische, handgemachte brasilianische & afrikanische Spezialitäten von Angela"
     images={[
       {
-        src: '/images/hero-fallback.jpg',
+        src: heroFallback,
         alt: "D'ouro Soulfood Bistro — Afro-Lateinamerikanische Küche in Salzburg",
         width: 1600,
         height: 900,
@@ -147,7 +240,10 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 3. REVIEW BADGE */}
-  <section class="py-section-mobile md:py-5 px-4 md:px-16 border-b border-border-subtle" aria-label="Bewertungen">
+  <section
+    class="py-section-mobile md:py-5 px-4 md:px-16 border-b border-border-subtle"
+    aria-label="Bewertungen"
+  >
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
       <ReviewBadge
         rating={4.8}
@@ -163,7 +259,10 @@ const PAGE_DESCRIPTION =
   {/* 3b. QUICK-ACCESS ROW — fast access to menu/reservation/events/location,
        consolidated into one scannable block (priority: fast access to menu,
        ordering, reservation, events, and location). */}
-  <section class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Schnellzugriff">
+  <section
+    class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto"
+    aria-label="Schnellzugriff"
+  >
     <div class="grid grid-cols-4 gap-2 sm:gap-4">
       {[
         {
@@ -193,8 +292,12 @@ const PAGE_DESCRIPTION =
         >
           <svg
             class="w-5 h-5 sm:w-6 sm:h-6 text-brand-gold shrink-0"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
             aria-hidden="true"
           >
             <path d={item.icon} />
@@ -240,7 +343,10 @@ const PAGE_DESCRIPTION =
 
   {/* 7. 6 AFRO-LATINO SPEZIALITÄTEN — moved down: now a browse aid, the
        quick-access row above is the primary fast-access mechanism. */}
-  <section class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Speisekarte Kategorien">
+  <section
+    class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto"
+    aria-label="Speisekarte Kategorien"
+  >
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
         Unsere Speisekarte
@@ -273,7 +379,10 @@ const PAGE_DESCRIPTION =
   {/* 8. EVENTS & FEIERN — Firmenevents + Private Feiern consolidated into one
        section (two cards) instead of two separate full-width sections;
        shorter scroll, same content. */}
-  <section class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Events & Feiern">
+  <section
+    class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto"
+    aria-label="Events & Feiern"
+  >
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
         Feiern & Events
@@ -287,14 +396,26 @@ const PAGE_DESCRIPTION =
       {[
         {
           title: 'Firmenevents',
-          description: 'Von Team-Lunches bis Firmenfeiern — unsere Catering-Pakete passen sich Ihren Bedürfnissen an.',
-          image: { src: '/images/catering/event.webp', alt: 'Firmenevent Catering', width: 800, height: 600 },
+          description:
+            'Von Team-Lunches bis Firmenfeiern — unsere Catering-Pakete passen sich Ihren Bedürfnissen an.',
+          image: {
+            src: cateringEvent,
+            alt: 'Firmenevent Catering',
+            width: 800,
+            height: 600,
+          },
           cta: { label: 'Anfrage senden', href: '/contact' },
         },
         {
           title: 'Private Feiern',
-          description: 'Geburtstage, Hochzeiten, Familientreffen — wir bringen Soul Food direkt zu Ihnen.',
-          image: { src: '/images/catering/private.webp', alt: 'Private Feiern Catering', width: 800, height: 600 },
+          description:
+            'Geburtstage, Hochzeiten, Familientreffen — wir bringen Soul Food direkt zu Ihnen.',
+          image: {
+            src: cateringPrivate,
+            alt: 'Private Feiern Catering',
+            width: 800,
+            height: 600,
+          },
           cta: { label: 'Jetzt planen', href: '/contact' },
         },
       ].map((item) => (
@@ -339,7 +460,11 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 11. MAP & STANDORT SECTION */}
-  <section id="standort" class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label="Unser Standort">
+  <section
+    id="standort"
+    class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto"
+    aria-label="Unser Standort"
+  >
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
         Standort
@@ -365,7 +490,9 @@ const PAGE_DESCRIPTION =
         <div class="flex flex-col flex-1 justify-between gap-4 p-5 md:p-8">
           <div class="flex flex-col gap-3">
             <div>
-              <span class="text-xs uppercase font-semibold tracking-wider text-brand-gold-ink">Restaurant & Bistro</span>
+              <span class="text-xs uppercase font-semibold tracking-wider text-brand-gold-ink">
+                Restaurant & Bistro
+              </span>
               <h3 class="text-xl md:text-2xl font-bold text-text-primary font-display mt-0.5">
                 Salzburg, Österreich
               </h3>
@@ -376,7 +503,9 @@ const PAGE_DESCRIPTION =
                 <span class="text-[11px] text-text-tertiary uppercase font-medium">Adresse</span>
                 <address class="not-italic text-xs md:text-sm text-text-secondary leading-relaxed">
                   <p>{address_line1}</p>
-                  <p>{postal_code} {city}</p>
+                  <p>
+                    {postal_code} {city}
+                  </p>
                 </address>
               </div>
               <div class="flex flex-col gap-0.5">
@@ -428,7 +557,9 @@ const PAGE_DESCRIPTION =
   const el = document.getElementById('today-hours');
 
   if (el) {
-    const hours: { d: number; closed: boolean; time: string }[] = JSON.parse(el.dataset.hours ?? '[]');
+    const hours: { d: number; closed: boolean; time: string }[] = JSON.parse(
+      el.dataset.hours ?? '[]',
+    );
 
     // 'en-US' short weekday is a stable, locale-independent key. The timeZone
     // stays Europe/Vienna on purpose: the relevant "today" is the restaurant's,
@@ -439,7 +570,13 @@ const PAGE_DESCRIPTION =
     }).format(new Date());
 
     const ISO_DAY: Record<string, number> = {
-      Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 7,
+      Mon: 1,
+      Tue: 2,
+      Wed: 3,
+      Thu: 4,
+      Fri: 5,
+      Sat: 6,
+      Sun: 7,
     };
 
     const entry = hours.find((h) => h.d === ISO_DAY[code]);

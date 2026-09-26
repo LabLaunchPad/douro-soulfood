@@ -12,5 +12,5 @@
   "featured": true,
   "available": true,
   "allergens": [],
-  "image": "/images/menu/roja.webp"
+  "image": "/src/assets/menu/roja.webp"
 }

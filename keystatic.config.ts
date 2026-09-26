@@ -36,8 +36,14 @@ export default config({
         }),
         image: fields.image({
           label: 'Dish Photo',
-          directory: 'public/images/menu',
-          publicPath: '/images/menu',
+          // Stored bytes live in src/assets so Astro's compile-time image
+          // pipeline optimizes them; the JSON value is the project-root-
+          // absolute path (e.g. /src/assets/menu/brigadeiro.webp), which
+          // Astro's image() schema helper resolves to ImageMetadata.
+          // NOTE: mirrored in src/content.config.ts — the two schemas are
+          // hand-synced (see .ai/decisions/keystatic-sync.okf.md).
+          directory: 'src/assets/menu',
+          publicPath: '/src/assets/menu',
         }),
         // Optional. When empty, components fall back to the dish title, which is
         // an acceptable alt but describes the NAME rather than the photo. Filling

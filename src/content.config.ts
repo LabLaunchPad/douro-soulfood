@@ -16,12 +16,16 @@ import { glob } from 'astro/loaders';
 
 const menuItems = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/menu-items' }),
-  schema: z.object({
+  // image() resolves the Keystatic-stored path (e.g.
+  // /src/assets/menu/brigadeiro.webp) to ImageMetadata at sync time, so
+  // <Image> gets compile-time optimization. A dangling path fails the
+  // BUILD ([ImageNotFound]), not sync — keep JSON and files in step.
+  schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
     descriptionEn: z.string().optional(),
     price: z.number().min(0),
-    image: z.string().nullable().optional(),
+    image: image().nullable().optional(),
     /**
      * Alt text for `image`. Optional — consumers fall back to `title`.
      * Mirrored in keystatic.config.ts; the two schemas are hand-synced.

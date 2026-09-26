@@ -27,11 +27,11 @@ This matches the Material 3 / Carbon-style "4/8px rhythm" rule exactly — Tailw
 
 ## Known deviation: fractional (half-step) spacing
 
-**75 call sites** (verified via grep, 2026-08-07) use fractional Tailwind spacing utilities — `-0.5`, `-1.5`, `-2.5`, `-3.5` → 2px / 6px / 10px / 14px — which fall between the 4px grid steps. Concentrated in compact UI: icon-to-text gaps and badge/chip internal padding (`AllergenHeaderLegend.astro`, `MenuBistroCard.astro`, `ReviewBadge.astro`, `Footer.astro`, `menu.astro`, `Button.astro`).
+**73 call sites** (verified via grep, 2026-09-27; was 75 on 2026-08-07) use fractional Tailwind spacing utilities — `-0.5`, `-1.5`, `-2.5`, `-3.5` → 2px / 6px / 10px / 14px — which fall between the 4px grid steps. Concentrated in compact UI: icon-to-text gaps and badge/chip internal padding (`AllergenHeaderLegend.astro`, `MenuBistroCard.astro`, `ReviewBadge.astro`, `Footer.astro`, `menu.astro`, `Button.astro`).
 
 ```
 grep -rnoE '\b(p|px|py|pt|pb|pl|pr|m|mx|my|mt|mb|ml|mr|gap|gap-x|gap-y|space-x|space-y)-(0\.5|1\.5|2\.5|3\.5)\b' src/
-→ 75 matches
+→ 73 matches
 ```
 
 **This is documented as a known deviation, not silently accepted debt, and deliberately not auto-fixed.** Reasoning: half-steps are common, defensible practice for icon+text gaps at small scale, where a pure 4px gap reads cramped and 8px reads loose — 6px is frequently the actually-correct choice for a 12–14px icon next to 11–12px text. Normalizing all 75 to the strict grid would require per-instance visual judgment (some genuinely should move to 4/8px; some are correct as-is), which is exactly the kind of change this design system's own verification-loop rule says must be visually checked one at a time, not regex-replaced. Treat this list as the backlog for that pass, not as "already fine."

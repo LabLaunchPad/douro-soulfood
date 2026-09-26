@@ -13,3 +13,16 @@ This matches the pre-existing, established behavior of every other `<Image>` usa
 
 ## If real compression/format gains are wanted later
 Would require relocating the referenced files from `public/images/` into `src/assets/` and updating every `src` reference (Keystatic's `fields.image()` directory config in `keystatic.config.ts` would also need reconsidering, since it writes uploads to `public/images/menu` today). That's a larger, separate migration — not attempted here, consistent with `CLAUDE.md`'s "smallest correct change" directive and this document's job being to report accurately, not to expand scope.
+
+## Migration outcome (2026-09, branch `chore/finish-deferred-items`)
+
+The migration above has now been executed (Tasks 0–5) and this section
+supersedes the limitation: 46 files moved to `src/assets/` (gallery 9,
+catering 2, hero 2, menu statics 18, CMS photos 14, brand logo 1) and every
+rendered `<Image>` now receives `ImageMetadata`, emitting hashed `/_astro/`
+URLs — verified in `dist/` output for `/` and `/menu`, including JSON-LD
+absolute image URLs via `.src`. `public/images/` retains only the two
+crawler/browser shims (`og-default.jpg`, `apple-touch-icon.png`); 12
+unreferenced dead files were not migrated. The 3 remaining stable public
+URLs (`/dourologo.webp` + the 2 shims) are deliberate — see
+`docs/image-policy.md`, which now governs all image additions.

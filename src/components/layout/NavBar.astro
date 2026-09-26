@@ -7,8 +7,10 @@
  * - Desktop dual-state scroll transition (transparent top vs solid dark on scroll).
  */
 
+import { Image } from 'astro:assets';
 import MobileNavDrawer from './MobileNavDrawer.astro';
 import { NAV_LINKS, type NavLink } from '@/lib/nav';
+import brandLogo from '@/assets/brand/dourologo.webp';
 import { t } from '@/lib/i18n/ui';
 
 interface Props {
@@ -49,11 +51,11 @@ const {
         class="flex items-center no-underline hover:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold rounded-xs"
         aria-label="D'ouro Soulfood Homepage"
       >
-        <img
-          src="/dourologo.webp"
+        <Image
+          src={brandLogo}
           alt="D'ouro Soulfood Logo"
-          width="292"
-          height="139"
+          width={292}
+          height={139}
           class="h-10 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
         />
       </a>
