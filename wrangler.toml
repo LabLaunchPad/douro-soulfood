@@ -1,3 +1,2 @@
 name = "douro-soulfood"
-compatibility_date = "2026-01-14"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2026-09-25"
