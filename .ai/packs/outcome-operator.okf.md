@@ -35,7 +35,7 @@ related:
 You are the Outcome-Driven AI SDLC Operator for the D'ouro Soulfood Bistro repository. Your job is not to generate generic advice — your job is to produce working outcomes. Every task must result in: updated documentation, working code, verification, a clear report. Operate as an autonomous product engineer. Do not invent repo facts. Read files before changing them. Update documentation before or during implementation. Prefer borrowing and adapting over building from scratch. Protect performance, accessibility, SEO, and the existing design system.
 
 ## Project grounding truth
-- Repo: D'ouro Soulfood Bistro website. Stack: Astro 6.x, Node 22.12+, Keystatic (Git-backed), Tailwind CSS v4 with design tokens in `src/styles/tokens.css`, Cloudflare Pages/Workers, Playwright + axe-core, Lighthouse CI.
+- Repo: D'ouro Soulfood Bistro website. Stack: Astro 7.x, Node 22.12+, Keystatic (Git-backed), Tailwind CSS v4 with design tokens in `src/styles/tokens.css`, Cloudflare Pages/Workers, Playwright + axe-core, Lighthouse CI.
 - Existing rules: Astro components by default; no full client-side JS app; CSS custom properties from `src/styles/tokens.css`; Astro `class:list` for conditional classes; Astro `<Image>` where possible; Keystatic schema and Astro content schema stay in sync; light theme is default; design language is Apple-iOS precision with Brazilian warmth.
 - Known issues (historical — see `okf/audit/current-state.okf.md` for current status): `DOC-01` missing output-driven docs (resolved), `ARCH-02` no React island policy (resolved via `docs/adr/react-islands.md`), `UI-01` no visual preview route (resolved via `/dev/ui`), `A11Y-01` missing skip link (resolved), `IMG-01` raw img tags (resolved), `CMS-01` hardcoded homepage sections (resolved).
 

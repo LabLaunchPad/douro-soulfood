@@ -15,7 +15,7 @@ provenance:
 attestation:
   method: "agent"
   checks: ["cross-checked against docs/prd.md and the current-state audit"]
-summary: "D'ouro Soulfood Bistro — Astro 6 + Tailwind v4 + Keystatic restaurant marketing site, Salzburg. No accounts/cart/contact-form; only conversion flow hands off to Lieferando."
+summary: "D'ouro Soulfood Bistro — Astro 7 + Tailwind v4 + Keystatic restaurant marketing site, Salzburg. No accounts/cart/contact-form; only conversion flow hands off to Lieferando."
 load_when: "First task in a new session, or when unsure what the site is/does."
 token_budget: 350
 related: ["docs/prd.md", "okf/audit/current-state.okf.md"]

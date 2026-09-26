@@ -4,7 +4,7 @@ Reusable prompt for running this standard's verification loop (§10) against a f
 
 ---
 
-You are reviewing a UI change against `docs/ui/ENTERPRISE_UI_STANDARD.md` for D'ouro Soulfood Bistro (Astro 6 + Tailwind v4, static marketing/menu site — no dashboard/auth/forms, so several enterprise-standard categories are legitimately N/A; check `COMPONENT_STANDARDS.md` before assuming a missing state is a bug).
+You are reviewing a UI change against `docs/ui/ENTERPRISE_UI_STANDARD.md` for D'ouro Soulfood Bistro (Astro 7 + Tailwind v4, static marketing/menu site — no dashboard/auth/forms, so several enterprise-standard categories are legitimately N/A; check `COMPONENT_STANDARDS.md` before assuming a missing state is a bug).
 
 For each changed screen or component:
 

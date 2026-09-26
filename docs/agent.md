@@ -27,7 +27,7 @@ related: ["AGENTS.md"]
 ## Project Identity
 
 **What:** Restaurant website for D'ouro Soulfood Bistro, Salzburg, Austria
-**Stack:** Astro 6 + Tailwind CSS v4 + Keystatic CMS + Cloudflare Pages
+**Stack:** Astro 7 + Tailwind CSS v4 + Keystatic CMS + Cloudflare Pages
 **Design:** Apple iOS-inspired light theme with Brazilian gold warmth
 **Reference site:** talkintacos.net (structural/spacing reference only — D'ouro's own brand palette, fonts, and content)
 
@@ -80,7 +80,7 @@ public/
 - **ALWAYS** use the radius scale: `rounded-[var(--radius-md)]` or Tailwind classes
 - **ALWAYS** use the easing curves: `transition: all var(--duration-normal) var(--ease-spring)`
 
-### 2. Astro 6 Patterns
+### 2. Astro 7 Patterns
 - `.astro` components only — this site ships **zero client-side JS framework**. There is no React integration; do not add one without discussing it first. See `docs/adr/react-islands.md` for the full policy: Astro + vanilla `<script>` is the default for all interactivity, React-as-island is allowed only for a narrow, explicitly-approved set of cases, and it must never replace a working static component.
 - Use Astro's built-in `<Image />` component for optimized images.
 - Use content collections (`getCollection()`) for CMS-managed data — `menu_items` and `faq` are declared in `src/content.config.ts`. `settings` is read via a direct JSON import (`import siteSettings from '@/content/settings/default.json'`) since it's a singleton, not a collection.

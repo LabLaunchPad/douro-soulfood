@@ -3,7 +3,7 @@
 > Produced per `CLAUDE.md`'s `OUTCOME-000` — confirms or corrects the grounding truth against actual repo files. Every claim below was checked directly against the named file at the time of writing (`main`, commit `596b9fe` and earlier this session); nothing here is inferred from memory alone.
 
 ## 1. Stack — confirmed accurate
-- `package.json`: `astro@^6.4.8`, `@astrojs/cloudflare@^13.0.0`, `@astrojs/sitemap@^3.0.0`, `@keystatic/astro@^5.2.0`, `@keystatic/core@^0.5.50`, `tailwindcss@^4.0.0`, `@tailwindcss/vite@^4.0.0`. `engines.node: ">=22.12.0"`. `packageManager: pnpm@9.15.9`.
+- `package.json`: `astro@^7.3.5`, `@astrojs/cloudflare@^14.3.3`, `@astrojs/sitemap@^3.7.4`, `@keystatic/astro@^6.0.0`, `@keystatic/core@^0.6.9`, `tailwindcss@^4.3.3`, `@tailwindcss/vite@^4.3.3`. `engines.node: ">=22.12.0"`. `packageManager: pnpm@9.15.9`.
 - **No React** in `dependencies` or `devDependencies` — confirms `CLAUDE.md`'s premise that a React-island policy doesn't exist yet because React isn't installed at all (it was removed in an earlier cleanup pass; not merely "never added").
 - `devDependencies`: `@axe-core/playwright`, `@playwright/test`, `wrangler`, `prettier` (+ `prettier-plugin-astro`), `typescript`. No unit-test runner (Vitest/Jest) exists.
 - `astro.config.mjs`: `output: 'server'`, `@astrojs/cloudflare` adapter (`platformProxy: { enabled: true }`, `imageService: 'compile'`), `image.remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com' }]`, integrations `sitemap()` + `keystatic()`. No React integration registered.

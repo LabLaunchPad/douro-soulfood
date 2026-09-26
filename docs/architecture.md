@@ -27,7 +27,7 @@ related: [".ai/packs/architecture.okf.md"]
 
 | Layer | Choice | Rationale |
 |-------|--------|-----------|
-| Framework | Astro 6 | Content-first, Cloudflare-native, zero-JS by default |
+| Framework | Astro 7 | Content-first, Cloudflare-native, zero-JS by default |
 | Styling | Tailwind CSS v4 | Design token integration via `@theme`, JIT |
 | CMS | Keystatic | Git-backed, visual editing, Astro-native support |
 | Hosting | Cloudflare Pages / Workers | Free tier, edge CDN, zero cold starts |
@@ -41,7 +41,7 @@ related: [".ai/packs/architecture.okf.md"]
 
 ```
 ┌─────────────────────────────────────────┐
-│  Astro 6 — output: 'server'             │
+│  Astro 7 — output: 'server'             │
 │  (Cloudflare adapter, SSR-capable)      │
 │                                         │
 │  Prerendered (export const prerender    │

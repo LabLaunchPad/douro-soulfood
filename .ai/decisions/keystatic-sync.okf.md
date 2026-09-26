@@ -19,4 +19,4 @@ related: [".ai/packs/content-cms.okf.md"]
 
 # Decision: Keystatic/Astro schema sync is manual, always
 
-This is not automated and Astro v6 provides no built-in mechanism to keep these two files in sync — a schema drift bug (missing 5 fields on `menu_items`) was found and fixed once already in this repo's history. Any content-schema change task must update both files in the same change and verify by opening `/keystatic` and confirming an existing item's fields round-trip correctly, or by running `pnpm build` (which validates every content JSON file against the zod schema at build time).
+This is not automated and Astro v7 provides no built-in mechanism to keep these two files in sync — a schema drift bug (missing 5 fields on `menu_items`) was found and fixed once already in this repo's history. Any content-schema change task must update both files in the same change and verify by opening `/keystatic` and confirming an existing item's fields round-trip correctly, or by running `pnpm build` (which validates every content JSON file against the zod schema at build time).

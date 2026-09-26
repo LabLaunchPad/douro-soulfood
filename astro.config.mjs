@@ -38,7 +38,7 @@ export default defineConfig({
       // With one live locale, every path has exactly one entry in this map, so
       // @astrojs/sitemap's own `links.length <= 1` guard (generate-sitemap.js)
       // suppresses <xhtml:link rel="alternate"> for all of them — verified
-      // against the installed 3.7.2 source, not assumed. Adding a second live
+      // against the installed 3.7.4 source, not assumed. Adding a second live
       // locale (Phase 3) is what turns this on, automatically, for every path
       // that has a translated sibling — legal pages stay untouched since they
       // deliberately never get an `en` sibling page.
