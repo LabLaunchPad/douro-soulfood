@@ -44,7 +44,8 @@ const menuSchema = menuNode(
       name: item.data.title,
       description: item.data.description,
       priceInCents: item.data.price,
-      image: item.data.image ?? undefined,
+      // ImageMetadata has no URL form — JSON-LD needs the built file path.
+      image: item.data.image?.src,
       dietary: item.data.dietary,
       available: item.data.available,
     })),

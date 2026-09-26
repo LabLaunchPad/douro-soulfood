@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import FlagIcon from '@/components/ui/FlagIcon.astro';
 import { orderUrl as orderHref } from '@/lib/site';
 
@@ -13,7 +14,8 @@ interface Props {
   prepTimeEn?: string;
   allergens?: string[];
   addOns?: { label: string; price: number }[];
-  imageSrc?: string;
+  /** CMS photo (ImageMetadata) or a public/ fallback path (dev preview). */
+  imageSrc?: ImageMetadata | string;
   imageAlt?: string;
   available?: boolean;
   class?: string;
