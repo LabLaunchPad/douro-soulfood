@@ -108,8 +108,20 @@ const structuredData = noindex
          from Google's servers, so no visitor IP is sent to Google before
          consent. Preload the two default-weight files used above the fold
          to avoid a flash of fallback text. -->
-    <link rel="preload" href="/fonts/dm-sans-normal-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/fraunces-normal-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/dm-sans-normal-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/fraunces-normal-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <!-- schema.org @graph — exactly ONE ld+json block per page, built by
          src/lib/seo/graph.ts from the Keystatic settings singleton.
@@ -122,7 +134,9 @@ const structuredData = noindex
          src/integrations/csp-hashes.mjs and injected into dist/client/_headers
          — they are NOT hand-maintained, precisely because this content now
          varies with CMS edits. Verify with `pnpm build && pnpm check:csp`. -->
-    {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+    {structuredData && (
+      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    )}
 
     <!-- Lets a page add its own head tags (e.g. a preload for its LCP image). -->
     <slot name="head" />
@@ -130,7 +144,9 @@ const structuredData = noindex
     <!-- Reduced motion respect -->
     <style>
       @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
           animation-duration: 0.01ms !important;
           animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
@@ -157,4 +173,3 @@ const structuredData = noindex
     <MobileBottomBar />
   </body>
 </html>
-

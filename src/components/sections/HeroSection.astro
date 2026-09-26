@@ -1,5 +1,4 @@
 ---
-
 /**
  * HeroSection — Full-bleed hero with background image carousel,
  * headline overlay, and dual CTA buttons.
@@ -115,15 +114,17 @@ const heroImage = images[0];
           class="hidden md:block absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
         ></video>
       </>
-    ) : heroImage && (
-      <img
-        src={heroImage.src}
-        alt={heroImage.alt}
-        width={heroImage.width}
-        height={heroImage.height}
-        class="absolute inset-0 w-full h-full object-cover object-center"
-        loading="eager"
-      />
+    ) : (
+      heroImage && (
+        <img
+          src={heroImage.src}
+          alt={heroImage.alt}
+          width={heroImage.width}
+          height={heroImage.height}
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager"
+        />
+      )
     )}
     <!-- Gradient overlay: dark overlay for text contrast -->
     <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
@@ -143,9 +144,7 @@ const heroImage = images[0];
       </h1>
 
       {subheadline && (
-        <p class="text-base md:text-lg text-white/90 max-w-[52ch] leading-relaxed">
-          {subheadline}
-        </p>
+        <p class="text-base md:text-lg text-white/90 max-w-[52ch] leading-relaxed">{subheadline}</p>
       )}
 
       <!-- Desktop CTA buttons (Hidden on Mobile per reference layout) -->
@@ -161,8 +160,12 @@ const heroImage = images[0];
           <span class="flex items-center gap-1 whitespace-nowrap">{ctaPrimary.label}</span>
           <svg
             class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)]"
-            viewBox="0 0 256 256" fill="none" stroke="currentColor"
-            stroke-width="24" stroke-linecap="round" stroke-linejoin="round"
+            viewBox="0 0 256 256"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="24"
+            stroke-linecap="round"
+            stroke-linejoin="round"
             aria-hidden="true"
           >
             <line x1="70" y1="128" x2="216" y2="128" />
@@ -191,7 +194,13 @@ const heroImage = images[0];
            the one common next step those two buttons don't cover. -->
       {ctaSecondary && (
         <div class="flex md:hidden mt-4">
-          <Button href={ctaSecondary.href} variant="primary" size="lg" arrow class="w-full justify-center shadow-glow-gold">
+          <Button
+            href={ctaSecondary.href}
+            variant="primary"
+            size="lg"
+            arrow
+            class="w-full justify-center shadow-glow-gold"
+          >
             {ctaSecondary.label}
           </Button>
         </div>
@@ -226,7 +235,7 @@ const heroImage = images[0];
 
       const wantDesktop = desktopQuery.matches;
       const next = document.querySelector<HTMLVideoElement>(
-        `[data-hero-video="${wantDesktop ? 'desktop' : 'mobile'}"]`
+        `[data-hero-video="${wantDesktop ? 'desktop' : 'mobile'}"]`,
       );
       if (!next || next === activeVideo) return;
 

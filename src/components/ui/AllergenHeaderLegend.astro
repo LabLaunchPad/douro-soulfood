@@ -14,14 +14,14 @@ interface Props {
 const { allergens, class: className = '' } = Astro.props;
 
 const fullMap: Record<string, { codeDisplay: string; de: string; en: string }> = {
-  'A': { codeDisplay: 'A', de: 'Gluten', en: 'Gluten' },
-  'G': { codeDisplay: 'G/M', de: 'Milch', en: 'Milk' },
-  'M': { codeDisplay: 'G/M', de: 'Milch', en: 'Milk' },
+  A: { codeDisplay: 'A', de: 'Gluten', en: 'Gluten' },
+  G: { codeDisplay: 'G/M', de: 'Milch', en: 'Milk' },
+  M: { codeDisplay: 'G/M', de: 'Milch', en: 'Milk' },
   'G/M': { codeDisplay: 'G/M', de: 'Milch', en: 'Milk' },
-  'B': { codeDisplay: 'B', de: 'Krebstiere', en: 'Crustaceans' },
-  'R': { codeDisplay: 'R', de: 'Weichtiere', en: 'Molluscs' },
-  'E': { codeDisplay: 'E', de: 'Erdnüsse', en: 'Peanuts' },
-  'F': { codeDisplay: 'F', de: 'Soja', en: 'Soy' },
+  B: { codeDisplay: 'B', de: 'Krebstiere', en: 'Crustaceans' },
+  R: { codeDisplay: 'R', de: 'Weichtiere', en: 'Molluscs' },
+  E: { codeDisplay: 'E', de: 'Erdnüsse', en: 'Peanuts' },
+  F: { codeDisplay: 'F', de: 'Soja', en: 'Soy' },
 };
 
 /** Default global list if no section filter is passed */
@@ -46,15 +46,32 @@ if (allergens && allergens.length > 0) {
 const itemsToRender = activeKeys
   .map((k) => fullMap[k])
   .filter(Boolean)
-  .filter((item, index, self) => index === self.findIndex((t) => t.codeDisplay === item.codeDisplay));
+  .filter(
+    (item, index, self) => index === self.findIndex((t) => t.codeDisplay === item.codeDisplay),
+  );
 ---
 
-<div class:list={['w-full bg-(--color-bistro-paper) border border-(--color-bistro-paper-border) rounded-sm p-3.5 sm:p-4 shadow-sm', className]}>
+<div
+  class:list={[
+    'w-full bg-(--color-bistro-paper) border border-(--color-bistro-paper-border) rounded-sm p-3.5 sm:p-4 shadow-sm',
+    className,
+  ]}
+>
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
     {/* Label Header with Info Icon */}
     <div class="flex items-center gap-2 shrink-0 font-serif font-bold text-xs uppercase tracking-wider text-(--color-bistro-ink)">
-      <svg class="w-4 h-4 text-(--color-bistro-banner-border) shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <svg
+        class="w-4 h-4 text-(--color-bistro-banner-border) shrink-0"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
       </svg>
       <span>ALLERGENE / ALLERGENS:</span>
     </div>
@@ -79,11 +96,17 @@ const itemsToRender = activeKeys
     <div class="max-w-6xl mx-auto pt-2.5 mt-2.5 border-t border-(--color-bistro-paper-border)/70 flex flex-col lg:flex-row items-center justify-between gap-x-6 gap-y-1 text-xs text-(--color-bistro-muted) font-sans italic text-center lg:text-left leading-snug">
       <p class="flex items-center gap-1.5 justify-center lg:justify-start">
         <FlagIcon lang="de" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
-        <span>Fragen Sie unser Team nach detaillierten Informationen zu Allergenen und Zutaten. Alle Preise inkl. MwSt. Änderungen und Irrtümer vorbehalten.</span>
+        <span>
+          Fragen Sie unser Team nach detaillierten Informationen zu Allergenen und Zutaten. Alle
+          Preise inkl. MwSt. Änderungen und Irrtümer vorbehalten.
+        </span>
       </p>
       <p class="flex items-center gap-1.5 justify-center lg:justify-start">
         <FlagIcon lang="uk" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
-        <span>Please ask our team for detailed information regarding allergens and ingredients. All prices incl. VAT. Subject to changes and errors.</span>
+        <span>
+          Please ask our team for detailed information regarding allergens and ingredients. All
+          prices incl. VAT. Subject to changes and errors.
+        </span>
       </p>
     </div>
   )}

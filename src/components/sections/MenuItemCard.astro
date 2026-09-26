@@ -67,9 +67,10 @@ const formatPrice = (cents: number): string => {
   }).format(euros);
 };
 
-const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
-  ? `${formatPrice(priceVariants.nonAlcoholic)} / ${formatPrice(priceVariants.alcoholic)}`
-  : formatPrice(priceInCents);
+const displayPrice =
+  priceVariants?.nonAlcoholic && priceVariants?.alcoholic
+    ? `${formatPrice(priceVariants.nonAlcoholic)} / ${formatPrice(priceVariants.alcoholic)}`
+    : formatPrice(priceInCents);
 ---
 
 {imageSrc ? (
@@ -86,7 +87,13 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
     ]}
   >
     {/* Entire Card Clickable Link */}
-    <a href={orderHref} target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-30" aria-label={`Jetzt ${name} bestellen`}></a>
+    <a
+      href={orderHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="absolute inset-0 z-30"
+      aria-label={`Jetzt ${name} bestellen`}
+    ></a>
 
     {/* Badges Overlay Container */}
     <div class="absolute top-3 inset-x-3 z-30 flex items-center justify-between pointer-events-none">
@@ -94,7 +101,9 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
         <span class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold rounded-full bg-black/75 text-amber-300 border border-amber-500/40 backdrop-blur-md">
           ⏱️ {prepTime}
         </span>
-      ) : <div />}
+      ) : (
+        <div />
+      )}
 
       {featured && (
         <span class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-full bg-brand-gold/90 text-brand-espresso shadow-md backdrop-blur-xs font-display uppercase tracking-wider">
@@ -126,7 +135,9 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
     {/* Availability Banner */}
     {!available && (
       <div class="absolute inset-0 z-20 bg-surface-primary/70 flex items-center justify-center backdrop-blur-xs">
-        <span class="text-sm font-semibold text-text-tertiary uppercase tracking-wider">Nicht verfügbar</span>
+        <span class="text-sm font-semibold text-text-tertiary uppercase tracking-wider">
+          Nicht verfügbar
+        </span>
       </div>
     )}
 
@@ -147,7 +158,10 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
         </span>
       </div>
 
-      <p class="text-xs md:text-sm text-text-secondary leading-relaxed line-clamp-2" style="color: rgba(255, 255, 255, 0.85);">
+      <p
+        class="text-xs md:text-sm text-text-secondary leading-relaxed line-clamp-2"
+        style="color: rgba(255, 255, 255, 0.85);"
+      >
         {description}
       </p>
 
@@ -163,8 +177,12 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
 
       {(dietary.length > 0 || allergens.length > 0) && (
         <div class="flex flex-wrap items-center gap-1.5 mt-1 pt-1 border-t border-white/10">
-          {dietary.map((tag) => <DietaryBadge tag={tag} />)}
-          {allergens.map((code) => <AllergenBadge code={code} />)}
+          {dietary.map((tag) => (
+            <DietaryBadge tag={tag} />
+          ))}
+          {allergens.map((code) => (
+            <AllergenBadge code={code} />
+          ))}
         </div>
       )}
     </div>
@@ -184,7 +202,13 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
     ]}
   >
     {/* Entire Card Clickable Link */}
-    <a href={orderHref} target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-30" aria-label={`Jetzt ${name} bestellen`}></a>
+    <a
+      href={orderHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="absolute inset-0 z-30"
+      aria-label={`Jetzt ${name} bestellen`}
+    ></a>
 
     {/* Top Row: Name + Price + Featured/Prep */}
     <div class="flex flex-col gap-2">
@@ -204,11 +228,7 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
           <span class="text-base md:text-lg font-bold text-brand-gold-ink whitespace-nowrap px-2.5 py-1 rounded bg-surface-elevated border border-brand-gold/30">
             {displayPrice}
           </span>
-          {prepTime && (
-            <span class="text-[11px] font-medium text-amber-300/90">
-              ⏱️ {prepTime}
-            </span>
-          )}
+          {prepTime && <span class="text-[11px] font-medium text-amber-300/90">⏱️ {prepTime}</span>}
         </div>
       </div>
 
@@ -232,8 +252,12 @@ const displayPrice = priceVariants?.nonAlcoholic && priceVariants?.alcoholic
 
       {(dietary.length > 0 || allergens.length > 0) && (
         <div class="flex flex-wrap items-center gap-1.5">
-          {dietary.map((tag) => <DietaryBadge tag={tag} />)}
-          {allergens.map((code) => <AllergenBadge code={code} />)}
+          {dietary.map((tag) => (
+            <DietaryBadge tag={tag} />
+          ))}
+          {allergens.map((code) => (
+            <AllergenBadge code={code} />
+          ))}
         </div>
       )}
     </div>
