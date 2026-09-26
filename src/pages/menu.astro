@@ -10,6 +10,15 @@ import AllergenHeaderLegend from '@/components/ui/AllergenHeaderLegend.astro';
 import CategoryIcon from '@/components/ui/CategoryIcon.astro';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import showcaseQuesadillas from '@/assets/menu/Quesadillas.webp';
+import showcaseQuesadillas2 from '@/assets/menu/quesdillas2.webp';
+import showcaseQuesadillas3 from '@/assets/menu/ques3.webp';
+import showcaseTacos1 from '@/assets/menu/tacos1.webp';
+import showcaseTacos2 from '@/assets/menu/tacos2.webp';
+import showcaseTacos3 from '@/assets/menu/tacos3.webp';
+import showcaseBowl1 from '@/assets/menu/bowl1.webp';
+import showcaseBowl2 from '@/assets/menu/bowl2.webp';
+import showcaseBowl3 from '@/assets/menu/bowl3.webp';
 import { categoryConfig, drinkSubLabels, getSortedGroupedMenu, type DietaryTag } from '@/lib/menu';
 import { menuNode } from '@/lib/seo/graph';
 
@@ -226,7 +235,7 @@ const menuSchema = menuNode(
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
               <div class="aspect-square rounded-md overflow-hidden shadow-inner bg-(--color-bistro-placeholder)">
                 <Image
-                  src="/images/menu/Quesadillas.webp"
+                  src={showcaseQuesadillas}
                   alt="Drei goldbraun gebackene Quesadillas mit Hähnchen, Käse und Paprika auf schwarzer Platte, dazu Dip und Salat"
                   width={1254}
                   height={1254}
@@ -236,7 +245,7 @@ const menuSchema = menuNode(
               </div>
               <div class="aspect-square rounded-md overflow-hidden shadow-inner bg-(--color-bistro-placeholder)">
                 <Image
-                  src="/images/menu/quesdillas2.webp"
+                  src={showcaseQuesadillas2}
                   alt="Quesadillas im Anschnitt: geschmolzener Käse mit Hähnchen und Paprika, serviert mit Salat und Dip"
                   width={2048}
                   height={2048}
@@ -246,7 +255,7 @@ const menuSchema = menuNode(
               </div>
               <div class="aspect-square rounded-md overflow-hidden shadow-inner bg-(--color-bistro-placeholder)">
                 <Image
-                  src="/images/menu/ques3.webp"
+                  src={showcaseQuesadillas3}
                   alt="Quesadillas von oben, daneben ein Schälchen Chipotle-Dip mit Koriander und ein frischer Salat"
                   width={2048}
                   height={2048}
@@ -304,7 +313,7 @@ const menuSchema = menuNode(
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-(--color-bistro-placeholder)">
                 <Image
-                  src="/images/menu/tacos1.webp"
+                  src={showcaseTacos1}
                   alt="Drei Tacos mit geschmortem Rindfleisch, Guacamole, roten Zwiebeln und heller Sauce"
                   width={1254}
                   height={1254}
@@ -314,7 +323,7 @@ const menuSchema = menuNode(
               </div>
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-(--color-bistro-placeholder)">
                 <Image
-                  src="/images/menu/tacos2.webp"
+                  src={showcaseTacos2}
                   alt="Drei Tacos mit gegrilltem Hähnchen, Kichererbsen, Guacamole und heller Sauce"
                   width={1254}
                   height={1254}
@@ -324,7 +333,7 @@ const menuSchema = menuNode(
               </div>
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-(--color-bistro-placeholder)">
                 <Image
-                  src="/images/menu/tacos3.webp"
+                  src={showcaseTacos3}
                   alt="Zwei Tacos mit Garnelen, Guacamole, Mais und heller Sauce auf schwarzer Platte"
                   width={1254}
                   height={1254}
@@ -385,7 +394,7 @@ const menuSchema = menuNode(
             <div class="grid grid-cols-3 gap-3 sm:gap-4">
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-(--color-bistro-placeholder)">
                 <Image
-                  src="/images/menu/bowl1.webp"
+                  src={showcaseBowl1}
                   alt="Bowl mit gewürztem Hackfleisch, Guacamole, Tomaten, Mais, schwarzen Bohnen und Salat"
                   width={1254}
                   height={1254}
@@ -396,7 +405,7 @@ const menuSchema = menuNode(
               </div>
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-(--color-bistro-placeholder)">
                 <Image
-                  src="/images/menu/bowl2.webp"
+                  src={showcaseBowl2}
                   alt="Bowl mit Garnelen, Avocadocreme, Tomaten, schwarzen Bohnen, Rotkohl und Sprossen"
                   width={1254}
                   height={1254}
@@ -407,7 +416,7 @@ const menuSchema = menuNode(
               </div>
               <div class="w-full aspect-square rounded-md overflow-hidden shadow-inner bg-(--color-bistro-placeholder)">
                 <Image
-                  src="/images/menu/bowl3.webp"
+                  src={showcaseBowl3}
                   alt="Bowl mit geschmortem Fleisch, Käsestreifen, Guacamole, Sauerrahm, Tomatensalsa und schwarzen Bohnen"
                   width={1254}
                   height={1254}

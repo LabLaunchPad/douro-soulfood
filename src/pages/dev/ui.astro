@@ -19,6 +19,8 @@ import MenuItemCard from '@/components/sections/MenuItemCard.astro';
 import MenuBistroCard from '@/components/sections/MenuBistroCard.astro';
 import FeatureCard from '@/components/sections/FeatureCard.astro';
 import HeroSection from '@/components/sections/HeroSection.astro';
+import previewEvent from '@/assets/catering/event.webp';
+import previewHeroFallback from '@/assets/hero/hero-fallback.jpg';
 
 if (!import.meta.env.DEV) {
   return new Response(null, { status: 404 });
@@ -167,7 +169,7 @@ if (!import.meta.env.DEV) {
         title="Firmenevents"
         description="Von Team-Lunches bis Firmenfeiern — unsere Catering-Pakete passen sich Ihren Bedürfnissen an."
         image={{
-          src: '/images/catering/event.webp',
+          src: previewEvent,
           alt: 'Firmenevent Catering',
           width: 800,
           height: 600,
@@ -194,7 +196,7 @@ if (!import.meta.env.DEV) {
           videoSrc={undefined}
           images={[
             {
-              src: '/images/hero-fallback.jpg',
+              src: previewHeroFallback,
               alt: 'Preview image',
               width: 800,
               height: 450,

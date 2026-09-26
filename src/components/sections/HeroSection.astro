@@ -10,10 +10,13 @@
  * Zero hex codes. All colors from tokens.css @theme.
  */
 
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Button from '@/components/ui/Button.astro';
+import defaultPoster from '@/assets/hero/hero-fallback-1280.webp';
 
 interface HeroImage {
-  src: string;
+  src: ImageMetadata;
   alt: string;
   width: number;
   height: number;
@@ -63,7 +66,7 @@ const {
   videoSrc = '/douroherovideo.mp4',
   videoSrcMobile = '/douroheromobile.mp4',
   images = [],
-  poster = '/images/hero-fallback-1280.webp',
+  poster = defaultPoster.src,
   ctaPrimary,
   ctaSecondary,
 } = Astro.props;
@@ -116,7 +119,7 @@ const heroImage = images[0];
       </>
     ) : (
       heroImage && (
-        <img
+        <Image
           src={heroImage.src}
           alt={heroImage.alt}
           width={heroImage.width}

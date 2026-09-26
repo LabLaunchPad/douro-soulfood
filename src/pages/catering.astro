@@ -5,6 +5,8 @@ import Base from '@/layouts/Base.astro';
 import NavBar from '@/components/layout/NavBar.astro';
 import Footer from '@/components/layout/Footer.astro';
 import FeatureCard from '@/components/sections/FeatureCard.astro';
+import cateringEvent from '@/assets/catering/event.webp';
+import cateringPrivate from '@/assets/catering/private.webp';
 ---
 
 <Base
@@ -28,7 +30,7 @@ import FeatureCard from '@/components/sections/FeatureCard.astro';
     title="Firmenevents"
     description="Von Team-Lunches bis Firmenfeieren — unsere Catering-Pakete passen sich Ihren Bedürfnissen an."
     image={{
-      src: '/images/catering/event.webp',
+      src: cateringEvent,
       alt: 'Firmenevent Catering',
       width: 800,
       height: 600,
@@ -40,7 +42,7 @@ import FeatureCard from '@/components/sections/FeatureCard.astro';
     title="Private Feiern"
     description="Geburtstage, Hochzeiten, Familientreffen — wir bringen Soul Food direkt zu Ihnen."
     image={{
-      src: '/images/catering/private.webp',
+      src: cateringPrivate,
       alt: 'Private Feiern Catering',
       width: 800,
       height: 600,
