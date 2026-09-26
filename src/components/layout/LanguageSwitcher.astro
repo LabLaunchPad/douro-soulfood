@@ -14,14 +14,12 @@ import { LIVE_LOCALES, LOCALE_REGISTRY } from '@/lib/i18n/locales';
 const liveLocales = LOCALE_REGISTRY.filter((l) => LIVE_LOCALES.includes(l.code));
 ---
 
-{
-  liveLocales.length >= 2 && (
-    <nav aria-label="Sprache wählen" class="flex items-center gap-2">
-      {liveLocales.map((locale) => (
-        <a href={`/${locale.code}/`} hreflang={locale.code} class="text-sm no-underline">
-          {locale.label}
-        </a>
-      ))}
-    </nav>
-  )
-}
+{liveLocales.length >= 2 && (
+  <nav aria-label="Sprache wählen" class="flex items-center gap-2">
+    {liveLocales.map((locale) => (
+      <a href={`/${locale.code}/`} hreflang={locale.code} class="text-sm no-underline">
+        {locale.label}
+      </a>
+    ))}
+  </nav>
+)}

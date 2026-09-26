@@ -12,4 +12,6 @@ interface Props {
 const { lang, class: className = '' } = Astro.props;
 ---
 
-<svg class:list={['shrink-0', className]} aria-hidden="true"><use href={`#flag-${lang}`} /></svg>
+<svg class:list={['shrink-0', className]} aria-hidden="true">
+  <use href={`#flag-${lang}`} />
+</svg>
