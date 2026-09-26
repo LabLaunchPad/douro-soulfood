@@ -21,6 +21,8 @@ import FeatureCard from '@/components/sections/FeatureCard.astro';
 import HeroSection from '@/components/sections/HeroSection.astro';
 import previewEvent from '@/assets/catering/event.webp';
 import previewHeroFallback from '@/assets/hero/hero-fallback.jpg';
+import previewFeijoada from '@/assets/menu/feijoada.webp';
+import previewCoxinha from '@/assets/menu/coxinha.webp';
 
 if (!import.meta.env.DEV) {
   return new Response(null, { status: 404 });
@@ -116,7 +118,7 @@ if (!import.meta.env.DEV) {
           allergens={['G']}
           prepTime="20 min"
           featured
-          imageSrc="/images/menu/feijoada.webp"
+          imageSrc={previewFeijoada}
           imageAlt="Feijoada Brasileira"
           imageWidth={300}
           imageHeight={300}
@@ -133,7 +135,7 @@ if (!import.meta.env.DEV) {
           description="Demonstrates the !available overlay."
           priceInCents={890}
           available={false}
-          imageSrc="/images/menu/coxinha.webp"
+          imageSrc={previewCoxinha}
           imageWidth={300}
           imageHeight={300}
         />
