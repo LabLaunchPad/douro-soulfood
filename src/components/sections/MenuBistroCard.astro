@@ -48,7 +48,8 @@ const formatPrice = (cents: number): string => {
 const formattedPrice = formatPrice(priceInCents);
 
 /** Dual price display for items with alcoholic/non-alcoholic variants */
-const hasDualPrice = priceVariants?.nonAlcoholic !== undefined && priceVariants?.alcoholic !== undefined;
+const hasDualPrice =
+  priceVariants?.nonAlcoholic !== undefined && priceVariants?.alcoholic !== undefined;
 const dualPriceDisplay = hasDualPrice
   ? `${formatPrice(priceVariants!.nonAlcoholic!)} / ${formatPrice(priceVariants!.alcoholic!)}`
   : null;
@@ -107,11 +108,15 @@ const allergenString = allergens.length > 0 ? `(${allergens.join(', ')})` : '';
             <div class="flex flex-col items-end gap-0.5">
               <div class="flex items-center gap-1">
                 <FlagIcon lang="de" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
-                <span class="text-[11px] text-(--color-bistro-muted) font-sans font-medium tracking-wide whitespace-nowrap">ohne / mit Alkohol</span>
+                <span class="text-[11px] text-(--color-bistro-muted) font-sans font-medium tracking-wide whitespace-nowrap">
+                  ohne / mit Alkohol
+                </span>
               </div>
               <div class="flex items-center gap-1">
                 <FlagIcon lang="uk" class="w-3.5 h-2.5 rounded-[2px] shadow-xs" />
-                <span class="text-[11px] text-(--color-bistro-muted) font-sans font-medium tracking-wide whitespace-nowrap">non-alc. / alcoholic</span>
+                <span class="text-[11px] text-(--color-bistro-muted) font-sans font-medium tracking-wide whitespace-nowrap">
+                  non-alc. / alcoholic
+                </span>
               </div>
             </div>
           </div>
