@@ -10,6 +10,7 @@
 import { Image } from 'astro:assets';
 import MobileNavDrawer from './MobileNavDrawer.astro';
 import { NAV_LINKS, type NavLink } from '@/lib/nav';
+import { orderUrl } from '@/lib/site';
 import brandLogo from '@/assets/brand/dourologo.webp';
 import { t } from '@/lib/i18n/ui';
 
@@ -22,7 +23,7 @@ interface Props {
 
 const {
   links = NAV_LINKS,
-  ctaPrimary = { label: 'Jetzt bestellen', href: 'https://www.lieferando.at/en/menu/douro' },
+  ctaPrimary = { label: 'Jetzt bestellen', href: orderUrl },
   ctaSecondary = { label: 'Reservierung', href: '/contact' },
   class: className = '',
 } = Astro.props;

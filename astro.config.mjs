@@ -39,8 +39,9 @@ export default defineConfig({
     react(),
     sitemap({
       // Exclude the internal /dev/ui component-preview route (404s outside
-      // dev mode anyway, but it shouldn't appear in the sitemap regardless).
-      filter: (page) => !page.includes('/dev/'),
+      // dev mode anyway, but it shouldn't appear in the sitemap regardless)
+      // and the /keystatic/ admin route (no public content, robots-disallowed).
+      filter: (page) => !page.includes('/dev/') && !page.includes('/keystatic/'),
       // With one live locale, every path has exactly one entry in this map, so
       // @astrojs/sitemap's own `links.length <= 1` guard (generate-sitemap.js)
       // suppresses <xhtml:link rel="alternate"> for all of them — verified

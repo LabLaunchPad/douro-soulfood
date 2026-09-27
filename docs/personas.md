@@ -38,7 +38,7 @@ Three personas, each used to answer "would this decision make sense to this pers
 - English or German speaking, visiting Salzburg short-term, looking for something other than traditional Austrian cuisine.
 - Needs the menu translated (most `menu_items` entries carry `descriptionEn`, per `keystatic.config.ts`/`src/content.config.ts`), the address in a form Google Maps understands, and photos to build trust before walking in.
 - Primary journeys: `/menu` (browsing with dietary/allergen filters — `AllergenHeaderLegend.astro`, `DietaryBadge.astro`), the home page's photo grids (`PhotoGrid.astro` instances for "Beliebte Gerichte"/"Galerie"), and the consent-gated `MapEmbed.astro` for wayfinding.
-- What matters: allergen transparency (a legal/trust requirement in Austria, not just UX — see `docs/security.md` for the DSGVO angle) and the review badge (`ReviewBadge.astro`, 4.8★/978 reviews) as a trust signal for someone with no prior relationship to the restaurant.
+- What matters: allergen transparency (a legal/trust requirement in Austria, not just UX — see `docs/security.md` for the DSGVO angle) and the review badge (`ReviewBadge.astro`, 4.7★/1,224 Google reviews, Stand September 2026) as a trust signal for someone with no prior relationship to the restaurant.
 
 ### Delivery-Platform Discoverer — "Lieferando-Nutzer" (tertiary)
 - Finds D'ouro via Lieferando's own listing first, not this website.

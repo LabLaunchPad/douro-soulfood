@@ -3,6 +3,10 @@
  * UserReviews — Premium testimonial section displaying guest reviews.
  * Displays: 5-star ratings, testimonial text, reviewer names, avatars (initials), and review source.
  * Styled using the project's glassmorphism and gold branding tokens.
+ *
+ * ponytail: sources stay generic ("Gast") until reviews move to Keystatic with
+ * URL + date + consent. Never attribute these hardcoded quotes to Google or
+ * TripAdvisor — unverifiable provenance must not wear a platform's name.
  */
 
 interface Review {
@@ -27,19 +31,19 @@ const {
   reviews = [
     {
       name: 'Lukas M.',
-      source: 'Google Review',
+      source: 'Gast',
       rating: 5,
       text: 'Das beste Afro-Latin Food in Salzburg! Die Beef Tacos und die Caipirinha sind einfach weltklasse. Super Atmosphäre und Angela ist extrem herzlich.',
     },
     {
       name: 'Amara K.',
-      source: 'TripAdvisor',
+      source: 'Gast',
       rating: 5,
       text: 'Angelas Essen ist voller Geschmack und mit viel Liebe gekocht. Der Fufu und die Egusi-Suppe haben mich direkt nach Westafrika zurückversetzt. Ein absolutes Juwel in der Stadt!',
     },
     {
       name: 'Sophie B.',
-      source: 'Google Review',
+      source: 'Gast',
       rating: 5,
       text: 'Wir haben das Catering für eine Firmenfeier gebucht und alle waren restlos begeistert. Unglaublich leckeres Essen, frische Zutaten und toller Service!',
     },

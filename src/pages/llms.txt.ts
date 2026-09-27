@@ -34,7 +34,7 @@ export const GET: APIRoute = async () => {
 
   const body = `# ${settings.site_name}
 
-> ${settings.tagline}. Afro-lateinamerikanisches Bistro in Salzburg, Österreich. Gegründet von Angela, die alle Gerichte selbst kocht.
+> ${settings.tagline}. Afro-lateinamerikanisches Bistro in Salzburg, Österreich. Angelas Küche — sie kocht alle Gerichte selbst.
 
 Alle Inhalte dieser Website sind auf Deutsch (de-AT). Die Speisekarte führt zusätzlich englische Gerichtbeschreibungen.
 
@@ -45,7 +45,7 @@ Alle Inhalte dieser Website sind auf Deutsch (de-AT). Die Speisekarte führt zus
 - **Öffnungszeiten:** ${formatHoursSummary(hours)} (Zeitzone Europe/Vienna)
 - **Telefon:** ${settings.phone}
 - **E-Mail:** ${settings.email}
-- **Preisniveau:** €€
+- **Preise:** Alle Gerichte stehen mit Preisen auf der Speisekarte (/menu/).
 - **Bestellen/Liefern:** über Lieferando — ${orderUrl}
 - **Abholung:** ja, direkt im Bistro
 - **Reservierung:** telefonisch unter ${settings.phone} oder ohne Voranmeldung vorbeikommen. Es gibt kein Online-Reservierungsformular.

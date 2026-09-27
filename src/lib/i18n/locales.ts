@@ -6,7 +6,8 @@
  * entry, not a runtime check, that keeps a locale from shipping. Nothing in
  * this codebase should ever render a link, a <link rel="alternate">, or a
  * language-switcher entry for a locale that isn't in this array — see
- * `Base.astro`'s hreflang block and `LanguageSwitcher.astro`.
+ * `Base.astro`'s head block (canonical/og:locale; hreflang is intentionally
+ * absent while only one locale is live) and `LanguageSwitcher.astro`.
  *
  * Astro's own `i18n.locales` config (astro.config.mjs) is kept in lockstep
  * with `LIVE_LOCALES`, not with `LOCALE_REGISTRY` below — a locale only
@@ -16,7 +17,7 @@
  * 404, which is worse than not having the code path at all.
  */
 
-export type LocaleStatus = 'live' | 'planned';
+export type LocaleStatus = 'live' | 'planned' | 'translation_ready' | 'qa_ready';
 
 export interface LocaleEntry {
   /** BCP-47 tag, matching astro.config.mjs's `i18n.locales` once live. */
@@ -49,8 +50,8 @@ export const LOCALE_REGISTRY: readonly LocaleEntry[] = [
     blockedBy: 'No Chinese content exists in any form. Registry entry only, per docs/i18n.md.',
   },
   {
-    code: 'pt',
-    label: 'Português',
+    code: 'pt-BR',
+    label: 'Português (Brasil)',
     status: 'planned',
     blockedBy: 'No Portuguese content exists in any form. Registry entry only, per docs/i18n.md.',
   },

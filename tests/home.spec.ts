@@ -53,9 +53,9 @@ test.describe('Home page — content & visibility', () => {
     await expect(page).toHaveURL(/\/menu/);
   });
 
-  test('4.8 star review badge is visible', async ({ page }) => {
+  test('4.7 star review badge is visible', async ({ page }) => {
     // ReviewBadge component uses aria-label containing the rating
-    const reviewBadge = page.locator('[aria-label*="4.8"]');
+    const reviewBadge = page.locator('[aria-label*="4.7"]');
     await expect(reviewBadge).toBeVisible();
 
     // Verify the numeric rating is actually rendered as visible text.
@@ -63,7 +63,7 @@ test.describe('Home page — content & visibility', () => {
     // to require `.text-brand-gold` and silently went stale when the token was
     // changed to `text-brand-gold-ink` for AA contrast. Google's review-snippet
     // policy cares that the rating is visible, not which class paints it.
-    await expect(reviewBadge).toContainText('4.8');
+    await expect(reviewBadge).toContainText('4.7');
   });
 
   test('featured dishes section shows "Empfehlungen" heading', async ({ page }) => {

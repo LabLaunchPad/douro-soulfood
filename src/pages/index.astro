@@ -37,7 +37,7 @@ import gallery8 from '@/assets/gallery/8.webp';
 import gallery9 from '@/assets/gallery/9.webp';
 import cateringEvent from '@/assets/catering/event.webp';
 import cateringPrivate from '@/assets/catering/private.webp';
-import { settings as siteSettings, phoneHref, absoluteUrl, hours as parsedHours } from '@/lib/site';
+import { settings as siteSettings, phoneHref, absoluteUrl, hours as parsedHours, orderUrl } from '@/lib/site';
 import { formatHoursSummary, toClientHours } from '@/lib/hours';
 import { faqNode } from '@/lib/seo/graph';
 
@@ -245,14 +245,18 @@ const PAGE_DESCRIPTION =
     aria-label="Bewertungen"
   >
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
+      {/*
+        ponytail: rating/count are the current Google values (Stand September 2026),
+        presentational only — never mirrored into JSON-LD (see graph.ts note).
+      */}
       <ReviewBadge
-        rating={4.8}
-        reviewCount={978}
+        rating={4.7}
+        reviewCount={1224}
         source="Google Reviews"
-        href="https://www.google.com/maps/search/?api=1&query=Auerspergstra%C3%9Fe+10%2C+5020+Salzburg%2C+Austria"
+        href="https://www.google.com/maps/search/?api=1&query=D%27ouro+Soulfood+Bistro+Auerspergstra%C3%9Fe+10+5020+Salzburg&query_place_id=ChIJZ5K9XxaRdkcRtUZhEVaeRPo"
         size="lg"
       />
-      <span class="text-text-tertiary text-sm">Google Reviews</span>
+      <span class="text-text-tertiary text-sm">Google Reviews · Stand: September 2026</span>
     </div>
   </section>
 
@@ -533,7 +537,9 @@ const PAGE_DESCRIPTION =
                 {hoursSummary}
               </span>
             </div>
-            <Button href="/menu" variant="primary" size="sm" class="shadow-glow-gold">
+            {/* ponytail: this IS the order handoff (Lieferando) — the label must stay
+                "Jetzt bestellen" only while the href is the order URL, not /menu. */}
+            <Button href={orderUrl} target="_blank" rel="noopener noreferrer" variant="primary" size="sm" class="shadow-glow-gold">
               Jetzt bestellen
             </Button>
           </div>
