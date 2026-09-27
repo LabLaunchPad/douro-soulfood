@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
 import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -31,6 +32,11 @@ export default defineConfig({
   },
 
   integrations: [
+    // Scoped React island support for the Keystatic admin UI only
+    // (`keystatic-astro-page.astro` renders `<Keystatic client:only="react" />`).
+    // Approved exception to the Astro-default policy — see docs/adr/react-islands.md.
+    // No site component uses React; public pages ship zero React JS.
+    react(),
     sitemap({
       // Exclude the internal /dev/ui component-preview route (404s outside
       // dev mode anyway, but it shouldn't appear in the sitemap regardless).
