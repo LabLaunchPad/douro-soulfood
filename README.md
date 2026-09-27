@@ -16,7 +16,9 @@ pnpm dev
 
 # Open browser
 # Site: http://localhost:8788
-# CMS:  http://localhost:8788/keystatic
+# CMS:  edit via production /keystatic (Keystatic Cloud) or direct JSON —
+#       local dev runs in workerd, which has no filesystem, so Keystatic
+#       local storage cannot serve the admin UI in dev (see keystatic.config.ts)
 ```
 
 ## Stack
