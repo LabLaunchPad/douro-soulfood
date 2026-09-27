@@ -192,15 +192,17 @@ export function formatHoursSummary(parsed: ParsedHours): string {
 }
 
 /**
- * schema.org `OpeningHoursSpecification[]`. Closed days are emitted explicitly
- * so a crawler learns Sunday is a rest day rather than merely unlisted.
+ * schema.org `OpeningHoursSpecification[]`. Closed days are omitted entirely:
+ * that is Google's documented convention (a day with no entry is understood as
+ * closed), while `opens: 00:00 / closes: 00:00` reads as a zero-length window
+ * and gets flagged by validators.
  */
 export function toOpeningHoursSpecification(parsed: ParsedHours) {
   return groupConsecutive(parsed.entries).flatMap((group) => {
     const dayOfWeek = group.map((e) => SCHEMA_DAY[e.dayIndex]);
 
     if (group[0].closed) {
-      return [{ '@type': 'OpeningHoursSpecification', dayOfWeek, opens: '00:00', closes: '00:00' }];
+      return [];
     }
 
     return group[0].ranges.map((range) => ({

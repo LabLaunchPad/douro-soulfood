@@ -35,19 +35,14 @@ import { toOpeningHoursSpecification } from '@/lib/hours';
  */
 
 /**
- * Google's aggregate rating, as already displayed by `ReviewBadge` on the
- * homepage (which is what satisfies Google's "must be visible" requirement).
- *
- * Carried over verbatim from the previous hardcoded `Base.astro` block so this
- * refactor doesn't silently drop an existing signal. Two open questions for the
- * business before this should be considered settled — see `docs/seo.md`:
- *   1. Are 4.8 / 978 still current?
- *   2. Is marking up a third-party (Google) aggregate as the restaurant's own
- *      `aggregateRating` acceptable under Google's review-snippet policy?
- * If it stays, these belong in the Keystatic `settings` singleton so they can be
- * refreshed without a code change.
+ * NOTE (2026-09-27): no `aggregateRating` is emitted on purpose. The previous
+ * value (Google's 4.8/978) was a third-party aggregate marked up as the
+ * restaurant's own, which Google's review-snippet policy does not allow for a
+ * business's own pages — at ANY value, so "correcting" it to the current
+ * Google 4.7/1,224 would not fix the violation. The visible homepage badge
+ * carries the current Google rating as presentational social proof instead.
+ * See `docs/seo.md`.
  */
-const AGGREGATE_RATING = { value: '4.8', count: '978', best: '5' };
 
 /** Stable `@id`s. Fragment-on-homepage is the conventional pattern. */
 const ids = (site: URL | undefined) => ({
@@ -112,12 +107,6 @@ function restaurantNode(site: URL | undefined) {
     ...(settings.google_maps_url ? { hasMap: settings.google_maps_url } : {}),
     ...(sameAs.length > 0 ? { sameAs } : {}),
     hasMenu: id.menu,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: AGGREGATE_RATING.value,
-      reviewCount: AGGREGATE_RATING.count,
-      bestRating: AGGREGATE_RATING.best,
-    },
     // The only ordering path is the external Lieferando handoff.
     potentialAction: {
       '@type': 'OrderAction',
@@ -262,7 +251,7 @@ export function menuNode(sections: MenuSectionInput[], site: URL | undefined) {
  * `FAQPage` from the visible accordion. Honest expectation: Google restricted
  * FAQ rich results to authoritative government/health sites, so this will not
  * produce a SERP accordion. It remains valid markup and materially helps
- * AI/answer-engine extraction, which is the same reason `public/llms.txt` exists.
+ * AI/answer-engine extraction, which is the same reason `src/pages/llms.txt.ts` exists.
  */
 export function faqNode(
   items: { question: string; answer: string }[],

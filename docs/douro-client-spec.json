@@ -1,4 +1,5 @@
 {
+  "_notice": "STALE INTAKE SPEC (2026-09-27): superseded by Keystatic content + Google Business Profile. Known-wrong here: contact.phone (+43 677 63130499 vs live +43 676 4231921), hours close 20:00 (live 22:00), delivery platform Foodora (live: Lieferando-only, no src/ hits). Non-rendered; kept for history. Source of truth: src/content/settings/default.json and the GBP record (see docs/seo.md).",
   "brand": {
     "name": "D'ouro Soulfood Bistro",
     "legalName": "D'ouro Soulfood Bistro",

@@ -127,14 +127,15 @@ const {
     <div class="mt-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 text-text-tertiary text-xs md:text-sm">
       <!-- Left: Social Media Icons -->
       <div class="flex items-center gap-1.5">
-        <!-- Instagram -->
-        <a
-          href="https://www.instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="p-3 text-text-tertiary hover:text-brand-gold transition-colors duration-200"
-          aria-label="Instagram"
-        >
+        {/* Instagram — only when the CMS actually has a profile URL (same rule as sameAs) */}
+        {siteSettings.social?.instagram && (
+          <a
+            href={siteSettings.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-3 text-text-tertiary hover:text-brand-gold transition-colors duration-200"
+            aria-label="Instagram"
+          >
           <svg
             class="w-5 h-5"
             fill="none"
@@ -150,6 +151,7 @@ const {
             <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
           </svg>
         </a>
+        )}
 
         <!-- Facebook -->
         <a
