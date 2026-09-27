@@ -61,7 +61,13 @@ export default defineConfig({
     ssr: {
       external: ['sharp'],
       optimizeDeps: {
-        exclude: ['@keystatic/astro/internal/keystatic-api.js'],
+        // CJS-only dep of @keystatic/core's API route chain: without this,
+        // the Cloudflare workerd dev runner evaluates raw CJS and crashes
+        // /api/keystatic/* with "exports is not defined". (cookie is a
+        // direct devDependency in the exact version Keystatic uses so pnpm
+        // hoists a single copy Vite can discover and convert.)
+        // Astro 6-era exclude of '@keystatic/astro/internal/keystatic-api.js' superseded (green build on Astro 7 + Keystatic 6).
+        include: ['cookie'],
       },
     },
   },
