@@ -97,7 +97,9 @@ function restaurantNode(site: URL | undefined) {
       '@id': id.logo,
       url: absoluteUrl(settings.logo, site),
     },
-    image: absoluteUrl(settings.logo, site),
+    // Representative photo, not the logo: the CMS og_image (1200x630 brand
+    // spread). Logo stays `logo` only.
+    image: absoluteUrl(settings.og_image || settings.logo, site),
     servesCuisine: ['Brazilian', 'Latin American', 'African'],
     priceRange: '€€',
     currenciesAccepted: 'EUR',

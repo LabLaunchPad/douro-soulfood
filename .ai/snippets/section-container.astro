@@ -1,6 +1,9 @@
 ---
 // Snippet: standard home-page section shell — eyebrow + heading + optional
 // description, matching PhotoGrid.astro/FaqAccordion.astro's real markup.
+// Rhythm/container stay in sync with src/components/layout/Section.astro
+// (`py-section-mobile md:py-12`, `max-w-7xl`); new sections should use that
+// component instead of copying this shell.
 interface Props {
   ariaLabel: string;
   eyebrow: string;
@@ -10,16 +13,16 @@ interface Props {
 const { ariaLabel, eyebrow, title, description } = Astro.props;
 ---
 
-<section class="py-3 md:py-5 px-4 md:px-16 max-w-7xl mx-auto" aria-label={ariaLabel}>
+<section class="py-section-mobile md:py-12 px-4 md:px-16 max-w-7xl mx-auto" aria-label={ariaLabel}>
   <div class="text-center mb-4 md:mb-5">
-    <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
+    <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
       {eyebrow}
     </span>
-    <h2 class="text-xl md:text-3xl font-semibold text-text-primary font-display">
+    <h2 class="text-2xl md:text-3xl font-semibold text-text-primary font-display">
       {title}
     </h2>
     {description && (
-      <p class="text-text-secondary mt-1 max-w-[75ch] mx-auto text-xs md:text-sm">
+      <p class="text-text-secondary mt-1 max-w-[52ch] mx-auto text-xs md:text-sm">
         {description}
       </p>
     )}

@@ -38,7 +38,7 @@ import gallery8 from '@/assets/gallery/8.webp';
 import gallery9 from '@/assets/gallery/9.webp';
 import cateringEvent from '@/assets/catering/event.webp';
 import cateringPrivate from '@/assets/catering/private.webp';
-import { settings as siteSettings, phoneHref, absoluteUrl, hours as parsedHours, orderUrl } from '@/lib/site';
+import { settings as siteSettings, phoneHref, absoluteUrl, hours as parsedHours, orderUrl, mapsPlaceUrl, mapsEmbedUrl } from '@/lib/site';
 import { formatHoursSummary, toClientHours } from '@/lib/hours';
 import { faqNode } from '@/lib/seo/graph';
 
@@ -251,7 +251,7 @@ const PAGE_DESCRIPTION =
         rating={4.7}
         reviewCount={1224}
         source="Google Reviews"
-        href="https://www.google.com/maps/search/?api=1&query=D%27ouro+Soulfood+Bistro+Auerspergstra%C3%9Fe+10+5020+Salzburg&query_place_id=ChIJZ5K9XxaRdkcRtUZhEVaeRPo"
+        href={mapsPlaceUrl}
         size="lg"
       />
       <span class="text-text-tertiary text-sm">Google Reviews · Stand: September 2026</span>
@@ -477,7 +477,7 @@ const PAGE_DESCRIPTION =
         {/* Map (consent-gated: real iframe only loads after visitor clicks through) */}
         <div class="w-full md:w-1/2 min-h-[260px] md:min-h-[340px]">
           <MapEmbed
-            src="https://maps.google.com/maps?q=Auerspergstra%C3%9Fe%2010,%205020%20Salzburg&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src={mapsEmbedUrl}
             title="D'ouro Soulfood Standort"
             addressLabel="Auerspergstraße 10, 5020 Salzburg"
             class="min-h-[260px] md:min-h-[340px]"

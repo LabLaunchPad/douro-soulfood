@@ -14,7 +14,7 @@
 import { Image } from 'astro:assets';
 import Button from '@/components/ui/Button.astro';
 import brandLogo from '@/assets/brand/dourologo.webp';
-import { settings as siteSettings } from '@/lib/site';
+import { settings as siteSettings, orderUrl, phoneHref as sitePhoneHref } from '@/lib/site';
 import { FOOTER_NAV_LINKS, type NavLink as FooterLink } from '@/lib/nav';
 
 interface Props {
@@ -35,11 +35,11 @@ const {
   links = FOOTER_NAV_LINKS,
   cta = {
     label: 'Jetzt bestellen',
-    href: siteSettings.lieferando_url || 'https://www.lieferando.at/en/menu/douro',
+    href: orderUrl,
   },
   address = [`${siteSettings.address_line1}, ${siteSettings.postal_code} ${siteSettings.city}`],
-  phone = siteSettings.phone || '+43 676 4231921',
-  phoneHref = `tel:${(siteSettings.phone || '+43 676 4231921').replace(/[^+\d]/g, '')}`,
+  phone = siteSettings.phone,
+  phoneHref = sitePhoneHref,
   legalLinks = [
     { label: 'Impressum', href: '/impressum' },
     { label: 'Datenschutz', href: '/datenschutz' },
@@ -153,27 +153,29 @@ const {
         </a>
         )}
 
-        <!-- Facebook -->
-        <a
-          href="https://www.facebook.com/dourosoulfood/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="p-3 text-text-tertiary hover:text-brand-gold transition-colors duration-200"
-          aria-label="Facebook"
-        >
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
+        {/* Facebook — same rule as Instagram above: only when the CMS has a profile URL */}
+        {siteSettings.social?.facebook && (
+          <a
+            href={siteSettings.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-3 text-text-tertiary hover:text-brand-gold transition-colors duration-200"
+            aria-label="Facebook"
           >
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-          </svg>
-        </a>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+        )}
 
         <!-- Phone / Contact Link -->
         <a

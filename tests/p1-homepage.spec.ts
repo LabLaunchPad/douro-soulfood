@@ -124,6 +124,20 @@ test.describe('P1-10 footer copyright whitespace', () => {
   });
 });
 
+test.describe('P1-11 footer social icons are CMS-driven', () => {
+  test('facebook icon links the CMS profile URL, no hardcoded social hrefs', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    const facebook = page.locator('footer a[aria-label="Facebook"]');
+    await expect(facebook).toHaveAttribute(
+      'href',
+      'https://www.facebook.com/dourosoulfood/',
+    );
+    expect(await page.locator('footer a[aria-label="Instagram"]').count()).toBe(0);
+  });
+});
+
 test.describe('P1-9 dead Fraunces italic face removed', () => {
   test('no shipped stylesheet references fraunces-italic', async ({ page }) => {
     await page.goto('/');

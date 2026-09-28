@@ -6,7 +6,7 @@ import NavBar from '@/components/layout/NavBar.astro';
 import Footer from '@/components/layout/Footer.astro';
 import Button from '@/components/ui/Button.astro';
 import MapEmbed from '@/components/ui/MapEmbed.astro';
-import { settings as siteSettings, phoneHref } from '@/lib/site';
+import { settings as siteSettings, phoneHref, mapsDirectionsUrl, mapsEmbedUrl } from '@/lib/site';
 
 const { address_line1, address_line2, city, postal_code, phone, email, hours } = siteSettings;
 ---
@@ -78,7 +78,7 @@ const { address_line1, address_line2, city, postal_code, phone, email, hours } =
 
         <div class="flex flex-wrap gap-3">
           <Button
-            href="https://www.google.com/maps/dir/?api=1&destination=Auerspergstra%C3%9Fe+10%2C+5020+Salzburg"
+            href={mapsDirectionsUrl}
             variant="secondary"
             size="lg"
             arrow
@@ -94,7 +94,7 @@ const { address_line1, address_line2, city, postal_code, phone, email, hours } =
       <!-- Map (consent-gated: real iframe only loads after visitor clicks through) -->
       <div class="rounded-xl overflow-hidden bg-surface-card border border-border-subtle min-h-[400px]">
         <MapEmbed
-          src="https://maps.google.com/maps?q=Auerspergstra%C3%9Fe%2010,%205020%20Salzburg&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          src={mapsEmbedUrl}
           title="D'ouro Soulfood Standort"
           addressLabel={`${address_line1}, ${postal_code} ${city}`}
           class="min-h-[400px]"

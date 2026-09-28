@@ -84,6 +84,23 @@ export const COUNTRY_CODE = 'AT';
 export const orderUrl = settings.lieferando_url || 'https://www.lieferando.at/en/menu/douro';
 
 /**
+ * Google Maps URLs. The embed/directions links are derived from the CMS
+ * address so a client address edit cannot leave pages linking at the old
+ * location. The place link carries the stable GBP record ID
+ * (ChIJZ5K9XxaRdkcRtUZhEVaeRPo) — not derivable, so it lives here in
+ * exactly one place instead of hardcoded across pages.
+ */
+export const mapsPlaceUrl =
+  'https://www.google.com/maps/search/?api=1&query=D%27ouro+Soulfood+Bistro+Auerspergstra%C3%9Fe+10+5020+Salzburg&query_place_id=ChIJZ5K9XxaRdkcRtUZhEVaeRPo';
+
+const mapsQuery = encodeURIComponent(
+  `${settings.address_line1}, ${settings.postal_code} ${settings.city}`,
+);
+
+export const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+export const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`;
+
+/**
  * Only social profiles that actually have a URL. Three of the four are empty
  * strings in the CMS today, and emitting those as schema.org `sameAs` would
  * assert profiles that don't exist.

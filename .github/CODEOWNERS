@@ -1,4 +1,5 @@
 * @sr-creative-hub
 src/styles/ @sr-creative-hub
 docs/design-system.md @sr-creative-hub
-tina/ @sr-creative-hub
+src/content/ @sr-creative-hub
+keystatic.config.ts @sr-creative-hub

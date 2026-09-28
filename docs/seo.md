@@ -50,6 +50,8 @@ Built by `src/lib/seo/graph.ts`. **Exactly one `<script type="application/ld+jso
 
 - `Restaurant` `@id …/#restaurant` — declared **once** and referenced by `@id` from `WebPage.about`. It previously lived in `Base.astro` and was therefore emitted as 7 rival copies with address and phone hardcoded. Now sourced from `src/lib/site.ts` (Keystatic), including `openingHoursSpecification`, `hasMap`, `hasMenu`, `email`, `logo`, `inLanguage` and `sameAs` (empty social strings are dropped rather than emitted as broken URLs).
 - `WebSite` `…/#website`, `WebPage` `{url}#webpage`.
+- `Restaurant.image` is the CMS `og_image` brand spread (representative photo);
+  `logo` stays the logo only.
 - `BreadcrumbList` on the six inner routes; **omitted on the homepage**, where a one-item trail carries no information. There is no visible breadcrumb UI — markup-only is a supported arrangement.
 - `Menu` → `MenuSection` → `MenuItem` + `Offer` on `/menu`, derived from the same grouped collection the page renders.
 - `FAQPage` on `/`, mirroring the visible accordion.
@@ -77,6 +79,16 @@ Structured data costs hashes: `BreadcrumbList` is per-page-unique, so every page
 ## Sitemap and robots
 
 `@astrojs/sitemap` with a `filter` that excludes `/dev/` and `/keystatic/`. That filter is load-bearing: a route's own runtime 404 guard does **not** keep it out of the sitemap. `public/robots.txt` stays a static file — it has no CMS dependency.
+
+## Business-URL discipline (`src/lib/site.ts`)
+
+Ordering, phone, map and place links live in `site.ts`, never hardcoded in
+pages: `orderUrl` / `phoneHref` (NavBar, Footer, MobileBottomBar, contact),
+`mapsPlaceUrl` (stable GBP place-ID link, review badge), `mapsEmbedUrl` and
+`mapsDirectionsUrl` (derived from the CMS address, so an address edit can't
+leave maps pointing at the old location). Footer social icons render only when
+the CMS actually has that profile URL (Instagram and Facebook alike) — the same
+rule as schema.org `sameAs`.
 
 ## `/llms.txt`
 

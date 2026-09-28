@@ -12,4 +12,4 @@
 - [ ] Design system tokens used (no hardcoded colors)
 - [ ] Mobile-first responsive
 - [ ] Lighthouse 90+ maintained
-- [ ] TinaCMS content remains editable
+- [ ] Keystatic content remains editable
