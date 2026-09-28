@@ -1,0 +1,22 @@
+{
+ "docW": 1440,
+ "winW": 1440,
+ "overflow": false,
+ "navBg": "rgba(0, 0, 0, 0)",
+ "navH": 84,
+ "sections": [
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": null,
+   "top": 0,
+   "h": 2044,
+   "pt": "128px",
+   "pb": "96px",
+   "contentTop": 131,
+   "contentBottom": 1948
+  }
+ ],
+ "images": [],
+ "imageCount": 0
+}

@@ -1,0 +1,14 @@
+{
+ "runId": "evidence/2026-09-28T23-04-19",
+ "at": "2026-09-28T23:07:22.031Z",
+ "gates": {
+  "FUNCTIONAL_PASS": true,
+  "VISUAL_PASS": true,
+  "RESPONSIVE_PASS": true,
+  "ACCESSIBILITY_PASS": true,
+  "DESIGN_SYSTEM_PASS": true,
+  "REGRESSION_PASS": null,
+  "high": 0,
+  "medium": 0
+ }
+}

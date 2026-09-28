@@ -1,0 +1,55 @@
+{
+ "docW": 1440,
+ "winW": 1440,
+ "overflow": false,
+ "navBg": "rgba(0, 0, 0, 0)",
+ "navH": 84,
+ "sections": [
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": null,
+   "top": 0,
+   "h": 395,
+   "pt": "128px",
+   "pb": "96px",
+   "contentTop": 128,
+   "contentBottom": 251
+  },
+  {
+   "tag": "DIV",
+   "id": null,
+   "label": null,
+   "top": 395,
+   "h": 457,
+   "pt": "0px",
+   "pb": "0px",
+   "contentTop": 395,
+   "contentBottom": 852
+  },
+  {
+   "tag": "DIV",
+   "id": null,
+   "label": null,
+   "top": 852,
+   "h": 416,
+   "pt": "0px",
+   "pb": "0px",
+   "contentTop": 852,
+   "contentBottom": 1269
+  }
+ ],
+ "images": [
+  {
+   "w": 575,
+   "h": 431,
+   "alt": "Firmenevent Catering"
+  },
+  {
+   "w": 575,
+   "h": 390,
+   "alt": "Private Feiern Catering"
+  }
+ ],
+ "imageCount": 2
+}

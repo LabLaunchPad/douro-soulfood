@@ -1,0 +1,233 @@
+{
+ "docW": 1440,
+ "winW": 1440,
+ "overflow": false,
+ "navBg": "rgba(0, 0, 0, 0)",
+ "navH": 84,
+ "sections": [
+  {
+   "tag": "HEADER",
+   "id": null,
+   "label": null,
+   "top": 0,
+   "h": 900,
+   "pt": "0px",
+   "pb": "0px",
+   "contentTop": 0,
+   "contentBottom": 900
+  },
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": "Google-Bewertung",
+   "top": 900,
+   "h": 199,
+   "pt": "80px",
+   "pb": "80px",
+   "contentTop": 980,
+   "contentBottom": 1018
+  },
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": "Schnellzugriff",
+   "top": 1099,
+   "h": 242,
+   "pt": "80px",
+   "pb": "80px",
+   "contentTop": 1179,
+   "contentBottom": 1261
+  },
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": "Beliebte Gerichte",
+   "top": 1341,
+   "h": 2226,
+   "pt": "80px",
+   "pb": "80px",
+   "contentTop": 1421,
+   "contentBottom": 3486
+  },
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": "Unsere Geschichte",
+   "top": 3566,
+   "h": 403,
+   "pt": "80px",
+   "pb": "80px",
+   "contentTop": 3646,
+   "contentBottom": 3889
+  },
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": "Gästebewertungen",
+   "top": 3969,
+   "h": 690,
+   "pt": "80px",
+   "pb": "80px",
+   "contentTop": 4049,
+   "contentBottom": 4579
+  },
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": "Speisekarte Kategorien",
+   "top": 4659,
+   "h": 404,
+   "pt": "80px",
+   "pb": "80px",
+   "contentTop": 4739,
+   "contentBottom": 4983
+  },
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": "Events & Feiern",
+   "top": 5063,
+   "h": 867,
+   "pt": "80px",
+   "pb": "80px",
+   "contentTop": 5143,
+   "contentBottom": 5849
+  },
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": "Galerie",
+   "top": 5929,
+   "h": 2134,
+   "pt": "80px",
+   "pb": "80px",
+   "contentTop": 6009,
+   "contentBottom": 7983
+  },
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": "Häufig gestellte Fragen",
+   "top": 8063,
+   "h": 471,
+   "pt": "80px",
+   "pb": "80px",
+   "contentTop": 8143,
+   "contentBottom": 8454
+  },
+  {
+   "tag": "SECTION",
+   "id": "standort",
+   "label": "Unser Standort",
+   "top": 8534,
+   "h": 585,
+   "pt": "80px",
+   "pb": "80px",
+   "contentTop": 8614,
+   "contentBottom": 9039
+  }
+ ],
+ "images": [
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Taco Especial"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Quesadilla Hähnchen"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Feijoada Brasileira"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Pão de Queijo"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Mango Ceviche"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Coxinha"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "African Peanut Stew"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Brigadeiros"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Brisa do Mar"
+  },
+  {
+   "w": 562,
+   "h": 422,
+   "alt": "Firmenevent Catering"
+  },
+  {
+   "w": 562,
+   "h": 422,
+   "alt": "Private Feiern Catering"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Gastraum des D'ouro mit Fahrrad-Tisch, b"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Gäste an einem Holztisch im D'ouro, davo"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Drei Tacos mit Guacamole auf schwarzer P"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Paella mit Garnelen, Muscheln und Paprik"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "In der offenen Küche des D'ouro wird fri"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Fensterbank mit bunten Patchwork-Kissen "
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Tisch am Fenster mit Palme und Blick auf"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Außenansicht: das Schild „D'ouro Soul Fo"
+  },
+  {
+   "w": 459,
+   "h": 612,
+   "alt": "Weinregal im D'ouro mit Flaschen aus Chi"
+  }
+ ],
+ "imageCount": 20
+}

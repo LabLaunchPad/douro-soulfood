@@ -1,0 +1,231 @@
+{
+ "docW": 1440,
+ "winW": 1440,
+ "overflow": false,
+ "navBg": "rgba(0, 0, 0, 0)",
+ "navH": 84,
+ "sections": [
+  {
+   "tag": "SECTION",
+   "id": null,
+   "label": null,
+   "top": 0,
+   "h": 648,
+   "pt": "128px",
+   "pb": "64px",
+   "contentTop": 128,
+   "contentBottom": 584
+  },
+  {
+   "tag": "SECTION",
+   "id": "category-appetizers",
+   "label": null,
+   "top": 648,
+   "h": 722,
+   "pt": "16px",
+   "pb": "64px",
+   "contentTop": 664,
+   "contentBottom": 1306
+  },
+  {
+   "tag": "SECTION",
+   "id": "category-quesadillas",
+   "label": null,
+   "top": 1370,
+   "h": 1008,
+   "pt": "16px",
+   "pb": "64px",
+   "contentTop": 1386,
+   "contentBottom": 2313
+  },
+  {
+   "tag": "SECTION",
+   "id": "category-tacos",
+   "label": null,
+   "top": 2377,
+   "h": 1217,
+   "pt": "16px",
+   "pb": "64px",
+   "contentTop": 2393,
+   "contentBottom": 3531
+  },
+  {
+   "tag": "SECTION",
+   "id": "category-bowls",
+   "label": null,
+   "top": 3595,
+   "h": 1261,
+   "pt": "16px",
+   "pb": "64px",
+   "contentTop": 3611,
+   "contentBottom": 4791
+  },
+  {
+   "tag": "SECTION",
+   "id": "category-mains",
+   "label": null,
+   "top": 4855,
+   "h": 900,
+   "pt": "16px",
+   "pb": "64px",
+   "contentTop": 4871,
+   "contentBottom": 5691
+  },
+  {
+   "tag": "SECTION",
+   "id": "category-seafood",
+   "label": null,
+   "top": 5755,
+   "h": 641,
+   "pt": "16px",
+   "pb": "64px",
+   "contentTop": 5771,
+   "contentBottom": 6332
+  },
+  {
+   "tag": "SECTION",
+   "id": "category-drinks",
+   "label": null,
+   "top": 6396,
+   "h": 1348,
+   "pt": "16px",
+   "pb": "64px",
+   "contentTop": 6412,
+   "contentBottom": 7680
+  },
+  {
+   "tag": "SECTION",
+   "id": "category-desserts",
+   "label": null,
+   "top": 7744,
+   "h": 672,
+   "pt": "16px",
+   "pb": "64px",
+   "contentTop": 7760,
+   "contentBottom": 8352
+  }
+ ],
+ "images": [
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Nachos"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Mango Ceviche (Vegan)"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Coxinha mit Salat"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Pão de Queijo"
+  },
+  {
+   "w": 317,
+   "h": 317,
+   "alt": "Drei goldbraun gebackene Quesadillas mit"
+  },
+  {
+   "w": 317,
+   "h": 317,
+   "alt": "Quesadillas im Anschnitt: geschmolzener "
+  },
+  {
+   "w": 317,
+   "h": 317,
+   "alt": "Quesadillas von oben, daneben ein Schälc"
+  },
+  {
+   "w": 317,
+   "h": 317,
+   "alt": "Drei Tacos mit geschmortem Rindfleisch, "
+  },
+  {
+   "w": 317,
+   "h": 317,
+   "alt": "Drei Tacos mit gegrilltem Hähnchen, Kich"
+  },
+  {
+   "w": 317,
+   "h": 317,
+   "alt": "Zwei Tacos mit Garnelen, Guacamole, Mais"
+  },
+  {
+   "w": 317,
+   "h": 317,
+   "alt": "Bowl mit gewürztem Hackfleisch, Guacamol"
+  },
+  {
+   "w": 317,
+   "h": 317,
+   "alt": "Bowl mit Garnelen, Avocadocreme, Tomaten"
+  },
+  {
+   "w": 317,
+   "h": 317,
+   "alt": "Bowl mit geschmortem Fleisch, Käsestreif"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Feijoada"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Picanha"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "african peanut stew mit fufu"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Paella D'ouro"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Brisa do Mar Premium"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Amazonas"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Roja"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Pudim de Caramelo"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Torta de Chocolate"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Brigadeiro"
+  },
+  {
+   "w": 160,
+   "h": 160,
+   "alt": "Beijinho"
+  }
+ ],
+ "imageCount": 24
+}

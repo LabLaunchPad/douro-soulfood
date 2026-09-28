@@ -1,0 +1,13 @@
+{
+  "_note": "Repo-specific visual rules for douro-soulfood, derived from tokens.css + verified conventions. The analyzer enforces these against captured geometry. Do not impose generic rules where the repo defines its own.",
+  "rules": [
+    { "id": "R-OVERFLOW-01", "category": "overflow", "severity": "high", "check": "no-overflow", "expected": "docW <= winW + 1px on every route × viewport" },
+    { "id": "R-RHYTHM-01", "category": "rhythm", "severity": "medium", "check": "section-padding", "expected": "home sections pt/pb 80/80px desktop, 40/40px mobile; menu categories 16/64px desktop, 8/48px mobile", "tolerancePx": 2 },
+    { "id": "R-RHYTHM-02", "category": "rhythm", "severity": "medium", "check": "content-gaps", "expected": "home content-edge gaps 160px desktop / 80px mobile; menu 80px / 56px", "tolerancePx": 12 },
+    { "id": "R-ALIGN-01", "category": "alignment", "severity": "medium", "check": "container-edges", "expected": "contained sections share left edge ±4px; full-bleed grids span 0..winW", "tolerancePx": 4 },
+    { "id": "R-IMG-01", "category": "imagery", "severity": "medium", "check": "img-alt", "expected": "every main img has non-empty alt" },
+    { "id": "R-IMG-02", "category": "imagery", "severity": "medium", "check": "gallery-aspect", "expected": "Beliebte Gerichte + Galerie tiles aspect 0.75", "tolerance": 0.05 },
+    { "id": "R-NAV-01", "category": "chrome", "severity": "medium", "check": "nav-geometry", "expected": "fixed nav height 48..110px with non-transparent background" },
+    { "id": "R-AXE-01", "category": "accessibility", "severity": "high", "check": "axe-violations", "expected": "zero axe violations on 1440 + 390 snapshots" }
+  ]
+}

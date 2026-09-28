@@ -1,0 +1,429 @@
+{
+ "from": "evidence/2026-09-28T22-02-57",
+ "reason": "initial baseline: post-Pass-1 tree, analyzer 0 findings, all gates green",
+ "at": "2026-09-28T22:13:47.792Z",
+ "commit": "8a41cba",
+ "browser": "chromium",
+ "entries": [
+  {
+   "route": "/",
+   "viewport": "1440x900",
+   "file": "home-1440x900.png"
+  },
+  {
+   "route": "/",
+   "viewport": "390x844",
+   "file": "home-390x844.png"
+  },
+  {
+   "route": "/",
+   "viewport": "1440x900",
+   "file": "home-1440x900.png"
+  },
+  {
+   "route": "/",
+   "viewport": "390x844",
+   "file": "home-390x844.png"
+  },
+  {
+   "route": "/",
+   "viewport": "1440x900",
+   "file": "home-1440x900.png"
+  },
+  {
+   "route": "/",
+   "viewport": "390x844",
+   "file": "home-390x844.png"
+  },
+  {
+   "route": "/",
+   "viewport": "1440x900",
+   "file": "home-1440x900.png"
+  },
+  {
+   "route": "/",
+   "viewport": "390x844",
+   "file": "home-390x844.png"
+  },
+  {
+   "route": "/",
+   "viewport": "1440x900",
+   "file": "home-1440x900.png"
+  },
+  {
+   "route": "/",
+   "viewport": "390x844",
+   "file": "home-390x844.png"
+  },
+  {
+   "route": "/",
+   "viewport": "1440x900",
+   "file": "home-1440x900.png"
+  },
+  {
+   "route": "/",
+   "viewport": "390x844",
+   "file": "home-390x844.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "1440x900",
+   "file": "about-1440x900.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "390x844",
+   "file": "about-390x844.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "1440x900",
+   "file": "about-1440x900.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "390x844",
+   "file": "about-390x844.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "1440x900",
+   "file": "about-1440x900.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "390x844",
+   "file": "about-390x844.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "1440x900",
+   "file": "about-1440x900.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "390x844",
+   "file": "about-390x844.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "1440x900",
+   "file": "about-1440x900.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "390x844",
+   "file": "about-390x844.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "1440x900",
+   "file": "about-1440x900.png"
+  },
+  {
+   "route": "/about/",
+   "viewport": "390x844",
+   "file": "about-390x844.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "1440x900",
+   "file": "catering-1440x900.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "390x844",
+   "file": "catering-390x844.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "1440x900",
+   "file": "catering-1440x900.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "390x844",
+   "file": "catering-390x844.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "1440x900",
+   "file": "catering-1440x900.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "390x844",
+   "file": "catering-390x844.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "1440x900",
+   "file": "catering-1440x900.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "390x844",
+   "file": "catering-390x844.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "1440x900",
+   "file": "catering-1440x900.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "390x844",
+   "file": "catering-390x844.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "1440x900",
+   "file": "catering-1440x900.png"
+  },
+  {
+   "route": "/catering/",
+   "viewport": "390x844",
+   "file": "catering-390x844.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "1440x900",
+   "file": "contact-1440x900.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "390x844",
+   "file": "contact-390x844.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "1440x900",
+   "file": "contact-1440x900.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "390x844",
+   "file": "contact-390x844.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "1440x900",
+   "file": "contact-1440x900.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "390x844",
+   "file": "contact-390x844.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "1440x900",
+   "file": "contact-1440x900.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "390x844",
+   "file": "contact-390x844.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "1440x900",
+   "file": "contact-1440x900.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "390x844",
+   "file": "contact-390x844.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "1440x900",
+   "file": "contact-1440x900.png"
+  },
+  {
+   "route": "/contact/",
+   "viewport": "390x844",
+   "file": "contact-390x844.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "1440x900",
+   "file": "datenschutz-1440x900.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "390x844",
+   "file": "datenschutz-390x844.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "1440x900",
+   "file": "datenschutz-1440x900.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "390x844",
+   "file": "datenschutz-390x844.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "1440x900",
+   "file": "datenschutz-1440x900.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "390x844",
+   "file": "datenschutz-390x844.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "1440x900",
+   "file": "datenschutz-1440x900.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "390x844",
+   "file": "datenschutz-390x844.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "1440x900",
+   "file": "datenschutz-1440x900.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "390x844",
+   "file": "datenschutz-390x844.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "1440x900",
+   "file": "datenschutz-1440x900.png"
+  },
+  {
+   "route": "/datenschutz/",
+   "viewport": "390x844",
+   "file": "datenschutz-390x844.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "1440x900",
+   "file": "impressum-1440x900.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "390x844",
+   "file": "impressum-390x844.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "1440x900",
+   "file": "impressum-1440x900.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "390x844",
+   "file": "impressum-390x844.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "1440x900",
+   "file": "impressum-1440x900.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "390x844",
+   "file": "impressum-390x844.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "1440x900",
+   "file": "impressum-1440x900.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "390x844",
+   "file": "impressum-390x844.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "1440x900",
+   "file": "impressum-1440x900.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "390x844",
+   "file": "impressum-390x844.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "1440x900",
+   "file": "impressum-1440x900.png"
+  },
+  {
+   "route": "/impressum/",
+   "viewport": "390x844",
+   "file": "impressum-390x844.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "1440x900",
+   "file": "menu-1440x900.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "390x844",
+   "file": "menu-390x844.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "1440x900",
+   "file": "menu-1440x900.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "390x844",
+   "file": "menu-390x844.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "1440x900",
+   "file": "menu-1440x900.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "390x844",
+   "file": "menu-390x844.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "1440x900",
+   "file": "menu-1440x900.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "390x844",
+   "file": "menu-390x844.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "1440x900",
+   "file": "menu-1440x900.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "390x844",
+   "file": "menu-390x844.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "1440x900",
+   "file": "menu-1440x900.png"
+  },
+  {
+   "route": "/menu/",
+   "viewport": "390x844",
+   "file": "menu-390x844.png"
+  }
+ ]
+}

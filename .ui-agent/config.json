@@ -1,0 +1,119 @@
+{
+  "generatedAt": "2026-09-28T21:57:13.962Z",
+  "root": "C:\\douro-soulfood",
+  "framework": "astro",
+  "packageManager": "pnpm",
+  "scripts": {
+    "build": "astro build",
+    "dev": "wrangler pages dev --port 8788",
+    "preview": "node scripts/serve-dist.mjs"
+  },
+  "e2e": "playwright",
+  "a11y": "axe-playwright",
+  "routes": [
+    "/",
+    "/about/",
+    "/catering/",
+    "/contact/",
+    "/datenschutz/",
+    "/impressum/",
+    "/llms.txt/",
+    "/menu/"
+  ],
+  "viewports": [
+    [
+      375,
+      812
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      768,
+      1024
+    ],
+    [
+      1024,
+      768
+    ],
+    [
+      1280,
+      800
+    ],
+    [
+      1440,
+      900
+    ]
+  ],
+  "browsers": [
+    "chromium(unverified)"
+  ],
+  "tokens": {
+    "cssFiles": [
+      "src/styles/tokens.css",
+      "src/styles/global.css"
+    ],
+    "colors": [
+      "brand-terracotta",
+      "brand-terracotta-light",
+      "brand-terracotta-dark",
+      "brand-gold",
+      "brand-gold-light",
+      "brand-gold-dark",
+      "brand-gold-ink",
+      "brand-forest",
+      "brand-forest-light",
+      "brand-sage",
+      "brand-cream",
+      "brand-cream-warm",
+      "brand-mist",
+      "brand-espresso",
+      "brand-charcoal",
+      "brand-smoke",
+      "brand-ember",
+      "bistro-banner",
+      "bistro-banner-border",
+      "bistro-banner-text",
+      "bistro-ink",
+      "bistro-paper",
+      "bistro-paper-border",
+      "bistro-paper-alt",
+      "bistro-taupe",
+      "bistro-muted",
+      "bistro-muted-dark",
+      "bistro-text",
+      "bistro-text-strong",
+      "bistro-placeholder",
+      "surface-primary",
+      "surface-elevated",
+      "surface-card",
+      "surface-glass",
+      "text-primary",
+      "text-secondary",
+      "text-tertiary",
+      "text-inverse",
+      "border-subtle",
+      "border-default",
+      "border-emphasis"
+    ],
+    "spacing": [
+      "section-mobile=2.5rem"
+    ],
+    "radius": [
+      "xs=0.375rem",
+      "sm=0.625rem",
+      "md=0.875rem",
+      "lg=1.25rem",
+      "xl=1.75rem",
+      "2xl=2.5rem",
+      "full=9999px"
+    ]
+  },
+  "vision": {
+    "provider": "none",
+    "models": [],
+    "selected": null,
+    "status": "VISION_DEGRADED"
+  }
+}
