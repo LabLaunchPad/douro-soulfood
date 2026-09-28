@@ -66,6 +66,24 @@ test.describe('Home page — content & visibility', () => {
     await expect(reviewBadge).toContainText('4.7');
   });
 
+  test('hero video activates after load with poster intact', async ({ page, isMobile }) => {
+    // Activation is deferred to window `load` so the 4.8 MB video can't race
+    // the preloaded poster inside the LCP window. `goto` resolves after
+    // `load`, so the viewport-matching video must already carry its src while
+    // the other one stays src-less; both keep the shared poster fallback.
+    const active = page.locator(
+      `video[data-hero-video="${isMobile ? 'mobile' : 'desktop'}"]`,
+    );
+    const idle = page.locator(
+      `video[data-hero-video="${isMobile ? 'desktop' : 'mobile'}"]`,
+    );
+    await expect
+      .poll(async () => active.getAttribute('src'))
+      .toBe(isMobile ? '/douroheromobile.mp4' : '/douroherovideo.mp4');
+    expect(await idle.getAttribute('src')).toBeNull();
+    await expect(active).toHaveAttribute('poster', /hero-fallback-1280.*\.webp/);
+  });
+
   test('featured dishes section shows "Empfehlungen" heading', async ({ page }) => {
     // Scoped by the section's accessible name rather than a colour utility
     // class, for the same staleness reason as the review badge above.

@@ -256,7 +256,17 @@ const heroImage = images[0];
       activeVideo = next;
     };
 
-    activate();
+    // Deferred to window `load` on purpose: the 4.8 MB mobile video's first
+    // frame otherwise presents inside the LCP window and becomes the LCP
+    // entry (~4.1 s throttled), superseding the preloaded 55 KB poster that
+    // paints in the first second. The poster IS the video's stand-in frame,
+    // so starting playback after `load` is visually seamless — and LCP then
+    // measures the poster, not the video download.
+    if (document.readyState === 'complete') {
+      activate();
+    } else {
+      window.addEventListener('load', activate, { once: true });
+    }
     desktopQuery.addEventListener('change', activate);
     reduceMotion.addEventListener('change', activate);
   }
