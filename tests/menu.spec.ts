@@ -58,6 +58,24 @@ test.describe('Menu page — content', () => {
     expect(count).toBeGreaterThanOrEqual(1);
   });
 
+  test('category sections share one generous rhythm tier', async ({ page, isMobile }) => {
+    // Menu is a scannable list, so it sits one tier below the homepage
+    // (80px gaps desktop / 56px mobile vs 160px / 80px), applied uniformly:
+    // every category section is pt-2 pb-12 md:pt-4 md:pb-16.
+    const expected = isMobile ? { pt: '8px', pb: '48px' } : { pt: '16px', pb: '64px' };
+    const sections = page.locator('section[id^="category-"]');
+    expect(await sections.count()).toBeGreaterThanOrEqual(1);
+    for (let i = 0; i < (await sections.count()); i++) {
+      const section = sections.nth(i);
+      await expect
+        .poll(async () => section.evaluate((el) => getComputedStyle(el).paddingTop))
+        .toBe(expected.pt);
+      await expect
+        .poll(async () => section.evaluate((el) => getComputedStyle(el).paddingBottom))
+        .toBe(expected.pb);
+    }
+  });
+
   test('clicking a category link scrolls to that section', async ({ page }) => {
     const firstCategoryLink = page
       .locator('nav[aria-label="Menü-Kategorien"] a[href^="#category-"]')
