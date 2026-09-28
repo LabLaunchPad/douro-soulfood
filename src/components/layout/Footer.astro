@@ -48,7 +48,7 @@ const {
 } = Astro.props;
 ---
 
-<footer class="bg-surface-primary pt-8 pb-16 md:pb-12 border-t border-border-subtle">
+<footer class="bg-brand-espresso pt-8 pb-24 md:pb-12 border-t border-white/10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Main Floating Medium Silver Metallic Capsule Card -->
     <div class="bg-zinc-300/90 border border-zinc-300/90 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl transition-all duration-300">
@@ -63,7 +63,7 @@ const {
           >
             <Image
               src={brandLogo}
-              alt="D'ouro Soulfood Logo"
+              alt="D'ouro Soulfood Bistro Logo"
               width={292}
               height={139}
               class="h-10 md:h-12 w-auto object-contain transition-transform duration-200 hover:scale-105"
@@ -124,7 +124,7 @@ const {
     <slot />
 
     <!-- Outer Bottom Bar: Social Icons, Copyright, Contact -->
-    <div class="mt-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 text-text-tertiary text-xs md:text-sm">
+    <div class="mt-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 text-white/70 text-xs md:text-sm">
       <!-- Left: Social Media Icons -->
       <div class="flex items-center gap-1.5">
         {/* Instagram — only when the CMS actually has a profile URL (same rule as sameAs) */}
@@ -133,7 +133,7 @@ const {
             href={siteSettings.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            class="p-3 text-text-tertiary hover:text-brand-gold transition-colors duration-200"
+            class="p-3 text-white/70 hover:text-brand-gold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
             aria-label="Instagram"
           >
           <svg
@@ -159,7 +159,7 @@ const {
             href={siteSettings.social.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            class="p-3 text-text-tertiary hover:text-brand-gold transition-colors duration-200"
+            class="p-3 text-white/70 hover:text-brand-gold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
             aria-label="Facebook"
           >
             <svg
@@ -180,7 +180,7 @@ const {
         <!-- Phone / Contact Link -->
         <a
           href={phoneHref}
-          class="inline-flex items-center min-h-6 text-xs text-text-tertiary hover:text-brand-gold-ink transition-colors duration-200 no-underline"
+          class="inline-flex items-center min-h-6 text-xs text-white/70 hover:text-brand-gold transition-colors duration-200 no-underline"
         >
           {phone}
         </a>
@@ -188,7 +188,7 @@ const {
 
       <!-- Center: Copyright Notice -->
       <div class="text-center">
-        <p class="text-text-tertiary">
+        <p class="text-white/70">
           &copy; {currentYear}{' '}
           {copyrightName}. Alle Rechte vorbehalten.
         </p>
@@ -196,7 +196,7 @@ const {
 
       <!-- Right: Location -->
       <div class="text-right">
-        <address class="text-text-tertiary not-italic">{address[0]}</address>
+        <address class="text-white/70 not-italic">{address[0]}</address>
       </div>
     </div>
   </div>

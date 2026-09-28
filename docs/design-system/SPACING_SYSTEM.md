@@ -15,8 +15,9 @@ This matches the Material 3 / Carbon-style "4/8px rhythm" rule exactly — Tailw
 ## Section-level spacing (custom tokens)
 
 ```
---spacing-section: 7.5rem (120px)        — desktop section vertical padding
---spacing-section-mobile: 2rem (32px)    — mobile section vertical padding (was 4.5rem/72px until the 2026-08-07 mobile-first conversion redesign — a deliberate tighter, app-like rhythm per an explicit design brief, not a consistency fix)
+--spacing-section-mobile: 2.5rem (40px)  — mobile section vertical padding (2026-09-28: half the desktop register; was 2rem/32px)
+Desktop pairing: `md:py-20` (80px, premium hospitality band). Gaps land at 80px mobile / 160px desktop.
+(The 7.5rem/120px `--spacing-section` token was defined but never consumed — removed 2026-09-29.)
 ```
 
 ## Rules

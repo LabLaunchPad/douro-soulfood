@@ -40,7 +40,7 @@ const {
 /** Format price from cents to EUR display string e.g. €8,90 */
 const formatPrice = (cents: number): string => {
   const euros = cents / 100;
-  return new Intl.NumberFormat('de-DE', {
+  return new Intl.NumberFormat('de-AT', {
     style: 'currency',
     currency: 'EUR',
     minimumFractionDigits: 2,

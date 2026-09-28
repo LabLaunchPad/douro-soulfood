@@ -62,12 +62,13 @@ const menuSchema = menuNode(
 >
   <NavBar slot="nav" />
 
-  <!-- ═══ HERO HEADER ═══ -->
-  <section class="pt-28 pb-4 md:pt-32 md:pb-4 px-4 md:px-16 max-w-7xl mx-auto">
-    <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-brand-gold-ink mb-6 font-display uppercase tracking-tight">
+  <!-- ═══ HERO HEADER — full-bleed espresso identity band ═══ -->
+  <section class="w-full pt-28 pb-12 md:pt-32 md:pb-16 bg-brand-espresso">
+    <div class="max-w-7xl mx-auto px-4 md:px-16">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 font-display uppercase tracking-tight">
       Speisekarte
     </h1>
-    <p class="text-lg md:text-xl text-text-secondary max-w-[52ch] leading-relaxed">
+    <p class="text-lg md:text-xl text-white/90 max-w-[52ch] leading-relaxed">
       Jedes Gericht wird frisch und von Hand zubereitet — mit den Aromen Brasiliens und der Wärme
       Afrikas. Angela kocht alles selbst, mit Liebe und den besten Zutaten.
     </p>
@@ -80,14 +81,14 @@ const menuSchema = menuNode(
         return (
           <a
             href={`#category-${slug}`}
-            class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold uppercase tracking-wider rounded-lg
+            class="inline-flex items-center gap-2 px-4 py-2.5 min-h-11 text-sm font-bold uppercase tracking-wider rounded-lg
                    bg-surface-card border border-border-subtle text-text-secondary
                    hover:bg-surface-elevated hover:border-brand-gold hover:text-brand-gold-ink
                    active:bg-surface-primary
                    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold
                    no-underline transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)]"
           >
-            <CategoryIcon name={config.icon} class="w-4 h-4 text-brand-gold" />
+            <CategoryIcon name={config.icon} class="w-4 h-4 text-brand-gold-ink" />
             {config.label}
           </a>
         );
@@ -96,6 +97,7 @@ const menuSchema = menuNode(
 
     {/* Top Allergen Legend matching bistro menu reference */}
     <AllergenHeaderLegend />
+    </div>
   </section>
 
   <!-- ═══ MENU CATEGORIES ═══ -->
@@ -119,7 +121,7 @@ const menuSchema = menuNode(
       return (
         <section
           id={`category-${slug}`}
-          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20 space-y-10"
+          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-24 space-y-10"
         >
           {/* Main Category Banner Header */}
           <div class="flex justify-center mb-6">
@@ -178,7 +180,7 @@ const menuSchema = menuNode(
       return (
         <section
           id={`category-${slug}`}
-          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20"
+          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-24"
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
@@ -220,7 +222,7 @@ const menuSchema = menuNode(
       return (
         <section
           id={`category-${slug}`}
-          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20"
+          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-24"
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
@@ -298,7 +300,7 @@ const menuSchema = menuNode(
       return (
         <section
           id={`category-${slug}`}
-          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20"
+          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-24"
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
@@ -376,7 +378,7 @@ const menuSchema = menuNode(
       return (
         <section
           id={`category-${slug}`}
-          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20"
+          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-24"
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
@@ -460,7 +462,7 @@ const menuSchema = menuNode(
       return (
         <section
           id={`category-${slug}`}
-          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20"
+          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-24"
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
@@ -503,7 +505,7 @@ const menuSchema = menuNode(
       return (
         <section
           id={`category-${slug}`}
-          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20"
+          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-24"
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
@@ -546,7 +548,7 @@ const menuSchema = menuNode(
       return (
         <section
           id={`category-${slug}`}
-          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20"
+          class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-24"
         >
           {/* Category Banner Header */}
           <div class="flex justify-center mb-6">
@@ -587,11 +589,11 @@ const menuSchema = menuNode(
     return (
       <section
         id={`category-${slug}`}
-        class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-20"
+        class="pt-2 pb-12 md:pt-4 md:pb-16 px-4 md:px-16 max-w-7xl mx-auto scroll-mt-24"
       >
         {/* Category heading */}
         <div class="flex items-center gap-3.5 mb-8">
-          <div class="w-10 h-10 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center">
+          <div class="w-10 h-10 rounded-xl bg-brand-gold/15 text-brand-gold-ink flex items-center justify-center">
             <CategoryIcon name={config.icon} class="w-6 h-6" />
           </div>
           <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-text-primary font-display uppercase tracking-wider">

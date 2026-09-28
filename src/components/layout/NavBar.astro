@@ -1,10 +1,11 @@
 ---
 /**
- * NavBar — Solid light header + Mobile Capsule Trigger
+ * NavBar — Floating pill over hero, solid bar on scroll + Mobile Capsule Trigger
  *
- * - Solid warm-white bar (bg-surface-primary) with dark text: readable over
- *   every hero and section without scroll-state juggling. The logo is a
- *   logotype (exempt from text-contrast rules) and stays untouched.
+ * - At top: transparent shell, logo free-floating left, white pill capsule
+ *   with dark links right (owner direction, Talkin-style pattern).
+ * - Scrolled: solid warm-white bar (bg-surface-primary), pill dissolves.
+ * - The logo is a logotype (exempt from text-contrast rules) and stays untouched.
  * - Mobile capsule navbar containing German "Speisekarte" button + hamburger icon,
  *   which toggles the full-screen drawer rendered by MobileNavDrawer.astro.
  */
@@ -34,12 +35,13 @@ const {
 <nav
   aria-label="Hauptmenü"
   class:list={[
-    'fixed top-0 inset-x-0 z-50 py-3 md:py-4 bg-surface-primary/95 backdrop-blur-md border-b border-border-subtle shadow-md',
+    'nav-shell fixed top-0 inset-x-0 z-50 transition-all duration-300 ease-out',
     className,
   ]}
   data-nav
+  data-scrolled="false"
 >
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-12">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 md:px-12 py-3 md:py-4">
     <!-- Left: Logo Image Only -->
     <div class="shrink-0">
       <a
@@ -49,7 +51,7 @@ const {
       >
         <Image
           src={brandLogo}
-          alt="D'ouro Soulfood Logo"
+          alt="D'ouro Soulfood Bistro Logo"
           width={292}
           height={139}
           class="h-10 md:h-12 w-auto object-contain transition-transform duration-300 hover:scale-105"
@@ -57,9 +59,9 @@ const {
       </a>
     </div>
 
-    <!-- Right: Desktop Navigation Links (SSOT: rounded-md) -->
+    <!-- Right: Desktop floating pill (white capsule over hero; dissolves into the bar on scroll) -->
     <div class="hidden lg:flex items-center">
-      <div class="flex items-center gap-3">
+      <div class="nav-pill flex items-center gap-3 rounded-full px-3 py-1.5 bg-white/95 backdrop-blur-md border border-black/5 shadow-xl transition-all duration-300 ease-out">
         <!-- Nav links -->
         <div class="flex items-center gap-1">
           {links.map((link) => (
@@ -157,3 +159,36 @@ const {
 <MobileNavDrawer links={links} />
 
 <slot />
+
+<style>
+  /* Floating-pill pattern (owner direction, Talkin-style): transparent shell +
+     white capsule at top; solid bar with dissolved capsule once scrolled. */
+  .nav-shell {
+    background: transparent;
+  }
+  .nav-shell[data-scrolled='true'] {
+    background: color-mix(in srgb, var(--color-surface-primary) 95%, transparent);
+    border-bottom: 1px solid var(--color-border-subtle);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(12px);
+  }
+  .nav-shell[data-scrolled='true'] .nav-pill {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+</style>
+
+<script>
+  // Pill-to-bar scroll state: floating white capsule over the hero at top,
+  // full solid bar once the visitor scrolls. Drawer logic lives in MobileNavDrawer.astro.
+  const shell = document.querySelector('[data-nav]') as HTMLElement | null;
+  if (shell) {
+    const sync = () => {
+      shell.dataset.scrolled = String(window.scrollY > 20);
+    };
+    sync();
+    window.addEventListener('scroll', sync, { passive: true });
+  }
+</script>

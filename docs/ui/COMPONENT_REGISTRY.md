@@ -6,7 +6,7 @@ Real inventory (verified against `src/components/`, 2026-08-07; `Section` row ad
 |---|---|---|---|
 | `Button` | atom | default, hover, active, focus-visible (3 variants × all states) | disabled (no disabled CTA anywhere), loading (no async action it triggers) |
 | `MenuItemCard` | section | default, hover (image scale + title color), focus (via clickable-card link) | selected (no multi-select context), loading/error (static data) — has a real "unavailable" state (explicit banner, not hidden) |
-| `NavBar` | layout | default, scroll-triggered capsule transition, focus-visible, `aria-expanded` (mobile toggle) | disabled, loading — n/a |
+| `NavBar` | layout | default (solid light bar), focus-visible, `aria-expanded` (mobile toggle) | scroll states (removed 2026-09-29 — bar is always solid), disabled, loading — n/a |
 | `MobileNavDrawer` | layout | open/closed (via `inert`/`aria-hidden`), focus-trapped while open, focus-visible on all links | n/a |
 | `Section` | layout | default in two modes (contained: section is the container; full: full-bleed band with nested container), named landmark via `aria-label`, anchor via `id` | hover/active/focus/disabled/loading (non-interactive wrapper — correct, it owns rhythm/container only; interactive states belong to slotted content) |
 | `FaqAccordion` | section | closed/open (native `<details>`), hover, focus-visible | n/a — native element handles state semantics |

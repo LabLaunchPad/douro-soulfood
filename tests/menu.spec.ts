@@ -32,14 +32,14 @@ test.describe('Menu page — content', () => {
 
   test('at least one menu item with price (€) is visible', async ({ page }) => {
     // Prices come from Intl.NumberFormat('de-AT', { style: 'currency' }), which
-    // renders the amount BEFORE the symbol and separates them with a
-    // NON-BREAKING space (U+00A0) — e.g. "8,90 €", not "€8,90". The regex
+    // renders the symbol BEFORE the amount and separates them with a
+    // NON-BREAKING space (U+00A0) — e.g. "€ 8,90", not "8,90 €". The regex
     // below accepts either space kind so it survives an Intl/ICU data change.
     //
     // Matched by rendered text rather than by utility class: this assertion used
     // to look for `span.font-bold.text-brand-gold`, and prices are neither
     // spans nor gold any more, so it silently matched zero elements.
-    const priceRe = /\d+,\d{2}[\s ]*€/;
+    const priceRe = /€[\s ]*\d+,\d{2}/;
     const pricedCards = page.locator('article').filter({ hasText: priceRe });
 
     expect(await pricedCards.count()).toBeGreaterThanOrEqual(1);

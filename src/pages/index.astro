@@ -292,7 +292,7 @@ const PAGE_DESCRIPTION =
           class="group flex flex-col items-center gap-1.5 rounded-lg sm:rounded-2xl bg-surface-card border border-border-subtle hover:border-brand-gold/50 hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-sm p-3 sm:p-4 min-h-12"
         >
           <svg
-            class="w-5 h-5 sm:w-6 sm:h-6 text-brand-gold shrink-0"
+            class="w-5 h-5 sm:w-6 sm:h-6 text-brand-gold-ink shrink-0"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -360,9 +360,9 @@ const PAGE_DESCRIPTION =
       {categorySlots.map((slot) => (
         <a
           href={`/menu#category-${slot.slug}`}
-          class="group flex flex-col items-center text-center min-h-12 p-1.5 sm:p-4 rounded-lg sm:rounded-2xl bg-surface-card border border-border-subtle hover:border-brand-gold/50 hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-sm sm:shadow-md min-w-0"
+          class="group flex flex-col items-center text-center min-h-12 p-1.5 sm:p-4 rounded-lg sm:rounded-2xl bg-surface-card hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-sm sm:shadow-md min-w-0"
         >
-          <div class="w-7 h-7 sm:w-12 sm:h-12 rounded-md sm:rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center mb-1 sm:mb-3 group-hover:scale-110 transition-transform shrink-0">
+          <div class="w-7 h-7 sm:w-12 sm:h-12 rounded-md sm:rounded-xl bg-brand-gold/15 text-brand-gold-ink flex items-center justify-center mb-1 sm:mb-3 group-hover:scale-110 transition-transform shrink-0">
             <CategoryIcon name={slot.icon} class="w-3.5 h-3.5 sm:w-6 sm:h-6" />
           </div>
           <h3 class="text-xs sm:text-sm font-bold text-text-primary group-hover:text-brand-gold-ink font-display transition-colors leading-tight mb-0.5 sm:mb-1 line-clamp-2 break-words min-h-[2.2em] sm:min-h-[2.4em] w-full">
@@ -382,7 +382,7 @@ const PAGE_DESCRIPTION =
   <Section
     ariaLabel="Events & Feiern"
   >
-    <div class="text-center mb-4 md:mb-5">
+    <div class="text-left mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
         Feiern & Events
       </span>
@@ -462,7 +462,7 @@ const PAGE_DESCRIPTION =
   <Section
     id="standort"
     ariaLabel="Unser Standort"
-    class="scroll-mt-20"
+    class="scroll-mt-24"
   >
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">

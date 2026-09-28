@@ -165,7 +165,7 @@ Compact menu item card, used across most of `menu.astro`'s categories (quesadill
 
 ### NavBar
 **File:** `src/components/layout/NavBar.astro`
-Desktop scroll-transition header plus the mobile capsule trigger (logo, "Speisekarte" link, hamburger button). Renders `MobileNavDrawer` and owns the scroll-transition `<script>`; the drawer's own open/close/focus-trap logic lives in `MobileNavDrawer.astro`.
+Solid light header (`bg-surface-primary/95`) plus the mobile capsule trigger (logo, "Speisekarte" link, hamburger button). Renders `MobileNavDrawer`; the scroll-transition script was removed 2026-09-29 when the bar went permanently solid. The drawer's own open/close/focus-trap logic lives in `MobileNavDrawer.astro`.
 
 ### MobileNavDrawer
 **File:** `src/components/layout/MobileNavDrawer.astro`

@@ -27,7 +27,7 @@ const { links } = Astro.props;
 <!-- Full-Screen Mobile Drawer Overlay (Top-Left Aligned List) -->
 <div
   id="mobile-menu"
-  class="fixed inset-0 z-50 bg-brand-espresso/98 backdrop-blur-2xl
+  class="fixed inset-0 z-[70] bg-brand-espresso/98 backdrop-blur-2xl
          opacity-0 pointer-events-none transition-all duration-300
          lg:hidden flex flex-col justify-start overflow-y-auto"
   role="dialog"
@@ -42,7 +42,7 @@ const { links } = Astro.props;
     <a href="/" class="flex items-center no-underline">
       <Image
         src={brandLogo}
-        alt="D'ouro Soulfood Logo"
+        alt="D'ouro Soulfood Bistro Logo"
         width={292}
         height={139}
         class="h-10 md:h-12 w-auto object-contain"
@@ -87,7 +87,7 @@ const { links } = Astro.props;
     {links.map((link) => (
       <a
         href={link.href}
-        class="text-2xl font-bold tracking-wide uppercase text-white hover:text-brand-gold no-underline transition-colors"
+        class="inline-flex items-center min-h-11 text-2xl font-bold tracking-wide uppercase text-white hover:text-brand-gold no-underline transition-colors"
       >
         {link.label}
       </a>

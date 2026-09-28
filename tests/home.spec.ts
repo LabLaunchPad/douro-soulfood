@@ -151,7 +151,7 @@ test.describe('Home page — NavBar', () => {
 
   test('brand logo is visible in NavBar', async ({ page }) => {
     // NavBar renders only a logo image, no text brand name span
-    const logo = page.locator('nav[data-nav] img[alt="D\'ouro Soulfood Logo"]');
+    const logo = page.locator('nav[data-nav] img[alt="D\'ouro Soulfood Bistro Logo"]');
     await expect(logo).toBeVisible();
   });
 

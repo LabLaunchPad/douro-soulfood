@@ -10,7 +10,7 @@ New category introduced by this standard (not previously documented as a distinc
 | **Elevated** (`surface.section`) | `--color-surface-elevated` | Subtle-separation containers (pre-scroll nav state, hover backgrounds) |
 | **Card** (`surface.card` / `.cardRaised`) | `--color-surface-card` + `--shadow-sm`–`-lg` for elevation | Menu items, feature cards |
 | **Glass** (`surface.overlay`, translucent variant) | `--color-surface-glass` (`oklch(1.0 0.002 80 / 0.9)`) + `backdrop-blur-sm` | Testimonial cards |
-| **Inverse / dark capsule** (`surface.inverse`) | `bg-brand-espresso/90-95` + `backdrop-blur-md` | Floating nav capsule (desktop), mobile nav drawer full-screen overlay |
+| **Inverse / dark capsule** (`surface.inverse`) | `bg-brand-espresso/90-95` + `backdrop-blur-md` | Mobile nav drawer full-screen overlay (the desktop floating nav capsule was removed 2026-09-29 when the bar went solid light) |
 | **Hero scrim** (`surface.overlay`, dark variant) | `bg-gradient-to-b from-black/50 via-black/40 to-black/60` (raw, not yet a named token) | Hero video/image overlay, ensures white hero text stays legible over unpredictable video content |
 | **Bistro paper** (a themed sub-system, not a generic role) | `--color-bistro-paper` / `-paper-alt` / `-banner` | Menu page category banners and allergen legend — deliberately distinct visual world, see `COLOR_SYSTEM.md` |
 | **Metallic capsule** (a one-off, deliberate exception) | `bg-zinc-300/90` + `backdrop-blur-md` | Footer's main content card — an intentional "silver" surface distinct from the cream canvas, per its own source comment |

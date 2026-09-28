@@ -4,7 +4,9 @@ import { test, expect } from '@playwright/test';
  * Section spacing-system contract — one component owns homepage section
  * rhythm (padding, container, accessible name).
  *
- * TDD RED: no section carries data-section-mode yet (raw <section> tags).
+ * Green since 2026-09-27: all inline homepage sections render through
+ * Section (data-section-mode="contained"); component-owned sections carry
+ * the identical token pair without the wrapper.
  * Full-width mode has no homepage consumer by design; it is previewed at
  * /dev/ui (dev-only, not in dist) with a manual-check note per the
  * visual-preview pattern — no automated test claims to cover it.

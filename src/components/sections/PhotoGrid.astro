@@ -50,7 +50,7 @@ const { ariaLabel, eyebrow, title, description, items, cta } = Astro.props;
     {items.map((item, index) => (
       <div
         class:list={[
-          'group relative aspect-[3/4] rounded-lg overflow-hidden bg-surface-card border border-border-subtle hover:border-brand-gold/50 shadow-md transition-all duration-[var(--duration-normal)]',
+          'group relative aspect-[3/4] rounded-lg overflow-hidden bg-surface-card shadow-md transition-all duration-[var(--duration-normal)]',
           index === 8 && 'hidden sm:block',
         ]}
       >

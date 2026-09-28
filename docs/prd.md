@@ -60,7 +60,7 @@ A restaurant website for D'ouro Soulfood Bistro — a Brazilian/Latin/African fu
 
 Reflects what `src/pages/index.astro` actually renders — mostly hand-written inline sections, not separate reusable components:
 
-1. **NavBar** — scroll-transition header with a coupled mobile drawer
+1. **NavBar** — solid light header (warm-white bar, dark links) with a coupled mobile drawer
 2. **Hero** — single image (optional video), headline, dual CTA (`HeroSection.astro`)
 3. **Review Badge** — star rating strip below the hero
 4. **Category Grid** — icon-linked scroll to menu categories

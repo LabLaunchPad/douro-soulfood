@@ -53,9 +53,9 @@ Real inventory, verified against `src/components/` on 2026-08-07. Full contracts
 ### NavBar (`src/components/layout/NavBar.astro`)
 
 **Category**: layout shell
-**Purpose**: the site's persistent top navigation — fixed position, desktop pill-capsule nav + mobile hamburger trigger for `MobileNavDrawer`.
+**Purpose**: the site's persistent top navigation — fixed position, solid warm-white bar (`bg-surface-primary/95`) with dark links + mobile capsule trigger for `MobileNavDrawer` (2026-09-29 redesign; was transparent-over-hero with dark scroll capsule).
 
-**Behaviour**: `fixed top-0 inset-x-0 z-50`. Desktop shows a dark espresso capsule (`bg-brand-espresso/90`) with inline links + CTA; mobile shows the logo + a `w-8 h-8` (32px) hamburger button that opens `MobileNavDrawer`.
+**Behaviour**: `fixed top-0 inset-x-0 z-50`. Desktop shows inline dark links + outlined Reservierung + gold order CTA directly on the bar; mobile shows the logo + a light capsule (Speisekarte link + `w-11 h-11` hamburger) that opens `MobileNavDrawer` (which renders above at `z-[70]`).
 
 **Accessibility**: hamburger button has `aria-label="Navigationsmenü öffnen"` + `aria-expanded` state. Sits at `z-50`, below the skip-link's `z-[100]` — verified via a real 40-element keyboard-tab test (2026-08-07) that the skip link is never obscured by the fixed nav (WCAG 2.2 SC 2.4.11), and that anchor-linked sections elsewhere in the site (Datenschutz's table of contents) use `scroll-mt-28` to compensate for the fixed header's height on jump-navigation.
 

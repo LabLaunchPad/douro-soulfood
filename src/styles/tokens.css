@@ -292,7 +292,6 @@
      rhythm for full-width page sections.
      ───────────────────────────────────────────────────────────── */
 
-  --spacing-section: 7.5rem;       /* 120px — Desktop section padding */
   --spacing-section-mobile: 2.5rem; /* 40px — Mobile section padding (2026-09-28: half the desktop register per macro-whitespace guidance; was 2rem/32px) */
 
 
@@ -600,7 +599,7 @@
     transition: color var(--duration-fast) var(--ease-spring);
   }
   a:hover {
-    color: var(--color-brand-gold);
+    color: var(--color-brand-gold-ink);
   }
 
   /* ── Scrollbar ──
