@@ -52,3 +52,16 @@ Astro 7 + Tailwind v4 + Keystatic CMS restaurant marketing site for D'ouro Soulf
 
 ## Required report format
 End every non-trivial task with: what changed (files), what was verified (real commands run, real output), what wasn't verifiable and why, and any risk or follow-up worth flagging. Don't claim a check passed if it wasn't actually run.
+
+<!-- antislop:start -->
+## antislop
+For UI, copy, people, mobile layout, or code comments work, load the antislop skill for the task:
+- Core filter, always on: `antislop`
+- UI / visual: `antislop-ui`
+- Copy & text: `antislop-copywriting`
+- People: `antislop-human`
+- Mobile / responsive: `antislop-layoutmobile`
+- Code comments: `antislop-code`
+Before starting, ask the user when antislop applies: during the work, or after it is done.
+To update antislop later: `npx antislop-ai --update`, or run `npx antislop-ai` and pick Overwrite them.
+<!-- antislop:end -->

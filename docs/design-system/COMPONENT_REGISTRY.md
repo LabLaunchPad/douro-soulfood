@@ -79,10 +79,11 @@ Real inventory, verified against `src/components/` on 2026-08-07. Full contracts
 | HeroSection | section | Homepage hero, dual mobile/desktop video | Fixed 2026-08-07: was double-loading both mobile+desktop video files regardless of viewport (real, previously-undiscovered bug, ~doubled bandwidth on every homepage visit) |
 | FeatureCard | section | Generic image+text+CTA card (Firmenevents, Private Feiern) | None found |
 | OurStorySection | section | Founder-story block | Founder-title text-size fixed 2026-08-07 |
-| UserReviews | section | Testimonial marquee | Glass-card opacity raised 2026-08-07 for legibility |
+| UserReviews | section | Testimonial marquee | Glass-card opacity raised 2026-08-07 for legibility; pause control added 2026-09-27 (WCAG 2.2.2); dataset capped at doubled per track 2026-09-27 (was tripled — same reviewer visible twice per viewport) |
 | PhotoGrid | section | Gallery grid | None found |
 | FaqAccordion | section | Native `<details>`-based FAQ | None found |
-| MenuBistroCard | section | Menu item card for the bistro-themed category banners (Entradas, Bebidas sub-categories) | Undersized text (10-11px) and un-tokenized `stone-*`/`amber-*` colors — see `COLOR_SYSTEM.md` |
+| MenuBistroCard | section | Menu item card for the bistro-themed category banners (Entradas, Bebidas sub-categories) | Undersized text (10-11px) and un-tokenized `stone-*`/`amber-*` colors — see `COLOR_SYSTEM.md`; stretched-link focus fixed 2026-09-27 (`focus-visible` gold-ink ring, was `outline-none` + amber) |
 | MobileNavDrawer | layout | Full-screen mobile nav overlay | None found |
-| MobileBottomBar | layout | Fixed bottom call/order bar, mobile only | None found (note: appears to duplicate mid-page in `fullPage` screenshots — a Puppeteer stitching artifact, not a real rendering bug, see `GRID_SYSTEM.md`) |
+| MobileBottomBar | layout | Fixed bottom call/order bar, mobile only | None found (note: appears to duplicate mid-page in `fullPage` screenshots — a Playwright stitching artifact, not a real rendering bug, see `GRID_SYSTEM.md`) |
 | Footer | layout | Site footer | Nav-link/legal-link hover colors fixed 2026-08-07; still has un-tokenized `stone-*`/`zinc-*`/`neutral-*` for muted text — see `COLOR_SYSTEM.md` |
+| Section | layout | Shared section wrapper: owns vertical rhythm (`py-section-mobile md:py-5`), container (`max-w-7xl`, `px-4 md:px-16`) and landmark naming; `contained` (section is the container) vs `full` (bleed + nested container); extra classes for decoration only, never spacing overrides | Added 2026-09-27; 5 inline homepage sections migrated, rendering byte-identical; component-owned sections (PhotoGrid, UserReviews, FaqAccordion) stay self-contained |

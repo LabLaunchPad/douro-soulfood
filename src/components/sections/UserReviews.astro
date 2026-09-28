@@ -59,20 +59,42 @@ const getInitials = (name: string) => {
     .toUpperCase();
 };
 
-const marqueeReviews = [...reviews, ...reviews, ...reviews];
+/* Doubled (not tripled): the -50% loop needs two halves; one doubled half
+   (6 cards ≈ 2304px desktop / 1944px mobile) already exceeds the widest viewport. */
+const marqueeReviews = [...reviews, ...reviews];
 ---
 
-<section class="w-full py-section-mobile md:py-5" aria-label="Gästebewertungen">
+<section class="w-full py-section-mobile md:py-12" aria-label="Gästebewertungen" data-reviews>
   <div class="max-w-7xl mx-auto px-4 md:px-16 text-center mb-4 md:mb-5">
     <span class="inline-block text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
       Bewertungen
     </span>
     <h2 class="text-2xl md:text-4xl font-semibold text-text-primary font-display">{title}</h2>
     <p class="text-text-secondary mt-3 max-w-[52ch] mx-auto">{subtitle}</p>
+    {/* WCAG 2.2.2: >5s auto-motion needs a persistent pause control —
+        hover-pause alone excludes keyboard/touch users. */}
+    <button
+      type="button"
+      data-marquee-toggle
+      aria-controls="guest-reviews-track"
+      aria-label="Automatisches Scrollen der Bewertungen stoppen"
+      class="mt-4 inline-flex min-h-12 items-center gap-2 rounded-sm border border-border-default bg-surface-card px-4 text-xs font-semibold uppercase tracking-wider text-text-secondary no-underline transition-colors duration-[var(--duration-fast)] ease-[var(--ease-spring)] hover:border-border-emphasis hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+    >
+      <svg
+        class="w-3.5 h-3.5"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <rect x="3" y="2" width="3.5" height="12" rx="1" />
+        <rect x="9.5" y="2" width="3.5" height="12" rx="1" />
+      </svg>
+      <span data-marquee-toggle-label>Animation pausieren</span>
+    </button>
   </div>
 
-  <div class="w-full overflow-hidden marquee-mask py-4">
-    <div class="flex w-max animate-marquee">
+  <div id="guest-reviews-track" class="marquee-viewport w-full overflow-hidden marquee-mask py-4">
+    <div class="flex w-max animate-marquee" data-marquee-track>
       {/* Track A */}
       <div class="flex gap-6 pr-6 shrink-0">
         {marqueeReviews.map((review) => (
@@ -110,7 +132,7 @@ const marqueeReviews = [...reviews, ...reviews, ...reviews];
       </div>
 
       {/* Track B (Duplicated for seamless looping) */}
-      <div class="flex gap-6 pr-6 shrink-0" aria-hidden="true">
+      <div class="flex gap-6 pr-6 shrink-0" aria-hidden="true" data-marquee-track-dup>
         {marqueeReviews.map((review) => (
           <div class="flex flex-col justify-between w-[300px] sm:w-[360px] shrink-0 rounded-lg bg-surface-glass backdrop-blur-sm border border-border-subtle p-6 md:p-8 transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)] hover:border-border-default hover:shadow-md">
             <div class="flex flex-col gap-4">
@@ -147,3 +169,24 @@ const marqueeReviews = [...reviews, ...reviews, ...reviews];
     </div>
   </div>
 </section>
+
+<script>
+  // Pause/Play toggle for the testimonial marquee (WCAG 2.2.2). Class toggle
+  // sticks until re-activated; hover pause is pure CSS and never overrides it.
+  const section = document.querySelector<HTMLElement>('[data-reviews]');
+  const toggle = section?.querySelector<HTMLButtonElement>('[data-marquee-toggle]');
+  const label = toggle?.querySelector<HTMLElement>('[data-marquee-toggle-label]');
+
+  if (section && toggle && label) {
+    const LABEL_PAUSE = 'Animation pausieren';
+    const LABEL_RESUME = 'Animation fortsetzen';
+    const ARIA_PAUSE = 'Automatisches Scrollen der Bewertungen stoppen';
+    const ARIA_RESUME = 'Automatisches Scrollen der Bewertungen fortsetzen';
+
+    toggle.addEventListener('click', () => {
+      const paused = section.classList.toggle('reviews-paused');
+      label.textContent = paused ? LABEL_RESUME : LABEL_PAUSE;
+      toggle.setAttribute('aria-label', paused ? ARIA_RESUME : ARIA_PAUSE);
+    });
+  }
+</script>

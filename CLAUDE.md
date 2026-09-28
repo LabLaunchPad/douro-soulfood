@@ -48,3 +48,16 @@ Playwright and Lighthouse both need a Chromium binary and may not run in a sandb
   - Maintain verified responsive breakpoints (`lg:hidden` on mobile/tablet bar, `lg:flex` on desktop nav).
 - **Avoid Speculative "Improvements"**: Do not make speculative adjustments to touch targets, typography scales, or layouts under the guise of general audits without explicit user approval.
 - **Visual Verification**: Before finishing any UI task, verify layout integrity across mobile (<768px), tablet (768–1023px), and desktop (1024px+) viewports.
+
+<!-- antislop:start -->
+## antislop
+For UI, copy, people, mobile layout, or code comments work, load the antislop skill for the task:
+- Core filter, always on: `antislop`
+- UI / visual: `antislop-ui`
+- Copy & text: `antislop-copywriting`
+- People: `antislop-human`
+- Mobile / responsive: `antislop-layoutmobile`
+- Code comments: `antislop-code`
+Before starting, ask the user when antislop applies: during the work, or after it is done.
+To update antislop later: `npx antislop-ai --update`, or run `npx antislop-ai` and pick Overwrite them.
+<!-- antislop:end -->

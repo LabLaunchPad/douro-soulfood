@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import Base from '@/layouts/Base.astro';
 import Button from '@/components/ui/Button.astro';
 import NavBar from '@/components/layout/NavBar.astro';
+import Section from '@/components/layout/Section.astro';
 import HeroSection from '@/components/sections/HeroSection.astro';
 import ReviewBadge from '@/components/ui/ReviewBadge.astro';
 import CategoryIcon from '@/components/ui/CategoryIcon.astro';
@@ -240,10 +241,7 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 3. REVIEW BADGE */}
-  <section
-    class="py-section-mobile md:py-5 px-4 md:px-16 border-b border-border-subtle"
-    aria-label="Bewertungen"
-  >
+  <Section ariaLabel="Google-Bewertung" class="border-b border-border-subtle">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
       {/*
         ponytail: rating/count are the current Google values (Stand September 2026),
@@ -258,14 +256,13 @@ const PAGE_DESCRIPTION =
       />
       <span class="text-text-tertiary text-sm">Google Reviews · Stand: September 2026</span>
     </div>
-  </section>
+  </Section>
 
   {/* 3b. QUICK-ACCESS ROW — fast access to menu/reservation/events/location,
        consolidated into one scannable block (priority: fast access to menu,
        ordering, reservation, events, and location). */}
-  <section
-    class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto"
-    aria-label="Schnellzugriff"
+  <Section
+    ariaLabel="Schnellzugriff"
   >
     <div class="grid grid-cols-4 gap-2 sm:gap-4">
       {[
@@ -312,7 +309,7 @@ const PAGE_DESCRIPTION =
         </a>
       ))}
     </div>
-  </section>
+  </Section>
 
   {/* 4. BELIEBTE GERICHTE IM D'OURO BISTRO — moved up: strongest appetite-appeal
        asset shouldn't be buried several sections deep. */}
@@ -338,18 +335,17 @@ const PAGE_DESCRIPTION =
   {/* 6. TESTIMONIALS — grouped near Story rather than split by two event-CTA
        sections. Rendered directly (no wrapping <section>) since
        UserReviews.astro's own root is already a full section with its own
-       aria-label landmark and py-section-mobile padding — an outer wrapper
-       here previously double-padded this section (96px combined gap vs
-       64px everywhere else), caught by a 2026-08-08 browser-measured
+       aria-label landmark and section padding — an outer wrapper here would
+       double-pad this section (128px combined gap on mobile vs 64px
+       everywhere else), caught by a 2026-08-08 browser-measured
        audit. Matches how PhotoGrid/OurStorySection/FaqAccordion are
        already invoked below. */}
   <UserReviews />
 
   {/* 7. 6 AFRO-LATINO SPEZIALITÄTEN — moved down: now a browse aid, the
        quick-access row above is the primary fast-access mechanism. */}
-  <section
-    class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto"
-    aria-label="Speisekarte Kategorien"
+  <Section
+    ariaLabel="Speisekarte Kategorien"
   >
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
@@ -360,11 +356,11 @@ const PAGE_DESCRIPTION =
       </h2>
     </div>
 
-    <div class="grid grid-cols-6 gap-1 sm:gap-3 md:gap-4">
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-1 sm:gap-3 md:gap-4">
       {categorySlots.map((slot) => (
         <a
           href={`/menu#category-${slot.slug}`}
-          class="group flex flex-col items-center text-center p-1.5 sm:p-4 rounded-lg sm:rounded-2xl bg-surface-card border border-border-subtle hover:border-brand-gold/50 hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-sm sm:shadow-md min-w-0"
+          class="group flex flex-col items-center text-center min-h-12 p-1.5 sm:p-4 rounded-lg sm:rounded-2xl bg-surface-card border border-border-subtle hover:border-brand-gold/50 hover:bg-surface-elevated transition-all duration-[var(--duration-fast)] no-underline shadow-sm sm:shadow-md min-w-0"
         >
           <div class="w-7 h-7 sm:w-12 sm:h-12 rounded-md sm:rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center mb-1 sm:mb-3 group-hover:scale-110 transition-transform shrink-0">
             <CategoryIcon name={slot.icon} class="w-3.5 h-3.5 sm:w-6 sm:h-6" />
@@ -378,14 +374,13 @@ const PAGE_DESCRIPTION =
         </a>
       ))}
     </div>
-  </section>
+  </Section>
 
   {/* 8. EVENTS & FEIERN — Firmenevents + Private Feiern consolidated into one
        section (two cards) instead of two separate full-width sections;
        shorter scroll, same content. */}
-  <section
-    class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto"
-    aria-label="Events & Feiern"
+  <Section
+    ariaLabel="Events & Feiern"
   >
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
@@ -444,7 +439,7 @@ const PAGE_DESCRIPTION =
         </div>
       ))}
     </div>
-  </section>
+  </Section>
 
   {/* 9. GALERIE SECTION */}
   <PhotoGrid
@@ -464,10 +459,9 @@ const PAGE_DESCRIPTION =
   />
 
   {/* 11. MAP & STANDORT SECTION */}
-  <section
+  <Section
     id="standort"
-    class="py-section-mobile md:py-5 px-4 md:px-16 max-w-7xl mx-auto"
-    aria-label="Unser Standort"
+    ariaLabel="Unser Standort"
   >
     <div class="text-center mb-4 md:mb-5">
       <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
@@ -546,7 +540,7 @@ const PAGE_DESCRIPTION =
         </div>
       </div>
     </article>
-  </section>
+  </Section>
 
   {/* 12. FOOTER */}
   <Footer slot="footer" />

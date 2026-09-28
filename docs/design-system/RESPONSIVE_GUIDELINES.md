@@ -18,6 +18,8 @@ Mobile (390×844, iPhone-class viewport) is the primary check for every screen b
 ## Desktop-specific notes
 
 - Nav collapses to a dark capsule pill at `lg:` (1024px) — below that, hamburger + drawer. (Moved from `md:`/768px in #48 to fix capsule-nav wrapping at the tablet breakpoint; this doc wasn't updated at the time — fixed 2026-08-07 during a tablet/wide viewport audit.)
+- `MobileBottomBar` is phone-only chrome: `md:hidden` (hidden ≥768px), matching its documented `<768px` intent and the hero's own mobile/desktop CTA switch at `md:` — fixed 2026-09-27 (was `lg:hidden`, showing tablet users both desktop hero CTAs and the mobile bar plus a 5px CTA nick). Footer clearance (`pb-16` mobile / `md:pb-12`) steps at the same `md:` rule, so bar visibility and page compensation cannot drift apart; the bar also auto-hides with `inert` on scroll-down as defense in depth. Guarded by `tests/p0-regression.spec.ts`.
+- Homepage category grid: `grid-cols-3` below `md:`, `md:grid-cols-6` at/above (fixed 2026-09-27 — was 6-up down to 360px, ~51px columns, untappable). Tiles carry `min-h-12` like the quick-access row.
 - Menu category filter chips: single-row flex-wrap on mobile, unconstrained row on desktop.
 - Gallery grid: `grid-cols-2` mobile → `lg:grid-cols-3` desktop.
 

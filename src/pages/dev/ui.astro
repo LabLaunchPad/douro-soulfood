@@ -19,6 +19,7 @@ import MenuItemCard from '@/components/sections/MenuItemCard.astro';
 import MenuBistroCard from '@/components/sections/MenuBistroCard.astro';
 import FeatureCard from '@/components/sections/FeatureCard.astro';
 import HeroSection from '@/components/sections/HeroSection.astro';
+import Section from '@/components/layout/Section.astro';
 import previewEvent from '@/assets/catering/event.webp';
 import previewHeroFallback from '@/assets/hero/hero-fallback.jpg';
 import previewFeijoada from '@/assets/menu/feijoada.webp';
@@ -208,6 +209,26 @@ if (!import.meta.env.DEV) {
           ctaSecondary={{ label: 'Secondary CTA', href: '#' }}
         />
       </div>
+    </section>
+
+    <section>
+      <h2 class="text-lg font-semibold mb-3 font-display">Section</h2>
+      <div class="flex flex-col gap-3">
+        <Section ariaLabel="Preview contained" class="border border-border-subtle">
+          <p class="text-sm text-text-secondary">
+            Contained: the section itself is the container (max-w-7xl).
+          </p>
+        </Section>
+        <Section ariaLabel="Preview full" mode="full" class="bg-surface-elevated">
+          <p class="text-sm text-text-secondary">
+            Full: full-bleed background with the container nested inside.
+          </p>
+        </Section>
+      </div>
+      <p class="text-xs text-text-tertiary mt-2">
+        Manual check: full-bleed background spans the viewport while inner text aligns with
+        contained sections; rhythm (py-section-mobile md:py-12) identical in both modes.
+      </p>
     </section>
 
     <footer class="text-xs text-text-tertiary border-t border-border-subtle pt-4">

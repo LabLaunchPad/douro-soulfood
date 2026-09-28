@@ -76,14 +76,10 @@ const heroImage = images[0];
 ---
 
 <header class="relative w-full overflow-hidden bg-surface-primary">
-  <!-- Background layer (Video or Image) -->
-  <div
-    class="absolute inset-0 overflow-hidden"
-    role="region"
-    aria-live="polite"
-    aria-atomic="true"
-    aria-label="Hero-Hintergrund"
-  >
+  <!-- Background layer (Video or Image) — purely decorative: hidden from
+       assistive technology. The heading, copy and CTAs live in the sibling
+       content div below and keep their semantics. -->
+  <div class="absolute inset-0 overflow-hidden" aria-hidden="true" data-hero-background>
     {videoSrc ? (
       <>
         {/* Mobile and desktop videos share a poster fallback and load lazily —

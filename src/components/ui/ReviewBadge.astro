@@ -80,8 +80,10 @@ const Tag = href ? 'a' : 'div';
       which must never be marked up as our own `aggregateRating`
       (see the note in `src/lib/seo/graph.ts`). */}
 
-  {/* Star icons — brand gold */}
-  <div class="flex items-center gap-0.5" role="img" aria-hidden="true">
+  {/* Star icons — brand gold, decorative: the parent carries the full
+      rating aria-label, so no role/label here (role="img" without a name
+      would be worse than none). */}
+  <div class="flex items-center gap-0.5" aria-hidden="true">
     {/* Full stars */}
     {Array.from({ length: fullStars }).map(() => (
       <svg

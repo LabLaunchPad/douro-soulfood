@@ -1,0 +1,52 @@
+---
+/**
+ * Section: single owner of section rhythm (vertical padding, horizontal
+ * container, accessible name). Padding (not margins) separates sections so
+ * background treatments can bleed without collapsing.
+ *
+ * Two modes, one spacing system (`py-section-mobile md:py-12`, `max-w-7xl`):
+ * - contained (default): the section itself is the container, the pattern
+ *   most homepage sections already used.
+ * - full: full-bleed section (e.g. tinted band) with the container nested
+ *   inside, so content edges align with contained sections.
+ */
+
+interface Props {
+  /** Accessible name: every section must be a named landmark. */
+  ariaLabel?: string;
+  /** Anchor id (e.g. standort). Omitted when absent. */
+  id?: string;
+  /** contained: section is the container. full: container nested inside. */
+  mode?: 'contained' | 'full';
+  /** Extra classes (e.g. border-b, background). Never spacing overrides. */
+  class?: string;
+}
+
+const { ariaLabel, id, mode = 'contained', class: className = '' } = Astro.props;
+---
+
+{
+  mode === 'full' ? (
+    <section
+      id={id}
+      aria-label={ariaLabel}
+      data-section
+      data-section-mode="full"
+      class:list={['w-full py-section-mobile md:py-12', className]}
+    >
+      <div class="max-w-7xl mx-auto px-4 md:px-16">
+        <slot />
+      </div>
+    </section>
+  ) : (
+    <section
+      id={id}
+      aria-label={ariaLabel}
+      data-section
+      data-section-mode="contained"
+      class:list={['py-section-mobile md:py-12 px-4 md:px-16 max-w-7xl mx-auto', className]}
+    >
+      <slot />
+    </section>
+  )
+}

@@ -511,13 +511,8 @@
   src: url('/fonts/fraunces-normal-variable.woff2') format('woff2');
 }
 
-@font-face {
-  font-family: 'Fraunces';
-  font-style: italic;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url('/fonts/fraunces-italic-variable.woff2') format('woff2');
-}
+/* No Fraunces italic face: zero display+italic uses, so the 79.6 KB file is dead weight;
+   a future italic heading falls back to synthesized oblique. */
 
 
 /* ─────────────────────────────────────────────────────────────────
@@ -542,11 +537,18 @@
   /* ── HTML root ──
      Sets the background to the deepest surface (the "void")
      and ensures the warm cream text color is inherited by
-     all children. Smooth scrolling enabled globally. */
+     all children. Smooth scrolling only when the user has not
+     asked for reduced motion (WCAG 2.3.3) — the global
+     reduced-motion block kills durations, not scroll behavior. */
   html {
-    scroll-behavior: smooth;
     background-color: var(--color-surface-primary);
     color: var(--color-text-primary);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   /* ── Body ──
