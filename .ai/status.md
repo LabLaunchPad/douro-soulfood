@@ -4,7 +4,7 @@
 
 ## Current repo status
 
-D'ouro Soulfood Bistro site — Astro 7 + Tailwind v4 + Keystatic, deployed to Cloudflare Pages/Workers. `main` branch is stable; `pnpm build` passes clean from a fresh checkout. Legal pages (Impressum/Datenschutz) are live. Google Fonts are self-hosted, Google Maps is consent-gated. The Impeccable design-audit skill is installed (project scope, Claude Code only, `.claude/skills/impeccable/`). A full design-system knowledge base lives at `docs/design-system/` (17 files, real project data, not placeholders). No open PRs, no open issues.
+D'ouro Soulfood Bistro site — Astro 7 + Tailwind v4 + Keystatic, deployed to Cloudflare Pages/Workers. `main` branch is stable; `pnpm build` passes clean from a fresh checkout. Legal pages (Impressum/Datenschutz) are live. Google Fonts are self-hosted, Google Maps is consent-gated. The Impeccable design-audit skill is installed (project scope, Claude Code only, `.claude/skills/impeccable/`). A full design-system knowledge base lives at `docs/design-system/` (17 files, real project data, not placeholders). One open draft PR (#57, stale since 2026-08-09), no open issues.
 
 ## Active task
 
@@ -18,6 +18,7 @@ Fix the mobile LCP breach (see blockers) — it is the only `error`-level budget
 
 ## Current blockers
 
+- **Production deployment is stale (found 2026-09-28)**: live `https://douro-soulfood.com/` serves pre-#63 HTML — `md:py-5` (40px gaps), `4.8/978` badge + `aggregateRating` node, no `data-section-mode`, old hero loader — missing all Sept 27–28 work (SEO truth pass, P0/P1, Section component, both rhythm upgrades, LCP deferral). Edge cache is NOT the cause (`Cache-Control: max-age=0, must-revalidate` with revalidated HIT means the origin Worker itself is old). Cloudflare Workers Builds Git integration is not deploying `main` pushes. Owner action required in the Cloudflare dashboard (Deployments last-deploy date, Settings → Builds repo/branch connection and build-failure log). Agent stop-and-ask #6 applies: no repo-side credential can fix this.
 - **Mobile LCP exceeds budget**: ~4131 ms on `/` and ~2863 ms on `/menu/` against 2500 ms, and `/` scores 0.86 against the 0.90 performance floor. Measured against a Brotli-serving origin, so it is genuine and not a compression artifact. Cause is the render-blocking CSS. **Do not resolve by relaxing a threshold.**
 - **`CLOUDFLARE_API_TOKEN` secret is unset**, so `Deploy Preview`/`Deploy to Production` fail. Needs repo-admin access. The Actions deploy path is _additionally_ broken (Pages command against a Workers build, `dist/` instead of `dist/client`, wrangler 3 vs 4) and redundant — Cloudflare's Git integration is what actually deploys.
 
