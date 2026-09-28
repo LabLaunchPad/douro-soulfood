@@ -33,8 +33,10 @@ test.describe('Section component contract', () => {
   });
 
   test('section rhythm matches the spacing system', async ({ page, isMobile }) => {
-    // Mobile: py-section-mobile (32px). Desktop: md:py-12 (48px, menu.astro precedent).
-    const expectedPad = isMobile ? '32px' : '48px';
+    // Research-backed generous tier (2026-09-28): mobile py-section-mobile
+    // (40px, half the desktop register), desktop md:py-20 (80px, premium
+    // hospitality band 80-160px; gaps land at 80px mobile / 160px desktop).
+    const expectedPad = isMobile ? '40px' : '80px';
     for (const label of CONTAINED_SECTIONS) {
       const section = page.locator(`section[aria-label="${label}"]`);
       await expect
