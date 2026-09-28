@@ -1,6 +1,6 @@
 # Component Registry
 
-Real inventory (verified against `src/components/`, 2026-08-07). Full per-component contracts with anatomy/props/token-mapping detail: `docs/design-system/COMPONENT_REGISTRY.md` — this file adds the state-completeness column this standard specifically requires (section 6/9), which the other registry didn't check for.
+Real inventory (verified against `src/components/`, 2026-08-07; `Section` row added 2026-09-28 — remainder unchanged). Full per-component contracts with anatomy/props/token-mapping detail: `docs/design-system/COMPONENT_REGISTRY.md` — this file adds the state-completeness column this standard specifically requires (section 6/9), which the other registry didn't check for.
 
 | Component | Category | States present | States N/A (with reason) |
 |---|---|---|---|
@@ -8,6 +8,7 @@ Real inventory (verified against `src/components/`, 2026-08-07). Full per-compon
 | `MenuItemCard` | section | default, hover (image scale + title color), focus (via clickable-card link) | selected (no multi-select context), loading/error (static data) — has a real "unavailable" state (explicit banner, not hidden) |
 | `NavBar` | layout | default, scroll-triggered capsule transition, focus-visible, `aria-expanded` (mobile toggle) | disabled, loading — n/a |
 | `MobileNavDrawer` | layout | open/closed (via `inert`/`aria-hidden`), focus-trapped while open, focus-visible on all links | n/a |
+| `Section` | layout | default in two modes (contained: section is the container; full: full-bleed band with nested container), named landmark via `aria-label`, anchor via `id` | hover/active/focus/disabled/loading (non-interactive wrapper — correct, it owns rhythm/container only; interactive states belong to slotted content) |
 | `FaqAccordion` | section | closed/open (native `<details>`), hover, focus-visible | n/a — native element handles state semantics |
 | `AllergenBadge` / `DietaryBadge` | atom | default only (static informational chips) | hover/active/focus (not interactive — correct, they're not buttons/links) |
 | `ReviewBadge` | atom | default only (static display) | interactive states — correct, purely informational |
