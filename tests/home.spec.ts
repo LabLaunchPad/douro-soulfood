@@ -90,6 +90,36 @@ test.describe('Home page — content & visibility', () => {
     await expect(active).toHaveAttribute('poster', /hero-fallback-1280.*\.webp/);
   });
 
+  test('active hero video is muted by property and reaches a playable state', async ({
+    page,
+    isMobile,
+  }) => {
+    // iPhone regression contract: the repo file carries an audio track, so
+    // iOS Safari's autoplay policy needs muted === true (property, not just
+    // attribute) at play() time — attribute-only muting is a silent-block
+    // path on WebKit. The script records its outcome on data-playback-state.
+    const active = page.locator(
+      `video[data-hero-video="${isMobile ? 'mobile' : 'desktop'}"]`,
+    );
+    await expect.poll(async () => active.getAttribute('src')).not.toBeNull();
+    expect(await active.evaluate((v) => (v as HTMLVideoElement).muted)).toBe(true);
+    await expect
+      .poll(async () => active.getAttribute('data-playback-state'))
+      .toBe('PLAYING');
+  });
+
+  test('reduced-motion leaves hero video sourceless on poster', async ({ browser }) => {
+    const context = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await context.newPage();
+    await page.goto('/');
+    for (const kind of ['mobile', 'desktop']) {
+      const video = page.locator(`video[data-hero-video="${kind}"]`);
+      expect(await video.getAttribute('src')).toBeNull();
+      await expect(video).toHaveAttribute('data-playback-state', 'NO_SOURCE');
+    }
+    await context.close();
+  });
+
   test('featured dishes section shows "Empfehlungen" heading', async ({ page }) => {
     // Scoped by the section's accessible name rather than a colour utility
     // class, for the same staleness reason as the review badge above.

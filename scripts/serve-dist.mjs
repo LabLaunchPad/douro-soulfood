@@ -95,6 +95,32 @@ function sendFile(req, res, path, size) {
     Vary: 'Accept-Encoding',
   };
 
+  // Byte-range support (RFC 9110 §14): media elements (notably iOS Safari
+  // <video>, which probes `Range: bytes=0-1` and stalls on a 200 full-body
+  // answer) require 206 Partial Content. Production Cloudflare delivery is
+  // audited separately; this keeps local media behavior faithful so
+  // playback tests exercise the same contract.
+  const range = String(req.headers.range || '');
+  const rangeMatch = /^bytes=(\d*)-(\d*)$/.exec(range);
+  if (rangeMatch && req.method === 'GET') {
+    const rawStart = rangeMatch[1] === '' ? size - Number(rangeMatch[2] || 0) : Number(rangeMatch[1]);
+    const start = Math.max(0, rawStart);
+    const end = rangeMatch[2] === '' ? size - 1 : Number(rangeMatch[2]);
+    if (Number.isNaN(start) || Number.isNaN(end) || start > end || start >= size) {
+      res.writeHead(416, { ...headers, 'Content-Range': `bytes */${size}` });
+      return res.end();
+    }
+    const clampedEnd = Math.min(end, size - 1);
+    res.writeHead(206, {
+      ...headers,
+      'Accept-Ranges': 'bytes',
+      'Content-Range': `bytes ${start}-${clampedEnd}/${size}`,
+      'Content-Length': clampedEnd - start + 1,
+    });
+    return createReadStream(path, { start, end: clampedEnd }).pipe(res);
+  }
+  headers['Accept-Ranges'] = 'bytes';
+
   const accepted = String(req.headers['accept-encoding'] || '');
   const encoding = !COMPRESSIBLE.has(ext)
     ? null

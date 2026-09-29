@@ -207,14 +207,53 @@ const heroImage = images[0];
   // loaded at all and the poster image stays visible (WCAG 2.2.2 — this
   // background video is purely decorative, loops indefinitely, and has no
   // pause control, so it must not autoplay for users who've asked for
-  // reduced motion). Autoplay can still fail even when allowed (iOS/macOS
-  // Safari Low Power Mode blocks it unconditionally, with no way to detect
-  // or work around this) — .play()'s rejection is caught silently and the
-  // poster remains visible, which is the correct fallback.
+  // reduced motion).
+  //
+  // No `autoplay` attribute on purpose: the file is 4-8 MB and must not
+  // enter the LCP window — activation stays gated on window `load` (see
+  // below) with `preload="none"`, and playback is driven by an explicit
+  // JS play() call instead. Autoplay can still fail even when allowed
+  // (iOS/macOS Safari Low Power Mode blocks it unconditionally, with no
+  // way to detect or work around this) — the state model below records
+  // the outcome on `data-playback-state` and the poster stays visible,
+  // which is the correct fallback. No console output in production: the
+  // attribute is the diagnostic channel (readable via devtools/Playwright).
+  type PlaybackState =
+    | 'NO_SOURCE'
+    | 'SOURCE_ASSIGNED'
+    | 'CAN_PLAY'
+    | 'PLAYING'
+    | 'BLOCKED_AUTOPLAY'
+    | 'MEDIA_ERROR'
+    | 'NETWORK_ERROR'
+    | 'STALLED';
   const videos = document.querySelectorAll<HTMLVideoElement>('[data-hero-video]');
   if (videos.length > 0) {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const desktopQuery = window.matchMedia('(min-width: 768px)');
+
+    const setState = (video: HTMLVideoElement, state: PlaybackState) => {
+      video.dataset.playbackState = state;
+    };
+
+    for (const video of videos) {
+      setState(video, 'NO_SOURCE');
+      // Media-element truth the swallowed promise can't give: 404/truncated
+      // file vs undecodable bytes vs stall-before-first-frame.
+      video.addEventListener('error', () => {
+        const code = video.error?.code;
+        // MEDIA_ERR_NETWORK (2) = fetch failed; all other codes = bytes
+        // arrived but unusable (aborted/empty/decode).
+        setState(video, code === 2 ? 'NETWORK_ERROR' : 'MEDIA_ERROR');
+      });
+      video.addEventListener('stalled', () => {
+        if (video.dataset.playbackState !== 'PLAYING') setState(video, 'STALLED');
+      });
+      video.addEventListener('canplay', () => {
+        if (video.dataset.playbackState === 'SOURCE_ASSIGNED') setState(video, 'CAN_PLAY');
+      });
+      video.addEventListener('playing', () => setState(video, 'PLAYING'));
+    }
 
     let activeVideo: HTMLVideoElement | null = null;
 
@@ -235,12 +274,29 @@ const heroImage = images[0];
 
       const src = next.dataset.videoSrc;
       if (src) {
+        // Property, not just attribute: the file carries an audio track, so
+        // iOS Safari's autoplay policy needs muted === true at play() time.
+        // Attribute-only muting is a known silent-block path on WebKit.
+        next.muted = true;
+        next.defaultMuted = true;
         next.src = src;
+        setState(next, 'SOURCE_ASSIGNED');
         next.load();
-        next.play().catch(() => {
-          // Autoplay rejected (Low Power Mode, restrictive in-app browser,
-          // data-saver mode, etc.) — poster image stays visible, no error.
-        });
+        next
+          .play()
+          .then(() => {
+            activeVideo = next;
+          })
+          .catch((err: unknown) => {
+            // NotAllowedError = autoplay/Low-Power block (poster is the
+            // correct fallback, no retry). Anything else leaves this
+            // viewport unclaimed so a later trigger (viewport change,
+            // visibility return) retries instead of stranding on poster.
+            const name = err instanceof Error ? err.name : '';
+            setState(next, name === 'NotAllowedError' ? 'BLOCKED_AUTOPLAY' : 'MEDIA_ERROR');
+            if (name === 'NotAllowedError') activeVideo = next;
+          });
+        return;
       }
       activeVideo = next;
     };
