@@ -51,7 +51,7 @@ const {
 <footer class="bg-brand-espresso pt-8 pb-24 md:pb-12 border-t border-white/10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Main Floating Medium Silver Metallic Capsule Card -->
-    <div class="bg-zinc-300/90 border border-zinc-300/90 backdrop-blur-md rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl transition-all duration-300">
+    <div class="bg-surface-card border border-border-subtle rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl transition-all duration-300">
       <!-- Top Row: Logo, Nav Links, Order CTA -->
       <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
         <!-- Left: Logo & Tagline -->
@@ -69,7 +69,7 @@ const {
               class="h-10 md:h-12 w-auto object-contain transition-transform duration-200 hover:scale-105"
             />
           </a>
-          <p class="text-xs md:text-sm text-zinc-700 leading-relaxed font-sans font-medium">
+          <p class="text-xs md:text-sm text-text-secondary leading-relaxed font-sans font-medium">
             {tagline}
           </p>
         </div>
@@ -79,7 +79,7 @@ const {
           {links.map((link) => (
             <a
               href={link.href}
-              class="inline-flex items-center min-h-12 md:min-h-6 text-sm md:text-base font-bold text-zinc-900 hover:text-brand-gold-ink
+              class="inline-flex items-center min-h-12 md:min-h-6 text-sm md:text-base font-bold text-text-primary hover:text-brand-gold-ink
                      no-underline transition-colors duration-200 rounded-sm"
             >
               {link.label}
@@ -95,7 +95,6 @@ const {
             rel="noopener noreferrer"
             variant="primary"
             size="lg"
-            arrow
             class="text-sm md:text-base font-extrabold tracking-wider uppercase shadow-md hover:shadow-lg hover:scale-[1.02]"
           >
             {cta.label}
@@ -104,14 +103,14 @@ const {
       </div>
 
       <!-- Horizontal Divider Line -->
-      <div class="border-t border-zinc-300 my-6 md:my-8"></div>
+      <div class="border-t border-border-subtle my-6 md:my-8"></div>
 
       <!-- Inner Bottom Row: Legal Links -->
       <div class="flex flex-wrap items-center gap-6">
         {legalLinks.map((link) => (
           <a
             href={link.href}
-            class="inline-flex items-center min-h-12 md:min-h-6 text-xs md:text-sm font-bold text-zinc-700 hover:text-zinc-950
+              class="inline-flex items-center min-h-12 md:min-h-6 text-xs md:text-sm font-bold text-text-secondary hover:text-text-primary
                    no-underline transition-colors duration-200"
           >
             {link.label}

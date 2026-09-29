@@ -153,25 +153,12 @@ const heroImage = images[0];
           href={ctaPrimary.href}
           target={ctaPrimary.external ? '_blank' : undefined}
           rel={ctaPrimary.external ? 'noopener noreferrer' : undefined}
-          class="group inline-flex items-center gap-2 min-h-12 px-5 py-3 text-base font-semibold
+          class="inline-flex items-center gap-2 min-h-12 px-5 py-3 text-base font-semibold
                  rounded-sm bg-brand-gold hover:bg-brand-gold-light active:bg-brand-gold-dark text-brand-espresso
                  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold
                  no-underline transition-colors duration-[var(--duration-fast)] ease-[var(--ease-spring)] shadow-glow-gold"
         >
           <span class="flex items-center gap-1 whitespace-nowrap">{ctaPrimary.label}</span>
-          <svg
-            class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)]"
-            viewBox="0 0 256 256"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="24"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <line x1="70" y1="128" x2="216" y2="128" />
-            <polyline points="144 56 216 128 144 200" />
-          </svg>
         </a>
 
         <!-- Secondary CTA — outlined style -->
@@ -197,10 +184,10 @@ const heroImage = images[0];
         <div class="flex md:hidden mt-4">
           <Button
             href={ctaSecondary.href}
-            variant="primary"
+            variant="secondary"
             size="lg"
             arrow
-            class="w-full justify-center shadow-glow-gold"
+            class="w-full justify-center bg-surface-elevated"
           >
             {ctaSecondary.label}
           </Button>

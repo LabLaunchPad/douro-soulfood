@@ -98,7 +98,7 @@ const marqueeReviews = [...reviews, ...reviews];
       {/* Track A */}
       <div class="flex gap-6 pr-6 shrink-0">
         {marqueeReviews.map((review) => (
-          <div class="flex flex-col justify-between w-[300px] sm:w-[360px] shrink-0 rounded-lg bg-surface-glass backdrop-blur-sm border border-border-subtle p-6 md:p-8 transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)] hover:border-border-default hover:shadow-md">
+          <div class="flex flex-col justify-between w-[300px] sm:w-[360px] shrink-0 rounded-lg bg-surface-card border border-border-subtle p-6 md:p-8 transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)] hover:border-border-default hover:shadow-md">
             <div class="flex flex-col gap-4">
               {/* Star rating */}
               <div
@@ -134,7 +134,7 @@ const marqueeReviews = [...reviews, ...reviews];
       {/* Track B (Duplicated for seamless looping) */}
       <div class="flex gap-6 pr-6 shrink-0" aria-hidden="true" data-marquee-track-dup>
         {marqueeReviews.map((review) => (
-          <div class="flex flex-col justify-between w-[300px] sm:w-[360px] shrink-0 rounded-lg bg-surface-glass backdrop-blur-sm border border-border-subtle p-6 md:p-8 transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)] hover:border-border-default hover:shadow-md">
+          <div class="flex flex-col justify-between w-[300px] sm:w-[360px] shrink-0 rounded-lg bg-surface-card border border-border-subtle p-6 md:p-8 transition-all duration-[var(--duration-fast)] ease-[var(--ease-spring)] hover:border-border-default hover:shadow-md">
             <div class="flex flex-col gap-4">
               {/* Star rating */}
               <div

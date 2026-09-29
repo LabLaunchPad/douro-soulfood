@@ -20,6 +20,10 @@ Real inventory, verified against `src/components/` on 2026-08-07. Full contracts
 
 **Behaviour**: `arrow` prop appends a chevron SVG that translates 2px right and fades in on hover — a consistent micro-interaction across every arrow-bearing CTA site-wide, not a one-off per instance.
 
+**Arrow intent (R-31, taste audit F-2 2026-09-29)**: the chevron means "browse on" (menu, packages, gallery CTAs). Order CTAs (the Lieferando handoff) carry no arrow — hunger needs no direction hint.
+
+**Glow ratification (R-31, taste audit F-3 2026-09-29)**: `shadow-glow-gold` fires only on the primary hunger action per view (order/browse CTA, hover or persistent) — never on cards, badges, icons, or backgrounds. It is the one deliberate accent, not glow-everywhere.
+
 **Accessibility**
 - Touch target: `sm` = 36px min-height, `md` = 44px, `lg` = 48px — all clear WCAG 2.2 SC 2.5.8's 24px floor with margin.
 - Focus-visible outline present on all three variants (verified — a prior audit found and fixed a missing-outline bug elsewhere in the codebase; `Button` was never affected).

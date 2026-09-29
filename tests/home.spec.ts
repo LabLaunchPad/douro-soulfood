@@ -20,10 +20,10 @@ test.describe('Home page — content & visibility', () => {
     await page.goto('/');
   });
 
-  test('H1 "Afro-Latin Soul im Herzen von Salzburg" is visible', async ({ page }) => {
+  test('H1 "Afro-lateinamerikanische Küche in Salzburg" is visible', async ({ page }) => {
     const h1 = page.locator('h1');
     await expect(h1).toBeVisible();
-    await expect(h1).toHaveText('Afro-Latin Soul im Herzen von Salzburg');
+    await expect(h1).toHaveText('Afro-lateinamerikanische Küche in Salzburg');
   });
 
   // Desktop-only: hero CTAs live in a `hidden md:flex` container, not shown on mobile
@@ -47,10 +47,12 @@ test.describe('Home page — content & visibility', () => {
   test('secondary CTA "Speisekarte ansehen" navigates to /menu', async ({ page, isMobile }) => {
     test.skip(isMobile, 'Hero CTAs hidden on mobile viewport');
 
-    // Exact-name match: three /menu links contain the substring
-    // "Speisekarte ansehen" (hero secondary, mobile hero CTA, and the
-    // "Komplette Speisekarte ansehen" section CTA), so `hasText` is ambiguous.
-    const secondaryCta = page.getByRole('link', { name: 'Speisekarte ansehen', exact: true });
+    // Exact-name match scoped to the hero header: the dishes section carries
+    // its own "Speisekarte ansehen" header CTA, so a page-wide match is
+    // ambiguous under strict mode.
+    const secondaryCta = page
+      .locator('header')
+      .getByRole('link', { name: 'Speisekarte ansehen', exact: true });
     await expect(secondaryCta).toBeVisible();
 
     await secondaryCta.click();
@@ -109,7 +111,7 @@ test.describe('Home page — content & visibility', () => {
     // plus a persistent per-tile order handoff (touch/keyboard reachable).
     const dishes = page.locator('section[aria-label="Beliebte Gerichte"]');
     const headerCta = dishes.locator('a[href="/menu"]', {
-      hasText: 'Komplette Speisekarte ansehen',
+      hasText: 'Speisekarte ansehen',
     });
     await expect(headerCta).toBeVisible();
 
@@ -121,9 +123,11 @@ test.describe('Home page — content & visibility', () => {
     );
   });
 
-  test('"Komplette Speisekarte ansehen" CTA links to /menu', async ({ page }) => {
-    const fullMenuCta = page.locator('a[href="/menu"]', {
-      hasText: 'Komplette Speisekarte ansehen',
+  test('"Speisekarte ansehen" CTA links to /menu', async ({ page }) => {
+    // Scoped to the dishes section: the label is deliberately shared with
+    // both hero CTAs since the unslop pass, so a page-wide match is ambiguous.
+    const fullMenuCta = page.locator('section[aria-label="Beliebte Gerichte"] a[href="/menu"]', {
+      hasText: 'Speisekarte ansehen',
     });
     await expect(fullMenuCta).toBeVisible();
   });
@@ -135,7 +139,7 @@ test.describe('Home page — content & visibility', () => {
     // Verify the key narrative text
     await expect(storySection.locator('h2', { hasText: "Wie D'ouro begann" })).toBeVisible();
     await expect(
-      storySection.locator('p', { hasText: /D'ouro begann während des Lockdowns/ }),
+      storySection.locator('p', { hasText: /D'ouro begann im Lockdown/ }),
     ).toBeVisible();
   });
 
@@ -418,7 +422,7 @@ test.describe('Home page — SEO meta tags', () => {
 
   test('page has meta description', async ({ page }) => {
     const metaDesc = page.locator('meta[name="description"]');
-    await expect(metaDesc).toHaveAttribute('content', /brasilianische.*afrikanische.*Salzburg/);
+    await expect(metaDesc).toHaveAttribute('content', /Brasilianische.*afrikanische.*Salzburg/);
   });
 
   test('page has canonical URL', async ({ page }) => {
