@@ -27,7 +27,7 @@ interface Props {
 const {
   links = NAV_LINKS,
   ctaPrimary = { label: 'Jetzt bestellen', href: orderUrl },
-  ctaSecondary = { label: 'Reservierung', href: '/contact' },
+  ctaSecondary = { label: 'Reservieren', href: '/contact' },
   class: className = '',
 } = Astro.props;
 ---
@@ -75,7 +75,7 @@ const {
           ))}
         </div>
 
-        <!-- Secondary Button (Reservierung — SSOT: rounded-sm = 10px) -->
+        <!-- Secondary Button (Reservieren — SSOT: rounded-sm = 10px) -->
         {ctaSecondary && (
           <a
             href={ctaSecondary.href}

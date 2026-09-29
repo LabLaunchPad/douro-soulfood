@@ -9,7 +9,7 @@ export const categoryConfig: Record<string, { label: string; order: number; icon
   'tacos':        { label: 'Tacos',                  order: 30, icon: 'tacos' },
   'bowls':        { label: 'Bowls',                  order: 40, icon: 'bowls' },
   'mains':        { label: 'Pratos Feitos',          order: 50, icon: 'mains' },
-  'seafood':      { label: 'Pratos Do Mar',          order: 60, icon: 'seafood' },
+  'seafood':      { label: 'Pratos do Mar',          order: 60, icon: 'seafood' },
   'sides':        { label: 'Beilagen / Sides',       order: 65, icon: 'sides' },
   'drinks':       { label: 'Bebidas',                order: 70, icon: 'drinks' },
   'desserts':     { label: 'Sobremesas',             order: 80, icon: 'desserts' },

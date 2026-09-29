@@ -22,10 +22,10 @@ test.describe('About page — content', () => {
   });
 
   test("Angela's story section is visible with founder heading", async ({ page }) => {
-    const heading = page.locator('h2', { hasText: "Angela's Geschichte" });
+    const heading = page.locator('h2', { hasText: 'Angelas Geschichte' });
     await expect(heading).toBeVisible();
 
-    const role = page.locator('p', { hasText: 'Founder & Chef' });
+    const role = page.locator('p', { hasText: 'Gründerin & Chefköchin' });
     await expect(role).toBeVisible();
 
     await expect(

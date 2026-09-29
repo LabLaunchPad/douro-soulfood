@@ -29,7 +29,7 @@ const { lat = RESTAURANT_LAT, lon = RESTAURANT_LON } = Astro.props;
     </button>
     <span data-distance-result class="hidden text-xs md:text-sm font-medium text-text-primary" aria-live="polite"></span>
   </div>
-  <p class="text-xs text-text-tertiary">Nur mit deiner Zustimmung. Dein Standort bleibt auf deinem Gerät.</p>
+  <p class="text-xs text-text-tertiary">Nur mit Ihrer Zustimmung. Ihr Standort bleibt auf Ihrem Gerät.</p>
 </div>
 
 <script>
@@ -66,13 +66,13 @@ const { lat = RESTAURANT_LAT, lon = RESTAURANT_LON } = Astro.props;
             const km = 2 * 6371 * Math.asin(Math.sqrt(a));
             show(
               km < 1
-                ? `Ca. ${Math.round((km * 1000) / 10) * 10} m Luftlinie von dir`
-                : `Ca. ${km.toLocaleString('de-AT', { maximumFractionDigits: 1 })} km Luftlinie von dir`,
+                ? `Ca. ${Math.round((km * 1000) / 10) * 10} m Luftlinie von Ihnen`
+                : `Ca. ${km.toLocaleString('de-AT', { maximumFractionDigits: 1 })} km Luftlinie von Ihnen`,
             );
             trigger.remove();
           },
           () => {
-            show('Standort nicht verfügbar. Nutze Route planen.');
+            show('Standort nicht verfügbar. Nutzen Sie „Route planen".');
             trigger.remove();
           },
           { timeout: 8000, maximumAge: 600000 },

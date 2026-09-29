@@ -26,7 +26,8 @@ test.describe('Catering page — content', () => {
     const heading = page.locator('h2', { hasText: 'Firmenevents' });
     await expect(heading).toBeVisible();
 
-    const cta = page.locator('a[href="/contact"]', { hasText: 'Anfrage senden' });
+    // First card on the page; both cards share the unified inquiry CTA.
+    const cta = page.locator('a[href="/contact"]', { hasText: 'Anfrage senden' }).first();
     await expect(cta).toBeVisible();
   });
 
@@ -34,12 +35,14 @@ test.describe('Catering page — content', () => {
     const heading = page.locator('h2', { hasText: 'Private Feiern' });
     await expect(heading).toBeVisible();
 
-    const cta = page.locator('a[href="/contact"]', { hasText: 'Jetzt planen' });
-    await expect(cta).toBeVisible();
+    // One label per intent: both catering cards share the inquiry CTA.
+    const ctas = page.locator('a[href="/contact"]', { hasText: 'Anfrage senden' });
+    await expect(ctas).toHaveCount(2);
+    await expect(ctas.first()).toBeVisible();
   });
 
   test('clicking a catering CTA navigates to /contact', async ({ page }) => {
-    const cta = page.locator('a[href="/contact"]', { hasText: 'Anfrage senden' });
+    const cta = page.locator('a[href="/contact"]', { hasText: 'Anfrage senden' }).first();
     await cta.click();
     await expect(page).toHaveURL(/\/contact/);
   });

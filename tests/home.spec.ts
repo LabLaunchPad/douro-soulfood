@@ -259,7 +259,7 @@ test.describe('Home page — mobile menu', () => {
     await expect(hamburgerBtn).toHaveAttribute('aria-expanded', 'true');
 
     // Mobile nav links should be visible inside the overlay
-    const mobileNav = mobileMenu.locator('nav[aria-label="Mobile Navigation Drawer"]');
+    const mobileNav = mobileMenu.locator('nav[aria-label="Mobiles Navigationsmenü"]');
     await expect(mobileNav).toBeVisible();
   });
 
@@ -272,7 +272,7 @@ test.describe('Home page — mobile menu', () => {
     // "Speisekarte" (the nav item and the order CTA block), so an
     // overlay-wide `hasText` match is ambiguous under strict mode.
     const menuLink = mobileMenu.locator(
-      'nav[aria-label="Mobile Navigation Drawer"] a[href="/menu"]',
+      'nav[aria-label="Mobiles Navigationsmenü"] a[href="/menu"]',
     );
     await expect(menuLink).toBeVisible();
     await menuLink.click();

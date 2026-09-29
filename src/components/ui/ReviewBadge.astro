@@ -72,7 +72,7 @@ const Tag = href ? 'a' : 'div';
     sizeClasses[size],
     className,
   ]}
-  aria-label={`${rating.toFixed(1)} (${reviewCount.toLocaleString('de-AT')}) — ${rating.toFixed(1)} von ${maxRating} Sternen bei ${source}`}
+  aria-label={`${rating.toFixed(1)} (${reviewCount.toLocaleString('de-AT')}): ${rating.toFixed(1)} von ${maxRating} Sternen bei ${source}`}
 >
   {/* No microdata here on purpose. This element used to carry
       itemtype="AggregateRating" with three <meta itemprop> children, but nothing
