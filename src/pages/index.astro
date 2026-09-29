@@ -89,7 +89,7 @@ const categorySlots = [
   {
     slug: 'quesadillas',
     title: 'Quesadillas',
-    desc: 'Melted Gouda & Mozzarella-Mix',
+    desc: 'Mit Gouda und Mozzarella überbacken',
     icon: 'quesadillas',
   },
   { slug: 'tacos', title: 'Tacos', desc: 'Picanha, Pollo, Vegano & Gambas', icon: 'tacos' },
@@ -180,7 +180,7 @@ const galleryImages = [
   },
   {
     src: gallery8,
-    alt: "Außenansicht: das Schild „D'ouro Soul Food“ über dem Eingang in der Auerspergstraße",
+    alt: "Außenansicht: das Schild „D'ouro Soulfood“ über dem Eingang in der Auerspergstraße",
     width: 382,
     height: 510,
   },
@@ -198,7 +198,7 @@ const galleryImages = [
   },
   {
     src: galleryEingang,
-    alt: "D'ouro Soul Food von außen: Hängeschild, Eingang und Speisekarten in der Auerspergstraße",
+    alt: "D'ouro Soulfood von außen: Hängeschild, Eingang und Speisekarten in der Auerspergstraße",
     width: 768,
     height: 1020,
   },
@@ -246,7 +246,7 @@ const faqItems = faqEntries.map((item) => ({
 // make one page advertise three different URLs for itself.
 const PAGE_TITLE = 'Afro-Lateinamerikanische Küche in Salzburg';
 const PAGE_DESCRIPTION =
-  'Frische brasilianische & afrikanische Soulfood-Spezialitäten von Angela in Salzburg. Tacos, Bowls, Feijoada & afrikanische Gerichte. Auerspergstraße 10.';
+  'Brasilianische und afrikanische Gerichte von Angela in Salzburg: Tacos, Bowls, Feijoada. Auerspergstraße 10.';
 ---
 
 <Base
@@ -271,8 +271,8 @@ const PAGE_DESCRIPTION =
   {/* 2. HERO SECTION */}
   <HeroSection
     accent="D'ouro Soulfood Bistro"
-    headline="Afro-Latin Soul im Herzen von Salzburg"
-    subheadline="Frische, handgemachte brasilianische & afrikanische Spezialitäten von Angela"
+    headline="Afro-lateinamerikanische Küche in Salzburg"
+    subheadline="Brasilianische und afrikanische Gerichte von Angela in Salzburg"
     images={[
       {
         src: heroFallback,
@@ -362,9 +362,9 @@ const PAGE_DESCRIPTION =
     ariaLabel="Beliebte Gerichte"
     eyebrow="Empfehlungen"
     title="Beliebte Gerichte"
-    description="Frisch von Angela zubereitet, mit den besten Zutaten Brasiliens und Westafrikas."
+    description="Von Angela gekocht, mit Zutaten aus Brasilien und Westafrika."
     items={popularDishes}
-    cta={{ label: 'Komplette Speisekarte ansehen', href: '/menu' }}
+    cta={{ label: 'Speisekarte ansehen', href: '/menu' }}
     variant="commerce"
     orderHref={orderUrl}
   />
@@ -374,7 +374,7 @@ const PAGE_DESCRIPTION =
     ariaLabel="Unsere Geschichte"
     eyebrow="Unsere Geschichte"
     title="Wie D'ouro begann"
-    text="D'ouro begann während des Lockdowns, als Angela von zu Hause aus selbstgemachtes brasilianisches Essen an alle verteilte, die ein Stück Heimat suchten. Genau diese Wärme und Leidenschaft stecken auch heute in jedem einzelnen Gericht."
+    text="D'ouro begann im Lockdown: Angela kochte brasilianisches Essen zu Hause und gab es aus. So kocht sie heute in der Auerspergstraße."
     founderName="Angela"
     founderTitle="Gründerin & Chefköchin"
   />
@@ -399,7 +399,7 @@ const PAGE_DESCRIPTION =
         Unsere Speisekarte
       </span>
       <h2 class="text-2xl md:text-3xl font-extrabold text-text-primary font-display uppercase tracking-tight">
-        Entdecken Sie unsere 6 Afro-Latino-Spezialitäten
+        Unsere Speisekarte in 6 Kategorien
       </h2>
     </div>
 
@@ -477,7 +477,7 @@ const PAGE_DESCRIPTION =
           Feiern & Events
         </span>
         <h2 class="text-2xl md:text-3xl font-semibold text-white font-display">
-          Für jeden Anlass das Richtige
+          Catering für Firmen und private Feiern
         </h2>
       </div>
 
@@ -486,7 +486,7 @@ const PAGE_DESCRIPTION =
           {
             title: 'Firmenevents',
             description:
-              'Von Team-Lunchs bis Firmenfeiern passen sich unsere Catering-Pakete Ihren Bedürfnissen an.',
+              'Catering-Pakete für Team-Essen und Firmenfeiern. Sie wählen Menü und Umfang.',
             image: {
               src: cateringEvent,
               alt: 'Firmenevent Catering',
@@ -498,7 +498,7 @@ const PAGE_DESCRIPTION =
           {
             title: 'Private Feiern',
             description:
-              'Geburtstage, Hochzeiten, Familientreffen. Wir bringen Soulfood direkt zu Ihnen.',
+              'Für private Feiern bringen wir das Essen zu Ihnen.',
             image: {
               src: cateringPrivate,
               alt: 'Private Feiern Catering',
@@ -537,7 +537,7 @@ const PAGE_DESCRIPTION =
     ariaLabel="Galerie"
     eyebrow="Impressionen"
     title="Galerie"
-    description="Einblicke in unsere frischen Speisen und das Ambiente im D'ouro Bistro."
+    description="Fotos von Gerichten und Räumen im D'ouro Bistro."
     items={galleryImages}
   />
 
