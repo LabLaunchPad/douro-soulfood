@@ -29,8 +29,9 @@
 /* ─────────────────────────────────────────────────────────────────
    1. GOOGLE FONTS — Preload strategy
    ─────────────────────────────────────────────────────────────────
-   Fonts: Fraunces (display/headings — wonky, soft serif with soul)
-          DM Sans  (body/labels — clean, geometric, great readability)
+   Fonts: Bricolage Grotesque (display/headings — expressive grotesque,
+             hand-cut warmth with street character)
+           DM Sans  (body/labels — clean, geometric, great readability)
 
    Strategy:
    - <link rel="preconnect"> in Base.astro <head> for DNS + TCP handshake
@@ -47,7 +48,7 @@
      3. <link rel="stylesheet"> — Render-blocking CSS with display=swap
 
    Font families:
-     DISPLAY  — Fraunces (wonky soft serif — headings, heroes, pull quotes)
+      DISPLAY  — Bricolage Grotesque (expressive grotesque — headings, heroes)
      BODY     — DM Sans   (clean geometric sans — body, nav, labels)
      MONO     — System monospace fallback (code, technical data)
 
@@ -328,12 +329,13 @@
      TYPOGRAPHY — Fonts with soul
      Three font roles, each chosen for its personality:
 
-     DISPLAY — Fraunces
-       A wonky, soft serif that radiates warmth and character.
-       Its optical sizing (opsz axis) makes it readable at
-       any size. The "wonk" axis adds gentle irregularity —
-       like handwritten signage in a Brazilian market.
-       Perfect for: hero headings, section titles, pull quotes.
+      DISPLAY — Bricolage Grotesque
+        An expressive grotesque with hand-cut warmth and street character:
+        quirky letterforms with the confidence of painted market signage.
+        Chosen over the default AI serif (Fraunces) by explicit owner
+        direction — a sans display is the honest voice for an Afro-Latin
+        street-food bistro.
+        Perfect for: hero headings, section titles.
 
      BODY — DM Sans
        Clean, geometric, warm. Not corporate like Inter or
@@ -346,7 +348,7 @@
        Not a brand font — purely functional.
      ───────────────────────────────────────────────────────────── */
 
-  --font-display: 'Fraunces', 'Georgia', 'Times New Roman', serif;
+  --font-display: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif;
   --font-body: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
 
@@ -354,8 +356,8 @@
   /* ─────────────────────────────────────────────────────────────
      TYPE SCALE — Semantic role tokens
      A modular scale (~1.25 ratio, base 1rem) snapped to practical
-     rem values, mapped onto three roles: display (Fraunces, hero
-     and section headers), heading (Fraunces, subheadings and card
+      rem values, mapped onto three roles: display (Bricolage Grotesque, hero
+      and section headers), heading (Bricolage Grotesque, subheadings and card
      titles), body (DM Sans, paragraph and UI text), plus a single
      label token for eyebrows/badges/uppercase micro-text.
 
@@ -458,15 +460,18 @@
 
 
 /* ─────────────────────────────────────────────────────────────────
-   2b. Self-hosted fonts (Fraunces + DM Sans)
+   2b. Self-hosted fonts (Bricolage Grotesque + DM Sans)
    ─────────────────────────────────────────────────────────────────
    Self-hosted instead of loaded from Google's servers: loading fonts
    from fonts.googleapis.com/fonts.gstatic.com transmits the visitor's
    IP to Google before any consent exists (the same underlying issue
-   behind the 2022 Munich Google Fonts ruling). These four files are
-   the exact variable-font instances Google itself served for the
-   family/weight/style spec this site already used — same visual
-   result, no third-party request.
+   behind the 2022 Munich Google Fonts ruling). These files are the
+   exact variable-font instances Google itself serves for the
+   family/weight/style spec this site uses — same visual
+   result, no third-party request. Bricolage ships as latin + latin-ext
+   wght-variable slices (41 KB + 19 KB): latin covers German and
+   Portuguese diacritics on its own; latin-ext loads only if a glyph
+   outside latin is ever rendered.
    ═════════════════════════════════════════════════════════════════ */
 
 @font-face {
@@ -503,15 +508,25 @@
 }
 
 @font-face {
-  font-family: 'Fraunces';
+  font-family: 'Bricolage Grotesque';
   font-style: normal;
-  font-weight: 300 900;
+  font-weight: 200 800;
   font-display: swap;
-  src: url('/fonts/fraunces-normal-variable.woff2') format('woff2');
+  src: url('/fonts/bricolage-grotesque-latin-wght.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* No Fraunces italic face: zero display+italic uses, so the 79.6 KB file is dead weight;
-   a future italic heading falls back to synthesized oblique. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('/fonts/bricolage-grotesque-latin-ext-wght.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+20A0-20AB, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* No Bricolage italic face: zero display+italic uses, so the file is dead
+   weight; a future italic heading falls back to synthesized oblique. */
 
 
 /* ─────────────────────────────────────────────────────────────────

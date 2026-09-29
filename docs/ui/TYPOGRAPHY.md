@@ -22,7 +22,7 @@ Full narrative and the realignment fix history: `docs/design-system/TYPOGRAPHY.m
 
 ## Rules verified
 
-- Two font families only (Fraunces display, DM Sans body) — clears "limit font families" with margin.
+- Two font families only (Bricolage Grotesque display, DM Sans body) — clears "limit font families" with margin.
 - Consistent hierarchy: verified via a real 7-route visual audit — headings are always visually distinct from body text, never ambiguous.
 - Predictable weights: `font-bold`/`font-semibold`/`font-extrabold` used consistently for emphasis, `font-medium`/regular for body — no arbitrary weight values found.
 - No arbitrary font sizes remain outside the documented scale (verified via grep — every `text-[Npx]` arbitrary-value instance found this session was a deliberate undersized-text bug, already fixed to the 11-12px floor).

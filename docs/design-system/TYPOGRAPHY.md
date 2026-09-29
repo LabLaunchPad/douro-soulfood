@@ -4,7 +4,7 @@
 
 | Role | Stack | Loading |
 |---|---|---|
-| Display (`--font-display`) | `'Fraunces', 'Georgia', 'Times New Roman', serif` | Self-hosted `.woff2` (`public/fonts/fraunces-*.woff2`), `@font-face` in `tokens.css`, preloaded in `Base.astro` |
+| Display (`--font-display`) | `'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif` | Self-hosted `.woff2` (`public/fonts/bricolage-grotesque-*.woff2`, latin + latin-ext wght-variable), `@font-face` in `tokens.css`, preloaded in `Base.astro` |
 | Body (`--font-body`) | `'DM Sans', 'Inter', system-ui, -apple-system, sans-serif` | Self-hosted `.woff2` (`public/fonts/dm-sans-*.woff2`), same mechanism |
 | Mono (`--font-mono`) | `'SF Mono', 'Fira Code', 'Cascadia Code', monospace` | System stack only, no webfont — code/technical data, essentially unused on this content site |
 

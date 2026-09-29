@@ -138,11 +138,13 @@ test.describe('P1-11 footer social icons are CMS-driven', () => {
   });
 });
 
-test.describe('P1-9 dead Fraunces italic face removed', () => {
-  test('no shipped stylesheet references fraunces-italic', async ({ page }) => {
+test.describe('display typeface is Bricolage Grotesque, Fraunces fully removed', () => {
+  test('no shipped stylesheet references Fraunces; a Bricolage face is present', async ({
+    page,
+  }) => {
     await page.goto('/');
-    const refs = await page.evaluate(() => {
-      const hits: string[] = [];
+    const faces = await page.evaluate(() => {
+      const out: { family: string; src: string }[] = [];
       for (const sheet of document.styleSheets) {
         let rules: CSSRuleList | null = null;
         try {
@@ -152,13 +154,14 @@ test.describe('P1-9 dead Fraunces italic face removed', () => {
         }
         if (!rules) continue;
         for (const rule of rules) {
-          if (rule instanceof CSSFontFaceRule && rule.style.src.includes('fraunces-italic')) {
-            hits.push(rule.style.src);
+          if (rule instanceof CSSFontFaceRule) {
+            out.push({ family: rule.style.fontFamily, src: rule.style.src });
           }
         }
       }
-      return hits;
+      return out;
     });
-    expect(refs).toEqual([]);
+    expect(faces.some((f) => f.src.toLowerCase().includes('fraunces'))).toBe(false);
+    expect(faces.some((f) => f.src.includes('bricolage-grotesque-latin'))).toBe(true);
   });
 });

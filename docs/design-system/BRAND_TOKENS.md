@@ -13,6 +13,6 @@
 | Logo | `public/dourologo.png` — wordmark with a chili-pepper accent glyph |
 | Primary accent color | Gold (`--color-brand-gold`, `oklch(0.78 0.18 85.0)` ≈ `#ebab00`) |
 | Secondary accent | Terracotta (`--color-brand-terracotta`, `oklch(0.56 0.18 24.5)`) |
-| Typeface pairing | Fraunces (display/serif) + DM Sans (body/sans) — see `TYPOGRAPHY.md` |
+| Typeface pairing | Bricolage Grotesque (display/sans) + DM Sans (body/sans) — see `TYPOGRAPHY.md` |
 
 Brand tokens are content facts, not CSS values — see `COLOR_SYSTEM.md`/`TYPOGRAPHY.md` for the implementation tokens these facts map to.

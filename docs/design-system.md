@@ -98,7 +98,7 @@ Taupe:                #D6C4A5
 ## 3. Typography
 
 ### Font Stack
-- **Display:** `'Fraunces', 'Georgia', 'Times New Roman', serif` — a wonky, soft serif for headings, heroes, pull quotes
+- **Display:** `'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif` — an expressive grotesque for headings and heroes (replaced the Fraunces serif by owner direction 2026-09-29: a sans display is the honest voice for the bistro, and Fraunces is an overused AI default)
 - **Body:** `'DM Sans', 'Inter', system-ui, -apple-system, sans-serif` — clean, geometric, warm
 - **Mono:** `'SF Mono', 'Fira Code', 'Cascadia Code', monospace` — code/technical data only
 
