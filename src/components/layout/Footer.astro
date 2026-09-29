@@ -2,13 +2,16 @@
 /**
  * Footer — Option A: Floating Silver / Platinum Grey Card Layout
  *
- * Structure:
- * - Outer container sits on light/white page surface (bg-surface-primary).
+ * Structure (Talkin-style directory adapted to repo theme; no app/QR block —
+ * D'ouro has no app, so the fourth column is the order CTA):
+ * - Outer container sits on espresso (bg-brand-espresso).
  * - Main footer content is enclosed in a floating Silver / Platinum Grey capsule card
- *   (bg-neutral-100 border border-neutral-200 rounded-2xl shadow-xl).
- * - Top row: Logo (optimized src/assets import; /dourologo.webp stays public for JSON-LD), navigation links, and D'ouro Brand Gold CTA button.
+ *   (bg-surface-card border border-border-subtle rounded-2xl shadow-xl).
+ * - Top row: logo/contact block (logo, tagline, address, phone, social), two
+ *   navigation link columns, and D'ouro Brand Gold CTA button.
  * - Divider line & legal links inside the card.
- * - Outer bottom bar: Social icons, copyright notice, and location info.
+ * - Outer bottom bar: legal links, copyright notice, agency credit
+ *   ("Design & Developed by Lab LaunchPad").
  */
 
 import { Image } from 'astro:assets';
@@ -52,9 +55,9 @@ const {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Main Floating Medium Silver Metallic Capsule Card -->
     <div class="bg-surface-card border border-border-subtle rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl transition-all duration-300">
-      <!-- Top Row: Logo, Nav Links, Order CTA -->
-      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
-        <!-- Left: Logo & Tagline -->
+      <!-- Top Row: Logo + contact block, link columns, order CTA -->
+      <div class="flex flex-col lg:flex-row items-start lg:justify-between gap-8 lg:gap-12">
+        <!-- Left: Logo, tagline, address, phone, social -->
         <div class="flex flex-col gap-3 max-w-sm shrink-0">
           <a
             href="/"
@@ -72,19 +75,87 @@ const {
           <p class="text-xs md:text-sm text-text-secondary leading-relaxed font-sans font-medium">
             {tagline}
           </p>
+          <address class="text-xs md:text-sm text-text-secondary not-italic">{address[0]}</address>
+          <a
+            href={phoneHref}
+            class="inline-flex items-center min-h-6 w-fit text-xs md:text-sm text-text-secondary hover:text-brand-gold-ink transition-colors duration-200 no-underline"
+          >
+            {phone}
+          </a>
+          <div class="flex items-center gap-1.5 -ml-3">
+            {/* Instagram — only when the CMS actually has a profile URL (same rule as sameAs) */}
+            {siteSettings.social?.instagram && (
+              <a
+                href={siteSettings.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-3 text-text-tertiary hover:text-brand-gold-ink transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+                aria-label="Instagram"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+              </a>
+            )}
+
+            {/* Facebook — same rule as Instagram above: only when the CMS has a profile URL */}
+            {siteSettings.social?.facebook && (
+              <a
+                href={siteSettings.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-3 text-text-tertiary hover:text-brand-gold-ink transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+                aria-label="Facebook"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+            )}
+          </div>
         </div>
 
-        <!-- Middle: Navigation Links -->
-        <nav class="flex flex-wrap items-center gap-x-6 gap-y-3" aria-label="Footer Navigation">
-          {links.map((link) => (
-            <a
-              href={link.href}
-              class="inline-flex items-center min-h-12 md:min-h-6 text-sm md:text-base font-bold text-text-primary hover:text-brand-gold-ink
-                     no-underline transition-colors duration-200 rounded-sm"
-            >
-              {link.label}
-            </a>
-          ))}
+        <!-- Middle: Navigation link columns (Talkin-style directory, no app/QR block —
+             D'ouro has no app, so the fourth column is the order CTA, not a download prompt) -->
+        <nav
+          class="grid grid-cols-2 gap-x-10 sm:gap-x-14 gap-y-3"
+          aria-label="Footer Navigation"
+        >
+          {[links.slice(0, Math.ceil(links.length / 2)), links.slice(Math.ceil(links.length / 2))].map(
+            (column) => (
+              <div class="flex flex-col gap-1">
+                {column.map((link) => (
+                  <a
+                    href={link.href}
+                    class="inline-flex items-center min-h-12 md:min-h-6 w-fit text-sm md:text-base font-bold text-text-primary hover:text-brand-gold-ink
+                           no-underline transition-colors duration-200 rounded-sm"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            ),
+          )}
         </nav>
 
         <!-- Right: Primary Order CTA Button (D'ouro Brand Gold) -->
@@ -122,67 +193,19 @@ const {
     <!-- Slot for additional footer content -->
     <slot />
 
-    <!-- Outer Bottom Bar: Social Icons, Copyright, Contact -->
-    <div class="mt-8 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 text-white/70 text-xs md:text-sm">
-      <!-- Left: Social Media Icons -->
-      <div class="flex items-center gap-1.5">
-        {/* Instagram — only when the CMS actually has a profile URL (same rule as sameAs) */}
-        {siteSettings.social?.instagram && (
+    <!-- Outer Bottom Bar: legal links, copyright, agency credit -->
+    <div class="mt-8 pt-4 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-white/70 text-xs md:text-sm">
+      <!-- Left: Legal Links -->
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-1">
+        {legalLinks.map((link) => (
           <a
-            href={siteSettings.social.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-3 text-white/70 hover:text-brand-gold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
-            aria-label="Instagram"
+            href={link.href}
+            class="inline-flex items-center min-h-6 text-xs md:text-sm font-bold text-white/70 hover:text-brand-gold
+                   no-underline transition-colors duration-200"
           >
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-          </svg>
-        </a>
-        )}
-
-        {/* Facebook — same rule as Instagram above: only when the CMS has a profile URL */}
-        {siteSettings.social?.facebook && (
-          <a
-            href={siteSettings.social.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-3 text-white/70 hover:text-brand-gold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
-            aria-label="Facebook"
-          >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-            </svg>
+            {link.label}
           </a>
-        )}
-
-        <!-- Phone / Contact Link -->
-        <a
-          href={phoneHref}
-          class="inline-flex items-center min-h-6 text-xs text-white/70 hover:text-brand-gold transition-colors duration-200 no-underline"
-        >
-          {phone}
-        </a>
+        ))}
       </div>
 
       <!-- Center: Copyright Notice -->
@@ -193,9 +216,11 @@ const {
         </p>
       </div>
 
-      <!-- Right: Location -->
-      <div class="text-right">
-        <address class="text-white/70 not-italic">{address[0]}</address>
+      <!-- Right: Agency credit (plain text — no URL invented) -->
+      <div class="text-center md:text-right">
+        <p class="text-white/70">
+          Design & Developed by <span class="font-semibold text-white">Lab LaunchPad</span>
+        </p>
       </div>
     </div>
   </div>

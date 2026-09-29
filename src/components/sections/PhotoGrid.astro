@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Button from '@/components/ui/Button.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
 
 /**
  * PhotoGrid — heading + responsive photo grid (2 cols mobile, 3 cols desktop).
@@ -48,27 +49,26 @@ const commerce = variant === 'commerce';
 
 <section class="py-section-mobile md:py-20" aria-label={ariaLabel}>
   <div class="max-w-7xl mx-auto px-4 md:px-16">
-  <div
-    class:list={[
-      'mb-4 md:mb-5',
-      commerce ? 'flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between' : 'text-center',
-    ]}
-  >
-    <div class={commerce ? 'text-left' : undefined}>
-      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
-        {eyebrow}
-      </span>
-      <h2 class="text-2xl md:text-3xl font-semibold text-text-primary font-display">{title}</h2>
-      {description && (
-        <p class:list={['text-text-secondary mt-1 max-w-[52ch] text-xs md:text-sm', !commerce && 'mx-auto']}>{description}</p>
+  {commerce ? (
+    <div class="mb-4 md:mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div class="text-left">
+        <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
+          {eyebrow}
+        </span>
+        <h2 class="text-2xl md:text-3xl font-semibold text-text-primary font-display">{title}</h2>
+        {description && (
+          <p class="text-text-secondary mt-1 max-w-[52ch] text-xs md:text-sm">{description}</p>
+        )}
+      </div>
+      {cta && (
+        <Button href={cta.href} variant="secondary" size="sm" arrow class="shrink-0 self-start sm:self-auto">
+          {cta.label}
+        </Button>
       )}
     </div>
-    {commerce && cta && (
-      <Button href={cta.href} variant="secondary" size="sm" arrow class="shrink-0 self-start sm:self-auto">
-        {cta.label}
-      </Button>
-    )}
-  </div>
+  ) : (
+    <SectionHeader eyebrow={eyebrow} title={title} description={description} />
+  )}
   </div>
 
   <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 px-2 md:px-4">

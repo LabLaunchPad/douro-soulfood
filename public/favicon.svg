@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#0A0A0A"/>
-  <text x="16" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="700" font-size="18" fill="#C8913A">D</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- D'ouro monogram: espresso tile + gold serif D + chili accent.
+       Tiny sizes (16-48px) cannot render the full wordmark legibly, so the
+       square tiles (logo-square, apple-touch) carry the real lockup (see
+       scripts/brand-build.mjs) while favicons use this brand-dressed mark. -->
+  <rect width="64" height="64" rx="14" fill="#211C17" />
+  <text x="29" y="47" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="40" fill="#C8913A">D</text>
+  <g transform="translate(47,16) scale(1.35) translate(-47,-16)">
+    <path d="M45 12 C51 12 54 16 52 21 C50 26 44 27 42 23 C40 19 41 13 45 12 Z" fill="#D9481C" />
+    <path d="M45 12 C44 9 45 7 47 6" fill="none" stroke="#2F9E44" stroke-width="2.5" stroke-linecap="round" />
+  </g>
 </svg>

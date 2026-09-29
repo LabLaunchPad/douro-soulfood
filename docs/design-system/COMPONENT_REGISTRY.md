@@ -25,7 +25,7 @@ Real inventory, verified against `src/components/` on 2026-08-07. Full contracts
 **Glow ratification (R-31, taste audit F-3 2026-09-29)**: `shadow-glow-gold` fires only on the primary hunger action per view (order/browse CTA, hover or persistent) — never on cards, badges, icons, or backgrounds. It is the one deliberate accent, not glow-everywhere.
 
 **Accessibility**
-- Touch target: `sm` = 36px min-height, `md` = 44px, `lg` = 48px — all clear WCAG 2.2 SC 2.5.8's 24px floor with margin.
+- Touch target: all three sizes are `min-h-12` (48px) — clears WCAG 2.2 SC 2.5.8's 24px floor with margin. (Corrected 2026-09-29: an earlier entry claimed `sm` = 36px / `md` = 44px; the source sets `min-h-12` on all sizes, differing only in padding.)
 - Focus-visible outline present on all three variants (verified — a prior audit found and fixed a missing-outline bug elsewhere in the codebase; `Button` was never affected).
 - Renders semantically correct element (`<a>` vs `<button>`) based on whether it navigates or acts — never a `<div onclick>`.
 

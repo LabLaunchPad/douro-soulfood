@@ -11,9 +11,9 @@ import { test, expect } from '@playwright/test';
  * /dev/ui (dev-only, not in dist) with a manual-check note per the
  * visual-preview pattern — no automated test claims to cover it.
  *
- * Full-bleed sections (Story, PhotoGrid grids, Events band) are exempt from
- * CONTAINED_SECTIONS by design: the band carries the identical padding
- * tokens (py-section-mobile md:py-20) with an inner max-w-7xl container,
+ * Full-bleed sections (Story, PhotoGrid grids, Events band, Standort) are
+ * exempt from CONTAINED_SECTIONS by design: the band carries the identical
+ * padding tokens (py-section-mobile md:py-20) with an inner max-w-7xl container,
  * verified visually per pass, same as the other exempt sections.
  */
 
@@ -21,7 +21,7 @@ const CONTAINED_SECTIONS = [
   'Google-Bewertung',
   'Schnellzugriff',
   'Speisekarte Kategorien',
-  'Unser Standort',
+  // 'Unser Standort' fortress backdrop band, exempt 2026-09-29 — rhythm relocated to the full-bleed test below.
 ];
 
 test.describe('Section component contract', () => {
@@ -52,5 +52,22 @@ test.describe('Section component contract', () => {
         .poll(async () => section.evaluate((el) => getComputedStyle(el).maxWidth))
         .toBe('1280px');
     }
+  });
+
+  test('standort full-bleed band keeps the rhythm contract', async ({
+    page,
+    isMobile,
+  }) => {
+    const section = page.locator('section[aria-label="Unser Standort"]');
+    await expect(section).toHaveAttribute('data-section-mode', 'full');
+    const expectedPad = isMobile ? '40px' : '80px';
+    await expect
+      .poll(async () => section.evaluate((el) => getComputedStyle(el).paddingTop))
+      .toBe(expectedPad);
+    await expect
+      .poll(async () =>
+        section.locator('div.max-w-7xl').evaluate((el) => getComputedStyle(el).maxWidth),
+      )
+      .toBe('1280px');
   });
 });

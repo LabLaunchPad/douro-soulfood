@@ -1,6 +1,9 @@
 // pnpm brand:build — deterministic brand derivatives from approved sources.
-// - favicon.svg (approved D-mark) -> favicon-48.png, favicon-32.png, favicon.ico
-// - favicon.svg @512 -> images/logo-square.png (structured-data square logo)
+// - favicon.svg (espresso tile + gold serif D + chili accent) -> favicon-48.png, favicon-32.png, favicon.ico
+//   (tiny sizes can't render the wordmark legibly — the monogram carries the brand here)
+// - src/assets/brand/dourologo.webp (the real lockup) composited centered on an
+//   espresso tile -> images/logo-square.png (512, structured-data square logo),
+//   images/apple-touch-icon.png (180, must be opaque for iOS)
 // - images/apple-touch-icon.png -> apple-touch-icon.png (root convention copy)
 // No new artwork: every byte derives from already-approved repo files.
 import sharp from 'sharp';
@@ -30,10 +33,28 @@ function writeIco(pngs, outFile) {
 }
 
 const svg = pub('favicon.svg');
+const lockupSrc = join(root, 'src', 'assets', 'brand', 'dourologo.webp');
+const ESPRESSO_TILE = '#211C17'; // brand-espresso, opaque (iOS/social-safe)
+
+/** Square tile: real lockup centered on espresso, lockup width = fitRatio * size. */
+async function lockupTile(size, outFile, fitRatio = 0.84) {
+  const w = Math.round(size * fitRatio);
+  const lockup = await sharp(lockupSrc).resize({ width: w }).png().toBuffer();
+  await sharp({
+    create: { width: size, height: size, channels: 4, background: ESPRESSO_TILE },
+  })
+    .composite([{ input: lockup, gravity: 'center' }])
+    .png()
+    .toFile(outFile);
+  console.log(`wrote ${outFile} ${size}x${size} (lockup tile)`);
+}
+
+await lockupTile(512, pub('images', 'logo-square.png'));
+await lockupTile(180, pub('images', 'apple-touch-icon.png'));
+
 const jobs = [
   ['favicon-48.png', 48],
   ['favicon-32.png', 32],
-  ['images/logo-square.png', 512],
 ];
 for (const [name, size] of jobs) {
   const buf = await sharp(svg, { density: 300 }).resize(size, size).png().toBuffer();

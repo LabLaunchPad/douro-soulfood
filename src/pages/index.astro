@@ -47,6 +47,7 @@ import cateringEvent from '@/assets/catering/event.webp';
 import cateringPrivate from '@/assets/catering/private.webp';
 import storefrontSign from '@/assets/catering/storefront-sign.webp';
 import storefrontSignMobile from '@/assets/catering/storefront-sign-mobile.webp';
+import fortressSalzburg from '@/assets/Festung-Hohensalzburg_Tourismus-Salzburg-GmbH_Guenter-Breitegger.webp';
 import { settings as siteSettings, phoneHref, absoluteUrl, hours as parsedHours, orderUrl, mapsPlaceUrl, mapsEmbedUrl, mapsDirectionsUrl } from '@/lib/site';
 import { formatHoursSummary, toClientHours } from '@/lib/hours';
 import { faqNode } from '@/lib/seo/graph';
@@ -553,13 +554,33 @@ const PAGE_DESCRIPTION =
   <Section
     id="standort"
     ariaLabel="Unser Standort"
-    class="scroll-mt-24"
+    mode="full"
+    class="scroll-mt-24 relative overflow-hidden"
   >
+    <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+      <Image
+        src={fortressSalzburg}
+        width={1728}
+        height={740}
+        widths={[768, 1280, 1728]}
+        sizes="100vw"
+        loading="lazy"
+        fetchpriority="low"
+        quality={80}
+        alt=""
+        class="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/65"></div>
+    </div>
+    {/* Content wrapper sits above the absolute backdrop (positioned elements
+        paint above static content — without this the scrim would darken the
+        card and bury the header). Same pattern as HeroSection/Events. */}
+    <div class="relative">
     <div class="text-center mb-4 md:mb-5">
-      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
+      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold uppercase tracking-wider mb-1">
         Standort
       </span>
-      <h2 class="text-2xl md:text-3xl font-semibold text-text-primary font-display">
+      <h2 class="text-2xl md:text-3xl font-semibold text-white font-display">
         Unser Bistro in Salzburg
       </h2>
     </div>
@@ -590,7 +611,7 @@ const PAGE_DESCRIPTION =
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div class="flex flex-col gap-0.5">
-                <span class="text-[11px] text-text-tertiary uppercase font-medium">Adresse</span>
+                <span class="text-micro text-text-tertiary uppercase font-medium">Adresse</span>
                 <address class="not-italic text-xs md:text-sm text-text-secondary leading-relaxed">
                   <p>{address_line1}</p>
                   <p>
@@ -599,7 +620,7 @@ const PAGE_DESCRIPTION =
                 </address>
               </div>
               <div class="flex flex-col gap-0.5">
-                <span class="text-[11px] text-text-tertiary uppercase font-medium">Kontakt</span>
+                <span class="text-micro text-text-tertiary uppercase font-medium">Kontakt</span>
                 <a
                   href={phoneHref}
                   class="text-xs md:text-sm text-text-secondary hover:text-brand-gold-ink no-underline transition-colors"
@@ -612,7 +633,7 @@ const PAGE_DESCRIPTION =
 
           <div class="border-t border-border-subtle pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
-              <span class="text-[11px] text-text-tertiary block">Öffnungszeiten</span>
+              <span class="text-micro text-text-tertiary block">Öffnungszeiten</span>
               <span
                 id="today-hours"
                 data-hours={JSON.stringify(clientHours)}
@@ -645,6 +666,8 @@ const PAGE_DESCRIPTION =
         </div>
       </div>
     </article>
+    <p class="mt-4 text-right text-micro text-white/70">Foto: Tourismus Salzburg GmbH / Günter Breitegger</p>
+    </div>
   </Section>
 
   {/* 12. FOOTER */}

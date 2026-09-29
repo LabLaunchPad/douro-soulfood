@@ -159,6 +159,19 @@
   --color-bistro-text-strong: #292524;  /* stone-800 equiv — stronger emphasis text */
   --color-bistro-placeholder: #f5f5f4;  /* stone-100 equiv — image placeholder background */
 
+  /* Warm accent roles for on-dark and on-paper contexts, added 2026-09-29.
+     Previously Tailwind's default amber-* scale used directly in
+     AllergenBadge, MenuItemCard (on-photo pills) and MenuBistroCard
+     (on-paper spice text/chips) — values here equal the exact amber
+     shades already in use, so this is a token-ownership fix, not a
+     visual change. Rule: warm/ember roles are for food-imagery and
+     bistro-paper contexts only, never body text on site surfaces. */
+  --color-brand-flare: #fcd34d;         /* amber-300 equiv — light warm text/accent on dark */
+  --color-brand-flare-border: #f59e0b;  /* amber-500 equiv — borders/glows on dark */
+  --color-bistro-spice: #78350f;        /* amber-900 equiv — strong warm text on paper */
+  --color-bistro-spice-deep: #451a03;   /* amber-950 equiv — deepest warm text on paper */
+  --color-bistro-spice-wash: #fef3c7;   /* amber-100 equiv — tinted chip background on paper */
+
 
   /* ═════════════════════════════════════════════════════════════
      TIER 2 — SEMANTIC TOKENS
@@ -385,6 +398,14 @@
 
   --text-label: 0.75rem;               /* 12px — eyebrows, badges, uppercase micro-copy (text-xs) */
   --text-label--line-height: 1.4;
+
+  /* 11px micro-labels (eyebrow captions, code chips, prep-time notes),
+     added 2026-09-29. Previously twelve `text-[11px]` arbitrary values
+     across index, both menu cards, AllergenHeaderLegend and AllergenBadge —
+     same size, no shared rule. Rule: labels and metadata only, never body
+     copy. No bundled line-height: like the arbitrary values it replaces,
+     `text-micro` sets size only and inherits line-height from context. */
+  --text-micro: 0.6875rem;
 
   --text-body-sm: 0.875rem;            /* 14px — captions, metadata (text-sm) */
   --text-body-sm--line-height: 1.5;

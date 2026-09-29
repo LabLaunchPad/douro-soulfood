@@ -17,6 +17,7 @@
     "lhci": "lhci autorun",
     "check:csp": "node scripts/checks/verify-csp-hashes.mjs",
     "check:hours": "node --experimental-strip-types scripts/checks/verify-hours.mjs",
+    "check:format": "node --experimental-strip-types scripts/checks/verify-format.mjs",
     "check:i18n": "node --experimental-strip-types scripts/checks/verify-i18n.mjs",
     "ui:agent": "node .ui-agent/cli.mjs",
     "ui:audit": "node .ui-agent/orchestrator/run.mjs audit",

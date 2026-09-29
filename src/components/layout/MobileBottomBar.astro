@@ -26,7 +26,6 @@ const phone = settings.phone;
     aria-label="Jetzt anrufen"
   >
     <svg
-      class="phone-ring-icon"
       xmlns="http://www.w3.org/2000/svg"
       width="18"
       height="18"
@@ -120,43 +119,9 @@ const phone = settings.phone;
     background-color: var(--color-brand-gold-dark);
   }
 
-  /* Phone Ring Animation */
-  @keyframes phone-ring {
-    0%,
-    100% {
-      transform: rotate(0deg);
-    }
-    5% {
-      transform: rotate(15deg);
-    }
-    10% {
-      transform: rotate(-13deg);
-    }
-    15% {
-      transform: rotate(14deg);
-    }
-    20% {
-      transform: rotate(-12deg);
-    }
-    25% {
-      transform: rotate(10deg);
-    }
-    30% {
-      transform: rotate(0deg);
-    }
-  }
-
-  .phone-ring-icon {
-    animation: phone-ring 3s ease-in-out infinite;
-    transform-origin: center center;
-  }
-
-  /* Respect reduced motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    .phone-ring-icon {
-      animation: none;
-    }
-  }
+  /* Phone icon is static by design (2026-09-29 audit): the previous
+     `phone-ring` infinite wiggle was a persistent attention loop with no
+     state-change purpose. The `:active` color shift confirms presses. */
 </style>
 
 <script>

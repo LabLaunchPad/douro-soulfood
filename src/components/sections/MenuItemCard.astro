@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import DietaryBadge from '@/components/ui/DietaryBadge.astro';
 import AllergenBadge from '@/components/ui/AllergenBadge.astro';
+import { formatPrice, formatDualPrice } from '@/lib/format';
 import { orderUrl as orderHref } from '@/lib/site';
 
 /**
@@ -59,20 +60,8 @@ const {
   class: className = '',
 } = Astro.props;
 
-/** Format price from cents to EUR display string */
-const formatPrice = (cents: number): string => {
-  const euros = cents / 100;
-  return new Intl.NumberFormat('de-AT', {
-    style: 'currency',
-    currency: 'EUR',
-    minimumFractionDigits: 2,
-  }).format(euros);
-};
-
-const displayPrice =
-  priceVariants?.nonAlcoholic && priceVariants?.alcoholic
-    ? `${formatPrice(priceVariants.nonAlcoholic)} / ${formatPrice(priceVariants.alcoholic)}`
-    : formatPrice(priceInCents);
+/** Display price: dual non-alcoholic/alcoholic variant when both exist. */
+const displayPrice = formatDualPrice(priceVariants) ?? formatPrice(priceInCents);
 ---
 
 {imageSrc ? (
@@ -100,7 +89,7 @@ const displayPrice =
     {/* Badges Overlay Container */}
     <div class="absolute top-3 inset-x-3 z-30 flex items-center justify-between pointer-events-none">
       {prepTime ? (
-        <span class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold rounded-full bg-black/75 text-amber-300 border border-amber-500/40 backdrop-blur-md">
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold rounded-full bg-black/75 text-brand-flare border border-brand-flare-border/40 backdrop-blur-md">
           ⏱️ {prepTime}
         </span>
       ) : (
@@ -170,7 +159,7 @@ const displayPrice =
       {addOns.length > 0 && (
         <div class="flex flex-wrap gap-1 mt-0.5">
           {addOns.map((addon) => (
-            <span class="inline-flex items-center gap-1 text-[11px] font-medium text-brand-gold bg-brand-gold/15 px-2 py-0.5 rounded border border-brand-gold/30">
+            <span class="inline-flex items-center gap-1 text-micro font-medium text-brand-gold bg-brand-gold/15 px-2 py-0.5 rounded border border-brand-gold/30">
               + {addon.label} ({formatPrice(addon.price)})
             </span>
           ))}
@@ -217,7 +206,7 @@ const displayPrice =
       <div class="flex items-start justify-between gap-3">
         <div class="flex flex-col gap-1">
           {featured && (
-            <span class="inline-self-start inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-semibold rounded bg-brand-gold/20 text-brand-gold-ink border border-brand-gold/30 uppercase tracking-wider font-display">
+            <span class="inline-self-start inline-flex items-center gap-1 px-2 py-0.5 text-micro font-semibold rounded bg-brand-gold/20 text-brand-gold-ink border border-brand-gold/30 uppercase tracking-wider font-display">
               Empfehlung
             </span>
           )}
@@ -230,7 +219,7 @@ const displayPrice =
           <span class="text-base md:text-lg font-bold text-brand-gold-ink whitespace-nowrap px-2.5 py-1 rounded bg-surface-elevated border border-brand-gold/30">
             {displayPrice}
           </span>
-          {prepTime && <span class="text-[11px] font-medium text-amber-300/90">⏱️ {prepTime}</span>}
+          {prepTime && <span class="text-micro font-medium text-brand-flare/90">⏱️ {prepTime}</span>}
         </div>
       </div>
 
@@ -245,7 +234,7 @@ const displayPrice =
       {addOns.length > 0 && (
         <div class="flex flex-wrap gap-1">
           {addOns.map((addon) => (
-            <span class="inline-flex items-center gap-1 text-[11px] font-medium text-brand-gold-ink bg-brand-gold/15 px-2 py-0.5 rounded border border-brand-gold/30">
+            <span class="inline-flex items-center gap-1 text-micro font-medium text-brand-gold-ink bg-brand-gold/15 px-2 py-0.5 rounded border border-brand-gold/30">
               + {addon.label} ({formatPrice(addon.price)})
             </span>
           ))}
