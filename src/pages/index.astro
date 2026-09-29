@@ -39,6 +39,8 @@ import gallery8 from '@/assets/gallery/8.webp';
 import gallery9 from '@/assets/gallery/9.webp';
 import cateringEvent from '@/assets/catering/event.webp';
 import cateringPrivate from '@/assets/catering/private.webp';
+import storefrontSign from '@/assets/catering/storefront-sign.webp';
+import storefrontSignMobile from '@/assets/catering/storefront-sign-mobile.webp';
 import { settings as siteSettings, phoneHref, absoluteUrl, hours as parsedHours, orderUrl, mapsPlaceUrl, mapsEmbedUrl, mapsDirectionsUrl } from '@/lib/site';
 import { formatHoursSummary, toClientHours } from '@/lib/hours';
 import { faqNode } from '@/lib/seo/graph';
@@ -382,26 +384,50 @@ const PAGE_DESCRIPTION =
   {/* 8. EVENTS & FEIERN — Firmenevents + Private Feiern consolidated into one
        section (two cards) instead of two separate full-width sections;
        shorter scroll, same content. */}
-  {/* 8. EVENTS & FEIERN — Talkin'-Tacos band + overlap card pattern: a
-       full-bleed scrimmed catering photo carries the header, the two cards
-       sit on top of it. Drama without new components. The band photo is
-       decorative (aria-hidden): the same catering images appear in the cards
-       below with their real alt text. Card CTAs split intent honestly —
-       packages deep-link the /catering page, planning goes to /contact. */}
-  <section aria-label="Events & Feiern" class="relative overflow-hidden py-section-mobile md:py-20">
-    <div class="absolute inset-0" aria-hidden="true">
+  {/* 8. EVENTS & FEIERN — Talkin'-Tacos band + overlap card pattern, staged
+       around the real storefront sign: a clear photo strip up top shows the
+       D'ouro Soul Food hanging sign with no text over it (systematic sign
+       visibility on every viewport), the header and cards sit in the dark
+       zone below. The band photo is decorative (aria-hidden): the sign's
+       brand value is visual, the accessible story lives in the header copy.
+       Card CTAs split intent honestly — packages deep-link /catering,
+       planning goes to /contact. */}
+  <section aria-label="Events & Feiern" class="relative overflow-hidden bg-brand-espresso py-section-mobile md:py-20">
+    {/* Photo zone: pinned to the top with a fixed height so the sign crop
+        keeps its intended framing on every viewport (a full-section bg
+        would zoom 4x on tall mobile stacks). Fades to solid espresso where
+        the cards rest. */}
+    <div class="absolute inset-x-0 top-0 h-[420px] md:h-[560px]" aria-hidden="true">
+      {/* Desktop banner: full street scene, top-anchored so the sign leads */}
       <Image
-        src={cateringPrivate}
+        src={storefrontSign}
         alt=""
-        width={800}
-        height={600}
+        width={1600}
+        height={1000}
         format="webp"
-        quality={70}
-        class="w-full h-full object-cover"
+        quality={85}
+        class="hidden md:block w-full h-full object-cover object-[50%_0%]"
         loading="lazy"
       />
-      <div class="absolute inset-0 bg-brand-espresso/80"></div>
+      {/* Mobile crop: tight lock on the sign oval (the wide banner would
+          zoom past it at phone aspect ratios) */}
+      <Image
+        src={storefrontSignMobile}
+        alt=""
+        width={900}
+        height={368}
+        format="webp"
+        quality={85}
+        class="md:hidden w-full h-full object-cover object-center"
+        loading="lazy"
+      />
+      {/* Graded scrim: luminous up top for the white sign oval, blending to
+          solid espresso at the photo zone's base. No flat full-section wash. */}
+      <div class="absolute inset-0 bg-gradient-to-b from-brand-espresso/15 via-brand-espresso/55 to-brand-espresso"></div>
     </div>
+
+    {/* Sign stage: clear window onto the hanging sign, never covered by text */}
+    <div class="relative h-64 md:h-72" aria-hidden="true"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 md:px-16">
       <div class="text-left mb-4 md:mb-5">
