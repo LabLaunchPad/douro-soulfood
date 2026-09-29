@@ -54,9 +54,9 @@ interface Props {
    */
   poster?: string;
   /** Primary CTA config */
-  ctaPrimary: { label: string; href: string };
+  ctaPrimary: { label: string; href: string; external?: boolean };
   /** Secondary CTA config */
-  ctaSecondary?: { label: string; href: string };
+  ctaSecondary?: { label: string; href: string; external?: boolean };
 }
 
 const {
@@ -151,6 +151,8 @@ const heroImage = images[0];
         <!-- Primary CTA — brand gold with glow -->
         <a
           href={ctaPrimary.href}
+          target={ctaPrimary.external ? '_blank' : undefined}
+          rel={ctaPrimary.external ? 'noopener noreferrer' : undefined}
           class="group inline-flex items-center gap-2 min-h-12 px-5 py-3 text-base font-semibold
                  rounded-sm bg-brand-gold hover:bg-brand-gold-light active:bg-brand-gold-dark text-brand-espresso
                  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold

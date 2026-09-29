@@ -27,17 +27,21 @@ test.describe('Home page — content & visibility', () => {
   });
 
   // Desktop-only: hero CTAs live in a `hidden md:flex` container, not shown on mobile
-  test('primary CTA "Besuchen Sie uns" is visible and navigates to /contact', async ({
+  test('primary CTA "Jetzt bestellen" opens the Lieferando order handoff in a new tab', async ({
     page,
     isMobile,
   }) => {
     test.skip(isMobile, 'Hero CTAs hidden on mobile viewport');
 
-    const primaryCta = page.locator('a[href="/contact"]', { hasText: 'Besuchen Sie uns' });
+    // Commerce contract (Talkin-Tacos pass): the hero's dominant action is
+    // the external order handoff, not an on-site visit page. Scoped to the
+    // hero <header>: nav, standort and footer carry their own order links.
+    const primaryCta = page
+      .locator('header')
+      .getByRole('link', { name: 'Jetzt bestellen', exact: true });
     await expect(primaryCta).toBeVisible();
-
-    await primaryCta.click();
-    await expect(page).toHaveURL(/\/contact/);
+    await expect(primaryCta).toHaveAttribute('href', /lieferando/);
+    await expect(primaryCta).toHaveAttribute('target', '_blank');
   });
 
   test('secondary CTA "Speisekarte ansehen" navigates to /menu', async ({ page, isMobile }) => {
@@ -92,8 +96,29 @@ test.describe('Home page — content & visibility', () => {
       .getByText('Empfehlungen', { exact: true });
     await expect(eyebrow).toBeVisible();
 
-    const featuredHeading = page.locator('h2', { hasText: "Beliebte Gerichte im D'ouro Bistro" });
+    const featuredHeading = page.locator('section[aria-label="Beliebte Gerichte"] h2', {
+      hasText: 'Beliebte Gerichte',
+    });
     await expect(featuredHeading).toBeVisible();
+  });
+
+  test('commerce header docks the menu CTA header-right, dish tiles carry order buttons', async ({
+    page,
+  }) => {
+    // Talkin-Tacos `Featured` contract: one CTA per section, header-right,
+    // plus a persistent per-tile order handoff (touch/keyboard reachable).
+    const dishes = page.locator('section[aria-label="Beliebte Gerichte"]');
+    const headerCta = dishes.locator('a[href="/menu"]', {
+      hasText: 'Komplette Speisekarte ansehen',
+    });
+    await expect(headerCta).toBeVisible();
+
+    const orderButtons = dishes.locator('a[target="_blank"][aria-label*="auf Lieferando bestellen"]');
+    await expect(orderButtons).toHaveCount(9);
+    await expect(orderButtons.first()).toHaveAttribute(
+      'aria-label',
+      'Taco Especial auf Lieferando bestellen',
+    );
   });
 
   test('"Komplette Speisekarte ansehen" CTA links to /menu', async ({ page }) => {

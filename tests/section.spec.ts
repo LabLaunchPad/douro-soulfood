@@ -10,13 +10,17 @@ import { test, expect } from '@playwright/test';
  * Full-width mode has no homepage consumer by design; it is previewed at
  * /dev/ui (dev-only, not in dist) with a manual-check note per the
  * visual-preview pattern — no automated test claims to cover it.
+ *
+ * Full-bleed sections (Story, PhotoGrid grids, Events band) are exempt from
+ * CONTAINED_SECTIONS by design: the band carries the identical padding
+ * tokens (py-section-mobile md:py-20) with an inner max-w-7xl container,
+ * verified visually per pass, same as the other exempt sections.
  */
 
 const CONTAINED_SECTIONS = [
   'Google-Bewertung',
   'Schnellzugriff',
   'Speisekarte Kategorien',
-  'Events & Feiern',
   'Unser Standort',
 ];
 

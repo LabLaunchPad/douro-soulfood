@@ -28,20 +28,45 @@ interface Props {
   description?: string;
   items: PhotoItem[];
   cta?: { label: string; href: string };
+  /**
+   * Commerce header (Talkin'-Tacos `Featured` pattern): left-aligned title
+   * with the CTA docked header-right instead of a centered button block
+   * below the grid. One CTA per section, trained eye toward the menu.
+   */
+  variant?: 'center' | 'commerce';
+  /**
+   * When set, every tile gets a persistent order button (gold circle,
+   * bottom-right) linking out — the honest version of the `+` quick-add
+   * overlay. Persistent, never hover-only, so touch and keyboard get it too.
+   */
+  orderHref?: string;
 }
 
-const { ariaLabel, eyebrow, title, description, items, cta } = Astro.props;
+const { ariaLabel, eyebrow, title, description, items, cta, variant = 'center', orderHref } = Astro.props;
+const commerce = variant === 'commerce';
 ---
 
 <section class="py-section-mobile md:py-20" aria-label={ariaLabel}>
   <div class="max-w-7xl mx-auto px-4 md:px-16">
-  <div class="text-center mb-4 md:mb-5">
-    <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
-      {eyebrow}
-    </span>
-    <h2 class="text-2xl md:text-3xl font-semibold text-text-primary font-display">{title}</h2>
-    {description && (
-      <p class="text-text-secondary mt-1 max-w-[52ch] mx-auto text-xs md:text-sm">{description}</p>
+  <div
+    class:list={[
+      'mb-4 md:mb-5',
+      commerce ? 'flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between' : 'text-center',
+    ]}
+  >
+    <div class={commerce ? 'text-left' : undefined}>
+      <span class="inline-block text-xs md:text-sm font-semibold text-brand-gold-ink uppercase tracking-wider mb-1">
+        {eyebrow}
+      </span>
+      <h2 class="text-2xl md:text-3xl font-semibold text-text-primary font-display">{title}</h2>
+      {description && (
+        <p class:list={['text-text-secondary mt-1 max-w-[52ch] text-xs md:text-sm', !commerce && 'mx-auto']}>{description}</p>
+      )}
+    </div>
+    {commerce && cta && (
+      <Button href={cta.href} variant="secondary" size="sm" arrow class="shrink-0 self-start sm:self-auto">
+        {cta.label}
+      </Button>
     )}
   </div>
   </div>
@@ -64,11 +89,38 @@ const { ariaLabel, eyebrow, title, description, items, cta } = Astro.props;
           class="w-full h-full object-cover transition-transform duration-[var(--duration-normal)] ease-[var(--ease-out-quart)] group-hover:scale-105"
           loading="lazy"
         />
+        {orderHref && (
+          <a
+            href={orderHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${item.alt} auf Lieferando bestellen`}
+            class="absolute bottom-2 right-2 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full
+                   bg-brand-gold text-brand-espresso shadow-md
+                   transition-transform duration-[var(--duration-fast)] ease-[var(--ease-spring)]
+                   hover:scale-105 active:scale-95
+                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+          >
+            <svg
+              class="w-4 h-4"
+              viewBox="0 0 256 256"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="24"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="70" y1="128" x2="216" y2="128" />
+              <polyline points="144 56 216 128 144 200" />
+            </svg>
+          </a>
+        )}
       </div>
     ))}
   </div>
 
-  {cta && (
+  {!commerce && cta && (
     <div class="mt-4 md:mt-6 text-center max-w-7xl mx-auto px-4 md:px-16">
       <Button href={cta.href} variant="primary" size="lg" arrow class="shadow-glow-gold">
         {cta.label}
