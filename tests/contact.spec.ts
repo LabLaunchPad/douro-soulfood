@@ -119,3 +119,38 @@ test.describe('Contact page — SEO meta', () => {
     await expect(canonical).toHaveAttribute('href', 'https://douro-soulfood.com/contact/');
   });
 });
+
+test.describe('Contact page — location/distance', () => {
+  test('directions link is place-anchored (origin left to device)', async ({ page }) => {
+    await page.goto('/contact');
+    const routeButton = page.locator('a', { hasText: 'Route planen' });
+    const href = await routeButton.getAttribute('href');
+    expect(href).toContain('destination_place_id=ChIJZ5K9XxaRdkcRtUZhEVaeRPo');
+    expect(href).not.toContain('origin=');
+  });
+
+  test('map iframe pins the GBP record by name', async ({ page }) => {
+    await page.goto('/contact');
+    const mapEmbed = page.locator('[data-map-embed]');
+    await mapEmbed.getByRole('button', { name: 'Karte anzeigen' }).click();
+    const src = await mapEmbed.locator('iframe').getAttribute('src');
+    expect(src).toContain('output=embed');
+    expect(src).toContain('Soulfood');
+  });
+
+  test('granted location shows on-device straight-line distance', async ({ page, context }) => {
+    // Salzburg old town ~950 m from Auerspergstraße 10 — nothing leaves the device.
+    await context.grantPermissions(['geolocation']);
+    await context.setGeolocation({ latitude: 47.8094, longitude: 13.055 });
+    await page.goto('/contact');
+    await page.getByRole('button', { name: 'Entfernung anzeigen' }).click();
+    const result = page.locator('[data-distance-result]');
+    await expect(result).toContainText(/Ca\. 9\d0 m Luftlinie/);
+  });
+
+  test('denied location degrades to the directions hint', async ({ page }) => {
+    await page.goto('/contact');
+    await page.getByRole('button', { name: 'Entfernung anzeigen' }).click();
+    await expect(page.locator('[data-distance-result]')).toContainText(/Route planen/);
+  });
+});

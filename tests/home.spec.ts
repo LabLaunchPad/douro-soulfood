@@ -329,6 +329,16 @@ test.describe('Home page — Google Maps consent gate', () => {
     await expect(iframe).toHaveCount(1);
     await expect(iframe).toHaveAttribute('src', /maps\.google\.com/);
   });
+
+  test('standort offers route planning and opt-in distance', async ({ page }) => {
+    const standort = page.locator('section[aria-label="Unser Standort"]');
+    await expect(
+      standort.locator('a[href*="maps/dir"][href*="destination_place_id"]'),
+    ).toContainText('Route planen');
+    await expect(
+      standort.getByRole('button', { name: 'Entfernung anzeigen' }),
+    ).toBeVisible();
+  });
 });
 
 /* ═══════════════════════════════════════════════════════════════

@@ -6,6 +6,7 @@ import NavBar from '@/components/layout/NavBar.astro';
 import Footer from '@/components/layout/Footer.astro';
 import Button from '@/components/ui/Button.astro';
 import MapEmbed from '@/components/ui/MapEmbed.astro';
+import DistanceToUs from '@/components/ui/DistanceToUs.astro';
 import { settings as siteSettings, phoneHref, mapsDirectionsUrl, mapsEmbedUrl } from '@/lib/site';
 
 const { address_line1, address_line2, city, postal_code, phone, email, hours } = siteSettings;
@@ -89,6 +90,7 @@ const { address_line1, address_line2, city, postal_code, phone, email, hours } =
             Speisekarte ansehen
           </Button>
         </div>
+        <DistanceToUs />
       </div>
 
       <!-- Map (consent-gated: real iframe only loads after visitor clicks through) -->

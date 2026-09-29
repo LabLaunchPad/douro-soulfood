@@ -86,19 +86,42 @@ export const orderUrl = settings.lieferando_url || 'https://www.lieferando.at/en
 /**
  * Google Maps URLs. The embed/directions links are derived from the CMS
  * address so a client address edit cannot leave pages linking at the old
- * location. The place link carries the stable GBP record ID
- * (ChIJZ5K9XxaRdkcRtUZhEVaeRPo) — not derivable, so it lives here in
+ * location. The GBP record ID below is not derivable, so it lives here in
  * exactly one place instead of hardcoded across pages.
  */
+const GBP_PLACE_ID = 'ChIJZ5K9XxaRdkcRtUZhEVaeRPo';
+
 export const mapsPlaceUrl =
-  'https://www.google.com/maps/search/?api=1&query=D%27ouro+Soulfood+Bistro+Auerspergstra%C3%9Fe+10+5020+Salzburg&query_place_id=ChIJZ5K9XxaRdkcRtUZhEVaeRPo';
+  `https://www.google.com/maps/search/?api=1&query=D%27ouro+Soulfood+Bistro+Auerspergstra%C3%9Fe+10+5020+Salzburg&query_place_id=${GBP_PLACE_ID}`;
 
 const mapsQuery = encodeURIComponent(
   `${settings.address_line1}, ${settings.postal_code} ${settings.city}`,
 );
 
-export const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-export const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`;
+/**
+ * Embed query pins the GBP record BY NAME (place card with pin + name), not
+ * just the street. Legacy no-key output=embed endpoint: q + z only.
+ */
+const mapsEmbedQuery = encodeURIComponent(
+  `D'ouro Soulfood Bistro, ${settings.address_line1}, ${settings.postal_code} ${settings.city}`,
+);
+
+export const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsEmbedQuery}&t=&z=17&ie=UTF8&iwloc=&output=embed`;
+/**
+ * Origin omitted on purpose: Google defaults to the visitor's device
+ * location (or an origin form) on every platform — Android app/browser,
+ * iOS app-if-installed/browser, desktop browser. destination_place_id
+ * anchors the exact GBP record.
+ */
+export const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}&destination_place_id=${GBP_PLACE_ID}`;
+
+/**
+ * Restaurant coordinates: D'ouro - Soul Food POI, OpenStreetMap node
+ * 12160605695 (Auerspergstraße 10, verified 2026-09-29). On-device
+ * haversine reference only — never sent anywhere.
+ */
+export const RESTAURANT_LAT = 47.807635;
+export const RESTAURANT_LON = 13.042574;
 
 /**
  * Only social profiles that actually have a URL. Three of the four are empty

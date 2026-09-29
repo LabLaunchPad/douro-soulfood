@@ -14,6 +14,7 @@ import PhotoGrid from '@/components/sections/PhotoGrid.astro';
 import OurStorySection from '@/components/sections/OurStorySection.astro';
 import FaqAccordion from '@/components/sections/FaqAccordion.astro';
 import MapEmbed from '@/components/ui/MapEmbed.astro';
+import DistanceToUs from '@/components/ui/DistanceToUs.astro';
 import Footer from '@/components/layout/Footer.astro';
 import { getCollection } from 'astro:content';
 import heroPoster from '@/assets/hero/hero-fallback-1280.webp';
@@ -38,7 +39,7 @@ import gallery8 from '@/assets/gallery/8.webp';
 import gallery9 from '@/assets/gallery/9.webp';
 import cateringEvent from '@/assets/catering/event.webp';
 import cateringPrivate from '@/assets/catering/private.webp';
-import { settings as siteSettings, phoneHref, absoluteUrl, hours as parsedHours, orderUrl, mapsPlaceUrl, mapsEmbedUrl } from '@/lib/site';
+import { settings as siteSettings, phoneHref, absoluteUrl, hours as parsedHours, orderUrl, mapsPlaceUrl, mapsEmbedUrl, mapsDirectionsUrl } from '@/lib/site';
 import { formatHoursSummary, toClientHours } from '@/lib/hours';
 import { faqNode } from '@/lib/seo/graph';
 
@@ -537,6 +538,19 @@ const PAGE_DESCRIPTION =
             <Button href={orderUrl} target="_blank" rel="noopener noreferrer" variant="primary" size="sm" class="shadow-glow-gold">
               Jetzt bestellen
             </Button>
+          </div>
+
+          {/* Anreise: universelle Google-Route (nutzt den Gerätestandort) + Opt-in-Entfernung */}
+          <div class="flex flex-col gap-2 border-t border-border-subtle pt-4">
+            <a
+              href={mapsDirectionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs md:text-sm font-semibold text-text-secondary hover:text-brand-gold-ink no-underline transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold-ink w-fit"
+            >
+              Route planen
+            </a>
+            <DistanceToUs />
           </div>
         </div>
       </div>

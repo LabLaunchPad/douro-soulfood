@@ -1,0 +1,84 @@
+---
+/**
+ * DistanceToUs — opt-in "how far am I" for the Standort/contact map blocks.
+ *
+ * - One explicit button. No auto-prompt, no tracking, no storage: coordinates
+ *   are read once via navigator.geolocation, compared on-device against the
+ *   restaurant POI with haversine, then discarded.
+ * - Straight-line ("Luftlinie") distance in de-AT format; denied/unsupported
+ *   states degrade to a directions hint. Result uses aria-live.
+ */
+import { RESTAURANT_LAT, RESTAURANT_LON } from '@/lib/site';
+
+interface Props {
+  lat?: number;
+  lon?: number;
+}
+
+const { lat = RESTAURANT_LAT, lon = RESTAURANT_LON } = Astro.props;
+---
+
+<div data-distance data-lat={lat} data-lon={lon} class="flex flex-col gap-1">
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+    <button
+      type="button"
+      data-distance-trigger
+      class="text-xs md:text-sm font-semibold text-text-secondary hover:text-brand-gold-ink no-underline transition-colors underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold-ink"
+    >
+      Entfernung anzeigen
+    </button>
+    <span data-distance-result class="hidden text-xs md:text-sm font-medium text-text-primary" aria-live="polite"></span>
+  </div>
+  <p class="text-xs text-text-tertiary">Nur mit deiner Zustimmung. Dein Standort bleibt auf deinem Gerät.</p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-distance]').forEach((root) => {
+    const trigger = root.querySelector<HTMLButtonElement>('[data-distance-trigger]');
+    const out = root.querySelector<HTMLElement>('[data-distance-result]');
+    if (!trigger || !out) return;
+
+    const show = (text: string) => {
+      out.textContent = text;
+      out.classList.remove('hidden');
+    };
+
+    trigger.addEventListener(
+      'click',
+      () => {
+        if (!('geolocation' in navigator)) {
+          show('Standort wird von diesem Browser nicht unterstützt.');
+          trigger.remove();
+          return;
+        }
+        trigger.disabled = true;
+        trigger.textContent = 'Standort wird ermittelt …';
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const lat = parseFloat(root.dataset.lat ?? '');
+            const lon = parseFloat(root.dataset.lon ?? '');
+            const toRad = (d: number) => (d * Math.PI) / 180;
+            const a =
+              Math.sin(toRad(pos.coords.latitude - lat) / 2) ** 2 +
+              Math.cos(toRad(lat)) *
+                Math.cos(toRad(pos.coords.latitude)) *
+                Math.sin(toRad(pos.coords.longitude - lon) / 2) ** 2;
+            const km = 2 * 6371 * Math.asin(Math.sqrt(a));
+            show(
+              km < 1
+                ? `Ca. ${Math.round((km * 1000) / 10) * 10} m Luftlinie von dir`
+                : `Ca. ${km.toLocaleString('de-AT', { maximumFractionDigits: 1 })} km Luftlinie von dir`,
+            );
+            trigger.remove();
+          },
+          () => {
+            show('Standort nicht verfügbar. Nutze Route planen.');
+            trigger.remove();
+          },
+          { timeout: 8000, maximumAge: 600000 },
+        );
+      },
+      { once: true },
+    );
+  });
+</script>
