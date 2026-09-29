@@ -1,0 +1,21 @@
+# D'ouro Soulfood Bistro — douro-soulfood.com
+
+Afro-lateinamerikanisches Restaurant in Salzburg, Österreich.
+Brasilianische und afrikanische Gerichte von Gründerin Angela: Tacos, Bowls,
+Feijoada, Coxinha, Caipirinha. Catering für Firmenfeiern und private Feiern.
+
+## Fakten
+
+- Adresse: Auerspergstraße 10, 5020 Salzburg, Österreich
+- Telefon: +43 676 4231921
+- Öffnungszeiten: Montag bis Samstag 11:00 bis 22:00 Uhr, Sonntag geschlossen
+- Google-Bewertung: 4.7 von 5 Sternen (Stand September 2026)
+- Bestellung: über Lieferando; Tischreservierung telefonisch
+
+## Seiten
+
+- Start: https://douro-soulfood.com/ — Küche, Gerichte, Geschichte, Bewertungen, Standort
+- Speisekarte: https://douro-soulfood.com/menu/ — Tacos, Bowls, Quesadillas, Feijoada, Preise, Allergene
+- Catering: https://douro-soulfood.com/catering/ — Firmenfeiern, private Feiern, Angebots-Anfrage
+- Über uns: https://douro-soulfood.com/about/ — Angelas Geschichte, Lockdown-Anfänge
+- Kontakt: https://douro-soulfood.com/contact/ — Adresse, Anfahrt, Öffnungszeiten

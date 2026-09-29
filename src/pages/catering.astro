@@ -5,14 +5,54 @@ import Base from '@/layouts/Base.astro';
 import NavBar from '@/components/layout/NavBar.astro';
 import Footer from '@/components/layout/Footer.astro';
 import FeatureCard from '@/components/sections/FeatureCard.astro';
+import FaqAccordion from '@/components/sections/FaqAccordion.astro';
 import cateringEvent from '@/assets/catering/event.webp';
 import cateringPrivate from '@/assets/catering/private.webp';
+import { absoluteUrl } from '@/lib/site';
+import { faqNode } from '@/lib/seo/graph';
+
+/** Catering FAQ: inline (page-specific, not the global Keystatic collection
+ * shown on the homepage). Same items feed the visible accordion and the
+ * FAQPage JSON-LD node, so prose and schema cannot drift apart. */
+const cateringFaq = [
+  {
+    question: 'Was kostet ein Catering von D’ouro in Salzburg?',
+    answer:
+      'Das hängt von Personenzahl, Menü und Umfang ab. Schicken Sie uns Anlass, Datum und Gästezahl über die Kontaktseite oder rufen Sie an: Sie erhalten ein individuelles Angebot. Pauschalpreise nennen wir bewusst nicht, weil jedes Event anders isst.',
+  },
+  {
+    question: 'Für welche Anlässe bietet D’ouro Catering an?',
+    answer:
+      'Firmenfeiern und Team-Essen ebenso wie private Feiern: Geburtstage, Hochzeiten und Familientreffen. Wir liefern brasilianische und afrikanische Gerichte, von Tacos und Bowls bis Feijoada, direkt zu Ihrer Veranstaltung in Salzburg.',
+  },
+  {
+    question: 'Wie weit im Voraus muss ich anfragen?',
+    answer:
+      'Je früher, desto besser, besonders für Hochzeiten und Firmenfeiern in der Hauptsaison. Aber fragen Sie auch kurzfristig an: Rufen Sie uns an unter +43 676 4231921, dann wissen Sie sofort, was möglich ist.',
+  },
+  {
+    question: 'Liefern Sie das Catering oder muss ich es abholen?',
+    answer:
+      'Wir bringen das Essen direkt zu Ihrer Location in Salzburg. Ob Servicepersonal vor Ort möglich ist, klären wir bei Ihrer Anfrage mit.',
+  },
+  {
+    question: 'Gibt es vegane und vegetarische Optionen fürs Catering?',
+    answer:
+      'Ja. Wir haben vegane und vegetarische Gerichte, von Bowls über Eintöpfe bis zu Beilagen. Sagen Sie uns bei der Anfrage Bescheid, dann stellen wir das Menü entsprechend zusammen.',
+  },
+  {
+    question: 'Woher kommen die Rezepte fürs Catering?',
+    answer:
+      'Gründerin Angela kocht brasilianische Gerichte wie Feijoada und Coxinha, ergänzt um westafrikanische Eintöpfe wie Egusi-Suppe mit Fufu. Alle Catering-Menüs kommen aus unserer Küche in der Auerspergstraße 10 in Salzburg.',
+  },
+];
 ---
 
 <Base
-  title="Catering & Events"
-  description="Catering von D'ouro Soulfood in Salzburg: von Team-Lunchs und Firmenfeiern bis zu Geburtstagen, Hochzeiten und Familientreffen, brasilianisches und afrikanisches Soulfood direkt zu Ihrem Event."
+  title="Catering & Events in Salzburg"
+  description="Catering von D'ouro Soulfood in Salzburg: Firmenfeiern, Team-Essen, Hochzeiten, Geburtstage und Familientreffen mit brasilianischem und afrikanischem Soulfood, direkt zu Ihrem Event."
   breadcrumb={[{ name: 'Catering & Events', path: '/catering/' }]}
+  extraSchemaNodes={[faqNode(cateringFaq, absoluteUrl('/catering/', Astro.site))]}
 >
   <NavBar slot="nav" />
 
@@ -28,7 +68,7 @@ import cateringPrivate from '@/assets/catering/private.webp';
 
   <FeatureCard
     title="Firmenevents"
-    description="Von Team-Lunchs bis Firmenfeiern passen sich unsere Catering-Pakete Ihren Bedürfnissen an."
+    description="Catering-Pakete für Team-Essen und Firmenfeiern. Sie wählen Menü und Umfang."
     image={{
       src: cateringEvent,
       alt: 'Firmenevent Catering',
@@ -40,7 +80,7 @@ import cateringPrivate from '@/assets/catering/private.webp';
 
   <FeatureCard
     title="Private Feiern"
-    description="Geburtstage, Hochzeiten, Familientreffen. Wir bringen Soulfood direkt zu Ihnen."
+    description="Für private Feiern bringen wir das Essen zu Ihnen."
     image={{
       src: cateringPrivate,
       alt: 'Private Feiern Catering',
@@ -49,6 +89,13 @@ import cateringPrivate from '@/assets/catering/private.webp';
     }}
     cta={{ label: 'Anfrage senden', href: '/contact' }}
     reverse
+  />
+
+  <FaqAccordion
+    ariaLabel="Häufige Fragen zum Catering"
+    eyebrow="Catering-FAQ"
+    title="Häufige Fragen zum Catering"
+    items={cateringFaq}
   />
 
   <Footer slot="footer" />
