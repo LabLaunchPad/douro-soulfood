@@ -27,7 +27,7 @@ test.describe('P1-2 category grid usable on phones', () => {
     const page = await context.newPage();
     await page.goto('/');
     const section = page.locator('section', {
-      has: page.locator('h2', { hasText: 'Afro-Latino' }),
+      has: page.locator('h2', { hasText: 'Speisekarte in 6 Kategorien' }),
     });
     const firstTile = section.locator('a').first();
     expect((await firstTile.boundingBox())?.width ?? 0).toBeGreaterThanOrEqual(90);
@@ -95,7 +95,7 @@ test.describe('P1-7 decorative SVGs hidden from AT', () => {
   test('category icons expose no unnamed graphics', async ({ page }) => {
     await page.goto('/');
     const section = page.locator('section', {
-      has: page.locator('h2', { hasText: 'Afro-Latino' }),
+      has: page.locator('h2', { hasText: 'Speisekarte in 6 Kategorien' }),
     });
     for (const svg of await section.locator('svg').all()) {
       await expect(svg).toHaveAttribute('aria-hidden', 'true');
